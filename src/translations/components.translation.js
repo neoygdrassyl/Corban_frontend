@@ -476,6 +476,13 @@ export let translations = {
             ],
             FORM_DOCUMENT_TABLE : ['DOCUMENTO', 'TIPOLOGÍA', 'FOLIOS', 'APORTO', 'TITULO LISTA: ', 'NUEVA LISTA: ', 'Nombre lista', 'Nombre documento', ],
             FORM_DOCUMENT_BTNS : ['ACTUALIZAR LISTA', 'GUARDAR LISTA', 'ELIMINAR LISTA', 'REMOVER ULTIMO', 'NUEVO ITEM', 'NUEVA LISTA', 'AÑADIR LISTA' ],
+            LIST_HELP: [
+                {
+                    title: 'MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: NUEVA ENTRADA',
+                    content: 'Esta ventana permite crear una nueva entrada en este módulo, todos los documentos que ingreses a la entidad deben ser registrados en este módulo, antes de especificar los documento que ingresaran se debe crear la entrada que contendrá la información inicial del evento de ingreso de documentos.',
+                    focus: 'title',
+                },
+            ],
         }
     }
 }
