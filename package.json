@@ -1,0 +1,56 @@
+{
+  "name": "corban_client",
+  "version": "0.2.0",
+  "private": true,
+  "dependencies": {
+    "@blueprintjs/core": "^4.3.2",
+    "@blueprintjs/datetime": "^4.3.0",
+    "@blueprintjs/popover2": "^1.4.0",
+    "@blueprintjs/select": "^4.2.2",
+    "@pathofdev/react-tag-input": "^1.0.7",
+    "@rsuite/icons": "^1.0.2",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
+    "moment": "^2.29.1",
+    "moment-business-days": "^1.2.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-viewer-reactjs": "^2.2.3",
+    "react": "^17.0.2",
+    "react-data-table-component": "^7.5.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "^5.0.1",
+    "react-vis": "^1.11.7",
+    "rsuite": "^5.2.1",
+    "styled-components": "^5.3.5",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

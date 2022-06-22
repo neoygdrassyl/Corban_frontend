@@ -1,0 +1,103 @@
+{
+    "san.buc.1": {
+        "indexName":"san.buc.1",
+        "id": "cub1",
+        "name": "CURADURIA URBANA UNO DE BUCARAMANGA",
+        "name2": "Curaduría Urbana 1 de Bucaramanga",
+        "nomen": "68001-1-",
+        "number": "1",
+        "city": "Bucaramanga",
+        "state": "SANTANDER",
+        "master": "Luis Carlos Parra Salazar",
+        "title": "Arq.",
+        "job": "CURADOR URBANO UNO DE BUCARAMANGA",
+        "nit": "91239522-1",
+        "dir": "CALLE 36 No 31-39 Oficinas: 101/102 Centro Empresarial Chicamocha",
+        "tel": "(607) 680 3596",
+        "cel": "(057) 316 279 5010",
+        "email": "curaduriaurbana1@gmail.com",
+        "page": "www.curaduria1bucaramanga.com/",
+        "law": "DRA. MARÍA MARGARITA JEREZ",
+        "lawt": "Asesora Jurídica",
+        "digital_sign": "docs/public/user_signatures/luis_parra.png",
+        "serials": {
+            "start":"VR",
+            "end": "CUB",
+            "process": "68001-1"
+        },
+        "pot" : {
+            "mm": 11,
+            "yy": 2014
+        }
+    },
+
+    "san.pie.1" : {
+        "indexName":"san.pie.1",
+        "id": "cup1",
+        "name": "CURADURIA URBANA UNO DE PIEDECUESTA",
+        "name2": "Curaduría Urbana 1 de Piedecuesta",
+        "nomen": "68547-1-'",
+        "number": "1",
+        "city": "Piedecuesta",
+        "state": "SANTANDER",
+        "statelc": "Santander",
+        "master": "Silvia Johanna Camargo Gutierrez",
+        "title": "Ing.",
+        "job": "CURADORA URBANA UNO DE PIEDECUESTA",
+        "nit": "37754281-3",
+        "dir": "CENTRO COMERCIAL DE LA CUESTA LOCAL 321 CARRERA 15 No. 3AN-10",
+        "tel": "(607) 607 6399200",
+        "cel": "(057) 314 471 0505",
+        "email": "curaduria1piedecuesta@gmail.com",
+        "page": "www.curaduria1piedecuesta.com",
+        "law": "SILVIA JOHANNA CAMARGO GUTIERREZ",
+        "lawt": "Ingeniera Civil",
+        "w_spp_1": "JENY SUAREZ",
+        "digital_sign": false,
+        "serials": {
+            "start":"VR",
+            "end": "OE",
+            "process": "68547-1"
+        },
+        "pot" : {
+            "mm": 11,
+            "yy": 2003
+        }
+    },
+
+    "dev": {
+        "indexName":"DatabaseT",
+        "id": "dev",
+       "name": "CURADURIA URBANA UNO DE PIEDECUESTA",
+        "name2": "Curaduría Urbana 1 de Piedecuesta",
+        "nomen": "68001-1-",
+        "number": "1",
+        "city": "Piedecuesta",
+        "state": "SANTANDER",
+        "statelc": "Santander",
+        "master": "Silvia Johanna Camargo Gutierrez",
+        "title": "Ing.",
+        "job": "CURADORA URBANA UNO DE PIEDECUESTA",
+        "nit": "37754281-3",
+        "dir": "CENTRO COMERCIAL DE LA CUESTA LOCAL 321 CARRERA 15 No. 3AN-10",
+        "tel": "(607) 607 6399200",
+        "cel": "(057) 314 471 0505",
+        "email": "curaduria1piedecuesta@gmail.com",
+        "page": "www.curaduria1piedecuesta.com",
+        "law": "SILVIA JOHANNA CAMARGO GUTIERREZ",
+        "lawt": "Ingeniera Civil",
+        "w_spp_1": "JENY SUAREZ",
+        "digital_sign": false,
+        "serials": {
+            "start":"VR",
+            "end": "OE",
+            "process": "68547-1"
+        },
+        "pot" : {
+            "mm": 11,
+            "yy": 2003
+        }
+    }
+
+}
+    
