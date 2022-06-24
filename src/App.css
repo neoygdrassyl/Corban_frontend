@@ -4,6 +4,7 @@
 @import "~@blueprintjs/popover2/lib/css/blueprint-popover2.css";
 
 
+
 footer {
   box-shadow: 0 50vh 0 50vh #2d2d2d;
 }
@@ -150,7 +151,6 @@ border-color: darkgray;
 .bg-info{background-color: #0099cc;}
 .bg-dark{background-color: #2d2d2d;}
 .bg-light{background-color: whitesmoke;}
-
 .bg-cold{background-color: #0047ca83;}
 .bg-blood{background-color: darkred;}
 .bg-paranoia{background-color: #af00afb2;}
@@ -168,18 +168,31 @@ border-color: darkgray;
 .border-blood{border: 1px solid; border-color: darkred;}
 .border-paranoia{border: 1px solid; border-color: #af00afb2;}
 
-.text-primary{color:#0044cc;}
-.text-secondary{color: black;}
-.text-success{color: forestgreen;}
-.text-danger{color: crimson;}
-.text-warning{color: goldenrod;}
-.text-info{color: #0099cc;}
-.text-dark{color: dimgray;}
-.text-light{color: whitesmoke;}
-.text-cold{color: #0047ca83;}
-.text-blood{color: darkred;}
-.text-paranoia{color: #af00afb2;}
-.text-muted{color: dimgray;}
+.text-primary,    .light .text-primary      {color:#0044cc;}
+.text-secondary,  .light .text-secondary    {color: black;}
+.text-success,    .light .text-success      {color: forestgreen;}
+.text-danger,     .light .text-danger       {color: crimson;}
+.text-warning,    .light .text-warning      {color: goldenrod;}
+.text-info,       .light .text-info         {color: #0099cc;}
+.text-dark,       .light .text-dark         {color: dimgray;}
+.text-light,      .light .text-light        {color: whitesmoke;}
+.text-cold,       .light .text-cold         {color: #0047ca83;}
+.text-blood,      .light .text-blood        {color: darkred;}
+.text-paranoia,   .light .text-paranoia     {color: #af00afb2;}
+.text-muted,      .light .text-muted        {color: dimgray;}
+
+.dark .text-primary      {color:#3866c3;}
+.dark .text-secondary    {color: black;}
+.dark .text-success      {color: forestgreen;}
+.dark .text-danger       {color: rgb(214, 49, 82);}
+.dark .text-warning      {color: goldenrod;}
+.dark .text-info         {color: #0099cc;}
+.dark .text-dark         {color: dimgray;}
+.dark .text-light        {color: whitesmoke;}
+.dark .text-cold         {color: #0047ca83;}
+.dark .text-blood        {color: darkred;}
+.dark .text-paranoia     {color: #af00afb2;}
+.dark .text-muted        {color: dimgray;}
 
 
 

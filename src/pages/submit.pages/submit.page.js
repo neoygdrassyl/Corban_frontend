@@ -19,6 +19,7 @@ import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_
 import moment from 'moment';
 import SUBMIT_LISTS from './submit_lists.component';
 import ButtonWhisper from '../../resources/customs/components/btnWhisper.component';
+import SUBMIT_PDF from './submit_pdf.component';
 
 
 export default function SUBMIT() {
@@ -391,8 +392,7 @@ export default function SUBMIT() {
                 {MANAGE_COMPONENT(editItem)}
                 {editItem ? <>
                     <SUBMIT_LISTS currentItem={editItem} />
-                    <Divider>{'CERTIFICACION DE ENTREGA'}</Divider>
-                    pdf goes here
+                    <SUBMIT_PDF currentItem={editItem} />
                 </> : ''}
             </MODAL>
         </>

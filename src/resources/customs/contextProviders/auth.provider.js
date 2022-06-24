@@ -1,6 +1,5 @@
 import React from "react";
 
-import { fakeAuthProvider } from '../../../services/auth/auth'
 import AtuhService from '../../../services/apis/auth.service'
 import { GET_JSON_FULL } from "../utils/lamdas.functions";
 

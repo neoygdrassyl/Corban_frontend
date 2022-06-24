@@ -84,6 +84,16 @@ export default function SUBMIT_LISTS(props) {
     // ************************** JSX ELEMENTS **************************** //
     const COMPONENT_LISTS = () => {
         return <>
+
+            {lists.length > 0 ?
+                <Grid className='my-1' fluid>
+                    <Row className='border bg-cold txt-c fw-b  py-1' style={{ width: '100%' }}>
+                        <Col xl={18} lg={16} md={16} sm={12} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[0]}</label></Col>
+                        <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[1]}</label></Col>
+                        <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[2]}</label></Col>
+                    </Row>
+                </Grid>
+                : ''}
             {lists.map(list => {
                 let title = list.list_title;
                 let names = list.list_name.split(';');
@@ -93,11 +103,6 @@ export default function SUBMIT_LISTS(props) {
 
                 let isEdit = editList.id == list.id;
                 return <Grid className='my-1' fluid>
-                    <Row className='border bg-cold txt-c fw-b  py-1' style={{ width: '100%' }}>
-                        <Col xl={18} lg={16} md={16} sm={12} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[0]}</label></Col>
-                        <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[1]}</label></Col>
-                        <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>{trn.FORM_DOCUMENT_TABLE[2]}</label></Col>
-                    </Row>
                     <Row className='border bg-cold txt-c fw-b' style={{ width: '100%' }} >
                         <Col xl={22} lg={22} md={22} sm={22} xs={22}>
                             {isEdit ?
@@ -421,9 +426,9 @@ export default function SUBMIT_LISTS(props) {
     return (
         <>
             <Divider>{trn.categories[1]}  <BTN_HELP
-                title={trn.btn_help_texts[0]}
-                text={trn.btn_help_texts[1]}
-                page={trn.HELP_PAGE} focus="title" /></Divider>
+                title={trn.DOCUMENT_LIST_POP[0]}
+                text={trn.DOCUMENT_LIST_POP[1]}
+                page={trn.DOCUMENT_LIST_INFO} focus="doc_list" /></Divider>
             {COMPONENT_LISTS()}
             <div className='py-1'>
                 <PanelGroup accordion bordered className='py-0 mx-1 border-success'>

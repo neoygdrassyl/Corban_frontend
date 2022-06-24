@@ -1,6 +1,8 @@
-import { Icon } from '@blueprintjs/core';
+import React from 'react'
+import { Button, Icon, InputGroup } from '@blueprintjs/core';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from "react-icons/ri";
+import { Col, Grid, Panel, PanelGroup, Row } from 'rsuite';
 
 
 export let translations = {
@@ -74,7 +76,7 @@ export let translations = {
             title: 'COPY DOCUMENT INTO FORM',
             whisper: 'Copy document',
             datatable: 'DOCUMENTS LIST',
-            columns:[ 'CODE', 'DOCUMENT', 'ACTION'],
+            columns: ['CODE', 'DOCUMENT', 'ACTION'],
         },
         es: {
             click: 'Dar click para mas información...',
@@ -83,7 +85,15 @@ export let translations = {
             title: 'COPIAR DOCUMENTO A FORMULARIO',
             whisper: 'Copiar documento',
             datatable: 'LISTA DE DOCUMENTOS',
-            columns:[ 'CÓDIGO', 'DOCUMENTO', 'ACCIÓN'],
+            columns: ['CÓDIGO', 'DOCUMENTO', 'ACCIÓN'],
+        }
+    },
+    btnPdf: {
+        en: {
+            btn: 'GENERATE PDF',
+        },
+        es: {
+            btn: 'GENERAR PDF',
         }
     },
     // ******************** COMPONENTS ************************ // 
@@ -122,9 +132,11 @@ export let translations = {
     formComponent: {
         en: {
             req: 'REQUIRED',
+            uploader: 'Click or drag files to this area to upload',
         },
         es: {
             req: 'REQUERIDO',
+            uploader: 'Click o arrastre archivos a esta area para subirlos',
         }
     },
 
@@ -186,7 +198,7 @@ export let translations = {
             new: 'NEW ENTRY',
             edit: 'UPDATE ENTRY',
             new_btn_help_texts: ['FILLING BOOTH', 'This windows allows the creation of a new entry in the Filling Booth module.'],
-            categories : ['FILLING BOOTH FORM', 'DOCUMENT LIST', 'DIGITAL ANEX AND RECIPE'],
+            categories: ['FILLING BOOTH FORM', 'DOCUMENT LIST', 'DIGITAL ANEX AND RECIPE'],
             NEW_HELP_PAGE: [
                 {
                     title: 'FILLING BOOTH : NEW ENTRY',
@@ -201,7 +213,7 @@ export let translations = {
                     focus: 'edit',
                 },
             ],
-            FORM_INFO_BTN : ['FILLING BOOTH: FORM', 'This form contains all the information needed for an entry to be created'],
+            FORM_INFO_BTN: ['FILLING BOOTH: FORM', 'This form contains all the information needed for an entry to be created'],
             FORM_INFO: [
                 {
                     title: 'Public ID',
@@ -287,7 +299,7 @@ export let translations = {
             ],
             FORM_MANAGE: [
                 { label: 'Public ID', placeholder: 'Filling number', rightBtnLabel: 'Generate next entry ID', },
-                { label: 'Associated ID', placeholder: 'Process number', rightBtnLabel:[ 'Verifiy assoiated ID', 'Generate next ID'], },
+                { label: 'Associated ID', placeholder: 'Process number', rightBtnLabel: ['Verifiy assoiated ID', 'Generate next ID'], },
                 { label: 'Pays fixed expenditures', label1: 'Create new process', label2: 'This option will create a new urban development' },
                 { label: 'Payment ID', placeholder: 'Payment number' },
                 { label: 'Type', placeholder: 'Type, modality or short description of the associaed process' },
@@ -301,8 +313,99 @@ export let translations = {
                 { label: 'Details', placeholder: 'Details not contemplated in the previous form items' },
                 { label: ['ID found', 'ID not found', 'Errors were find while searching for the ID', 'A associated ID must be typed'] },
             ],
-            FORM_DOCUMENT_TABLE : ['DOCUMENT', 'TIPOLOGY', 'PAGES', 'PROVIDED', 'LIST TITLE: ', 'NEW LIST: ', 'List name', 'Document name',  ],
-            FORM_DOCUMENT_BTNS : ['UPDATE LIST', 'SAVE LIST', 'DELETE LIST', 'REMOVE LAST', 'NEW ITEM', 'NEW LIST', 'ADD LIST' ],
+            FORM_DOCUMENT_TABLE: ['DOCUMENT', 'TIPOLOGY', 'PAGES', 'PROVIDED', 'LIST TITLE: ', 'NEW LIST: ', 'List name', 'Document name',],
+            FORM_DOCUMENT_BTNS: ['UPDATE LIST', 'SAVE LIST', 'DELETE LIST', 'REMOVE LAST', 'NEW ITEM', 'NEW LIST', 'ADD LIST'],
+            DOCUMENT_LIST_POP: ['DOCUMENT LISTS', 'All documents filled to the organization in physical form. May contain multiple lists related to the process.'],
+            DOCUMENT_LIST_INFO: [
+                {
+                    title: 'LIST OF DOCUMENTS',
+                    content: <>This section contains all document lists related to this single window entry. Initially, no visible list will be found, to add a list it must be entered in the <label className='fw-b'>NEW LIST</label> section. Once a list has been added, a table will appear listing the documents with their characteristics; Name, number of pages and its type code.</>,
+                    focus: 'doc_list',
+                },
+                {
+                    title: 'Document Characteristics',
+                    content: 'The documents associated with each single window entry have 3 characteristics of their own, these are:',
+                    focus: 'doc_data', list: [
+                        { subtitle: 'DOCUMENT NAME', text: 'A short description or the name of the document. In the case of documents made up of several sheets, all its sheets will be understood as part of the same document.' },
+                        { subtitle: 'TYPE', text: 'A unique code and identifier for each document. The system uses this code to identify the documents entered in each process. Not all documents entered may have a typology code.' },
+                        { subtitle: 'FOLIOS', text: 'The number of sheets of which the document is made up.' },
+                    ],
+                },
+                {
+                    title: 'NEW LIST',
+                    content: 'This section allows the creation of new lists of documents and associate them to the process automatically.',
+                    component: <PanelGroup accordion bordered className='py-0 mx-1 border-success'>
+                        <Panel header={<h6><Icon icon={'add'} intent={'success'} size="18" /> {'NEW LIST'}</h6>}></Panel>
+                    </PanelGroup>,
+                    focus: 'new_list',
+                },
+                {
+                    title: <label className='text-success'>HOW TO ADD A NEW LIST?</label>,
+                    content: <>
+                        <p>To add a list of documents click on the <label className='fw-b'>NEW LIST</label> button, a new section will appear, this section is a table with a list of documents. This list is initially the list of <lalbel>DOCUMENTS COMMON TO EVERY REQUEST</lalbel>.</p>
+                        <p>
+                            <div class="bp4-input-group">
+                                <span class={"bp4-icon bp4-icon-add-to-artifact"}></span>
+                                <select className={'bp4-input'}>
+                                    <option >{'DOCUMENTOS COMUNES A TODA SOLICITUD'}</option>
+                                    <option >{'DOCUMENTOS LICENCIA DE URBANIZACION'}</option>
+                                    <option >{'DOCUMENTOS LICENCIA DE PARCELACION'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES LICENCIA DE SUBDIVICION'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES DE RECONOCIMIENTO DE EDIFICACIONES'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES LICENCIA DE CONSTRUCCION'}</option>
+                                    <option >{'DOCUMENTOS INERVENCION Y OCUPACION ESPACIO PUBLICO'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES OTRAS ACTUACIONES'}</option>
+                                    <option >{'DOCUMENTOS EXPENSAS / IMPUESTOS'}</option>
+                                    <option >{'NUEVA LISTA'}</option>
+                                </select>
+                                <span class={"bp4-icon bp4-icon-chevron-down"}></span>
+                            </div>
+                        </p>
+                        <p>To change this list, use the selector and choose the list you want to add. As the selected list is changed, the table below will also change reflecting the change in lists.</p>
+                        <p>Once the list has been selected, the table must be filled. To do this, in the <label className='fw-b'>CONTRIBUTION</label> column, select the documents that were delivered to the entity and enter the number of pages of the document.</p>
+                        <p>When all the data is duly entered, the next step is to add the list by clicking on the button <Button icon={'add'} intent={'success'} text={'ADD LIST'} /> .</p>
+                        <p>If a list does NOT contain all the documents that need to be entered, <label className='fw-b'>it is possible to add several lists.</label> The lists must be added separately, each containing the different required documents.</p>
+                        <p className='fw-b'><Icon icon={'chevron-right'} /> CUSTOMIZABLE LISTS</p>
+                        <p>In case no list has the required documents, the <label className='fw-b'>NEW LIST</label> option should be used in the list selector. </p>
+                        <p>When a NEW LIST is created, the list items must be added one by one, in addition, this list must be given a proper name in the text box <InputGroup placeholder={'List name'} leftIcon={"highlight"} /></p>
+                        <p>To add a new Item, click on the button <Button icon={'add'} intent={'success'} text={'NEW ITEM'} />, this will create a new row in the table, In this row, you must specify the properties of the document, its name, its type and the number of pages. To add yet another item, just click the button again. </p>
+                        <p className='fw-b'><Icon icon={'chevron-right'} /> SEARCH NAME AND TYPE OF DOCUMENTS</p>
+                        <p>When you don't have the name or type code of a document to type, you can click on the <Button icon={'duplicate'} intent={'primary'} /> Copy button document. This button will open a new window with the <label className='fw-b'>LIST OF DOCUMENTS</label> table. Here you must search for the document of interest and click on the button <Button icon={'duplicate'} intent={'primary'} /> Copy document again. The system will copy the name and type of the list creation table.</p>
+                        <p>Once all the documents of interest have been added, you must click on the button <Button icon={'add'} intent={'success'} text={'ADD LIST'} /> To add this list .</p>
+                    </>,
+                    focus: 'new_list_tuto',
+                },
+                {
+                    title: <label className='text-primary'>TABLE: LIST OF DOCUMENTS</label>,
+                    content: <>
+                        <p>When at least one list of documents has been created, this table will appear indicating the current list of documents present in the entry.</p>
+                        <Grid className='my-1' fluid>
+                            <Row className='border bg-cold txt-c fw-b py-1' style={{ width: '100%' }}>
+                                <Col xl={18} lg={16} md={16} sm={12} xs={8}><label>DOCUMENT</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>TYPOLOGY</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>FOLIOS</label></Col>
+                            </Row>
+                            <Row className='border bg-cold txt-c fw-b py-1' style={{ width: '100%' }}>
+                                <Col xl={24} lg={24} md={24} sm={24} xs={24}><label>LIST TITLE: <label className='text-muted'>LIST NAME</label> </label></Col>
+                            </Row>
+                            <Row className='border txt -c py-1' style={{ width: '100%' }}>
+                                <Col xl={18} lg={16} md={16} sm={12} xs={8}><label className=''>DOCUMENT NAME</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label className=''>#</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label className=''>#</label></Col>
+                            </Row>
+                        </Grid>
+                        <p>These lists can continue to be modified after their creation, new items can be added, removed and the list can be deleted altogether.</p>
+                    </>,
+                    list: [
+                        { text: <>To alter an already generated list, click on the button <Button icon={'annotation'} intent={'primary'} /> UPDATE LIST, the selected list will change its appearance in order to change the data that are necessary.</> },
+                        { text: <>To add an item to the list, click on the button <Button icon={'add'} intent={'success'} text={'NEW ITEM'} /></> },
+                        { text: <>To remove an item from the list, click the button <Button icon={'remove'} intent={'secondary'} text={'REMOVE LAST'} /></> },
+                        { text: <>To delete the entire list, click the button <Button icon={'trash'} intent={'danger'} text={'DELETE LIST'} />. This is considered a <label className='text-danger fw-b'>DANGEROUS ACTION</label></> },
+                        { text: <>Once you have made all the required changes, save the information by clicking the button <Button icon={'floppy-disk'} intent={'primary'} text={'SAVE LIST'} /></> },
+                    ],
+                    focus: 'edit_list_tuto',
+                },
+            ],
         },
         es: {
             HELP_PAGE: [
@@ -359,7 +462,7 @@ export let translations = {
             new: 'NUEVA ENTRADA',
             edit: 'ACTUALIZAR ENTRADA',
             new_btn_help_texts: ['MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: NUEVA ENTRADA', 'Esta ventana permite crear nuevas entradas para este módulo, todo documento que ingrese a la entidad debe de ser registrado primero.'],
-            categories : ['RADICACIÓN VENTANILLA ÚNICA', 'LISTA DE DOCUMENTOS', 'ANEXO DIGITAL Y CERTIFICACIONES DE ENTREGA'],
+            categories: ['RADICACIÓN VENTANILLA ÚNICA', 'LISTA DE DOCUMENTOS', 'ANEXO DIGITAL Y CERTIFICACIONES DE ENTREGA'],
             NEW_HELP_PAGE: [
                 {
                     title: 'MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: NUEVA ENTRADA',
@@ -374,7 +477,7 @@ export let translations = {
                     focus: 'edit',
                 },
             ],
-            FORM_INFO_BTN : ['MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: FORMULARIO', 'Este formulario contiene toda la inforacion necesaria para cada entrada de la ventanilla única.'],
+            FORM_INFO_BTN: ['MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: FORMULARIO', 'Este formulario contiene toda la inforacion necesaria para cada entrada de la ventanilla única.'],
             FORM_INFO: [
                 {
                     title: 'Nr Radicación',
@@ -474,13 +577,97 @@ export let translations = {
                 { label: 'Observaciones y detalles', placeholder: 'Detalles no contenplados en el resto del formulario' },
                 { label: ['Se encontró consecutivo', 'No se encontró consecutivo', 'Se encontraron errores en el Código a buscar', 'Debe especificar un consecutivo de Licencia'] },
             ],
-            FORM_DOCUMENT_TABLE : ['DOCUMENTO', 'TIPOLOGÍA', 'FOLIOS', 'APORTO', 'TITULO LISTA: ', 'NUEVA LISTA: ', 'Nombre lista', 'Nombre documento', ],
-            FORM_DOCUMENT_BTNS : ['ACTUALIZAR LISTA', 'GUARDAR LISTA', 'ELIMINAR LISTA', 'REMOVER ULTIMO', 'NUEVO ITEM', 'NUEVA LISTA', 'AÑADIR LISTA' ],
-            LIST_HELP: [
+            FORM_DOCUMENT_TABLE: ['DOCUMENTO', 'TIPOLOGÍA', 'FOLIOS', 'APORTO', 'TITULO LISTA: ', 'NUEVA LISTA: ', 'Nombre lista', 'Nombre documento',],
+            FORM_DOCUMENT_BTNS: ['ACTUALIZAR LISTA', 'GUARDAR LISTA', 'ELIMINAR LISTA', 'REMOVER ULTIMO', 'NUEVO ITEM', 'NUEVA LISTA', 'AÑADIR LISTA'],
+            DOCUMENT_LIST_POP: ['LISTA DE DOCUMENTOS', 'Los documentos entregados en forma fisica a la entidad, puede contenter multiples listas de documentos relacionados con la entrada.'],
+            DOCUMENT_LIST_INFO: [
                 {
-                    title: 'MODULO DE GESTIÓN DE VENTANILLA ÚNICA DE RADICACIÓN: NUEVA ENTRADA',
-                    content: 'Esta ventana permite crear una nueva entrada en este módulo, todos los documentos que ingreses a la entidad deben ser registrados en este módulo, antes de especificar los documento que ingresaran se debe crear la entrada que contendrá la información inicial del evento de ingreso de documentos.',
-                    focus: 'title',
+                    title: 'LISTA DE DOCUMENTOS',
+                    content: <>Esta sección contiene todas las listas de documentos relacionadas a esta entrada de ventanilla única. Inicialmente, no se encontrarán ninguna lista visible, para añadir una lista se debe ingresar en la sección de <label className='fw-b'>NUEVA LISTA</label>. Una vez se halla añadido una lista, aparecerán una tabla listando los documentos con sus características; Nombre, número de folios y su código de tipología.</>,
+                    focus: 'doc_list',
+                },
+                {
+                    title: 'Características de documento',
+                    content: 'Los documentos asociados a cada entrada de ventanilla única poseen 3 características propias, estas son:',
+                    focus: 'doc_data', list: [
+                        { subtitle: 'NOMBRE DE DOCUMENTO', text: 'Una descripción corta o el nombre del documento. En el caso de documentos compuestos por varias hojas, todas sus hojas se comprenderán como parte del mismo documento.' },
+                        { subtitle: 'TIPOLOGÍA', text: 'Un código único e identificador de cada documento. El sistema usa ese código para identificar los documentos ingresaos a cada proceso. No todos los documentos ingresados pueden tener un código de tipología.' },
+                        { subtitle: 'FOLIOS', text: 'El número de hojas de las cuales el documento esta compuesto.' },
+                    ],
+                },
+                {
+                    title: 'NUEVA LISTA',
+                    content: 'Esta sección permite la creación de nuevas listas de documentos y asociarlos al proceso de forma automática.',
+                    component: <PanelGroup accordion bordered className='py-0 mx-1 border-success'>
+                        <Panel header={<h6><Icon icon={'add'} intent={'success'} size="18" /> {'NUEVA LISTA'}</h6>}></Panel>
+                    </PanelGroup>,
+                    focus: 'new_list',
+                },
+                {
+                    title: <label className='text-success'>¿COMO AÑADIR UNA NUEVA LISTA?</label>,
+                    content: <>
+                        <p>Para añadir una lista de documentos haga click en el botón de <label className='fw-b'>NUEVA LISTA</label>, una sección nueva aparecerá, esta sección es una tabla con una lista de documentos. Esta lista inicialmente es la lista de <lalbel>DOCUMENTOS COMUNES A TODA SOLICITUD</lalbel>.</p>
+                        <p>
+                            <div class="bp4-input-group">
+                                <span class={"bp4-icon bp4-icon-add-to-artifact"}></span>
+                                <select className={'bp4-input'}>
+                                    <option >{'DOCUMENTOS COMUNES A TODA SOLICITUD'}</option>
+                                    <option >{'DOCUMENTOS LICENCIA DE URBANIZACION'}</option>
+                                    <option >{'DOCUMENTOS LICENCIA DE PARCELACION'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES LICENCIA DE SUBDIVICION'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES DE RECONOCIMIENTO DE EDIFICACIONES'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES LICENCIA DE CONSTRUCCION'}</option>
+                                    <option >{'DOCUMENTOS INERVENCION Y OCUPACION ESPACIO PUBLICO'}</option>
+                                    <option >{'DOCUMENTOS ADICIONALES OTRAS ACTUACIONES'}</option>
+                                    <option >{'DOCUMENTOS EXPENSAS / IMPUESTOS'}</option>
+                                    <option >{'NUEVA LISTA'}</option>
+                                </select>
+                                <span class={"bp4-icon bp4-icon-chevron-down"}></span>
+                            </div>
+                        </p>
+                        <p>Para cambiar esta lista, utilice el seleccionador y elija la lista que quiere añadir. A medida que se cambia la lista seleccionada, la tabla de abajo cambiará también reflejando el cambio de listas.</p>
+                        <p>Una vez seleccionada la lista se debe proceder a llenar la tabla. Para ello, en la columna de <label className='fw-b'>APORTO</label> seleccione los documentos que SI fueron entregados a la entidad y digite el número de folios del documento.</p>
+                        <p>Cuando todos los datos se halla digitado debidamente, el siguiente paso es añadir la lista haciendo click en el boton <Button icon={'add'} intent={'success'} text={'AÑADIR LISTA'} />.</p>
+                        <p>Si una lista NO contiene todos los documentos que se necesitan ingresar, <label className='fw-b'>es posible añadir varias listas.</label> Se deben añadir las listas de forma separada, cada una conteniendo los diferentes documentos requeridos.</p>
+                        <p className='fw-b'><Icon icon={'chevron-right'} /> LISTAS PERSONALIZABLES</p>
+                        <p>En caso tal de que ninguna lista tenga los documentos requeridos, se debe usar la opción de <label className='fw-b'>NUEVA LISTA</label> en el seleccionador de listas. </p>
+                        <p>Cuando se crea una NUEVA LISTA, se deben de añadir los items de la lista uno por uno, ademas se debe de darle un nombre propio a esta lista en la caja de texto  <InputGroup placeholder={'Nombre lista'} leftIcon={"highlight"} /></p>
+                        <p>Para añadir un nuevo Item, haga click en el boton <Button icon={'add'} intent={'success'} text={'NUEVO ITEM'} />, esto creará una nueva fila en la tabla, en esta fila se deben de especificar las propiedades del documento, su nombre, su tipología y el número de folios. Para añadir otro ítem más, solo haga click en el botón nuevamente. </p>
+                        <p className='fw-b'><Icon icon={'chevron-right'} /> BUSCAR NOMBRE Y TIPOLOGÍA DE DOCUMENTOS</p>
+                        <p>Cuando no se tenga a la mano el nombre o el codigo de tipologia de un documento a digitar, se puede hacer click en el boton de <Button icon={'duplicate'} intent={'primary'} /> Copiar documento. Este botón abrirá una nueva ventana con la tabla de <label className='fw-b'>LISTA DE DOCUMENTOS</label>. Aquí se debe buscar el documento de interés y hacer click en el botón de <Button icon={'duplicate'} intent={'primary'} /> Copiar documento nuevamente. El sistema copiará el nombre y la tipología de la tabla de creación de lista.</p>
+                        <p>Una vez añadidos todos los documento de interes, se debe hacer click en el boton de <Button icon={'add'} intent={'success'} text={'AÑADIR LISTA'} /> Para añadir está lista.</p>
+                    </>,
+                    focus: 'new_list_tuto',
+                },
+                {
+                    title: <label className='text-primary'>TABLA: LISTADO DE DOCUMENTOS</label>,
+                    content: <>
+                        <p>Cuando al menos una lista de documentos haya sido creada, esta tabla aparecerá indicando el listado de documentos presentes actual en la entrada.</p>
+                        <Grid className='my-1' fluid>
+                            <Row className='border bg-cold txt-c fw-b  py-1' style={{ width: '100%' }}>
+                                <Col xl={18} lg={16} md={16} sm={12} xs={8}><label>DOCUMENTO</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>TIPOLOGÍA</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label>FOLIOS</label></Col>
+                            </Row>
+                            <Row className='border bg-cold txt-c fw-b  py-1' style={{ width: '100%' }}>
+                                <Col xl={24} lg={24} md={24} sm={24} xs={24}><label>TITULO LISTA: <label className='text-muted'>NOMBRE LISTA</label></label></Col>
+                            </Row>
+                            <Row className='border txt-c py-1' style={{ width: '100%' }}>
+                                <Col xl={18} lg={16} md={16} sm={12} xs={8}><label className=''>NOMBRE DOCUMENTO</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label className=''>#</label></Col>
+                                <Col xl={3} lg={4} md={4} sm={6} xs={8}><label className=''>#</label></Col>
+                            </Row>
+                        </Grid>
+                        <p>Estas listas puede seguir siendo modificadas posterior a su creación, nuevos ítems pueden ser añadidos, removidos y la lista puede ser eliminada del todo.</p>
+                    </>,
+                    list: [
+                        { text: <>Para alterar una lista ya generada, haga click en el botón <Button icon={'annotation'} intent={'primary'} /> ACTUALIZAR LISTA, la lista seleccionada cambiará su apariencia para poder cambiar los datos que sean necesarios.</> },
+                        { text: <>Para añadir un ítem a la lista, haga click en el botón <Button icon={'add'} intent={'success'} text={'NUEVO ITEM'} /></> },
+                        { text: <>Para remover un ítem a la lista, haga click en el botón <Button icon={'remove'} intent={'secondary'} text={'REMOVER ULTIMO'} /></> },
+                        { text: <>Para eliminar toda la lista, haga click en el botón <Button icon={'trash'} intent={'danger'} text={'ELIMINAR LISTA'} />. Esta es considerado una <label className='text-danger fw-b'>ACCIÓN PELIGROSA</label></> },
+                        { text: <>Una vez echo todos los cambios requeridos, guarde la información haciendo click en el botón <Button icon={'floppy-disk'} intent={'primary'} text={'GUARDAR LISTA'} /></> }
+                    ],
+                    focus: 'edit_list_tuto',
                 },
             ],
         }

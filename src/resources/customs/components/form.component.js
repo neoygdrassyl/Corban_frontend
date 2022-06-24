@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Col, Grid, Popover, Row, SelectPicker, Whisper } from 'rsuite';
-import { Button, FormGroup, InputGroup, Switch } from '@blueprintjs/core';
+import { Col, Grid, Popover, Row, SelectPicker, Uploader, Whisper } from 'rsuite';
+import { Button, FormGroup, InputGroup, NumericInput, Switch } from '@blueprintjs/core';
 import { UtilContext } from '../contextProviders/util.provider';
 import TEXTAREA from './textarea.component';
 
@@ -51,6 +51,25 @@ export default function FORM(props) {
                     onBlur={input.onBlur}
                     fill length={input.length ?? 2000} />
 
+            case 'number':
+                return <NumericInput id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
+                    leftIcon={input.leftIcon}
+                    intent={input.intent}
+                    onValueChange={input.onChange}
+                    onBlur={input.onBlur}
+                    min={input.min} max={input.max}
+                    buttonPosition={input.btnPos ?? 'right'}
+                    allowNumericCharactersOnly fill
+                />
+
+            case 'uploader':
+                return <Uploader 
+                id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
+                accept={input.accept ?? "image/png, image/jpeg application/pdf"}
+                draggable >
+                    <div style={{ lineHeight: '150px', borderColor: 'dodgerblue', backgroundColor: theme == 'dark' ? '#2d2d2d' : '' }}>{trn.uploader}</div>
+                </Uploader>
+
             default:
                 return <InputGroup id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
                     leftIcon={input.leftIcon}
@@ -68,7 +87,7 @@ export default function FORM(props) {
 
 
     return (
-        <form id={props.id} onSubmit={props.onSubmit} >
+        <form id={props.id} onSubmit={props.onSubmit} enctype={props.upload ? "multipart/form-data": ''}>
             <Grid className='py-1' fluid>
                 {form.map(row => {
                     return <Row style={{ width: '100%' }}>
