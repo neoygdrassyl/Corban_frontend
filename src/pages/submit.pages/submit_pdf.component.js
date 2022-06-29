@@ -1,49 +1,58 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
 
 import SERVICE_SUBMIT from '../../services/apis/submit.service';
-import { Button, Col, Divider, Grid, Panel, PanelGroup, Row, toaster, Uploader } from 'rsuite';
-import { Button as ButtonBP, FormGroup, Icon, InputGroup, NumericInput, Switch } from '@blueprintjs/core';
+import { Col, Divider, Grid, Row, toaster } from 'rsuite';
+import { Button as ButtonBP } from '@blueprintjs/core';
 
-import { ALERT_EMPTY_LIST, ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../resources/customs/utils/notifications.vars';
-import DOC_LIST from '../../resources/jsons/fun6DocsList.json'
-import BTN_LIST_DOCS from '../../resources/customs/components/btnListDocs.component';
-import ButtonWhisper from '../../resources/customs/components/btnWhisper.component';
+import { ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../resources/customs/utils/notifications.vars';
 import BTN_HELP from '../../resources/customs/components/btnHelp.component';
-import { BsFilePdf } from 'react-icons/bs';
 import BTN_PDF from '../../resources/customs/components/btnPDF.component';
 import FORM from '../../resources/customs/components/form.component';
+import moment from 'moment';
 
 
 export default function SUBMIT_PDF(props) {
     const { currentItem } = props;
-    const auth = useContext(AuthContext);
-    const user = auth.user ?? {};
-
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('submit');
     const lang = utilities.lang;
-
-    var [load, setLoad] = useState(0);
-    useEffect(() => {
-
-    }, [load]);
+    const files = utilities.files;
 
     // ************************** HELP FUCTIONS **************************** //
-
+    let _GET_DOC = () => {
+        var _CHILD = currentItem.sub_doc;
+        var _VARS = {
+            id: _CHILD ? _CHILD.id : 0,
+            id_public: _CHILD ? _CHILD.id_public : null,
+            pages: _CHILD ? _CHILD.pages : null,
+            filename: _CHILD ? _CHILD.filename : null,
+            path: _CHILD ? _CHILD.path : null,
+        }
+        return _VARS
+    }
     // ************************** JSX ELEMENTS **************************** //
     const FORM_COMPONENT = () => {
+        const docData = _GET_DOC();
+        const fileList = docData.filename ? [{ name: docData.filename, fileKey: 1, }] : false;
         const FORM_INPUTS = [
-            { inputs: [{ label: "Subir archivo digitalizado", type: 'uploader', req: true, }] },
             {
-                inputs: [{ label: "Codigo Radicación", placeholder: "Consecutivo de radicación", leftIcon: 'selection', req: true, },
-                { type: 'number', label: "Número de folios", placeholder: "Número de folios del documento", leftIcon: 'document', req: true, }]
+                inputs: [{
+                    id: 'submit_pdf_anex_3', label: "Subir archivo digitalizado", type: 'uploader', req: true, fileList: fileList,
+                    onClick: (cb) => CONFIRM_DELETE(lang, docData.filename, () => {removeDocument(docData.id, cb)})
+                }]
+            },
+            {
+                inputs: [
+                    { id: 'submit_pdf_anex_1', label: "Codigo Radicación", placeholder: "Consecutivo de radicación", leftIcon: 'selection', req: true, dv: docData.id_public ?? currentItem.id_public ?? '' },
+                    { id: 'submit_pdf_anex_2', type: 'number', label: "Número de folios", placeholder: "Número de folios del documento", leftIcon: 'document', req: true, dv: docData.pages ?? '' }
+                ]
             },
         ]
 
-        return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); }} upload
-            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="primary" text={'GUARDAR'} style={{ float: 'right' }} />} />
+        return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); addDocument() }} upload
+            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={'GUARDAR'} style={{ float: 'right' }} />}
+            />
     }
     const BTN_COMPONENT = () => {
         return <>
@@ -72,6 +81,78 @@ export default function SUBMIT_PDF(props) {
                 ALERT_ERROR(lang)
             });
 
+    }
+
+    let addDocument = () => {
+        var formData = new FormData();
+
+        if (files.length) {
+            let _homepath = 'submit'
+            let _creationYear = moment(currentItem.createdAt).format('YY');
+            let _folder = currentItem.id_public;
+            let _name = files[0].name.replace(/\_/g, "");
+            formData.append('file', files[0].blobFile, `${_homepath}_${_creationYear}_${_folder}_${_name}`)
+        }
+
+
+        let id_public = document.getElementById("submit_pdf_anex_1").value;
+        formData.set('id_public', id_public);
+        let pages = document.getElementById("submit_pdf_anex_2").value;
+        formData.set('pages', pages);
+
+        manageDocument(formData);
+    }
+
+    let manageDocument = (formData) => {
+        ALERT_WAIT(lang)
+        if (_GET_DOC().id) {
+            SERVICE_SUBMIT.update_anex(_GET_DOC().id, formData)
+                .then(response => {
+                    if (response.data === 'OK') {
+                        ALERT_SUCCESS(lang);
+                        utilities.setFiles(new Array());
+                        props.reload();
+                    }
+                    else ALERT_ERROR(lang);
+                })
+                .catch(e => {
+                    console.log(e);
+                    ALERT_ERROR(lang);
+                });
+        } else {
+            formData.set('submitId', currentItem.id);
+            SERVICE_SUBMIT.create_anex(formData)
+                .then(response => {
+                    if (response.data === 'OK') {
+                        ALERT_SUCCESS(lang);
+                        utilities.setFiles(new Array());
+                        props.reload();
+                    } else ALERT_ERROR(lang);
+                })
+                .catch(e => {
+                    console.log(e);
+                    ALERT_ERROR(lang);
+                });
+        }
+    }
+
+    let removeDocument = (id, cb) => {
+        toaster.remove();
+        ALERT_WAIT(lang)
+        SERVICE_SUBMIT.delete_anex(id)
+            .then(response => {
+                if (response.data === 'OK') {
+                    ALERT_SUCCESS(lang);
+                    utilities.setFiles(new Array());
+                    cb(new Array());
+                    props.reload();
+                }
+                else ALERT_ERROR(lang);
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang);
+            });
     }
 
     return (

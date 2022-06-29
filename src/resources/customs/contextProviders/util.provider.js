@@ -9,6 +9,8 @@ export let UtilContext = React.createContext();
 // THIS CONTEXT PROVIDER MANAGES THE LANGUAGE AND THEME FUNCTIONALITIES OF THE WEB
 
 export function UtilProvider({ children }) {
+    let [files, setFiles] =  React.useState([]);
+    
     let [lang, setLang] = React.useState('es');
 
     // light | dark | contrast  
@@ -43,7 +45,7 @@ export function UtilProvider({ children }) {
           }
       }
 
-    let value = { theme, lang, changeTheme, getTranslation, changeLang, };
+    let value = { theme, lang, changeTheme, getTranslation, changeLang, files, setFiles};
 
     return <UtilContext.Provider value={value}>{children}</UtilContext.Provider>;
 }

@@ -133,10 +133,14 @@ export let translations = {
         en: {
             req: 'REQUIRED',
             uploader: 'Click or drag files to this area to upload',
+            limitFile: 'Max files',
+            limiSize: 'Max size',
         },
         es: {
             req: 'REQUERIDO',
             uploader: 'Click o arrastre archivos a esta area para subirlos',
+            limitFile: 'Archivos máximos',
+            limiSize: 'Tamaño máximos',
         }
     },
 
@@ -398,10 +402,10 @@ export let translations = {
                     </>,
                     list: [
                         { text: <>To alter an already generated list, click on the button <Button icon={'annotation'} intent={'primary'} /> UPDATE LIST, the selected list will change its appearance in order to change the data that are necessary.</> },
-                        { text: <>To add an item to the list, click on the button <Button icon={'add'} intent={'success'} text={'NEW ITEM'} /></> },
+                        { text: <>To add an item to the list, click on the button <Button icon={'add'} intent={'primary'} text={'NEW ITEM'} /></> },
                         { text: <>To remove an item from the list, click the button <Button icon={'remove'} intent={'secondary'} text={'REMOVE LAST'} /></> },
                         { text: <>To delete the entire list, click the button <Button icon={'trash'} intent={'danger'} text={'DELETE LIST'} />. This is considered a <label className='text-danger fw-b'>DANGEROUS ACTION</label></> },
-                        { text: <>Once you have made all the required changes, save the information by clicking the button <Button icon={'floppy-disk'} intent={'primary'} text={'SAVE LIST'} /></> },
+                        { text: <>Once you have made all the required changes, save the information by clicking the button <Button icon={'floppy-disk'} intent={'success'} text={'SAVE LIST'} /></> },
                     ],
                     focus: 'edit_list_tuto',
                 },
@@ -662,10 +666,10 @@ export let translations = {
                     </>,
                     list: [
                         { text: <>Para alterar una lista ya generada, haga click en el botón <Button icon={'annotation'} intent={'primary'} /> ACTUALIZAR LISTA, la lista seleccionada cambiará su apariencia para poder cambiar los datos que sean necesarios.</> },
-                        { text: <>Para añadir un ítem a la lista, haga click en el botón <Button icon={'add'} intent={'success'} text={'NUEVO ITEM'} /></> },
+                        { text: <>Para añadir un ítem a la lista, haga click en el botón <Button icon={'add'} intent={'primary'} text={'NUEVO ITEM'} /></> },
                         { text: <>Para remover un ítem a la lista, haga click en el botón <Button icon={'remove'} intent={'secondary'} text={'REMOVER ULTIMO'} /></> },
                         { text: <>Para eliminar toda la lista, haga click en el botón <Button icon={'trash'} intent={'danger'} text={'ELIMINAR LISTA'} />. Esta es considerado una <label className='text-danger fw-b'>ACCIÓN PELIGROSA</label></> },
-                        { text: <>Una vez echo todos los cambios requeridos, guarde la información haciendo click en el botón <Button icon={'floppy-disk'} intent={'primary'} text={'GUARDAR LISTA'} /></> }
+                        { text: <>Una vez echo todos los cambios requeridos, guarde la información haciendo click en el botón <Button icon={'floppy-disk'} intent={'success'} text={'GUARDAR LISTA'} /></> }
                     ],
                     focus: 'edit_list_tuto',
                 },

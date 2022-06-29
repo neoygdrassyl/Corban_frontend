@@ -8,7 +8,7 @@ import SERVICE_FUN from '../../services/apis/fun.service';
 import TABLE_COMPONENT from '../../resources/customs/components/table.component';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from 'react-icons/ri'
-import { Button, Col, Divider, Popover, Row, toaster, Whisper } from 'rsuite';
+import { Col, Divider, Row, toaster } from 'rsuite';
 import BTN_HELP from '../../resources/customs/components/btnHelp.component';
 import { Button as ButtonBP, Icon } from '@blueprintjs/core';
 import MODAL from '../../resources/customs/components/modal.component';
@@ -38,7 +38,8 @@ export default function SUBMIT() {
     var [verifyMSG, setMSG] = useState("");
 
     useEffect(() => {
-        if (load == 0) loadData()
+        if (load == 0) loadData();
+        if (load == 2) loadData(true);
     }, [load]);
 
     // ************************** HELP FUCTIONS **************************** //
@@ -136,7 +137,7 @@ export default function SUBMIT() {
         return <>
             <Divider>{trn.categories[0]} <BTN_HELP title={trn.FORM_INFO_BTN[0]} text={trn.FORM_INFO_BTN[1]} page={trn.FORM_INFO} focus={'id_public'} /></Divider>
             <FORM form={FORM_INPUTS} id="submit_form" onSubmit={(e) => { e.preventDefault(); manage({ id: edit ? edit.id : false }) }}
-                submitBtn={edit ? <ButtonBP icon="annotation" intent="primary" type="submit" text={trn.edit} /> : <ButtonBP icon="add" intent="success" type="submit" text={trn.new} />} />
+                submitBtn={edit ? <ButtonBP icon="annotation" intent="success" type="submit" text={trn.edit} /> : <ButtonBP icon="add" intent="success" type="submit" text={trn.new} />} />
         </>
     }
 
@@ -172,9 +173,12 @@ export default function SUBMIT() {
             selector: row => row.sub_doc ? true : false,
             minWidth: '130px',
             maxWidth: '130px',
-            cell: row => row.sub_doc
-                ? <FaCheck className='text-success' />
-                : <FaTimes className='text-danger' />
+            cell: row => {
+                let isAnex = row.sub_doc ? row.sub_doc.filename ? true : false : false;   
+                if(isAnex) return <FaCheck className='text-success' />
+                else return <FaTimes className='text-danger' />
+
+            }
         },
         {
             name: <label>{trn.table_columns[5]}</label>,
@@ -191,11 +195,12 @@ export default function SUBMIT() {
         },
     ]
     // ******************************** APIS ****************************** //
-    function loadData() {
+    function loadData(updateEdit) {
         SERVICE_SUBMIT.getAll()
             .then(response => {
                 setData(response.data);
-                setLoad(1)
+                setLoad(1);
+                if(updateEdit) setEdit(response.data.find(d=> d.id == editItem.id));
             })
             .catch(e => {
                 console.log(e);
@@ -392,7 +397,7 @@ export default function SUBMIT() {
                 {MANAGE_COMPONENT(editItem)}
                 {editItem ? <>
                     <SUBMIT_LISTS currentItem={editItem} />
-                    <SUBMIT_PDF currentItem={editItem} />
+                    <SUBMIT_PDF currentItem={editItem} reload={() => setLoad(2)}/>
                 </> : ''}
             </MODAL>
         </>

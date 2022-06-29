@@ -4,7 +4,7 @@ import { UtilContext } from '../contextProviders/util.provider';
 import { Button as ButtonPB } from "@blueprintjs/core";
 
 export default function ButtonWhisper(props) {
-    const { placement, hover, controlId, subtle, onClick, icon, intent, whisper, title } = props
+    const { placement, hover, controlId, subtle, onClick, icon, intent, whisper, title, float } = props
 
     const utilities = useContext(UtilContext);
 
@@ -14,13 +14,13 @@ export default function ButtonWhisper(props) {
 
 
     return <>
-        <Whisper placement={placement ?? "top"} trigger={hover ?? "hover"} controlId={controlId ?? "control-id-hover"} speaker={speaker}>
+        <Whisper  placement={placement ?? "top"} trigger={hover ?? "hover"} controlId={controlId ?? "control-id-hover"} speaker={speaker}>
             {subtle ?
-                <Button size='sm' appearance='subtle' onClick={onClick}>
+                <Button size='sm' appearance='subtle' onClick={onClick} className={props.className} style={{float: float}}>
                     {props.children}
                 </Button>
                 :
-                <ButtonPB icon={icon} intent={intent ?? 'primary'} onClick={onClick} >
+                <ButtonPB icon={icon} intent={intent ?? 'primary'} onClick={onClick} className={props.className} style={{float: float}}>
                     {props.children}
                 </ButtonPB>
             }

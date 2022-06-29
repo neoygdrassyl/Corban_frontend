@@ -57,6 +57,9 @@ class SERVICE_SUBMIT {
     delete_list(id) {
         return http.delete(`/${route}/delete_list/${id}`, header());
     }
+    delete_anex(id) {
+        return http.delete(`/${route}/delete_anex/${id}`, header());
+    }
 
     deleteAll() {
         return http.delete(`/${route}`, header());

@@ -168,11 +168,11 @@ export default function SUBMIT_LISTS(props) {
                     {isEdit ?
                         <Row className='border py-1' style={{ width: '100%' }} >
                             <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                                <ButtonBP className='mx-1' icon="floppy-disk" intent="primary" text={trn.FORM_DOCUMENT_BTNS[1]} style={{ float: 'left' }}
+                                <ButtonBP className='mx-1' icon="floppy-disk" intent="success" text={trn.FORM_DOCUMENT_BTNS[1]} style={{ float: 'left' }}
                                     onClick={() => updateList(list.id)} />
                                 <ButtonBP icon="trash" intent="danger" text={trn.FORM_DOCUMENT_BTNS[2]} style={{ float: 'left' }}
                                     subtle onClick={() => CONFIRM_DELETE(lang, title, () => deleteList(list.id))} />
-                                <ButtonBP className='mx-1' icon="add" intent="success" text={trn.FORM_DOCUMENT_BTNS[4]} style={{ float: 'right' }}
+                                <ButtonBP className='mx-1' icon="add" intent="primary" text={trn.FORM_DOCUMENT_BTNS[4]} style={{ float: 'right' }}
                                     onClick={() => setEditListA(editListArray.concat([0]))} />
                                 {editListArray.length > 0 ?
                                     <ButtonBP icon="remove" intent="secondary" text={trn.FORM_DOCUMENT_BTNS[3]} style={{ float: 'right' }}
@@ -259,7 +259,7 @@ export default function SUBMIT_LISTS(props) {
                     })}
                     <Row className='border py-1' style={{ width: '100%' }} >
                         <Col xl={24} lg={24} md={24} sm={24} xs={24}>
-                            <ButtonBP className='mx-1' icon="add" intent="success" text={trn.FORM_DOCUMENT_BTNS[4]} style={{ float: 'right' }}
+                            <ButtonBP className='mx-1' icon="add" intent="primary" text={trn.FORM_DOCUMENT_BTNS[4]} style={{ float: 'right' }}
                                 onClick={() => setNewListA(newListArray.concat([0]))} />
                             {newListArray.length > 0 ?
                                 <ButtonBP icon="remove" intent="secondary" text={trn.FORM_DOCUMENT_BTNS[3]} style={{ float: 'right' }}

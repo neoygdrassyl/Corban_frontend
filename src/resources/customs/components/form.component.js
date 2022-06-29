@@ -3,6 +3,7 @@ import { Col, Grid, Popover, Row, SelectPicker, Uploader, Whisper } from 'rsuite
 import { Button, FormGroup, InputGroup, NumericInput, Switch } from '@blueprintjs/core';
 import { UtilContext } from '../contextProviders/util.provider';
 import TEXTAREA from './textarea.component';
+import UPLOADER from './uploader.component';
 
 
 export default function FORM(props) {
@@ -45,11 +46,7 @@ export default function FORM(props) {
                 </div>
 
             case 'textarea':
-                return <TEXTAREA
-                    id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
-                    onChange={input.onChange}
-                    onBlur={input.onBlur}
-                    fill length={input.length ?? 2000} />
+                return <TEXTAREA {...input} />
 
             case 'number':
                 return <NumericInput id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
@@ -63,12 +60,7 @@ export default function FORM(props) {
                 />
 
             case 'uploader':
-                return <Uploader 
-                id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
-                accept={input.accept ?? "image/png, image/jpeg application/pdf"}
-                draggable >
-                    <div style={{ lineHeight: '150px', borderColor: 'dodgerblue', backgroundColor: theme == 'dark' ? '#2d2d2d' : '' }}>{trn.uploader}</div>
-                </Uploader>
+                return <UPLOADER {...input} />
 
             default:
                 return <InputGroup id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
@@ -117,7 +109,7 @@ export default function FORM(props) {
                     </Row>
                 })}
                 <Row style={{ width: '100%' }}>
-                    <Col xl={24} lg={24} md={24} sm={24} xs={24}>{props.submitBtn}</Col>
+                    <Col xl={24} lg={24} md={24} sm={24} xs={24}>{props.btns}{props.submitBtn}</Col>
                 </Row>
             </Grid>
         </form>

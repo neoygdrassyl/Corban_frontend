@@ -18,11 +18,14 @@ const trn = {
         msg_nolist_title: 'NO ITEMS ON LIST',
         msg_nolist_body: 'There are not items created on the document list.',
 
+        msg_noupload_title: 'UNABLE TO UPLOAD FILE',
+        msg_noupload_body: 'The selected file or files surpass the max size limit.',
+
         msg_success_title: 'SUCCESSFUL ACTION',
         msg_success_body: 'This action has been processed successfully by the system.',
 
         confirm_delete_title: 'ARE YOU SURE ABOUT THIS ACTION?',
-        confirm_delete_body: 'Are you sure about permanently deleting this item from the list? The deleted data will not be salvage.',
+        confirm_delete_body: 'Are you sure about permanently deleting this item from the system? The deleted data will not be salvage.',
         confirm_delete_body2: 'The next Item will be deleted: ',
         confirm_delete_btn1: 'DELETE',
         confirm_delete_btn2: 'CANCEL',
@@ -42,11 +45,14 @@ const trn = {
         msg_nolist_title: 'NO HAY ITEMS EN LISTA',
         msg_nolist_body: 'No hay items de documentos en la lista, se debe crear al menos un item para crear una lista.',
 
+        msg_noupload_title: 'NO ES POSIBLE SUBIR EL ARCHIVO',
+        msg_noupload_body: 'El archivo o archivos seleccionados superan el limite de subida máximo.',
+
         msg_success_title: 'ACCIÓN PROCESADA',
         msg_success_body: 'Esta acción se ha realizado de forma exitosa por el sistema.',
 
         confirm_delete_title: '¿ESTA SEGURO DE ESTA ACCIÓN?',
-        confirm_delete_body: '¿Está seguro de eliminar permanentemente este elemento de la lista? Los datos eliminados no se podrán recuperar.',
+        confirm_delete_body: '¿Está seguro de eliminar permanentemente este elemento del sistema? Los datos eliminados no se podrán recuperar.',
         confirm_delete_body2: 'Se eliminará la siguiente entrada: ',
         confirm_delete_btn1: 'ELIMINAR',
         confirm_delete_btn2: 'CANCELAR',
@@ -109,12 +115,22 @@ const message_confirm = (lg, id, cb) => (
     </Message>
 );
 
+const noupload = lg => (
+    <Message showIcon closable duration={DURATION} type={'warning'} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_noupload_title}</label>}>
+        <label>{trn[lg].msg_noupload_body}</label>
+    </Message>
+);
+
 
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_DUPLICATE = (lg) => { toaster.push(error_duplicate(lg), { placement: 'topEnd' }); }
+export const ALERT_NOUPLOAD = (lg) => toaster.push(noupload(lg), { placement: 'topEnd' })
+
 export const ALERT_SUCCESS = (lg) => { toaster.push(message_success(lg), { placement: 'topEnd' }); }
 export const ALERT_EMPTY_LIST = (lg) => toaster.push(message_noList(lg), { placement: 'topEnd' })
+
 export const CONFIRM_DELETE = (lg, id, cb) => { toaster.push(message_confirm(lg, id, cb), { placement: 'topCenter' }); }
 
