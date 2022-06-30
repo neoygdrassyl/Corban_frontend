@@ -3,6 +3,7 @@ import { FlexboxGrid, Uploader } from 'rsuite';
 import { UtilContext } from '../contextProviders/util.provider';
 import { ALERT_NOUPLOAD } from '../utils/notifications.vars';
 import ButtonWhisper from './btnWhisper.component';
+import VIEWER from './viewer.component';
 
 export default function UPLOADER(props) {
     const utilities = useContext(UtilContext);
@@ -12,7 +13,7 @@ export default function UPLOADER(props) {
 
     const limitItems = props.limit ?? 1;
     const limitSize = props.size ?? 5242880;
-    var [currentFiles, setFiles] = useState(props.fileList || files);
+    var [currentFiles, setFiles] = useState(props.fileList || []);
 
     function onLoad(newFiles) {
         let _nLimitSize = getSize(newFiles);
@@ -57,17 +58,21 @@ export default function UPLOADER(props) {
                 fileList={currentFiles}
                 multiple={limitItems > 1 ? true : false}
                 renderFileInfo={(file, fileElement) => {
-                    return (
-                        <FlexboxGrid justify="end">
-                            <FlexboxGrid.Item colspan={24}>File Name: {file.name}
-                                {props.fileList ?
-                                    <>
-                                        <ButtonWhisper className="mx-1" whisper={'DELETE'} icon="trash"  intent='danger' float='right' onClick={() => props.onClick(setFiles)} />
-                                        <ButtonWhisper whisper={'VIEW'} icon="search-template" float='right'/>
-                                    </>
-                                    : ''}</FlexboxGrid.Item>
+                    if (props.fileList) return (props.fileList.map(_file => {
+                        return <FlexboxGrid justify="end">
+                            <FlexboxGrid.Item colspan={24}>
+                                <div style={{ wordBreak: 'break-all' }}>
+                                    File Name: {_file.name}
+                                    <ButtonWhisper className="mx-1" whisper={'DELETE DOCUMENT'} icon="trash" intent='danger' float='right' onClick={() => props.onClick(setFiles)} />
+                                    <VIEWER className="mx-1"  float='right' filename={_file.name} path={_file.path} />
+                                </div>
+                            </FlexboxGrid.Item>
                         </FlexboxGrid>
-                    );
+                    })
+                    )
+                    else return <FlexboxGrid justify="end">
+                        <FlexboxGrid.Item colspan={24}>File Name: {file.name}</FlexboxGrid.Item>
+                    </FlexboxGrid>
                 }}
             >
                 <div style={{ paddingTop: '75px', paddingBottom: '75px', borderColor: canUpload(currentFiles) ? 'crimson' : 'dodgerblue', backgroundColor: theme == 'dark' ? '#2d2d2d' : '' }}>

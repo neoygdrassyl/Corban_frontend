@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Col, Grid, Popover, Row, SelectPicker, Uploader, Whisper } from 'rsuite';
+import { Col, Grid, Popover, Row, Whisper } from 'rsuite';
 import { Button, FormGroup, InputGroup, NumericInput, Switch } from '@blueprintjs/core';
 import { UtilContext } from '../contextProviders/util.provider';
 import TEXTAREA from './textarea.component';

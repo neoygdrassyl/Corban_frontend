@@ -1,10 +1,5 @@
 import http from "../../http-common";
-
-let header = () => {
-  let token = localStorage.getItem('corban_jwt');
-  let conn = localStorage.getItem('corban_conn');
-  return { headers: { Authorization: 'Bearer ' + token, dbIndex: JSON.parse(conn).conn || '' } }
-}
+import { header } from "../auth/auth";
 
 const route = "fun"
 class FunService {

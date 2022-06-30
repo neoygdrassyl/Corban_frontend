@@ -104,13 +104,16 @@ const message_success = lg => {
 const message_confirm = (lg, id, cb) => (
     <Message showIcon type={'warning'} style={{ maxWidth: WIDTH }}
         header={<label className='fw-b'>{trn[lg].confirm_delete_title}</label>} duration={-1}>
-        <label>{trn[lg].confirm_delete_body}</label>
-        <br/>
-        <label>{trn[lg].confirm_delete_body2} <label className='fw-b'>{id}</label></label>
-        <hr />
-        <div style={{float: 'right'}}>
-            <Button className='mx-1' intent='danger' icon="trash" text={trn[lg].confirm_delete_btn1} onClick={cb} />
-            <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
+        <div style={{ wordBreak: 'break-all' }}>
+            <label>{trn[lg].confirm_delete_body}</label>
+            <br />
+            <label>{trn[lg].confirm_delete_body2} <label className='fw-b'>{id}</label></label>
+            <hr />
+
+            <div style={{ float: 'right' }}>
+                <Button className='mx-1' intent='danger' icon="trash" text={trn[lg].confirm_delete_btn1} onClick={cb} />
+                <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
+            </div>
         </div>
     </Message>
 );

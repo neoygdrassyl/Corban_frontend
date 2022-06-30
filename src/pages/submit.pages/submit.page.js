@@ -199,8 +199,9 @@ export default function SUBMIT() {
         SERVICE_SUBMIT.getAll()
             .then(response => {
                 setData(response.data);
-                setLoad(1);
                 if(updateEdit) setEdit(response.data.find(d=> d.id == editItem.id));
+                setLoad(1);
+               
             })
             .catch(e => {
                 console.log(e);

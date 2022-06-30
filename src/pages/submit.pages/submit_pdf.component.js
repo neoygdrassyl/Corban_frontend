@@ -34,7 +34,7 @@ export default function SUBMIT_PDF(props) {
     // ************************** JSX ELEMENTS **************************** //
     const FORM_COMPONENT = () => {
         const docData = _GET_DOC();
-        const fileList = docData.filename ? [{ name: docData.filename, fileKey: 1, }] : false;
+        const fileList = docData.filename || docData.path ? [{ name: docData.filename, fileKey: 1, path: docData.path}] : false;
         const FORM_INPUTS = [
             {
                 inputs: [{
