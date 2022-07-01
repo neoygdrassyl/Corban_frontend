@@ -16,9 +16,10 @@ export default function VIEWER(props) {
     const utilities = useContext(UtilContext);
     const auth = useContext(AuthContext);
     const conn = auth.conn ? auth.conn.conn : '';
-    const trn = utilities.getTranslation('formComponent');
+    const trn = utilities.getTranslation('viewer');
     const theme = utilities.theme;
     const lang = utilities.lang;
+    const token = auth.token;
 
     const [load, setLoad] = useState(0);
     const [scale, setScale] = useState(1);
@@ -63,14 +64,14 @@ export default function VIEWER(props) {
 
     let HEADER_MODAL = () => {
         return <>
-            VER DOCUMENTO : <label className='fw-n'>{filename}</label>
+            {trn.view} : <label className='fw-n'>{filename}</label>
             <h6>
                 <FlexboxGrid justify="space-between" className='fw-n my-1'>
                     <FlexboxGrid.Item colspan={8}>
 
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item colspan={8}>
-                        <FormGroup inline={true} label={"Escala documento"} >
+                        <FormGroup inline={true} label={trn.scale} >
                             <div class="bp4-input-group">
                                 <span class={"bp4-icon bp4-icon-plus"}></span>
                                 <select onChange={(e) => { setScale(e.target.value); setPagesComponent(numPages, e.target.value) }} className={'bp4-input'} >
@@ -86,13 +87,13 @@ export default function VIEWER(props) {
                     <FlexboxGrid.Item colspan={8}>
                         {file ?
                             <>
-                                <FormGroup inline={true} label={"Buscar pagina"} labelInfo={'(Paginas totales: ' + numPages + ')'}>
+                                <FormGroup inline={true} label={trn.search_page} labelInfo={`(${trn.search_info}: ${numPages})`}>
                                     <NumericInput
                                         leftIcon={'document'}
                                         allowNumericCharactersOnly
                                         buttonPosition='none'
                                         id="page_traveler"
-                                        rightElement={<ButtonWhisper whisper={'IR A PAGINA'} intent="secondary" icon={'arrow-right'}
+                                        rightElement={<ButtonWhisper whisper={trn.search_go} intent="secondary" icon={'arrow-right'}
                                             onClick={() => {
                                                 let page_traveler = document.getElementById('page_traveler').value;
                                                 if (document.getElementById("viewer_page_" + page_traveler)) document.getElementById("viewer_page_" + page_traveler).scrollIntoView();
@@ -138,7 +139,7 @@ export default function VIEWER(props) {
     }
 
     async function loadPdf(_url) {
-        let token = auth.token;
+
         return await fetch(_url, { method: "GET", headers: { Authorization: `Bearer ${token}`, dbIndex: conn }, }).then(res => {
             if (res.status == 500) return false;
             else return res.arrayBuffer();
@@ -170,12 +171,12 @@ export default function VIEWER(props) {
 
     return (
         <>
-            <ButtonWhisper whisper={'VIEW DOCUMENT'} icon={getDocExt(filename) === 'pdf' ? "document-open" : getDocExt(filename) === 'img' ? 'media' : 'search-template'} float={float} onClick={() => setModal(!modal)} />
+            <ButtonWhisper whisper={trn.view} icon={getDocExt(filename) === 'pdf' ? "document-open" : getDocExt(filename) === 'img' ? 'media' : 'search-template'} float={float} onClick={() => setModal(!modal)} />
 
             <MODAL
                 open={modal}
                 setOpen={setModal}
-                actionBtn={file !== 0 ? <Button icon="cloud-download" intent="danger" onClick={() => downloadDocment()}>DESCARGAR</Button> : false}
+                actionBtn={file !== 0 ? <Button icon="cloud-download" intent="danger" onClick={() => downloadDocment()}>{trn.download}</Button> : false}
                 title={HEADER_MODAL()}
                 icon={<Icon icon={'document-open'} intent={'primary'} size="25" />}
                 size="full"
@@ -191,16 +192,16 @@ export default function VIEWER(props) {
                         </FlexboxGrid.Item>
                         : file === 0 ?
                             <Message showIcon type={'error'}
-                                header={<label className='fw-b'>{'DOCUMENT NOT FOUND'}</label>}>
-                                <label>{'The document solicited cannot be found, check the detais of the entry or contact with the administrator.'}</label>
+                                header={<label className='fw-b'>{trn.notfound_tite}</label>}>
+                                <label>{trn.notfound_body}</label>
                             </Message>
                             : ''}
 
-                    {fimage ?
-                        <FlexboxGrid.Item colspan={24}>
-                            <img src={fimage} alt="Image" height={100 * scale + '%'} width={100 * scale + '%'}></img>
-                        </FlexboxGrid.Item>
-                        : ''}
+
+                    <FlexboxGrid.Item colspan={24}>
+                        <img src={fimage} hidden={!fimage} id={'viewer_img'} alt="Image" height={100 * scale + '%'} width={100 * scale + '%'}></img>
+                    </FlexboxGrid.Item>
+
 
                 </FlexboxGrid>
 

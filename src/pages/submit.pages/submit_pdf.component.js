@@ -16,6 +16,7 @@ export default function SUBMIT_PDF(props) {
     const { currentItem } = props;
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('submit');
+    const btrn = utilities.getTranslation('btns');
     const lang = utilities.lang;
     const files = utilities.files;
 
@@ -34,29 +35,29 @@ export default function SUBMIT_PDF(props) {
     // ************************** JSX ELEMENTS **************************** //
     const FORM_COMPONENT = () => {
         const docData = _GET_DOC();
-        const fileList = docData.filename || docData.path ? [{ name: docData.filename, fileKey: 1, path: docData.path}] : false;
+        const fileList = docData.filename || docData.path ? [{ name: docData.filename, fileKey: 1, path: docData.path }] : false;
         const FORM_INPUTS = [
             {
                 inputs: [{
-                    id: 'submit_pdf_anex_3', label: "Subir archivo digitalizado", type: 'uploader', req: true, fileList: fileList,
-                    onClick: (cb) => CONFIRM_DELETE(lang, docData.filename, () => {removeDocument(docData.id, cb)})
+                    id: 'submit_pdf_anex_3', label: trn.FORM_PDF[0], type: 'uploader', req: true, fileList: fileList,
+                    onClick: (cb) => CONFIRM_DELETE(lang, docData.filename, () => { removeDocument(docData.id, cb) })
                 }]
             },
             {
                 inputs: [
-                    { id: 'submit_pdf_anex_1', label: "Codigo Radicación", placeholder: "Consecutivo de radicación", leftIcon: 'selection', req: true, dv: docData.id_public ?? currentItem.id_public ?? '' },
-                    { id: 'submit_pdf_anex_2', type: 'number', label: "Número de folios", placeholder: "Número de folios del documento", leftIcon: 'document', req: true, dv: docData.pages ?? '' }
+                    { id: 'submit_pdf_anex_1', label: trn.FORM_PDF[1], placeholder: trn.FORM_PDF[1], leftIcon: 'selection', req: true, dv: docData.id_public ?? currentItem.id_public ?? '' },
+                    { id: 'submit_pdf_anex_2', type: 'number', label: trn.FORM_PDF[2], placeholder: trn.FORM_PDF[3], leftIcon: 'document', req: true, dv: docData.pages ?? '' }
                 ]
             },
         ]
 
         return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); addDocument() }} upload
-            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={'GUARDAR'} style={{ float: 'right' }} />}
-            />
+            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save} style={{ float: 'right' }} />}
+        />
     }
     const BTN_COMPONENT = () => {
         return <>
-            <p><label>Generar Certificación</label></p>
+            <p><label>{trn.generate_pdf}</label></p>
             <BTN_PDF onClick={() => pdf_gen()} />
         </>
     }
@@ -157,10 +158,10 @@ export default function SUBMIT_PDF(props) {
 
     return (
         <>
-            <Divider>{'GENERAR CERTIFIACION'}  <BTN_HELP
-                title={trn.DOCUMENT_LIST_POP[0]}
-                text={trn.DOCUMENT_LIST_POP[1]}
-                page={trn.DOCUMENT_LIST_INFO} focus="doc_list" /></Divider>
+            <Divider>{trn.title_pdf}  <BTN_HELP
+                title={trn.INFO_CERT_TITLE}
+                text={trn.INFO_CERT_BODY}
+                page={trn.INFO_CERT_HELP} focus="doc_cert" /></Divider>
             <Grid className='my-1' fluid>
                 <Row style={{ width: '100%' }}>
                     <Col xl={4} lg={6} md={8} sm={12} xs={24}>

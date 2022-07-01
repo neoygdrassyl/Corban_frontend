@@ -8,6 +8,7 @@ import VIEWER from './viewer.component';
 export default function UPLOADER(props) {
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('formComponent');
+    const btrn = utilities.getTranslation('btns');
     const theme = utilities.theme;
 
     const limitItems = props.limit ?? 1;
@@ -61,8 +62,8 @@ export default function UPLOADER(props) {
                         return <FlexboxGrid justify="end">
                             <FlexboxGrid.Item colspan={24}>
                                 <div style={{ wordBreak: 'break-all' }}>
-                                    File Name: {_file.name}
-                                    <ButtonWhisper className="mx-1" whisper={'DELETE DOCUMENT'} icon="trash" intent='danger' float='right' onClick={() => props.onClick(setFiles)} />
+                                    {trn.fileName}: {_file.name}
+                                    <ButtonWhisper className="mx-1" whisper={btrn.delete} icon="trash" intent='danger' float='right' onClick={() => props.onClick(setFiles)} />
                                     <VIEWER className="mx-1"  float='right' filename={_file.name} path={_file.path} />
                                 </div>
                             </FlexboxGrid.Item>
@@ -70,7 +71,7 @@ export default function UPLOADER(props) {
                     })
                     )
                     else return <FlexboxGrid justify="end">
-                        <FlexboxGrid.Item colspan={24}>File Name: {file.name}</FlexboxGrid.Item>
+                        <FlexboxGrid.Item colspan={24}>{trn.fileName}: {file.name}</FlexboxGrid.Item>
                     </FlexboxGrid>
                 }}
             >

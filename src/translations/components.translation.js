@@ -96,6 +96,54 @@ export let translations = {
             btn: 'GENERAR PDF',
         }
     },
+    btns: {
+        en: {
+            save: 'SAVE',
+            new: 'NEW',
+            edit: 'EDIT',
+            delete: 'DELETE',
+            add : 'ADD',
+            remove: 'REMOVE',
+            removelast: 'REMOVE LAST',
+            details: 'DETAILS',
+            view: 'VIEW',    
+        },
+        es: {
+            save: 'GUARDAR',
+            new: 'NUEVO',
+            edit: 'EDITAR',
+            delete: 'ELIMINAR',
+            add : 'AÑADIR',
+            remove: 'REMOVER',
+            removelast: 'REMOVER ULTIMO',
+            details: 'DETALLES',
+            view: 'VER',    
+        }
+           
+    },
+    viewer: {
+        en: {
+            view: 'VIEW DOCUMENT',
+            notfound_tite: 'DOCUMENT NOT FOUND',
+            notfound_body: 'The requested document can not be found, check the details of the entry or contact with the administrator.',
+            scale: 'Document scale',
+            search_page: 'Search page',
+            search_info: 'Total pages',
+            search_go: 'Go to page',
+            download: 'DOWNLOAD',
+           
+        },
+        es: {
+            view: 'VER DOCUMENTO',
+            notfound_tite: 'DOCUMENTO NO ENCONTRADO',
+            notfound_body: 'EL documento solicitado no fue encontrado, revise los detalles de esta entrada o contacte con el administrador.',
+            scale: 'Tamaño documento',
+            search_page: 'Buscar pagina',
+            search_info: 'Paginas totales',
+            search_go: 'Ir a pagina',
+            download: 'DESCARGAR',
+        }
+    },
     // ******************** COMPONENTS ************************ // 
     tableComponent: {
         en: {
@@ -135,12 +183,14 @@ export let translations = {
             uploader: 'Click or drag files to this area to upload',
             limitFile: 'Max files',
             limiSize: 'Max size',
+            fileName: 'File name',
         },
         es: {
             req: 'REQUERIDO',
             uploader: 'Click o arrastre archivos a esta area para subirlos',
             limitFile: 'Archivos máximos',
             limiSize: 'Tamaño máximos',
+            fileName: 'Nombre archivo',
         }
     },
 
@@ -410,6 +460,43 @@ export let translations = {
                     focus: 'edit_list_tuto',
                 },
             ],
+            title_pdf: 'CERTIFICATIONS',
+            FORM_PDF: ['Upload digital document', 'File code', 'Number of pages', 'Number of pages of the document'],
+            generate_pdf: 'Generate certificacion',
+            INFO_CERT_TITLE: 'CERTIFICATIONS',
+            INFO_CERT_BODY: 'The certifications are a document in PDF format that reflects the content of the entry. It can be generated and later saved in the system if necessary.',
+            INFO_CERT_HELP : [
+                {
+                    title: 'Certifications',
+                    content: <>The certification is a proof of entry documents. Once the entry is saved, the PDF format is generated, printed and signed and then digitized again with the signature as proof. As a final step it is saved in the system.</>,
+                    focus: 'doc_cert',
+                },
+                {
+                    title: 'Generate Certification',
+                    content: <>Generates and downloads a document in PDF format with the content of the post.</>,
+                    focus: 'doc_gen',
+                },
+                {
+                    title: 'Upload digitized file',
+                    content: <><p>Upload a document from the computer to the system to be stored in the cloud.</p>
+                    <p>Once the document is online, use the button <Button icon={'document-open'} intent={'primary'} /> or <Button icon={'media'} intent={'primary' } /> to see more details of the document.</p>
+                    <p>In order to update the document or delete it Use the button <Button icon={'trash'} intent={'danger'} /> to delete the scanned document and upload the new document. This is considered a <label className='text-danger'>DANGEROUS ACTION</label>.</p></>,
+                    lefticon: <Icon icon={'paperclip'} />,
+                    focus: 'doc_up',
+                },
+                {
+                    title: 'Filing code',
+                    content: <>The identifier code of the post.</>,
+                    lefticon: <Icon icon={'selection'} />,
+                    focus: 'doc_rad',
+                },
+                {
+                    title: 'Number of pages',
+                    content: <>Number of pages of the generated document.</>,
+                    lefticon: <Icon icon={'document'} />,
+                    focus: 'doc_pages',
+                },
+            ],
         },
         es: {
             HELP_PAGE: [
@@ -672,6 +759,43 @@ export let translations = {
                         { text: <>Una vez echo todos los cambios requeridos, guarde la información haciendo click en el botón <Button icon={'floppy-disk'} intent={'success'} text={'GUARDAR LISTA'} /></> }
                     ],
                     focus: 'edit_list_tuto',
+                },
+            ],
+            title_pdf: 'CERTIFICACIÓNES',
+            FORM_PDF: ['Subir archivo digitalizado', 'Codido de radicación', 'Número de folios', 'Número de folios del documento'],
+            generate_pdf: 'Generar certificación',
+            INFO_CERT_TITLE: 'CERTIFICACIÓNES',
+            INFO_CERT_BODY: 'Las certificaciones son un documento en formato PDF que refleja el contenido de la entrada. Puede ser generado y posteriormente guardado en el sistema en caso de ser necesario.',
+            INFO_CERT_HELP : [
+                {
+                    title: 'Certificaciones',
+                    content: <>La certificación es un documento comprobante de la entrada, que permite guardar en físico el evento de la ventanilla única. Una vez la entrada este hecha, se procede a generar el formato PDF, se imprime y se firma para después ser digitalizada nuevamente con la firma como comprobante. Como paso final se guarda en el sistema.</>,
+                    focus: 'doc_cert',
+                },
+                {
+                    title: 'Generar Certificación',
+                    content: <>Genera y descarga un documento en formato PDF con el contenido de la entrada.</>,
+                    focus: 'doc_gen',
+                },
+                {
+                    title: 'Subir archivo digitalizado',
+                    content: <><p>Sube un documento desde el computador al sistema para ser almacenado en la nube.</p>
+                    <p>Una vez el documento este en linea, utilize el boton <Button icon={'document-open'} intent={'primary'} /> o <Button icon={'media'} intent={'primary'} /> para ver más detalles del documento.</p>
+                    <p>Para poder actualizar el documento o eliminarlo Utilize el boton <Button icon={'trash'} intent={'danger'} /> para eliminar el documento digitalizado y suba el nuevo documento. Esta es considerada una <label className='text-danger'>ACCIÓN PELIGROSA</label>.</p></>,
+                    lefticon: <Icon icon={'paperclip'} />,
+                    focus: 'doc_up',
+                },
+                {
+                    title: 'Codido de radicación',
+                    content: <>El código identificador de la entrada.</>,
+                    lefticon: <Icon icon={'selection'} />,
+                    focus: 'doc_rad',
+                },
+                {
+                    title: 'Número de folios',
+                    content: <>Número de folios del documento generado.</>,
+                    lefticon: <Icon icon={'document'} />,
+                    focus: 'doc_pages',
                 },
             ],
         }
