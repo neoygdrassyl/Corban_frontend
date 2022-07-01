@@ -38,7 +38,7 @@ export default function VIEWER(props) {
     }, [load, modal, scale]);
 
     function getDocExt(_filename) {
-        if(!_filename) return false;
+        if (!_filename) return false;
         let docExt = _filename.substring(_filename.lastIndexOf('.'), _filename.length);
         if (docExt === '.pdf') return 'pdf'
         if (docExt === '.jpg' || docExt === '.png' || docExt === '.jpeg') return 'img'
@@ -112,7 +112,7 @@ export default function VIEWER(props) {
         var filePath;
         var formUrl;
         var formPdfBytes;
-        if(path){
+        if (path) {
             filePath = path.substring(path.lastIndexOf(conn), path.length);
             formUrl = process.env.REACT_APP_API_URL + '/document/' + filePath + '/' + filename;
             formPdfBytes = await loadPdf(formUrl);
@@ -138,7 +138,8 @@ export default function VIEWER(props) {
     }
 
     async function loadPdf(_url) {
-        return await fetch(_url).then(res => {
+        let token = auth.token;
+        return await fetch(_url, { method: "GET", headers: { Authorization: `Bearer ${token}`, dbIndex: conn }, }).then(res => {
             if (res.status == 500) return false;
             else return res.arrayBuffer();
         });
@@ -156,8 +157,8 @@ export default function VIEWER(props) {
         var filePath = path.substring(path.lastIndexOf(conn), path.length);
         var formUrl = process.env.REACT_APP_API_URL + '/document/' + filePath + '/' + filename;
         var formPdfBytes = await loadPdf(formUrl);
-        if(formPdfBytes) window.open(formUrl);
-        else{
+        if (formPdfBytes) window.open(formUrl);
+        else {
             filePath = filename.substring(0, filename.lastIndexOf('.'));
             let urls = filePath.split('_');
             formUrl = process.env.REACT_APP_API_URL + '/document/' + conn + '/' + urls[0] + '/' + urls[1] + '/' + urls[2] + '/' + filename;
@@ -174,7 +175,7 @@ export default function VIEWER(props) {
             <MODAL
                 open={modal}
                 setOpen={setModal}
-                actionBtn={<Button icon="cloud-download" intent="danger" onClick={() => downloadDocment()}>DESCARGAR</Button>}
+                actionBtn={file !== 0 ? <Button icon="cloud-download" intent="danger" onClick={() => downloadDocment()}>DESCARGAR</Button> : false}
                 title={HEADER_MODAL()}
                 icon={<Icon icon={'document-open'} intent={'primary'} size="25" />}
                 size="full"

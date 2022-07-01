@@ -9,7 +9,6 @@ export default function UPLOADER(props) {
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('formComponent');
     const theme = utilities.theme;
-    const files = utilities.files;
 
     const limitItems = props.limit ?? 1;
     const limitSize = props.size ?? 5242880;

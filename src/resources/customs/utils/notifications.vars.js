@@ -102,7 +102,7 @@ const message_success = lg => {
 }
 
 const message_confirm = (lg, id, cb) => (
-    <Message showIcon type={'warning'} style={{ maxWidth: WIDTH }}
+    <Message showIcon type={'warning'} style={{ maxWidth: '450px' }}
         header={<label className='fw-b'>{trn[lg].confirm_delete_title}</label>} duration={-1}>
         <div style={{ wordBreak: 'break-all' }}>
             <label>{trn[lg].confirm_delete_body}</label>
