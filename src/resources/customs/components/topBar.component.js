@@ -57,10 +57,15 @@ function TopBarComponent() {
                         <Nav.Item icon={<FaSignOutAlt style={{ fontSize: '1.2em' }} />} onClick={() => auth.signout(() => navigate("/"))}> {trn.lout}</Nav.Item>
                     </Nav.Menu>
 
-                    :
+                    : <>
                     <Nav.Item as={MyLink} to="/login" >
                         <label className="pointer"><FaRegUser className="text-icon" />{trn.log}</label>
                     </Nav.Item>
+                    <Nav.Item as={MyLink} to="/signin" className='bg-light'>
+                        <label className="pointer text-dark"><FaRegUser className="text-icon" />{trn.sign}</label>
+                    </Nav.Item>
+                    </>
+                    
                 }
 
             </Nav>

@@ -4,6 +4,8 @@ import { Button, FormGroup, InputGroup, NumericInput, Switch } from '@blueprintj
 import { UtilContext } from '../contextProviders/util.provider';
 import TEXTAREA from './textarea.component';
 import UPLOADER from './uploader.component';
+import PASSWORD from './password.component';
+import INPUTTEXT from './inputText.component';
 
 
 export default function FORM(props) {
@@ -62,24 +64,16 @@ export default function FORM(props) {
             case 'uploader':
                 return <UPLOADER {...input} />
 
+            case 'password':
+                return <PASSWORD {...input} />
             default:
-                return <InputGroup id={input.id} name={input.name} placeholder={input.placeholder} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
-                    leftIcon={input.leftIcon}
-                    intent={input.intent}
-                    onChange={input.onChange}
-                    onBlur={input.onBlur}
-                    maxLength={input.length ?? 200}
-                    rightElement={input.rightBtn ?
-                        <Whisper placement="top" trigger="hover" controlId={input.label + '_hoover_pop'} speaker={<Popover>{input.rightBtn.label}</Popover>}>
-                            <Button icon={input.rightBtn.icon} intent={input.rightBtn.intent} onClick={input.rightBtn.onClick} />
-                        </Whisper> : false}
-                />
+                return <INPUTTEXT {...input}/>
         }
     }
 
 
     return (
-        <form id={props.id} onSubmit={props.onSubmit} enctype={props.upload ? "multipart/form-data": ''}>
+        <form id={props.id} onSubmit={(e) => {e.preventDefault(); props.onSubmit(e)}} enctype={props.upload ? "multipart/form-data" : ''}>
             <Grid className='py-1' fluid>
                 {form.map(row => {
                     return <Row style={{ width: '100%' }}>
@@ -108,6 +102,7 @@ export default function FORM(props) {
                         )}
                     </Row>
                 })}
+                {props.children}
                 <Row style={{ width: '100%' }}>
                     <Col xl={24} lg={24} md={24} sm={24} xs={24}>{props.btns}{props.submitBtn}</Col>
                 </Row>

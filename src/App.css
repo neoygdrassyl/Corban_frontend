@@ -87,7 +87,7 @@ border-color: darkgray;
   opacity: 1; 
 }
 
-.dark h6, .dark h5, .dark h4, .dark label, .dark header label, .dark a, .dark header a, .dark .border{
+.dark h6, .dark h5, .dark h4, .dark h3, .dark h2, .dark h1, .dark label, .dark header label, .dark a, .dark header a, .dark .border{
   color: darkgray;
 }
 

@@ -15,8 +15,9 @@ export function AuthProvider({ children }) {
   });
 
   let signin = (_user, callback) => {
-    let validatedUser = validateUser(_user)
+    let validatedUser = validateUser(_user);
     setUser(validatedUser);
+    updateToken(_user.token, () => {});
     localStorage.removeItem('corban_user')
     sessionStorage.setItem('corban_logOn', true);
     localStorage.setItem('corban_user', JSON.stringify(validatedUser));
@@ -42,9 +43,16 @@ export function AuthProvider({ children }) {
   };
 
   let setConn = (_conn, callback) => {
+    var __conn = validateConn(_conn)
     localStorage.removeItem('corban_conn')
-    localStorage.setItem('corban_conn', JSON.stringify(_conn));
-    setCon(_conn);
+    localStorage.setItem('corban_conn', JSON.stringify(__conn));
+    setCon(__conn);
+    callback();
+  };
+
+  let clearConn = (callback) => {
+    localStorage.removeItem('corban_conn')
+    setCon(null);
     callback();
   };
 
@@ -84,7 +92,7 @@ export function AuthProvider({ children }) {
 
     } else  callback(false);
   }
-  let value = { user: user, token, conn, signin, signout, updateToken, check, setConn };
+  let value = { user: user, token, conn, signin, signout, updateToken, check, setConn, clearConn };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -92,30 +100,32 @@ export function AuthProvider({ children }) {
 function validateUser(_user) {
   var user = {}
 
-  let rolesNames = _user.rolesNames.split(';') ?? [];
-  let rolesPriorities = _user.rolesPriorities.split(';') ?? [];
-  let companiesInfo = _user.companiesInfo.split(';') ?? [];
-
   user.fullname = `${_user.name ?? ''} ${_user.name_2 ?? ''} ${_user.surname ?? ''} ${_user.surname_2 ?? ''}`;
   user.name = `${_user.name ?? ''} ${_user.surname ?? ''}`;
   user.id = _user.id;
   user.userInfo = _user.userInfo;
 
-  let companies = {};
+  return user
+}
+
+function validateConn(_conn) {
+
+  let companyInfo = _conn.companyInfo.split(';') ?? [];
+
+  let conn = {};
   let connections = [];
-  let _companies = _user.technicalInfo.split(';') ?? [];
+  let _companies = _conn.technicalInfo.split(';') ?? [];
   for (var i = 0; i < _companies.length; i++) {
     let connName = GET_JSON_FULL(_companies[i]).indexName;
 
     if (!connections.includes(connName)) connections.push(connName);
-    companies[connName] = {};
-    companies[connName].technicalInfo = GET_JSON_FULL(_companies[i]);
-    companies[connName].companiesInfo = GET_JSON_FULL(companiesInfo[i]);
-    companies[connName].companiesInfo.rolesNames = rolesNames[i];
-    companies[connName].companiesInfo.rolesPriorities = rolesPriorities[i];
+    conn = {};
+    conn.technicalInfo = GET_JSON_FULL(_companies[i]);
+    conn.companiyInfo = GET_JSON_FULL(companyInfo[i]);
 
   }
-  user.companies = companies;
-  user.connections = connections;
-  return user
+  conn.connections = connections;
+  conn.conn = _conn.bdname;
+  console.log(conn)
+  return conn
 }

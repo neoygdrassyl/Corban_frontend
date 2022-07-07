@@ -74,7 +74,7 @@ export default function Login() {
                         </Form.Group>
                         <Form.Group>
                             <ButtonToolbar>
-                                <Button appearance="primary" onClick={loginRequest}>Sign in</Button>
+                                <Button appearance="primary" onClick={loginRequest}>Log in</Button>
                             </ButtonToolbar>
                         </Form.Group>
                     </Form>

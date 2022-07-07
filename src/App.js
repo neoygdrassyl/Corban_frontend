@@ -30,6 +30,7 @@ import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view';
 import FUN_MACRO_VIEW from './pages/fun.pages/lists.pages/funMacro.view';
 import SUBMIT from "./pages/submit.pages/submit.page";
 import BEDROCK from "./pages/bedrock.page/bedrcok.page";
+import SIGN_IN from "./pages/signin.page/signin.page";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
               <Route exact path="/" element={<Navigate replace to="/home" />} />
               <Route element={<PublicLayout />} >
                 <Route exact path="/login" element={<Login />} />
+                <Route exact path="/signin" element={<SIGN_IN />} />
                 <Route exact path="/home" element={<Home />} />
                 <Route exact path="/bedrock" element={<BEDROCK />} />
               </Route>

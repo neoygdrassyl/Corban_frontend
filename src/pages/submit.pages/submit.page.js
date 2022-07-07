@@ -136,7 +136,7 @@ export default function SUBMIT() {
 
         return <>
             <Divider>{trn.categories[0]} <BTN_HELP title={trn.FORM_INFO_BTN[0]} text={trn.FORM_INFO_BTN[1]} page={trn.FORM_INFO} focus={'id_public'} /></Divider>
-            <FORM form={FORM_INPUTS} id="submit_form" onSubmit={(e) => { e.preventDefault(); manage({ id: edit ? edit.id : false }) }}
+            <FORM form={FORM_INPUTS} id="submit_form" onSubmit={(e) => manage({ id: edit ? edit.id : false })}
                 submitBtn={edit ? <ButtonBP icon="annotation" intent="success" type="submit" text={trn.edit} /> : <ButtonBP icon="add" intent="success" type="submit" text={trn.new} />} />
         </>
     }
@@ -174,8 +174,8 @@ export default function SUBMIT() {
             minWidth: '130px',
             maxWidth: '130px',
             cell: row => {
-                let isAnex = row.sub_doc ? row.sub_doc.filename ? true : false : false;   
-                if(isAnex) return <FaCheck className='text-success' />
+                let isAnex = row.sub_doc ? row.sub_doc.filename ? true : false : false;
+                if (isAnex) return <FaCheck className='text-success' />
                 else return <FaTimes className='text-danger' />
 
             }
@@ -199,9 +199,9 @@ export default function SUBMIT() {
         SERVICE_SUBMIT.getAll()
             .then(response => {
                 setData(response.data);
-                if(updateEdit) setEdit(response.data.find(d=> d.id == editItem.id));
+                if (updateEdit) setEdit(response.data.find(d => d.id == editItem.id));
                 setLoad(1);
-               
+
             })
             .catch(e => {
                 console.log(e);
@@ -398,7 +398,7 @@ export default function SUBMIT() {
                 {MANAGE_COMPONENT(editItem)}
                 {editItem ? <>
                     <SUBMIT_LISTS currentItem={editItem} />
-                    <SUBMIT_PDF currentItem={editItem} reload={() => setLoad(2)}/>
+                    <SUBMIT_PDF currentItem={editItem} reload={() => setLoad(2)} />
                 </> : ''}
             </MODAL>
         </>
