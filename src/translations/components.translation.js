@@ -104,24 +104,24 @@ export let translations = {
             new: 'NEW',
             edit: 'EDIT',
             delete: 'DELETE',
-            add : 'ADD',
+            add: 'ADD',
             remove: 'REMOVE',
             removelast: 'REMOVE LAST',
             details: 'DETAILS',
-            view: 'VIEW',    
+            view: 'VIEW',
         },
         es: {
             save: 'GUARDAR',
             new: 'NUEVO',
             edit: 'EDITAR',
             delete: 'ELIMINAR',
-            add : 'AÑADIR',
+            add: 'AÑADIR',
             remove: 'REMOVER',
             removelast: 'REMOVER ULTIMO',
             details: 'DETALLES',
-            view: 'VER',    
+            view: 'VER',
         }
-           
+
     },
     viewer: {
         en: {
@@ -133,7 +133,7 @@ export let translations = {
             search_info: 'Total pages',
             search_go: 'Go to page',
             download: 'DOWNLOAD',
-           
+
         },
         es: {
             view: 'VER DOCUMENTO',
@@ -188,6 +188,10 @@ export let translations = {
             fileName: 'File name',
             passwordSee: 'See password',
             passwordHide: 'Hide password',
+            _validate_min: (name, min) => `The field ${name} must have a minimun of ${min} letters.`,
+            _validate_reg: (name) => `The field ${name} does not fufill the solicited requiermentes.`,
+            _validate_pss: (name) => `The field ${name} does not fufill the miniun security requirements.`,
+            _validate_rps: (name) => `The field ${name} must conincide.`,
         },
         es: {
             req: 'REQUERIDO',
@@ -197,6 +201,10 @@ export let translations = {
             fileName: 'Nombre archivo',
             passwordSee: 'Ver Contraseña',
             passwordHide: 'Ocultar Contraseña',
+            _validate_min: (name, min) => `El campo ${name} debe tener un mínimo de ${min} letras.`,
+            _validate_reg: (name) => `El campo ${name} no cumple con los requisitos solicitados.`,
+            _validate_pss: (name) => `El campo ${name} no cumple con los requisitos mínimos de seguridad.`,
+            _validate_rps: (name) => `El campo ${name} debe coincidir.`,
         }
     },
 
@@ -533,7 +541,7 @@ export let translations = {
             generate_pdf: 'Generate certificacion',
             INFO_CERT_TITLE: 'CERTIFICATIONS',
             INFO_CERT_BODY: 'The certifications are a document in PDF format that reflects the content of the entry. It can be generated and later saved in the system if necessary.',
-            INFO_CERT_HELP : [
+            INFO_CERT_HELP: [
                 {
                     title: 'Certifications',
                     content: <>The certification is a proof of entry documents. Once the entry is saved, the PDF format is generated, printed and signed and then digitized again with the signature as proof. As a final step it is saved in the system.</>,
@@ -547,8 +555,8 @@ export let translations = {
                 {
                     title: 'Upload digitized file',
                     content: <><p>Upload a document from the computer to the system to be stored in the cloud.</p>
-                    <p>Once the document is online, use the button <Button icon={'document-open'} intent={'primary'} /> or <Button icon={'media'} intent={'primary' } /> to see more details of the document.</p>
-                    <p>In order to update the document or delete it Use the button <Button icon={'trash'} intent={'danger'} /> to delete the scanned document and upload the new document. This is considered a <label className='text-danger'>DANGEROUS ACTION</label>.</p></>,
+                        <p>Once the document is online, use the button <Button icon={'document-open'} intent={'primary'} /> or <Button icon={'media'} intent={'primary'} /> to see more details of the document.</p>
+                        <p>In order to update the document or delete it Use the button <Button icon={'trash'} intent={'danger'} /> to delete the scanned document and upload the new document. This is considered a <label className='text-danger'>DANGEROUS ACTION</label>.</p></>,
                     lefticon: <Icon icon={'paperclip'} />,
                     focus: 'doc_up',
                 },
@@ -834,7 +842,7 @@ export let translations = {
             generate_pdf: 'Generar certificación',
             INFO_CERT_TITLE: 'CERTIFICACIÓNES',
             INFO_CERT_BODY: 'Las certificaciones son un documento en formato PDF que refleja el contenido de la entrada. Puede ser generado y posteriormente guardado en el sistema en caso de ser necesario.',
-            INFO_CERT_HELP : [
+            INFO_CERT_HELP: [
                 {
                     title: 'Certificaciones',
                     content: <>La certificación es un documento comprobante de la entrada, que permite guardar en físico el evento de la ventanilla única. Una vez la entrada este hecha, se procede a generar el formato PDF, se imprime y se firma para después ser digitalizada nuevamente con la firma como comprobante. Como paso final se guarda en el sistema.</>,
@@ -848,8 +856,8 @@ export let translations = {
                 {
                     title: 'Subir archivo digitalizado',
                     content: <><p>Sube un documento desde el computador al sistema para ser almacenado en la nube.</p>
-                    <p>Una vez el documento este en linea, utilize el boton <Button icon={'document-open'} intent={'primary'} /> o <Button icon={'media'} intent={'primary'} /> para ver más detalles del documento.</p>
-                    <p>Para poder actualizar el documento o eliminarlo Utilize el boton <Button icon={'trash'} intent={'danger'} /> para eliminar el documento digitalizado y suba el nuevo documento. Esta es considerada una <label className='text-danger'>ACCIÓN PELIGROSA</label>.</p></>,
+                        <p>Una vez el documento este en linea, utilize el boton <Button icon={'document-open'} intent={'primary'} /> o <Button icon={'media'} intent={'primary'} /> para ver más detalles del documento.</p>
+                        <p>Para poder actualizar el documento o eliminarlo Utilize el boton <Button icon={'trash'} intent={'danger'} /> para eliminar el documento digitalizado y suba el nuevo documento. Esta es considerada una <label className='text-danger'>ACCIÓN PELIGROSA</label>.</p></>,
                     lefticon: <Icon icon={'paperclip'} />,
                     focus: 'doc_up',
                 },

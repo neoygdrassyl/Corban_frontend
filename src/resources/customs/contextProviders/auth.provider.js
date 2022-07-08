@@ -126,6 +126,5 @@ function validateConn(_conn) {
   }
   conn.connections = connections;
   conn.conn = _conn.bdname;
-  console.log(conn)
   return conn
 }

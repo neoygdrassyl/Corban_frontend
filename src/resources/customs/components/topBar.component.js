@@ -58,14 +58,15 @@ function TopBarComponent() {
                     </Nav.Menu>
 
                     : <>
-                    <Nav.Item as={MyLink} to="/login" >
-                        <label className="pointer"><FaRegUser className="text-icon" />{trn.log}</label>
-                    </Nav.Item>
-                    <Nav.Item as={MyLink} to="/signin" className='bg-light'>
-                        <label className="pointer text-dark"><FaRegUser className="text-icon" />{trn.sign}</label>
-                    </Nav.Item>
+
+                        <Nav.Item as={MyLink} to="/signin" >
+                            <label className="pointer"><FaRegUser className="text-icon" />{trn.sign}</label>
+                        </Nav.Item>
+                        <Nav.Item as={MyLink} to="/login" className='bg-light'>
+                            <label className="pointer text-dark"><FaRegUser className="text-icon" />{trn.log}</label>
+                        </Nav.Item>
                     </>
-                    
+
                 }
 
             </Nav>

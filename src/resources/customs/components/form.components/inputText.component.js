@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Popover, Whisper } from 'rsuite';
 import { Button, InputGroup, } from '@blueprintjs/core';
-import { UtilContext } from '../contextProviders/util.provider';
+import { UtilContext } from '../../contextProviders/util.provider';
 import { useState } from 'react';
 
 

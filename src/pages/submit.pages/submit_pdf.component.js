@@ -52,7 +52,7 @@ export default function SUBMIT_PDF(props) {
         ]
 
         return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); addDocument() }} upload
-            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save} style={{ float: 'right' }} />}
+            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save}/>}  btnAlignment='end' 
         />
     }
     const BTN_COMPONENT = () => {

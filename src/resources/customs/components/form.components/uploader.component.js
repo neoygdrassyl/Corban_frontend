@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { FlexboxGrid, Uploader } from 'rsuite';
-import { UtilContext } from '../contextProviders/util.provider';
-import { ALERT_NOUPLOAD } from '../utils/notifications.vars';
-import ButtonWhisper from './btnWhisper.component';
-import VIEWER from './viewer.component';
+import { UtilContext } from '../../contextProviders/util.provider';
+import { ALERT_NOUPLOAD } from '../../utils/notifications.vars';
+import ButtonWhisper from '../btnWhisper.component';
+import VIEWER from '../viewer.component';
 
 export default function UPLOADER(props) {
     const utilities = useContext(UtilContext);
