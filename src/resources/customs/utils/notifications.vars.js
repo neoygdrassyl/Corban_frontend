@@ -11,6 +11,12 @@ const trn = {
 
         msg_error_login_title: 'AUTHENTICATION FAILED',
         msg_error_login_body: 'This email and password combination is not valid, please make sure the authentication credentials are correct.',
+        msg_signup_title: 'USER CREATED SUCCESSFULLY',
+        msg_signup_body: 'The user creation has been successful, you will receive en email verifying the information. You may Log In into your account now.',
+        msg_error_signup_title: 'SIGN UP REGISTRATION FAILED',
+        msg_error_signup_body: 'This email or ID Number or NIT are already on use, verify the input values.',
+
+
         msg_error_title: 'PROCESS FAILED',
         msg_error_body: 'Failed to process the action, please try again later or contact administrator.',
         msg_error_duplicate_title: 'DUPLICATE ERROR',
@@ -30,7 +36,10 @@ const trn = {
         confirm_delete_btn1: 'DELETE',
         confirm_delete_btn2: 'CANCEL',
 
-
+        confirm_email_title: 'SEND EMAIL AUTOMATICALLY?',
+        confirm_email_body: (_detail) => <>Do you want to send an email to the address in order to <label className='fw-b'>{_detail}</label>?</>,
+        confirm_email_btn: 'SEND',
+        confirm_email_ph: 'Send remember email...',
     },
     es: {
         msg_wait_title: 'PROCESANDO FORMULARIO',
@@ -38,6 +47,11 @@ const trn = {
 
         msg_error_login_title: 'AUTENTIFICACIÓN FALLIDA',
         msg_error_login_body: 'Esta combinación de email y contraseña no son valida, asegúrese de que las credenciales de autentificación sean correctas.',
+        msg_signup_title: 'USUARIO CREADO CON ÉXITO',
+        msg_signup_body: 'La creación del usuario ha sido exitosa, recibirá un correo electrónico verificando la información. Puede iniciar sesión en su cuenta ahora.',
+        msg_error_signup_title: 'REGISTRO FALLIDO',
+        msg_error_signup_body: 'El Correo electrónico o numero de documento dados ya se encuentran en uso, verifique los datos.',
+
         msg_error_title: 'FALLA DE PROCESO',
         msg_error_body: 'No fue posible realizar la acción solicitada, inténtelo de nuevo mas tarde o comuníquese con el administrador.',
         msg_error_duplicate_title: 'ERROR DE DUPLICIDAD',
@@ -56,6 +70,14 @@ const trn = {
         confirm_delete_body2: 'Se eliminará la siguiente entrada: ',
         confirm_delete_btn1: 'ELIMINAR',
         confirm_delete_btn2: 'CANCELAR',
+
+        confirm_email_title: '¿ESTA SEGURO DE ESTA ACCIÓN?',
+        confirm_email_body: '¿Está seguro de eliminar permanentemente este elemento del sistema? Los datos eliminados no se podrán recuperar.',
+
+        confirm_email_title: '¿ENVIAR UN CORREO ELECTRÓNICO AUTOMÁTICAMENTE?',
+        confirm_email_body: (_detail) => <>¿Desea enviar un correo electrónico a la dirección para <label className='fw-b' >{_detail}</label>?</>,
+        confirm_email_btn: 'ENVIAR',
+        confirm_email_ph: 'Enviar email de recuperación...',
     }
 };
 
@@ -70,6 +92,20 @@ const error_login = lg => {
     return <Message showIcon type={'error'} closable duration={DURATION} style={{ maxWidth: WIDTH }}
         header={<label className='fw-b'>{trn[lg].msg_error_login_title}</label>}>
         <p className='txt-j'>{trn[lg].msg_error_login_body}</p>
+    </Message>
+}
+
+const signup = lg => {
+    return <Message showIcon type={'success'} closable style={{ maxWidth: WIDTH }} duration={-1}
+        header={<label className='fw-b'>{trn[lg].msg_signup_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_signup_body}</p>
+    </Message>
+}
+
+const error_signup = lg => {
+    return <Message showIcon type={'error'} closable style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_error_signup_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_error_signup_body}</p>
     </Message>
 }
 
@@ -125,10 +161,33 @@ const noupload = lg => (
     </Message>
 );
 
+const message_email = (lg, detail, email, cb) => (
+    <Message showIcon type={'info'} style={{ maxWidth: '450px' }}
+        header={<label className='fw-b'>{trn[lg].confirm_email_title}</label>} duration={-1}>
+        <div style={{ wordBreak: 'break-all' }}>
+            <label>{trn[lg].confirm_email_body(detail)}</label>
+
+            <div class="bp4-input-group my-1">
+                <span class="bp4-icon bp4-icon-envelope"></span>
+                <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].confirm_email_ph} defaultValue={email}/>
+            </div>
+
+            <div style={{ float: 'right' }}>
+                <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={cb} />
+                <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
+            </div>
+        </div>
+    </Message>
+);
+
 
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
+
+export const ALERT_SIGNUP = (lg) => toaster.push(signup(lg), { placement: 'topEnd' })
+export const ALERT_ERROR_SIGNUP = (lg) => { toaster.push(error_signup(lg), { placement: 'topEnd' }); }
+
 export const ALERT_ERROR_DUPLICATE = (lg) => { toaster.push(error_duplicate(lg), { placement: 'topEnd' }); }
 export const ALERT_NOUPLOAD = (lg) => toaster.push(noupload(lg), { placement: 'topEnd' })
 
@@ -136,4 +195,5 @@ export const ALERT_SUCCESS = (lg) => { toaster.push(message_success(lg), { place
 export const ALERT_EMPTY_LIST = (lg) => toaster.push(message_noList(lg), { placement: 'topEnd' })
 
 export const CONFIRM_DELETE = (lg, id, cb) => { toaster.push(message_confirm(lg, id, cb), { placement: 'topCenter' }); }
+export const CONFIRM_EMAIL = (lg, detail, email, cb) => { toaster.push(message_email(lg, detail, email, cb), { placement: 'topCenter' }); }
 

@@ -210,11 +210,31 @@ export let translations = {
 
 
     // ******************** PAGES ************************ // 
+    login: {
+        en: {
+            title: 'LOG IN',
+            email: 'LOGIN EMAIL',
+            emaili: 'Email used to log in into the page',
+            password: 'PASSWORD',
+            passwordi: 'Password for the account',
+            forgot : 'I FORGOT MY PASSWORD',
+            reason: 'receive a recovery password email'
+        },
+        es: {
+            title: 'INGRESO',
+            email: 'CORREO ELECTRÓNICO DE INGRESO',
+            emaili: 'Correo electrónico para iniciar sesión en la página',
+            password: 'CONTRASEÑA',
+            passwordi: 'Contraseña de la cuenta',
+            forgot : 'OLVIDÉ MY CONTRASEÑA',
+            reason: 'recibir un email de recuperación de contraseña'
+        }
+    },
     signin: {
         en: {
-            title: 'SIGN IN',
+            title: 'SIGN UP',
             email: 'EMAIL',
-            emaili: 'Email use to log in into the page',
+            emaili: 'Email used to log in into the page',
             password: 'PASSWORD',
             passwordi: 'Password for the account',
             password2: 'REPEAT PASSWORD',
@@ -244,7 +264,7 @@ export let translations = {
         es: {
             title: 'REGISTRARSE',
             email: 'CORREO ELECTRÓNICO',
-            emaili: 'Uso de correo electrónico para iniciar sesión en la página',
+            emaili: 'Correo electrónico para iniciar sesión en la página',
             password: 'CONTRASEÑA',
             passwordi: 'Contraseña de la cuenta',
             password2: 'REPETIR CONTRASEÑA',

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Button, ButtonToolbar, Col, Divider, FlexboxGrid, Form, InputGroup, Panel, Schema, toaster } from 'rsuite';
+import { Col, FlexboxGrid, Panel } from 'rsuite';
 import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { Button as ButtonBP, Icon } from '@blueprintjs/core';
-import { ALERT_ERROR_LOGIN, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
+import { Button as ButtonBP } from '@blueprintjs/core';
+import { ALERT_ERROR, ALERT_ERROR_SIGNUP, ALERT_SIGNUP, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
 import AtuhService from '../../services/apis/auth.service';
 import FORM from '../../resources/customs/components/form.component';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -95,7 +95,7 @@ export default function SIGN_IN() {
         {
             inputs: [
                 {
-                    label: trn.idNumber, placeholder: trn.idNumberi, leftIcon: 'id-number', id: 'sigin_form_idnumber', 
+                    label: trn.idNumber, placeholder: trn.idNumberi, leftIcon: 'id-number', id: 'sigin_form_idnumber',
                     req: true, min: 8,
                 },
                 {
@@ -106,14 +106,14 @@ export default function SIGN_IN() {
         },
     ]
 
-    function signup(data) {
-        if (!data) return;
+    function signup(_data) {
+        if (!_data) return;
 
         // CHECK THE GOOGLE CAPTHA VERIFICACION
 
 
         // -----------------------------------
-
+        let data = _data.data;
         var formData = new FormData();
         let email = data.find(d => d.key == 'sigin_form_email').value;
         formData.set('email', email);
@@ -133,7 +133,7 @@ export default function SIGN_IN() {
             let surname_2 = data.find(d => d.key == 'sigin_form_surname2').value;
             formData.set('surname_2', surname_2);
         }
-        if (type == '1'){
+        if (type == '1') {
             let name = data.find(d => d.key == 'sigin_form_namee').value;
             formData.set('name', name);
             let name_agent = data.find(d => d.key == 'sigin_form_namer').value;
@@ -144,6 +144,22 @@ export default function SIGN_IN() {
         formData.set('id_number', id_number);
         let phone = data.find(d => d.key == 'sigin_form_number').value;
         formData.set('phone', phone);
+
+        ALERT_WAIT(lang);
+        AtuhService.appSignUp(formData)
+            .then(response => {
+                if (response.data == 'OK') {
+                    ALERT_SIGNUP(lang);
+                    navigate('/login', { replace: true });
+                }
+                else if (response.data === 'ERROR_SIGNUP') ALERT_ERROR_SIGNUP(lang);
+                else ALERT_ERROR(lang);
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang);
+            });
+
 
     }
 

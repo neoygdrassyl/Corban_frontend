@@ -3,6 +3,7 @@ import { header } from "../auth/auth";
 
 class AtuhService {
   appLogin(data) {return http.post(`/login`, data);}
+  appSignUp(data) {return http.post(`/signup`, data);}
   verifyLogin(token) {return http.get(`/verify`, { headers: { Authorization: 'Bearer ' + token} });}
   loadCompanies(idUser, token) {return http.get(`/companies/${idUser}`, { headers: { Authorization: 'Bearer ' + token} });}
 

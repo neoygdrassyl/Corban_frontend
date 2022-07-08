@@ -71,6 +71,7 @@ export default function FORM(props) {
     function getDataFor() {
         let data = [];
         let isValidForm = true;
+        var formData = new FormData();
         form.map(row => {
             row.inputs.map(input => {
                 let key = input.id;
@@ -80,6 +81,7 @@ export default function FORM(props) {
                 item.key = key;
                 item.value = value;
                 item.name = input.label;
+                formData.set(input.fname ?? key, value);
 
                 // ----- FORM VALIDATION ------- 
                 item.validated = true;
@@ -90,14 +92,14 @@ export default function FORM(props) {
 
                 let passWordRegex = true;
                 let passwordRepeat = true;
-                if(input.type == 'password'){
+                if (input.type == 'password' && input.passView) {
                     let regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
                     passWordRegex = regex.test(value);
-                    if(!passWordRegex) item.validation += ' pss-';
-                    if(input.checkRepeat){
+                    if (!passWordRegex) item.validation += ' pss-';
+                    if (input.checkRepeat) {
                         let repeatValue = document.getElementById(input.checkRepeat).value;
                         passwordRepeat = repeatValue == value;
-                        if(!passwordRepeat) item.validation += 'rps-';
+                        if (!passwordRepeat) item.validation += 'rps-';
                     }
                 }
 
@@ -121,7 +123,8 @@ export default function FORM(props) {
         } else {
             setValidate(false);
         }
-        return data;
+        let object = { data: data, formData: formData }
+        return object;
     }
 
     // ************************* JSX COMPONENTS *************************** //
@@ -172,10 +175,10 @@ export default function FORM(props) {
                                 {d.validation.includes('reg')
                                     ? <li className='mx-3'><label className='text-danger'>{trn._validate_reg(d.name)}</label></li>
                                     : ''}
-                                 {d.validation.includes('pss')
+                                {d.validation.includes('pss')
                                     ? <li className='mx-3'><label className='text-danger'>{trn._validate_pss(d.name)}</label></li>
                                     : ''}
-                                 {d.validation.includes('rps')
+                                {d.validation.includes('rps')
                                     ? <li className='mx-3'><label className='text-danger'>{trn._validate_rps(d.name)}</label></li>
                                     : ''}
                             </>

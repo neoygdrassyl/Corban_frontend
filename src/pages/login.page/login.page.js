@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Button, ButtonToolbar, FlexboxGrid, Form, Panel, Schema, toaster } from 'rsuite';
+import { Col, FlexboxGrid, Form, Message, Panel, toaster } from 'rsuite';
+import { Button as ButtonBP } from '@blueprintjs/core';
+import FORM from '../../resources/customs/components/form.component';
 import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR_LOGIN, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
+import { ALERT_ERROR_LOGIN, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
 import AtuhService from '../../services/apis/auth.service';
 
 function useAuth() {
@@ -13,40 +15,46 @@ function useAuth() {
 export default function Login() {
     let navigate = useNavigate();
     let auth = useAuth();
-
-    let from =  "/dashboard";
-
+    let from = "/dashboard";
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('submit');
+    const trn = utilities.getTranslation('login');
     const lang = utilities.lang
 
-    const model = Schema.Model({
-        password: Schema.Types.StringType().isRequired('Este campo es obligatorio.'),
-        email: Schema.Types.StringType().isEmail('Ingrese una direccion de correo valida.')
-    });
-    const formRef = React.useRef();
-    const [formValue, setFormValue] = React.useState({});
+    const FORM_INPUTS = [
+        {
+            inputs: [
+                {
+                    label: trn.email, placeholder: trn.emaili, leftIcon: 'envelope', id: 'login_form_email',
+                    fname: 'email',
+                },
+            ],
+        },
+        {
+            inputs: [
+                {
+                    label: trn.password, placeholder: trn.passwordi, leftIcon: 'key', id: 'login_form_pass_1',
+                    type: 'password', fname: 'password',
+                },
+            ],
+        },
 
-    function loginRequest() {
-        if (!formRef.current.check()) {
-            console.error('Form Error');
-            return;
-        }
-        let formData = new FormData();
+    ]
 
-        formData.set('email', formValue.email)
-        formData.set('password', formValue.password)
+    function loginRequest(_data) {
+        if (!_data) return;
 
+        let formData = _data.formData;
+        //var formData = new FormData();
         ALERT_WAIT(lang);
         AtuhService.appLogin(formData)
             .then(response => {
                 if (response.data.id > 0) {
                     toaster.remove();
-                    auth.updateToken(response.data.token, () => {});
+                    auth.updateToken(response.data.token, () => { });
                     auth.signin(response.data, () => {
                         navigate(from, { replace: true });
                     });
-                    
+
                 } else {
                     ALERT_ERROR_LOGIN(lang);
                 }
@@ -58,29 +66,34 @@ export default function Login() {
 
     }
 
-    return (
-        <FlexboxGrid justify="center" align="middle" className="my-6" >
-            <FlexboxGrid.Item colspan={12}>
-                <h3>CORBAN SOFTWARE - LOGIN DE APLICACIÓN</h3>
-                <Panel header={<h3>Login</h3>} bordered >
-                    <Form fluid model={model} ref={formRef} formValue={formValue} onChange={setFormValue}>
-                        <Form.Group>
-                            <Form.ControlLabel>Email institucional o de Login</Form.ControlLabel>
-                            <Form.Control name="email" />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.ControlLabel>Contraseña</Form.ControlLabel>
-                            <Form.Control name="password" type="password" autoComplete="off" />
-                        </Form.Group>
-                        <Form.Group>
-                            <ButtonToolbar>
-                                <Button appearance="primary" onClick={loginRequest}>Log in</Button>
-                            </ButtonToolbar>
-                        </Form.Group>
-                    </Form>
-                </Panel>
+    function rememberPass() {
+        let emailToSend = document.getElementById('login_form_email').value;
 
+        CONFIRM_EMAIL(lang, trn.reason, emailToSend, acceptSend)
+
+        function acceptSend() {
+            toaster.remove();
+            console.log('hello there!')
+        }
+    }
+
+    return (<>
+        <FlexboxGrid justify="center" className="my-6" >
+            <FlexboxGrid.Item as={Col} colspan={6} xxl={6} xl={8} lg={8} md={12} sm={18} xs={24}>
+                <Panel header={<h3>CORBAN - {trn.title}</h3>} bordered className='border'>
+
+                    <FORM form={FORM_INPUTS} id="login_form" onSubmit={loginRequest} btnAlignment='center'
+                        submitBtn={<ButtonBP intent="primary" type="submit" text={trn.title} large />} >
+                        <>
+                            <a onClick={(e) => { e.preventDefault(); rememberPass() }}><label class="bp4-control text-primary">
+                                {trn.forgot}
+                            </label></a>
+                        </>
+                    </FORM>
+                </Panel>
             </FlexboxGrid.Item>
         </FlexboxGrid>
+    </>
+
     );
 }

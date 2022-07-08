@@ -30,14 +30,16 @@ export default function PASSWORD(props) {
             leftIcon={props.leftIcon}
             intent={currentIntent || props.intent}
             onChange={(e) => {
-                let value = e.target.value;
-                let regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
-                let checkRepeat = props.checkRepeat ? document.getElementById(props.checkRepeat).value : false;
-                let repeatedPass = true;
-                if (checkRepeat) repeatedPass = checkRepeat == value;
-                if (regex.test(value) && repeatedPass) setIntent('success')
-                else setIntent('danger')
-                if (props.shareSet) props.shareSet(value)
+                if(props.passView){
+                    let value = e.target.value;
+                    let regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+                    let checkRepeat = props.checkRepeat ? document.getElementById(props.checkRepeat).value : false;
+                    let repeatedPass = true;
+                    if (checkRepeat) repeatedPass = checkRepeat == value;
+                    if (regex.test(value) && repeatedPass) setIntent('success')
+                    else setIntent('danger')
+                    if (props.shareSet) props.shareSet(value)
+                }
                 if (props.onChange) props.onChange(e);
             }}
             onBlur={props.onBlur}
@@ -45,10 +47,10 @@ export default function PASSWORD(props) {
             type={props.passView ? "text" : 'password'}
             helper
             min={props.min}
-            rightElement={
+            rightElement={ props.passView ?
                 <Whisper placement="top" trigger="hover" controlId={props.label + '_hoover_pop'} speaker={<Popover>{props.passView ? trn.passwordHide : trn.passwordSee}</Popover>}>
                     <Button minimal={true} icon={props.passView ? 'unlock' : 'lock'} onClick={() => props.passCB(!props.passView)} />
-                </Whisper>}
+                </Whisper> : false}
         />
     );
 }

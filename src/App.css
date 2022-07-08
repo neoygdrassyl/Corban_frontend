@@ -209,6 +209,12 @@ border-color: darkgray;
 .text-lowercase{text-transform : lowercase;}
 .text-uppercase{text-transform : uppercase;}
 .text-capitalize{text-transform : capitalize;}
+.text-underline{text-decoration: underline;}
+
+.txt-lw{text-transform : lowercase;}
+.txt-up{text-transform : uppercase;}
+.txt-ca{text-transform : capitalize;}
+.txt-ul{text-decoration: underline;}
 
 .m-1{margin: 6px;}
 .m-2{margin: 12px;}
