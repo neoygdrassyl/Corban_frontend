@@ -226,7 +226,7 @@ export let translations = {
             emaili: 'Correo electrónico para iniciar sesión en la página',
             password: 'CONTRASEÑA',
             passwordi: 'Contraseña de la cuenta',
-            forgot : 'OLVIDÉ MY CONTRASEÑA',
+            forgot : 'OLVIDÉ MI CONTRASEÑA',
             reason: 'recibir un email de recuperación de contraseña'
         }
     },
@@ -290,6 +290,26 @@ export let translations = {
             number: 'NÚMERO DE CONTACTO',
             numberi: 'Número de contacto',
             conditions: 'Acepto todos los términos y condiciones del tratamiento de datos con base en la Ley Estatutaria de Habeas Data (Ley 1581 de 2012)'
+        }
+    },
+    reset:{
+        en: {
+            passReset : 'PASSWORD RESET',
+            passwordReq: ['Miminum of 8 letter.', 'Minimun of 1 capital letter.', 'Minimun of 1 digit', 'Minimun 1 special character: !#$%&?'],
+            newPassword: 'NEW PASSWORD',
+            repPassword: 'CONFIRM PASSWORD',
+            newPasswordLb: 'New password',
+            repPasswordLb: 'Confirm password',
+            btn: 'RESET PASSWORD',
+        },
+        es: {
+            passReset : 'RESTAURACIÓN DE CONTRASEÑA',
+            passwordReq: ['Mínimo de 8 letras.', 'Mínimo de 1 letra mayúscula.', 'Mínimo de 1 dígito', 'Mínimo 1 carácter especial: !#$%&?'],
+            newPassword: 'NUEVA CONTRASEÑA',
+            repPassword: 'CONFIRMAR CONTRASEÑA',
+            newPasswordLb: 'Nueva contraseña',
+            repPasswordLb: 'Confirmar contraseña',
+            btn: 'RESTAURAR',
         }
     },
     submit: {

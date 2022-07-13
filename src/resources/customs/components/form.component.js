@@ -189,9 +189,11 @@ export default function FORM(props) {
             </FlexboxGrid> : ''}
     </>
     let FOOTER_BTNS = () => <>
-        <FlexboxGrid justify={props.btnAlignment ?? 'start'} className='my-1'>
-            <FlexboxGrid.Item colspan={4}>
+        <FlexboxGrid className='my-1'>
+            <FlexboxGrid.Item colspan={24}>
+                <div className={props.btnAlignment ?? 'txt-l'}>
                 {props.btns}{props.submitBtn}
+                </div>
             </FlexboxGrid.Item>
         </FlexboxGrid>
     </>

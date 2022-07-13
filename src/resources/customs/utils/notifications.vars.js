@@ -40,6 +40,19 @@ const trn = {
         confirm_email_body: (_detail) => <>Do you want to send an email to the address in order to <label className='fw-b'>{_detail}</label>?</>,
         confirm_email_btn: 'SEND',
         confirm_email_ph: 'Send remember email...',
+
+        msg_error_reset_title: 'NOT POSSIBLE TO SEN EMAIL',
+        msg_error_reset_body: 'This email does not belong to a user, check the email or create a new user.',
+
+        msg_sent_reset_title: 'EMAIL SENT',
+        msg_sent_reset_body: 'An email has been sent to the address providing a recovery link. You may check your inbox in the next minutes.',
+       
+        msg_expired_reset_title: 'EXPIRED LINK',
+        msg_expired_reset_body: 'This link has expired, make a new link request in order to continue.',
+
+        msg_success_reset_title: 'PASSWORD RESET SUCCESS',
+        msg_success_reset_body: 'The password has been reseted successfuly.',
+       
     },
     es: {
         msg_wait_title: 'PROCESANDO FORMULARIO',
@@ -78,6 +91,19 @@ const trn = {
         confirm_email_body: (_detail) => <>¿Desea enviar un correo electrónico a la dirección para <label className='fw-b' >{_detail}</label>?</>,
         confirm_email_btn: 'ENVIAR',
         confirm_email_ph: 'Enviar email de recuperación...',
+
+        msg_error_reset_title: 'NO FUE POSIBLE ENVIAR EL CORREO',
+        msg_error_reset_body: 'El correo electrónico diligenciado no corresponde con ningún usuario, revise el correo o cree un nuevo usuario.',
+
+        msg_sent_reset_title: 'CORREO ENVIADO',
+        msg_sent_reset_body: 'Se ha enviado un correo electrónico a la dirección proporcionada con un enlace de recuperación. Revisa tu bandeja de entrada en los próximos minutos.',
+       
+        msg_expired_reset_title: 'LINK CADUCADO',
+        msg_expired_reset_body: 'Este link ha expirado su tiempo de disponibilidad, realicé una nueva solicitud del link para continuar.',
+     
+        msg_success_reset_title: 'CONTRASEÑA RESTAURADA',
+        msg_success_reset_body: 'La contraseña ha sido restaurada exitosamente.',
+       
     }
 };
 
@@ -169,21 +195,53 @@ const message_email = (lg, detail, email, cb) => (
 
             <div class="bp4-input-group my-1">
                 <span class="bp4-icon bp4-icon-envelope"></span>
-                <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].confirm_email_ph} defaultValue={email}/>
+                <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].confirm_email_ph} defaultValue={email} id="message_email_input"/>
             </div>
 
             <div style={{ float: 'right' }}>
-                <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={cb} />
+                <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={() => { toaster.remove(); cb(document.getElementById("message_email_input").value)}} />
                 <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
             </div>
         </div>
     </Message>
 );
 
+const error_reset = lg => {
+    return <Message showIcon type={'error'} closable duration={DURATION} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_error_reset_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_error_reset_body}</p>
+    </Message>
+}
+
+const sent_reset = lg => {
+    return <Message showIcon type={'success'} closable duration={DURATION} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_sent_reset_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_sent_reset_body}</p>
+    </Message>
+}
+
+const expired_reset = lg => {
+    return <Message showIcon type={'warning'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_expired_reset_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_expired_reset_body}</p>
+    </Message>
+}
+
+const success_reset = lg => {
+    return <Message showIcon type={'success'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_success_reset_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_success_reset_body}</p>
+    </Message>
+}
 
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
+
+export const ALERT_ERROR_RESET = (lg) => { toaster.push(error_reset(lg), { placement: 'topEnd' }); }
+export const ALERT_SENT_RESET = (lg) => { toaster.push(sent_reset(lg), { placement: 'topEnd' }); }
+export const ALERT_EXPIRED_RESET = (lg) => { toaster.push(expired_reset(lg), { placement: 'topEnd' }); }
+export const ALERT_SUCCESS_RESET = (lg) => { toaster.push(success_reset(lg), { placement: 'topEnd' }); }
 
 export const ALERT_SIGNUP = (lg) => toaster.push(signup(lg), { placement: 'topEnd' })
 export const ALERT_ERROR_SIGNUP = (lg) => { toaster.push(error_signup(lg), { placement: 'topEnd' }); }

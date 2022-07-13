@@ -38,7 +38,7 @@ export default function SIGN_IN() {
             inputs: [
                 {
                     label: trn.password, placeholder: trn.passwordi, leftIcon: 'key', id: 'sigin_form_pass_1', req: true,
-                    type: 'password', passView: pass1, passCB: setPass1, shareSet: setShare, labelHelp: <ul>
+                    type: 'password',  seePass: true, passView: pass1, passCB: setPass1, shareSet: setShare, labelHelp: <ul>
                         <li>{trn.passwordReq[0]}</li>
                         <li>{trn.passwordReq[1]}</li>
                         <li>{trn.passwordReq[2]}</li>
@@ -47,7 +47,7 @@ export default function SIGN_IN() {
                 },
                 {
                     label: trn.password2, placeholder: trn.password2i, leftIcon: 'key', id: 'sigin_form_pass_2', req: true,
-                    type: 'password', passView: pass2, passCB: setPass2, checkRepeat: 'sigin_form_pass_1', shareGet: sharePass,
+                    type: 'password', seePass: true, passView: pass2, passCB: setPass2, checkRepeat: 'sigin_form_pass_1', shareGet: sharePass,
                 },
             ],
         },
@@ -168,7 +168,7 @@ export default function SIGN_IN() {
             <FlexboxGrid.Item as={Col} colspan={6} xxl={6} xl={8} lg={8} md={12} sm={18} xs={24}>
                 <Panel header={<h3>CORBAN - {trn.title}</h3>} bordered className='border'>
 
-                    <FORM form={FORM_INPUTS} id="sigin_form" onSubmit={signup} btnAlignment='center'
+                    <FORM form={FORM_INPUTS} id="sigin_form" onSubmit={signup} btnAlignment='txt-c'
                         submitBtn={<ButtonBP intent="success" type="submit" text={trn.title} large />} >
                         <>
 

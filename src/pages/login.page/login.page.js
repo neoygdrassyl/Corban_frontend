@@ -5,7 +5,7 @@ import { Button as ButtonBP } from '@blueprintjs/core';
 import FORM from '../../resources/customs/components/form.component';
 import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR_LOGIN, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
+import { ALERT_ERROR, ALERT_ERROR_LOGIN, ALERT_ERROR_RESET, ALERT_SENT_RESET, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
 import AtuhService from '../../services/apis/auth.service';
 
 function useAuth() {
@@ -68,12 +68,23 @@ export default function Login() {
 
     function rememberPass() {
         let emailToSend = document.getElementById('login_form_email').value;
-
         CONFIRM_EMAIL(lang, trn.reason, emailToSend, acceptSend)
 
-        function acceptSend() {
-            toaster.remove();
-            console.log('hello there!')
+        function acceptSend(_email) {
+            let formData = new FormData();
+            formData.append('email', _email);
+            formData.append('lang', lang);
+            ALERT_WAIT(lang);
+            AtuhService.appResetEmail(formData)
+                .then(response => {
+                    if (response.data == 'OK') ALERT_SENT_RESET(lang);
+                    else if (response.data == 'NO USER LOGIN') ALERT_ERROR_RESET(lang);
+                    else ALERT_ERROR(lang);
+                })
+                .catch(e => {
+                    console.log(e);
+                    ALERT_ERROR(lang);
+                });
         }
     }
 
@@ -82,7 +93,7 @@ export default function Login() {
             <FlexboxGrid.Item as={Col} colspan={6} xxl={6} xl={8} lg={8} md={12} sm={18} xs={24}>
                 <Panel header={<h3>CORBAN - {trn.title}</h3>} bordered className='border'>
 
-                    <FORM form={FORM_INPUTS} id="login_form" onSubmit={loginRequest} btnAlignment='center'
+                    <FORM form={FORM_INPUTS} id="login_form" onSubmit={loginRequest} btnAlignment='txt-c'
                         submitBtn={<ButtonBP intent="primary" type="submit" text={trn.title} large />} >
                         <>
                             <a onClick={(e) => { e.preventDefault(); rememberPass() }}><label class="bp4-control text-primary">

@@ -30,7 +30,7 @@ export default function PASSWORD(props) {
             leftIcon={props.leftIcon}
             intent={currentIntent || props.intent}
             onChange={(e) => {
-                if(props.passView){
+                if(props.seePass){
                     let value = e.target.value;
                     let regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
                     let checkRepeat = props.checkRepeat ? document.getElementById(props.checkRepeat).value : false;
@@ -47,7 +47,7 @@ export default function PASSWORD(props) {
             type={props.passView ? "text" : 'password'}
             helper
             min={props.min}
-            rightElement={ props.passView ?
+            rightElement={ props.seePass ?
                 <Whisper placement="top" trigger="hover" controlId={props.label + '_hoover_pop'} speaker={<Popover>{props.passView ? trn.passwordHide : trn.passwordSee}</Popover>}>
                     <Button minimal={true} icon={props.passView ? 'unlock' : 'lock'} onClick={() => props.passCB(!props.passView)} />
                 </Whisper> : false}
