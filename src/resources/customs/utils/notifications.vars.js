@@ -11,8 +11,15 @@ const trn = {
 
         msg_error_login_title: 'AUTHENTICATION FAILED',
         msg_error_login_body: 'This email and password combination is not valid, please make sure the authentication credentials are correct.',
+        msg_inactive_login_title: 'THIS ACCOUNT HAS NOT BEEN ACTIVATED',
+        msg_inactive_login_body: 'This account is registered in the system, but it has not been activated yet, check your inbox for an email to activate your account or request a new email.',
+        msg_inactive_login_ph: 'Send activation email...',
+
+        msg_success_activate_title: 'ACCOUNT ACTIVATED',
+        msg_success_activate_body: 'This account has been successfully activated, you may now proceed to log in into your account.',
+
         msg_signup_title: 'USER CREATED SUCCESSFULLY',
-        msg_signup_body: 'The user creation has been successful, you will receive en email verifying the information. You may Log In into your account now.',
+        msg_signup_body: 'The user creation has been successful, you will receive en email verifying the information. You must log into your email and activate your account.',
         msg_error_signup_title: 'SIGN UP REGISTRATION FAILED',
         msg_error_signup_body: 'This email or ID Number or NIT are already on use, verify the input values.',
 
@@ -46,13 +53,13 @@ const trn = {
 
         msg_sent_reset_title: 'EMAIL SENT',
         msg_sent_reset_body: 'An email has been sent to the address providing a recovery link. You may check your inbox in the next minutes.',
-       
+
         msg_expired_reset_title: 'EXPIRED LINK',
         msg_expired_reset_body: 'This link has expired, make a new link request in order to continue.',
 
         msg_success_reset_title: 'PASSWORD RESET SUCCESS',
         msg_success_reset_body: 'The password has been reseted successfuly.',
-       
+
     },
     es: {
         msg_wait_title: 'PROCESANDO FORMULARIO',
@@ -60,8 +67,15 @@ const trn = {
 
         msg_error_login_title: 'AUTENTIFICACIÓN FALLIDA',
         msg_error_login_body: 'Esta combinación de email y contraseña no son valida, asegúrese de que las credenciales de autentificación sean correctas.',
+        msg_inactive_login_title: 'ESTA CUENTA NO HA SIDO ACTIVADA',
+        msg_inactive_login_body: 'Esta cuenta está registrada en el sistema, pero aún no ha sido activada, busque en su bandeja de entrada un correo electrónico para activar su cuenta o solicite un nuevo correo electrónico.',
+        msg_inactive_login_ph: 'Enviar correo electrónico de activación...',
+        
+        msg_success_activate_title: 'CUENTA ACTIVADA',
+        msg_success_activate_body: 'Esta cuenta se ha activado con éxito, ahora puede proceder a iniciar sesión en su cuenta.',
+
         msg_signup_title: 'USUARIO CREADO CON ÉXITO',
-        msg_signup_body: 'La creación del usuario ha sido exitosa, recibirá un correo electrónico verificando la información. Puede iniciar sesión en su cuenta ahora.',
+        msg_signup_body: 'La creación del usuario ha sido exitosa, recibirá un correo electrónico verificando el proceso de registro. Revise su correo para activar su cuenta.',
         msg_error_signup_title: 'REGISTRO FALLIDO',
         msg_error_signup_body: 'El Correo electrónico o numero de documento dados ya se encuentran en uso, verifique los datos.',
 
@@ -97,13 +111,13 @@ const trn = {
 
         msg_sent_reset_title: 'CORREO ENVIADO',
         msg_sent_reset_body: 'Se ha enviado un correo electrónico a la dirección proporcionada con un enlace de recuperación. Revisa tu bandeja de entrada en los próximos minutos.',
-       
+
         msg_expired_reset_title: 'LINK CADUCADO',
         msg_expired_reset_body: 'Este link ha expirado su tiempo de disponibilidad, realicé una nueva solicitud del link para continuar.',
-     
+
         msg_success_reset_title: 'CONTRASEÑA RESTAURADA',
         msg_success_reset_body: 'La contraseña ha sido restaurada exitosamente.',
-       
+
     }
 };
 
@@ -118,6 +132,31 @@ const error_login = lg => {
     return <Message showIcon type={'error'} closable duration={DURATION} style={{ maxWidth: WIDTH }}
         header={<label className='fw-b'>{trn[lg].msg_error_login_title}</label>}>
         <p className='txt-j'>{trn[lg].msg_error_login_body}</p>
+    </Message>
+}
+
+const inactive_login = (lg, email, cb) => {
+    return <Message showIcon type={'warning'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_inactive_login_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_inactive_login_body}</p>
+
+
+        <div class="bp4-input-group my-1">
+            <span class="bp4-icon bp4-icon-envelope"></span>
+            <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].msg_inactive_login_ph} defaultValue={email} id="message_email_2_input" />
+        </div>
+
+        <div style={{ float: 'right' }}>
+            <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={() => { toaster.remove(); cb(document.getElementById("message_email_2_input").value) }} />
+            <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
+        </div>
+    </Message>
+}
+
+const success_activate = lg => {
+    return <Message showIcon type={'success'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_success_activate_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_success_activate_body}</p>
     </Message>
 }
 
@@ -195,11 +234,11 @@ const message_email = (lg, detail, email, cb) => (
 
             <div class="bp4-input-group my-1">
                 <span class="bp4-icon bp4-icon-envelope"></span>
-                <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].confirm_email_ph} defaultValue={email} id="message_email_input"/>
+                <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].confirm_email_ph} defaultValue={email} id="message_email_input" />
             </div>
 
             <div style={{ float: 'right' }}>
-                <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={() => { toaster.remove(); cb(document.getElementById("message_email_input").value)}} />
+                <Button className='mx-1' intent='primary' icon="envelope" text={trn[lg].confirm_email_btn} onClick={() => { toaster.remove(); cb(document.getElementById("message_email_input").value) }} />
                 <Button intent='secondary' icon="cross" text={trn[lg].confirm_delete_btn2} onClick={() => toaster.remove()} />
             </div>
         </div>
@@ -237,6 +276,9 @@ const success_reset = lg => {
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
+export const ALERT_INACTIVE_LOGIN = (lg, email, cb) => { toaster.push(inactive_login(lg, email, cb), { placement: 'topCenter' }); }
+export const ALERT_SUCCESS_ACTIVATE = (lg, email, cb) => { toaster.push(success_activate(lg, email, cb), { placement: 'topCenter' }); }
+
 
 export const ALERT_ERROR_RESET = (lg) => { toaster.push(error_reset(lg), { placement: 'topEnd' }); }
 export const ALERT_SENT_RESET = (lg) => { toaster.push(sent_reset(lg), { placement: 'topEnd' }); }

@@ -99,11 +99,14 @@ export function AuthProvider({ children }) {
 
 function validateUser(_user) {
   var user = {}
+  var work_group_list = _user.technicalInfo ? _user.technicalInfo.split('&&') : [];
+  work_group_list = work_group_list.map(wgl => GET_JSON_FULL(wgl))
 
   user.fullname = `${_user.name ?? ''} ${_user.name_2 ?? ''} ${_user.surname ?? ''} ${_user.surname_2 ?? ''}`;
   user.name = `${_user.name ?? ''} ${_user.surname ?? ''}`;
   user.id = _user.id;
   user.userInfo = _user.userInfo;
+  user.workList = work_group_list;
 
   return user
 }
@@ -117,7 +120,6 @@ function validateConn(_conn) {
   let _companies = _conn.technicalInfo.split(';') ?? [];
   for (var i = 0; i < _companies.length; i++) {
     let connName = GET_JSON_FULL(_companies[i]).indexName;
-
     if (!connections.includes(connName)) connections.push(connName);
     conn = {};
     conn.technicalInfo = GET_JSON_FULL(_companies[i]);
@@ -126,5 +128,6 @@ function validateConn(_conn) {
   }
   conn.connections = connections;
   conn.conn = _conn.bdname;
+
   return conn
 }

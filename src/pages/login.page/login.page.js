@@ -5,7 +5,7 @@ import { Button as ButtonBP } from '@blueprintjs/core';
 import FORM from '../../resources/customs/components/form.component';
 import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR, ALERT_ERROR_LOGIN, ALERT_ERROR_RESET, ALERT_SENT_RESET, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
+import { ALERT_ERROR, ALERT_ERROR_LOGIN, ALERT_ERROR_RESET, ALERT_INACTIVE_LOGIN, ALERT_SENT_RESET, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
 import AtuhService from '../../services/apis/auth.service';
 
 function useAuth() {
@@ -19,6 +19,8 @@ export default function Login() {
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('login');
     const lang = utilities.lang
+    if (auth.user) navigate('/dashboard', { replace: true });
+
 
     const FORM_INPUTS = [
         {
@@ -45,6 +47,7 @@ export default function Login() {
 
         let formData = _data.formData;
         //var formData = new FormData();
+        let email = document.getElementById('login_form_email').value
         ALERT_WAIT(lang);
         AtuhService.appLogin(formData)
             .then(response => {
@@ -55,16 +58,32 @@ export default function Login() {
                         navigate(from, { replace: true });
                     });
 
-                } else {
-                    ALERT_ERROR_LOGIN(lang);
-                }
+                } else if (response.data == 'ERROR_3') ALERT_INACTIVE_LOGIN(lang, email, activateSend);
+                else ALERT_ERROR_LOGIN(lang);
             })
             .catch(e => {
                 console.log(e);
                 ALERT_ERROR_LOGIN(lang);
             });
-
     }
+
+    function activateSend(_email) {
+        let formData = new FormData();
+        formData.append('email', _email);
+        formData.append('lang', lang);
+        ALERT_WAIT(lang);
+        AtuhService.appVerifyAccountEmail(formData)
+            .then(response => {
+                if (response.data == 'OK') ALERT_SENT_RESET(lang);
+                else ALERT_ERROR(lang);
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang);
+            });
+    }
+
+
 
     function rememberPass() {
         let emailToSend = document.getElementById('login_form_email').value;

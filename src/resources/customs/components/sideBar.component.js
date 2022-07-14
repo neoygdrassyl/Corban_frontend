@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Sidenav, Nav } from 'rsuite';
 import { Grid, Attachment, Page, CheckOutline, Task } from '@rsuite/icons/';
+import PeoplesIcon from '@rsuite/icons/Peoples';
+import DetailIcon from '@rsuite/icons/Detail';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contextProviders/auth.provider';
+import { BiChevronRightCircle } from 'react-icons/bi'
 
 function SideBarComponent(props) {
     let navigate = useNavigate();
@@ -12,6 +16,12 @@ function SideBarComponent(props) {
         whiteSpace: 'nowrap',
         overflow: 'hidden'
     };
+
+    let auth = useContext(AuthContext);
+    let user = auth.user ? auth.user : false;
+
+    let workList = user.workList ? user.workList : [];
+
     return (<>
         <Sidenav.Header className="bg-cold">
             <NavLink to={'/dashboard'} className="text-light">
@@ -28,17 +38,27 @@ function SideBarComponent(props) {
         <Sidenav expanded={props.expand} defaultOpenKeys={['0']} appearance="primary">
             <Sidenav.Body>
                 <Nav>
-                    <Nav.Item eventKey="3" icon={<Attachment color="violet" />} onClick={() => navigate("/submit")}>
-                        VENTANILLA UNICA
-                    </Nav.Item>
-                    <Nav.Item eventKey="1" icon={<Task color="blue" />} onClick={() => navigate("/fun")}>
-                        LICENCIAS Y SOLICITUDES
-                    </Nav.Item>
-                    <Nav.Item eventKey="2" icon={<CheckOutline color="red" />}>
-                        PQRS
-                    </Nav.Item>
-                    <Nav.Item eventKey="4" icon={<Page color="green" />}>
-                        ARCHIVO
+                    <Nav.Menu
+                        eventKey="2"
+                        trigger="hover"
+                        title="MIS PROYECTOS"
+                        icon={<DetailIcon color="red" />}
+                        placement="rightStart"
+                    >
+                        <Nav.Item eventKey="3-1">proyecto 1</Nav.Item>
+                    </Nav.Menu>
+                    <Nav.Menu
+                        eventKey="1"
+                        trigger="hover"
+                        title="MIS EQUIPOS DE TRABAJO"
+                        icon={<PeoplesIcon color="blue" />}
+                        placement="rightStart"
+                    >
+                        {workList.map((wl, i) => <Nav.Item eventKey={"3-" + i}><BiChevronRightCircle /> {wl.name}</Nav.Item>)}
+
+                    </Nav.Menu>
+                    <Nav.Item eventKey="0" onClick={() => navigate("/fun")}>
+                        test
                     </Nav.Item>
                 </Nav>
             </Sidenav.Body>

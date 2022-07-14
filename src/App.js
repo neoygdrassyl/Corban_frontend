@@ -32,6 +32,7 @@ import SUBMIT from "./pages/submit.pages/submit.page";
 import BEDROCK from "./pages/bedrock.page/bedrcok.page";
 import SIGN_IN from "./pages/signin.page/signin.page";
 import RESET from "./pages/reset,pages/reset.page";
+import ACTIVATE from "./pages/activate.pages/activate.page";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                 <Route exact path="/home" element={<Home />} />
                 <Route exact path="/bedrock" element={<BEDROCK />} />
                 <Route exact path="/reset/:email&:jtw" element={<RESET />} />
+                <Route exact path="/activate/:email&:jtw" element={<ACTIVATE />} />
               </Route>
 
               <Route element={<PrivateRoute />}>

@@ -145,6 +145,8 @@ export default function SIGN_IN() {
         let phone = data.find(d => d.key == 'sigin_form_number').value;
         formData.set('phone', phone);
 
+        formData.set('lang', lang);
+
         ALERT_WAIT(lang);
         AtuhService.appSignUp(formData)
             .then(response => {

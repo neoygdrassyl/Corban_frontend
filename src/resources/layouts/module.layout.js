@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Outlet, } from 'react-router-dom';
-import { Container, Content, Nav, Navbar, Sidebar } from 'rsuite';
+import { Container, Content, Divider, Nav, Navbar, Sidebar } from 'rsuite';
 
 import SideBarComponent from '../../resources/customs/components/sideBar.component'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
@@ -26,14 +26,15 @@ const ModuleLayout = ({ children, ...rest }) => {
     return (
         <Container>
             <Container>
-                {connection ?
-                    <Sidebar className='sideBarMain'
-                        width={expand ? 260 : 56}
-                        collapsible >
-                        <SideBarComponent expand={expand} />
-                        <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
-                    </Sidebar>
-                    : ''}
+
+                <Sidebar className='sideBarMain'
+                    width={expand ? 260 : 56}
+                    collapsible >
+                    <SideBarComponent expand={expand} />
+                    <Divider />
+                    <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
+                </Sidebar>
+
                 <Container>
                     <Content>
                         <Outlet />

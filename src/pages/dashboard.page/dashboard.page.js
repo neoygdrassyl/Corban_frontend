@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Badge, Button, ButtonGroup, Col, Divider, Grid, IconButton, Panel, PanelGroup, Row } from 'rsuite';
+import { Badge, Button, ButtonGroup, Col, Divider, Grid, IconButton, Message, Panel, PanelGroup, Row } from 'rsuite';
 import { BiBuildingHouse } from 'react-icons/bi'
 import { VscLaw } from 'react-icons/vsc'
 import { IoDocumentAttachOutline } from 'react-icons/io5'
@@ -10,6 +10,7 @@ import { AuthContext } from '../../resources/customs/contextProviders/auth.provi
 import AtuhService from '../../services/apis/auth.service'
 import { ALERT_ERROR } from '../../resources/customs/utils/notifications.vars';
 import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
+import InfoRoundIcon from '@rsuite/icons/InfoRound';
 
 export default function Dashboard() {
     //  CONTEXT INITILIAZATION & CONTROL
@@ -144,6 +145,21 @@ export default function Dashboard() {
 
     return (
         <div className="my-6 px-0">
+            <Grid fluid>
+                <Row style={{ width: '100%' }} >
+                    <Col xs={24} sm={24} md={8} lg={6} xl={4} xxl={4}>
+                        <Message type="info" header={<label className='text-light fw-b'>{<InfoRoundIcon />} GENERAR PRELIQUIDACIÓN</label>} style={{backgroundColor: 'dodgerblue'}}>
+                            <label className='text-light'>Generar una Preliquidacion en una Curaduria</label>
+                        </Message>
+                    </Col>
+                    <Col xs={24} sm={24} md={8} lg={6} xl={4} xxl={4}>
+
+                    </Col>
+                </Row>
+
+            </Grid>
+
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>CORBAN SOFTWARE</h3>
             </Row>
@@ -181,7 +197,7 @@ export default function Dashboard() {
                                         <label >TELÉFONOS: </label>
                                     </Col>
                                     <Col xs={18} className="text-left">
-                                        <label className="fw-b">{connection.companiyInfo.number1 + ' /  ' + connection.companiyInfo.number2 }</label>
+                                        <label className="fw-b">{connection.companiyInfo.number1 + ' /  ' + connection.companiyInfo.number2}</label>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -205,7 +221,7 @@ export default function Dashboard() {
                                         <label >PAGINA WEB: </label>
                                     </Col>
                                     <Col xs={18} className="text-left">
-                                        <label className="fw-b"><a href={connection.companiyInfo.page} target="_blank"><BiLinkExternal style={{paddingTop: '1px'}}/>{connection.companiyInfo.page}</a></label>
+                                        <label className="fw-b"><a href={connection.companiyInfo.page} target="_blank"><BiLinkExternal style={{ paddingTop: '1px' }} />{connection.companiyInfo.page}</a></label>
                                     </Col>
                                 </Row>
                             </Panel>
