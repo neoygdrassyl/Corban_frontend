@@ -11,7 +11,7 @@ export default function ACTIVATE() {
     let params = useParams();
     const auth =  useContext(AuthContext);
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('reset');
+    const trn = utilities.getTranslation('activate');
     const lang = utilities.lang
 
     if (auth.user) navigate('/dashboard', { replace: true });
@@ -48,9 +48,9 @@ export default function ACTIVATE() {
     return (<>
         <FlexboxGrid justify="center" className="my-6" >
             <FlexboxGrid.Item as={Col} colspan={6} xxl={6} xl={8} lg={8} md={12} sm={18} xs={24}>
-                <Panel header={<h3>ACIVATING ACCOUNT...</h3>} bordered className='border txt-c' >
+                <Panel header={<h3>{trn.title}</h3>} bordered className='border txt-c' >
 
-                <Loader size="lg" content={'WAIT A MOMENT PLEASE'} vertical />
+                <Loader size="lg" content={trn.body} vertical />
 
                 </Panel>
             </FlexboxGrid.Item>

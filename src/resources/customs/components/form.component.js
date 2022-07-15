@@ -165,7 +165,7 @@ export default function FORM(props) {
         {showValidation ?
             <FlexboxGrid className='my-1'>
                 <FlexboxGrid.Item colspan={24}>
-                    <Divider />
+                    <hr />
                     {data.map(d => {
                         if (!d.validated) {
                             return <>
@@ -184,7 +184,7 @@ export default function FORM(props) {
                             </>
                         }
                     })}
-                    <Divider />
+                    <hr />
                 </FlexboxGrid.Item>
             </FlexboxGrid> : ''}
     </>

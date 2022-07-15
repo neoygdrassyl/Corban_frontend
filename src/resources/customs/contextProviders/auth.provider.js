@@ -3,6 +3,7 @@ import React from "react";
 import AtuhService from '../../../services/apis/auth.service'
 import { GET_JSON_FULL } from "../utils/lamdas.functions";
 
+
 export let AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
@@ -112,22 +113,35 @@ function validateUser(_user) {
 }
 
 function validateConn(_conn) {
-
   let companyInfo = _conn.companyInfo.split(';') ?? [];
-
+  let roles = [];
+  let totalRoles = _conn.roleName ? _conn.roleName.split(';').length : 0;
   let conn = {};
   let connections = [];
   let _companies = _conn.technicalInfo.split(';') ?? [];
+
   for (var i = 0; i < _companies.length; i++) {
     let connName = GET_JSON_FULL(_companies[i]).indexName;
     if (!connections.includes(connName)) connections.push(connName);
     conn = {};
     conn.technicalInfo = GET_JSON_FULL(_companies[i]);
     conn.companiyInfo = GET_JSON_FULL(companyInfo[i]);
+  }
 
+  for (var i = 0; i < totalRoles; i++) {
+    let name = _conn.roleName ? _conn.roleName.split(';')[i] : '';
+    let desc =  _conn.roleInfo ? _conn.roleInfo.split(';')[i] : '';
+    let priority =  _conn.rolePriority ? _conn.rolePriority.split(';')[i] : '';
+    let permits =  _conn.rolePermits ? _conn.rolePermits.split(';')[i] :'';
+
+    roles.push({name, desc, priority, permits})
   }
   conn.connections = connections;
   conn.conn = _conn.bdname;
+  conn.id = conn.technicalInfo.id
+  conn.roles = roles;
+
+
 
   return conn
 }

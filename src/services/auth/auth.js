@@ -13,7 +13,12 @@ const fakeAuthProvider = {
 const header = () => {
   let token = localStorage.getItem('corban_jwt');
   let conn = localStorage.getItem('corban_conn');
-  return { headers: { Authorization: 'Bearer ' + token, dbIndex: JSON.parse(conn).conn || '' } }
+  let user = localStorage.getItem('corban_user');
+ 
+  let connection = JSON.parse(conn);
+  let userInfo = JSON.parse(user);
+
+  return { headers: { Authorization: 'Bearer ' + token, dbIndex: connection.conn || '', dbId: connection.id, userId : userInfo.id} }
 }
 
   export { fakeAuthProvider, header };

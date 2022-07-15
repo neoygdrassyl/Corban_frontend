@@ -79,5 +79,8 @@ export default function TABLE_COMPONENT(props) {
 
             theme={utilities ? utilities.theme == 'light' ? 'default' : 'dark' : 'default'}
 
+            expandableRowsComponent={props.expand}
+            expandableRows={props.expand}
+
         />);
 }

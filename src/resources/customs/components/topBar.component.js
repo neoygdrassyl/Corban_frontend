@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
-import { Nav, Navbar, InputGroup, Input, Dropdown } from 'rsuite';
+import { Nav, Navbar, InputGroup, Input, Dropdown, Divider, Badge } from 'rsuite';
 import { Gear, Dashboard, Search, Icon } from '@rsuite/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsMoonStars, BsSun } from "react-icons/bs";
 import { IoLanguage } from "react-icons/io5";
 import { FaRegUser, FaSignOutAlt } from "react-icons/fa";
 import { MdOutlineSpaceDashboard } from "react-icons/md"
+import GridIcon from '@rsuite/icons/Grid';
+import DetailIcon from '@rsuite/icons/Detail';
+import PeoplesIcon from '@rsuite/icons/Peoples';
+import GearIcon from '@rsuite/icons/Gear';
+import NoticeIcon from '@rsuite/icons/Notice';
+import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import { AuthContext } from '../contextProviders/auth.provider'
 import { UtilContext } from '../contextProviders/util.provider';
 
@@ -41,7 +47,7 @@ function TopBarComponent() {
     );
 
     return (
-        <Navbar className='bg-dark app_nav'>
+        <Navbar className={'bg-dark app_nav ' + theme}>
             <Navbar.Brand as={MyLink} to="/home"><label className="pointer">CORBAN</label></Navbar.Brand>
             <Nav >
                 <Nav.Item as={MyLink} to="/home"><label className="pointer">{trn.home}</label></Nav.Item>
@@ -53,7 +59,13 @@ function TopBarComponent() {
                     <Nav.Menu
                         icon={<FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} />}
                         title={<label className="pointer text-uppercase">{user.name}</label>} >
-                        <Nav.Item icon={<MdOutlineSpaceDashboard style={{ fontSize: '1.2em' }} />} onClick={() => navigate("/dashboard")}> {trn.dash}</Nav.Item>
+                        <Nav.Item icon={<GridIcon color="dark" />} onClick={() => navigate("/dashboard")}> {trn.dash}</Nav.Item>
+                        <Nav.Item icon={<NoticeIcon color="orange" />} onClick={() => navigate("/dashboard")}> {'notificaciones'} <Badge color="blue" content="1" /></Nav.Item>
+                        <Nav.Item icon={<DetailIcon color="red" />} onClick={() => navigate("/dashboard")}> {'mis proyectos'}</Nav.Item>
+                        <Nav.Item icon={<PeoplesIcon color="blue" />} onClick={() => navigate("/dashboard")}> {'mis equipos'}</Nav.Item>
+                        <Nav.Item icon={<GearIcon color="green" />} onClick={() => navigate("/dashboard")}> {'Configuracion'}</Nav.Item>
+                        <Nav.Item icon={<HelpOutlineIcon color="violet" />} onClick={() => navigate("/dashboard")}> {'ayuda'}</Nav.Item>
+                        {<hr />}
                         <Nav.Item icon={<FaSignOutAlt style={{ fontSize: '1.2em' }} />} onClick={() => auth.signout(() => navigate("/"))}> {trn.lout}</Nav.Item>
                     </Nav.Menu>
 

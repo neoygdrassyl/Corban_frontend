@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Sidenav, Nav } from 'rsuite';
-import { Grid, Attachment, Page, CheckOutline, Task } from '@rsuite/icons/';
+import { Grid } from '@rsuite/icons/';
 import PeoplesIcon from '@rsuite/icons/Peoples';
 import DetailIcon from '@rsuite/icons/Detail';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contextProviders/auth.provider';
 import { BiChevronRightCircle } from 'react-icons/bi'
+import PageEndIcon from '@rsuite/icons/PageEnd';
 
 function SideBarComponent(props) {
     let navigate = useNavigate();
@@ -21,6 +22,7 @@ function SideBarComponent(props) {
     let user = auth.user ? auth.user : false;
 
     let workList = user.workList ? user.workList : [];
+
 
     return (<>
         <Sidenav.Header className="bg-cold">
@@ -47,19 +49,23 @@ function SideBarComponent(props) {
                     >
                         <Nav.Item eventKey="3-1">proyecto 1</Nav.Item>
                     </Nav.Menu>
-                    <Nav.Menu
-                        eventKey="1"
-                        trigger="hover"
-                        title="MIS EQUIPOS DE TRABAJO"
-                        icon={<PeoplesIcon color="blue" />}
-                        placement="rightStart"
-                    >
-                        {workList.map((wl, i) => <Nav.Item eventKey={"3-" + i}><BiChevronRightCircle /> {wl.name}</Nav.Item>)}
+                    {workList.length > 0 ?
+                        <Nav.Menu
+                            eventKey="1"
+                            trigger="hover"
+                            title="MIS EQUIPOS DE TRABAJO"
+                            icon={<PeoplesIcon color="blue" />}
+                            placement="rightStart"
+                        >
+                            {workList.map((wl, i) => <Nav.Item eventKey={"3-" + i} onClick={() => navigate("/dashteam/" + wl.id)} 
+                             icon={<PageEndIcon color="blue" />}>
+                                {wl.name}
+                            </Nav.Item>
+                            )}
 
-                    </Nav.Menu>
-                    <Nav.Item eventKey="0" onClick={() => navigate("/fun")}>
-                        test
-                    </Nav.Item>
+                        </Nav.Menu>
+                        : ''}
+
                 </Nav>
             </Sidenav.Body>
         </Sidenav>

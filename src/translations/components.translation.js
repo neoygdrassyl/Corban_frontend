@@ -109,6 +109,9 @@ export let translations = {
             removelast: 'REMOVE LAST',
             details: 'DETAILS',
             view: 'VIEW',
+            cancel: 'CANCEL',
+            confirm: 'CONFIRM',
+            close: 'CLOSE',
         },
         es: {
             save: 'GUARDAR',
@@ -120,6 +123,9 @@ export let translations = {
             removelast: 'REMOVER ULTIMO',
             details: 'DETALLES',
             view: 'VER',
+            cancel: 'CANCELAR',
+            confirm: 'CONFIRMAR',
+            close: 'CERRAR',
         }
 
     },
@@ -217,7 +223,7 @@ export let translations = {
             emaili: 'Email used to log in into the page',
             password: 'PASSWORD',
             passwordi: 'Password for the account',
-            forgot : 'I FORGOT MY PASSWORD',
+            forgot: 'I FORGOT MY PASSWORD',
             reason: 'receive a recovery password email'
         },
         es: {
@@ -226,8 +232,18 @@ export let translations = {
             emaili: 'Correo electrónico para iniciar sesión en la página',
             password: 'CONTRASEÑA',
             passwordi: 'Contraseña de la cuenta',
-            forgot : 'OLVIDÉ MI CONTRASEÑA',
+            forgot: 'OLVIDÉ MI CONTRASEÑA',
             reason: 'recibir un email de recuperación de contraseña'
+        }
+    },
+    activate: {
+        en: {
+            title: 'ACIVATING ACCOUNT...',
+            body: 'WAIT A MOMENT PLEASE',
+        },
+        es: {
+            title: 'ACTIVANDO CUENTA...',
+            body: 'ESPERE UN MOMENT POR FAVOR',
         }
     },
     signin: {
@@ -292,9 +308,9 @@ export let translations = {
             conditions: 'Acepto todos los términos y condiciones del tratamiento de datos con base en la Ley Estatutaria de Habeas Data (Ley 1581 de 2012)'
         }
     },
-    reset:{
+    reset: {
         en: {
-            passReset : 'PASSWORD RESET',
+            passReset: 'PASSWORD RESET',
             passwordReq: ['Miminum of 8 letter.', 'Minimun of 1 capital letter.', 'Minimun of 1 digit', 'Minimun 1 special character: !#$%&?'],
             newPassword: 'NEW PASSWORD',
             repPassword: 'CONFIRM PASSWORD',
@@ -303,7 +319,7 @@ export let translations = {
             btn: 'RESET PASSWORD',
         },
         es: {
-            passReset : 'RESTAURACIÓN DE CONTRASEÑA',
+            passReset: 'RESTAURACIÓN DE CONTRASEÑA',
             passwordReq: ['Mínimo de 8 letras.', 'Mínimo de 1 letra mayúscula.', 'Mínimo de 1 dígito', 'Mínimo 1 carácter especial: !#$%&?'],
             newPassword: 'NUEVA CONTRASEÑA',
             repPassword: 'CONFIRMAR CONTRASEÑA',
@@ -914,6 +930,32 @@ export let translations = {
                     focus: 'doc_pages',
                 },
             ],
+        }
+    },
+    roles: {
+        en: {
+            title: 'WORK TEAM ROLES',
+            tableHd: 'ROLES LIST',
+            tableCl: ['NAME', 'DESCRIPTION', 'ACTION'],
+            newtitle: 'CREATE NEW ROLE',
+            form: [
+                {label: 'ROLE NAME', ph: 'Name of te role'},
+                {label: 'ROLE DESCRIPTION', ph: 'Short description'},
+            ],
+            confirm: "Are you sure you want to permanently delete this role? the information won't be recoverable.",
+            adminRole: 'This role is an administrative role, it overpasses the rules from the Workers and Roles rules and CANNOT be eliminated.'
+        },
+        es: {
+            title: 'ROLES DE EQUIPO DE TRABAJO',
+            tableHd: 'LISTA DE ROLES',
+            tableCl: ['NOMBRE', 'DESCRIPCIÓN', 'ACCIÓN'],
+            newtitle: 'CREAR NUEVO ROL',
+            form: [
+                {label: 'NOMBRE DEL ROL', ph: 'Nombre de la función'},
+                {label: 'DESCRIPCIÓN DEL ROL', ph: 'Descripción breve'},
+            ],
+            confirm: "¿Está seguro de que desea eliminar esto rol de forma permanente? la información no será recuperable.",
+            adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.'
         }
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@blueprintjs/core';
+import { Alert, Button } from '@blueprintjs/core';
 import { Message, Notification, toaster } from 'rsuite';
 
 const DURATION = 10000;
@@ -8,6 +8,9 @@ const trn = {
     en: {
         msg_wait_title: 'PROCESSING FORM',
         msg_wait_body: 'The system is processing the data, one moment please.',
+
+        msg_noPermit_title: 'PERMIT DENIED',
+        msg_noPermi_body: 'This action was cancelled because the roles of this user does not have enought permits.',
 
         msg_error_login_title: 'AUTHENTICATION FAILED',
         msg_error_login_body: 'This email and password combination is not valid, please make sure the authentication credentials are correct.',
@@ -60,17 +63,25 @@ const trn = {
         msg_success_reset_title: 'PASSWORD RESET SUCCESS',
         msg_success_reset_body: 'The password has been reseted successfuly.',
 
+        msg_confirm_invite_title : 'SEND INVITATION',
+        msg_confirm_invite_body : 'Send an invitation to a registered user to be part of the work team.',
+        msg_confirm_invite_ph: 'Login name of the user',
+        msg_confirm_invite_btn: 'INVITE',
+
     },
     es: {
         msg_wait_title: 'PROCESANDO FORMULARIO',
         msg_wait_body: 'El sistema está procesando los datos, un momento por favor.',
+
+        msg_noPermit_title: 'NO TIENE PERMISOS',
+        msg_noPermi_body: 'La acción fue cancelada por que el rol de este usuario no tiene permisos suficientes.',
 
         msg_error_login_title: 'AUTENTIFICACIÓN FALLIDA',
         msg_error_login_body: 'Esta combinación de email y contraseña no son valida, asegúrese de que las credenciales de autentificación sean correctas.',
         msg_inactive_login_title: 'ESTA CUENTA NO HA SIDO ACTIVADA',
         msg_inactive_login_body: 'Esta cuenta está registrada en el sistema, pero aún no ha sido activada, busque en su bandeja de entrada un correo electrónico para activar su cuenta o solicite un nuevo correo electrónico.',
         msg_inactive_login_ph: 'Enviar correo electrónico de activación...',
-        
+
         msg_success_activate_title: 'CUENTA ACTIVADA',
         msg_success_activate_body: 'Esta cuenta se ha activado con éxito, ahora puede proceder a iniciar sesión en su cuenta.',
 
@@ -117,6 +128,11 @@ const trn = {
 
         msg_success_reset_title: 'CONTRASEÑA RESTAURADA',
         msg_success_reset_body: 'La contraseña ha sido restaurada exitosamente.',
+
+        msg_confirm_invite_title : 'ENVIAR INVITACIÓN',
+        msg_confirm_invite_body : 'Enviar una invitación a un usuario registrado para formar parte del equipo de trabajo.',
+        msg_confirm_invite_ph: 'Nombre de inicio de sesión del usuario',
+        msg_confirm_invite_btn: 'INVITAR',
 
     }
 };
@@ -185,6 +201,13 @@ const message_noLoad = lg => {
     return <Message showIcon type="error" closable duration={DURATION} style={{ maxWidth: WIDTH }}
         header={<label className='fw-b'>{trn[lg].msg_error_title}</label>}>
         <p className='txt-j'>{trn[lg].msg_error_body}</p>
+    </Message>
+}
+
+const alert_noPermit = lg => {
+    return <Message showIcon type="warning" closable duration={DURATION} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_noPermit_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_noPermit_body}</p>
     </Message>
 }
 
@@ -273,8 +296,53 @@ const success_reset = lg => {
     </Message>
 }
 
+const confirm_invite = (lg, theme, open, setOpen, cb, loading) => <Alert
+    className={theme}
+    canEscapeKeyCancel
+    canOutsideClickCancel
+    cancelButtonText={trn[lg].confirm_delete_btn2}
+    confirmButtonText={trn[lg].msg_confirm_invite_btn}
+    icon="search"
+    intent={'primary'}
+    isOpen={open}
+    loading={loading}
+    onCancel={() => setOpen(false)}
+    onConfirm={() => { cb(document.getElementById('confirm_invite_input').value)}}
+>
+    <>
+        <h6>{trn[lg].msg_confirm_invite_title}</h6>
+        <p>{trn[lg].msg_confirm_invite_body}</p>
+        <div class="bp4-input-group my-1">
+            <span class="bp4-icon bp4-icon-envelope"></span>
+            <input type="text" class="bp4-input bp4-fill" placeholder={trn[lg].msg_confirm_invite_ph} id="confirm_invite_input" />
+        </div>
+    </>
+
+</Alert>
+
+const confirm_delete = (lg, theme, id, open, setOpen, cb) => <Alert
+    className={theme}
+    canEscapeKeyCancel
+    canOutsideClickCancel
+    confirmButtonText={trn[lg].confirm_delete_btn1}
+    cancelButtonText={trn[lg].confirm_delete_btn2}
+    icon="trash"
+    intent={'danger'}
+    isOpen={open}
+    onCancel={() => setOpen(false)}
+    onConfirm={cb}
+>
+    <>
+        <h6>{trn[lg].confirm_delete_title}</h6>
+        <p>{trn[lg].confirm_delete_body}</p>
+        <p>{trn[lg].confirm_delete_body2} <label className='fw-b'>{id}</label></p>
+    </>
+
+</Alert>
+
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
+export const ALERT_NO_PERMIT = (lg) => { toaster.push(alert_noPermit(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
 export const ALERT_INACTIVE_LOGIN = (lg, email, cb) => { toaster.push(inactive_login(lg, email, cb), { placement: 'topCenter' }); }
 export const ALERT_SUCCESS_ACTIVATE = (lg, email, cb) => { toaster.push(success_activate(lg, email, cb), { placement: 'topCenter' }); }
@@ -297,3 +365,4 @@ export const ALERT_EMPTY_LIST = (lg) => toaster.push(message_noList(lg), { place
 export const CONFIRM_DELETE = (lg, id, cb) => { toaster.push(message_confirm(lg, id, cb), { placement: 'topCenter' }); }
 export const CONFIRM_EMAIL = (lg, detail, email, cb) => { toaster.push(message_email(lg, detail, email, cb), { placement: 'topCenter' }); }
 
+export const CONFIRM_INVITATION = (lg, theme, open, setOpen, cb, loading) => confirm_invite(lg, theme, open, setOpen, cb, loading)

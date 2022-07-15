@@ -8,7 +8,6 @@ import { AuthContext } from '../../resources/customs/contextProviders/auth.provi
 
 const ModuleLayout = ({ children, ...rest }) => {
     let auth = useContext(AuthContext);
-    let connection = auth.conn ? auth.conn : false;
     const [expand, setExpand] = React.useState(true);
 
     const NavToggle = ({ expand, onChange }) => {

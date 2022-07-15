@@ -28,11 +28,11 @@ export function GET_LAST_VR(_htmlId, _lang) {
 
 }
 
-export function GET_LAST_ID_PUBLIC(_htmlId, _lang){
+export function GET_LAST_ID_PUBLIC(_htmlId, _lang) {
     let new_id = "";
     let _user = GET_JSON_FULL(localStorage.getItem('corban_user'));
     let _conn = GET_JSON_FULL(localStorage.getItem('corban_conn')).conn;
-    let nomens =  _user.companies[_conn].technicalInfo.serials.process
+    let nomens = _user.companies[_conn].technicalInfo.serials.process
 
     SERVICE_FUN.getLastIdPublic()
         .then(response => {
@@ -58,7 +58,7 @@ export function GET_LAST_ID_PUBLIC(_htmlId, _lang){
 }
 
 export function GET_JSON_FIELD(objec, field) {
-    if(!objec) return false;
+    if (!objec) return false;
     let json = objec;
     let whileSafeBreaker = 0;
     while (!json[field]) {
@@ -74,7 +74,7 @@ export function GET_JSON_FIELD(objec, field) {
 }
 
 export function GET_JSON_FULL(objec) {
-    if(!objec) return {};
+    if (!objec) return {};
     let json = objec;
     let whileSafeBreaker = 0;
     while (typeof json !== 'object') {
@@ -87,4 +87,18 @@ export function GET_JSON_FULL(objec) {
         if (whileSafeBreaker == 10) return false;
     }
     return json
+}
+
+export function FIND_PERMIT(permits, id, value) {
+    if (permits.some(permit => permit.priority == 11)) return true;
+
+    permits.some(permit => {
+        let objPermit = GET_JSON_FULL(permit.permits);
+        if (id in objPermit) {
+            if (objPermit[id].includes(value)) return true;
+            else return false;
+        }
+        return false;
+    })
+
 }

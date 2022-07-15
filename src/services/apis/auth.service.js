@@ -9,14 +9,17 @@ class AtuhService {
   appVerifyAccount(data, token) { return http.post(`/accountverify`, data, { headers: { Authorization: 'Bearer ' + token } }) }
   appVerifyAccountEmail(data) { return http.post(`/accountverifyemail`, data) }
 
+  // INVITE
+  inviteUSer(data) { return http.post(`/invitation`, data, header()) }
+
   // PASSWORD RESET
   appResetEmail(data) { return http.post(`/reset`, data); }
   appResetPassword(data, token) { return http.post(`/resetpass`, data, { headers: { Authorization: 'Bearer ' + token } }) }
   appResetVerify(token) { return http.get(`/resetverify`, { headers: { Authorization: 'Bearer ' + token } }); }
-  
+
   loadCompanies(idUser, token) { return http.get(`/companies/${idUser}`, { headers: { Authorization: 'Bearer ' + token } }); }
-  loadWorkers(dbIndex) { return http.get(`/workers/${dbIndex}`, header()); }
-  loadWorkerData(dbIndex, idUser) { return http.get(`/workerdata/${dbIndex}%${idUser}`, header()); }
+  loadWorkers(dbId) { return http.get(`/workers/${dbId}`, header()); }
+  loadWorkerData(dbId, idUser) { return http.get(`/workerdata/${dbId}%${idUser}`, header()); }
 }
 
 export default new AtuhService();

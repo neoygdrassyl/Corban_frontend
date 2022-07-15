@@ -33,6 +33,8 @@ import BEDROCK from "./pages/bedrock.page/bedrcok.page";
 import SIGN_IN from "./pages/signin.page/signin.page";
 import RESET from "./pages/reset,pages/reset.page";
 import ACTIVATE from "./pages/activate.pages/activate.page";
+import DashboardTeam from "./pages/dashteam.pages/dashteam.page";
+import ROLES from "./pages/roles.pages/roles.page";
 
 function App() {
 
@@ -56,12 +58,15 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route element={<ModuleLayout />} >
                   <Route exact path="/dashboard" element={<Dashboard />} />
+                  <Route exact path="/dashteam/:team" element={<DashboardTeam />} />
                   <Route exact path="/fun" element={<Fun />} />
                   <Route exact path="/fun/macro" element={<FUN_MACRO_VIEW />} />
                   <Route exact path="/fun/macro/:date_start&:date_end" element={<FUN_MACRO_VIEW />} />
                   <Route exact path="/fun/gen/:id" element={<FUN_GEN_VIEW />} />
 
                   <Route exact path="/submit" element={<SUBMIT />} />
+
+                  <Route exact path="/roles" element={<ROLES />} />
                 </Route>
               </Route>
 
