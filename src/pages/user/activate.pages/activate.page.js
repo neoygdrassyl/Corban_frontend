@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Col, FlexboxGrid, Loader, Panel } from 'rsuite';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR, ALERT_SUCCESS_ACTIVATE } from '../../resources/customs/utils/notifications.vars';
-import AtuhService from '../../services/apis/auth.service';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { ALERT_ERROR, ALERT_SUCCESS_ACTIVATE } from '../../../resources/customs/utils/notifications.vars';
+import AtuhService from '../../../services/apis/auth.service';
 
 export default function ACTIVATE() {
     let navigate = useNavigate();

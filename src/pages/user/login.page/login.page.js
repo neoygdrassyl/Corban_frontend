@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Col, FlexboxGrid, Form, Message, Panel, toaster } from 'rsuite';
 import { Button as ButtonBP } from '@blueprintjs/core';
-import FORM from '../../resources/customs/components/form.component';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR, ALERT_ERROR_LOGIN, ALERT_ERROR_RESET, ALERT_INACTIVE_LOGIN, ALERT_SENT_RESET, ALERT_WAIT, CONFIRM_EMAIL } from '../../resources/customs/utils/notifications.vars';
-import AtuhService from '../../services/apis/auth.service';
+import FORM from '../../../resources/customs/components/form.component';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { ALERT_ERROR, ALERT_ERROR_LOGIN, ALERT_ERROR_RESET, ALERT_INACTIVE_LOGIN, ALERT_SENT_RESET, ALERT_WAIT, CONFIRM_EMAIL } from '../../../resources/customs/utils/notifications.vars';
+import AtuhService from '../../../services/apis/auth.service';
 
 function useAuth() {
     return useContext(AuthContext);

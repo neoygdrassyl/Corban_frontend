@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Col, FlexboxGrid, Form, Message, Panel, toaster } from 'rsuite';
 import { Button as ButtonBP } from '@blueprintjs/core';
-import FORM from '../../resources/customs/components/form.component';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR, ALERT_EXPIRED_RESET, ALERT_SUCCESS_RESET, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
-import AtuhService from '../../services/apis/auth.service';
+import FORM from '../../../resources/customs/components/form.component';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { ALERT_ERROR, ALERT_EXPIRED_RESET, ALERT_SUCCESS_RESET, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
+import AtuhService from '../../../services/apis/auth.service';
 
 export default function RESET() {
     let navigate = useNavigate();

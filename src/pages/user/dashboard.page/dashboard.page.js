@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Badge, Button, ButtonGroup, Col, Divider, Grid, IconButton, Message, Panel, PanelGroup, Row } from 'rsuite';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider'
-import AtuhService from '../../services/apis/auth.service'
-import { ALERT_ERROR } from '../../resources/customs/utils/notifications.vars';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider'
+import AtuhService from '../../../services/apis/auth.service'
+import { ALERT_ERROR } from '../../../resources/customs/utils/notifications.vars';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import InfoRoundIcon from '@rsuite/icons/InfoRound';
 
 export default function Dashboard() {

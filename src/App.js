@@ -14,28 +14,35 @@ import PublicLayout from './resources/layouts/public.layout';
 import ModuleLayout from './resources/layouts/module.layout';
 import MainLayout from "./resources/layouts/main.layout";
 
-// PAGES PUBLIC
-import Login from './pages/login.page/login.page'
-import Home from './pages/public/home.page/home.page'
-
 // SERVICES PROVIDERS
 import PrivateRoute from './services/auth/privateRoute.page'
 import { AuthProvider } from './resources/customs/contextProviders/auth.provider';
 import { UtilProvider } from './resources/customs/contextProviders/util.provider';
 
 // PAGES SOTWARE
-import Dashboard from './pages/dashboard.page/dashboard.page'
-import Fun from './pages/fun.pages/fun.page'
-import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view';
-import FUN_MACRO_VIEW from './pages/fun.pages/lists.pages/funMacro.view';
-import SUBMIT from "./pages/dovela/submit.pages/submit.page";
-import BEDROCK from "./pages/public/bedrock.page/bedrcok.page";
-import SIGN_IN from "./pages/signin.page/signin.page";
-import RESET from "./pages/reset,pages/reset.page";
-import ACTIVATE from "./pages/activate.pages/activate.page";
+
+// -------- DOVELA
 import DashboardTeam from "./pages/dovela/dashteam.pages/dashteam.page";
+import SUBMIT from "./pages/dovela/submit.pages/submit.page";
 import ROLES from "./pages/dovela/roles.pages/roles.page";
-import INVITE from "./pages/invite/invite.page";
+
+
+import Fun from './pages/fun.pages/fun.page' // TODO MOVE
+import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view'; // TODO MOVE
+import FUN_MACRO_VIEW from './pages/fun.pages/lists.pages/funMacro.view'; // TODO MOVE
+// -------- PUBLIC 
+import Home from './pages/public/home.page/home.page'
+import BEDROCK from "./pages/public/bedrock.page/bedrcok.page";
+
+// -------- USER
+import Dashboard from './pages/user/dashboard.page/dashboard.page'
+import SIGN_IN from "./pages/user/signin.page/signin.page";
+import Login from './pages/user/login.page/login.page'
+import INVITE from "./pages/user/invite/invite.page";
+import RESET from "./pages/user/reset,pages/reset.page";
+import ACTIVATE from "./pages/user/activate.pages/activate.page";
+
+
 
 function App() {
 

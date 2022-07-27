@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Col, FlexboxGrid, Loader, Panel } from 'rsuite';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { ALERT_ERROR, ALERT_ERROR_NOACTIVE, ALERT_ERROR_NOACTIVETEAM,  ALERT_SUCCESS_JOIN, ALERT_WARNING_EXPIRED, ALERT_WARNING_NOTVERIFIED, ALERT_WARNING_ONTEAM } from '../../resources/customs/utils/notifications.vars';
-import AtuhService from '../../services/apis/auth.service';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { ALERT_ERROR, ALERT_ERROR_NOACTIVE, ALERT_ERROR_NOACTIVETEAM,  ALERT_SUCCESS_JOIN, ALERT_WARNING_EXPIRED, ALERT_WARNING_NOTVERIFIED, ALERT_WARNING_ONTEAM } from '../../../resources/customs/utils/notifications.vars';
+import AtuhService from '../../../services/apis/auth.service';
 
 export default function INVITE() {
     let navigate = useNavigate();

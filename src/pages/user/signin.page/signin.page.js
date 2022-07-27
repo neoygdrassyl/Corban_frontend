@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Col, FlexboxGrid, Panel } from 'rsuite';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { Button as ButtonBP } from '@blueprintjs/core';
-import { ALERT_ERROR, ALERT_ERROR_SIGNUP, ALERT_SIGNUP, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
-import AtuhService from '../../services/apis/auth.service';
-import FORM from '../../resources/customs/components/form.component';
+import { ALERT_ERROR, ALERT_ERROR_SIGNUP, ALERT_SIGNUP, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
+import AtuhService from '../../../services/apis/auth.service';
+import FORM from '../../../resources/customs/components/form.component';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const recaptchaRef = React.createRef();
