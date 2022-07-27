@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import DATATABLE from 'react-data-table-component';
-import { Col, Row } from 'rsuite';
+import { Col, Loader, Row } from 'rsuite';
 import { UtilContext } from '../contextProviders/util.provider';
+import NON_IDEAL_STATE from './nonideal.component';
 
 
 export default function TABLE_COMPONENT(props) {
@@ -59,8 +60,8 @@ export default function TABLE_COMPONENT(props) {
             className="data-table"
 
             progressPending={load}
-            progressComponent={<h4 className="fw-bold my-4 text-muted">{trn.loading}</h4>}
-            noDataComponent={<h4 className="fw-bold  my-4 text-muted">{trn.nodata}</h4>}
+            progressComponent={<div className='txt-c my-3'><Loader size="lg" content={trn.loading} vertical /></div>}
+            noDataComponent={<NON_IDEAL_STATE type="datatable" />}
             noHeader={!title}
 
             striped="true"

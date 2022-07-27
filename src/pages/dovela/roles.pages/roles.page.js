@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
-import SERVICE_ROLES from '../../services/apis/roles.services';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import SERVICE_ROLES from '../../../services/apis/roles.services';
 
 // COMPONENTS
-import TABLE_COMPONENT from '../../resources/customs/components/table.component';
-import DIALOG from '../../resources/customs/components/dialog.component';
-import ALERT_CONFIRM from '../../resources/customs/utils/notCofirm.component';
-import BTN_HELP from '../../resources/customs/components/btnHelp.component';
-import FORM from '../../resources/customs/components/form.component';
-import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT } from '../../resources/customs/utils/notifications.vars';
+import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
+import DIALOG from '../../../resources/customs/components/dialog.component';
+import ALERT_CONFIRM from '../../../resources/customs/utils/notCofirm.component';
+import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
+import FORM from '../../../resources/customs/components/form.component';
+import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
 
 // ICONS
 import { FaEdit } from 'react-icons/fa'
@@ -18,10 +18,11 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 import { AiTwotoneStar } from 'react-icons/ai'
 
 
-import { FIND_PERMIT, GET_JSON_FULL } from '../../resources/customs/utils/lamdas.functions';
+import { FIND_PERMIT, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
 import { Col, Grid, Row } from 'rsuite';
-import { Button, Button as ButtonBP, Switch, Tooltip } from '@blueprintjs/core';
+import { Button, Button as ButtonBP, NonIdealState, Switch } from '@blueprintjs/core';
 import { Tooltip2 } from "@blueprintjs/popover2";
+import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 
 export default function ROLES() {
     const auth = useContext(AuthContext);
@@ -278,11 +279,14 @@ export default function ROLES() {
     return (
         <>
             <Row className="text-center" style={{ width: '100%' }}>
-                <h3>{trn.title}</h3>
+                <h3>{trn.title} <BTN_HELP
+                    title={trn.btn_help_tile}
+                    text={trn.btn_help_body}
+                    page={[]} focus="title" /></h3>
             </Row>
 
             {cancreate ? _COMPONENET_MANAGE(false) : ''}
-            {canView ? _COMPONENT_ROLES_DATATABLE() : 'NO PERMITS'}
+            {canView ? _COMPONENT_ROLES_DATATABLE() : <NON_IDEAL_STATE type="permit" />}
         </>
     );
 }

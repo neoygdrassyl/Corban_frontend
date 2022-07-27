@@ -16,7 +16,7 @@ import MainLayout from "./resources/layouts/main.layout";
 
 // PAGES PUBLIC
 import Login from './pages/login.page/login.page'
-import Home from './pages/home.page/home.page'
+import Home from './pages/public/home.page/home.page'
 
 // SERVICES PROVIDERS
 import PrivateRoute from './services/auth/privateRoute.page'
@@ -28,13 +28,14 @@ import Dashboard from './pages/dashboard.page/dashboard.page'
 import Fun from './pages/fun.pages/fun.page'
 import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view';
 import FUN_MACRO_VIEW from './pages/fun.pages/lists.pages/funMacro.view';
-import SUBMIT from "./pages/submit.pages/submit.page";
-import BEDROCK from "./pages/bedrock.page/bedrcok.page";
+import SUBMIT from "./pages/dovela/submit.pages/submit.page";
+import BEDROCK from "./pages/public/bedrock.page/bedrcok.page";
 import SIGN_IN from "./pages/signin.page/signin.page";
 import RESET from "./pages/reset,pages/reset.page";
 import ACTIVATE from "./pages/activate.pages/activate.page";
-import DashboardTeam from "./pages/dashteam.pages/dashteam.page";
-import ROLES from "./pages/roles.pages/roles.page";
+import DashboardTeam from "./pages/dovela/dashteam.pages/dashteam.page";
+import ROLES from "./pages/dovela/roles.pages/roles.page";
+import INVITE from "./pages/invite/invite.page";
 
 function App() {
 
@@ -53,11 +54,13 @@ function App() {
                 <Route exact path="/bedrock" element={<BEDROCK />} />
                 <Route exact path="/reset/:email&:jtw" element={<RESET />} />
                 <Route exact path="/activate/:email&:jtw" element={<ACTIVATE />} />
+                <Route exact path="/invite/:jtw" element={<INVITE />} />
               </Route>
 
               <Route element={<PrivateRoute />}>
                 <Route element={<ModuleLayout />} >
                   <Route exact path="/dashboard" element={<Dashboard />} />
+                  
                   <Route exact path="/dashteam/:team" element={<DashboardTeam />} />
                   <Route exact path="/fun" element={<Fun />} />
                   <Route exact path="/fun/macro" element={<FUN_MACRO_VIEW />} />

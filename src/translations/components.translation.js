@@ -112,6 +112,7 @@ export let translations = {
             cancel: 'CANCEL',
             confirm: 'CONFIRM',
             close: 'CLOSE',
+            nopermit: 'THIS USER HAS NO PERMITS',
         },
         es: {
             save: 'GUARDAR',
@@ -126,6 +127,7 @@ export let translations = {
             cancel: 'CANCELAR',
             confirm: 'CONFIRMAR',
             close: 'CERRAR',
+            nopermit: 'ESTE USUARIO NO TIENE PERMISOS',
         }
 
     },
@@ -151,6 +153,29 @@ export let translations = {
             search_go: 'Ir a pagina',
             download: 'DESCARGAR',
         }
+    },
+    nonIdealState: {
+        en: {
+            error_title: 'THERE WAS A MISTAKE',
+            error_body: 'An error occurred while loading the information, wait a few minutes before you try again.',
+            noload_title: 'UNABLE TO LOAD',
+            noload_body: 'The requested information could not be loaded, wait a few minutes before you try again.',
+            datatable_title: 'NO DATA FOUND',
+            datatable_body: 'The request was successful and no information was found for this query.',
+            permit_title: 'UNAUTHORIZED ACCESS',
+            permit_body: "The role of this user has no permits for this action, contact the team leader for more information about the user's role",
+        },
+        es: {
+             error_title: 'HUBO UN ERROR',
+             error_body: 'Ocurrió un error al cargar la información, espera unos minutos antes de volver a intentarlo.',
+             noload_title: 'NO SE PUEDE CARGAR',
+             noload_body: 'No se pudo cargar la información solicitada, espere unos minutos antes de volver a intentarlo.',
+             datatable_title: 'NO SE ENCONTRARON DATOS',
+             datatable_body: 'La solicitud fue exitosa y no se encontró información para esta consulta.',
+             permit_title: 'ACCESO NO AUTORIZADO',
+             permit_body: "El rol de este usuario no tiene permisos para esta acción, comuníquese con el líder del equipo para obtener más información sobre el rol del usuario",
+        }
+
     },
     // ******************** COMPONENTS ************************ // 
     tableComponent: {
@@ -243,6 +268,16 @@ export let translations = {
         },
         es: {
             title: 'ACTIVANDO CUENTA...',
+            body: 'ESPERE UN MOMENT POR FAVOR',
+        }
+    },
+    invite: {
+        en: {
+            title: 'ACCEPTING INVITATION...',
+            body: 'WAIT A MOMENT PLEASE',
+        },
+        es: {
+            title: 'ACEPTANDO INVITACIÓN...',
             body: 'ESPERE UN MOMENT POR FAVOR',
         }
     },
@@ -943,7 +978,9 @@ export let translations = {
                 {label: 'ROLE DESCRIPTION', ph: 'Short description'},
             ],
             confirm: "Are you sure you want to permanently delete this role? the information won't be recoverable.",
-            adminRole: 'This role is an administrative role, it overpasses the rules from the Workers and Roles rules and CANNOT be eliminated.'
+            adminRole: 'This role is an administrative role, it overpasses the rules from the Workers and Roles rules and CANNOT be eliminated.',
+            btn_help_tile: 'WORK TEAM ROLES',
+            btn_help_body: 'The list of roles that can be asigned to the users part of the team.',
         },
         es: {
             title: 'ROLES DE EQUIPO DE TRABAJO',
@@ -955,7 +992,9 @@ export let translations = {
                 {label: 'DESCRIPCIÓN DEL ROL', ph: 'Descripción breve'},
             ],
             confirm: "¿Está seguro de que desea eliminar esto rol de forma permanente? la información no será recuperable.",
-            adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.'
+            adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.',
+            btn_help_tile: 'ROLES DE EQUIPO DE TRABAJO',
+            btn_help_body: 'Lista de roles que pueden ser asignados a los usurios que sean parte del equipo de trabajo.',
         }
     }
 }

@@ -20,9 +20,8 @@ function SideBarComponent(props) {
 
     let auth = useContext(AuthContext);
     let user = auth.user ? auth.user : false;
-
+    
     let workList = user.workList ? user.workList : [];
-
 
     return (<>
         <Sidenav.Header className="bg-cold">

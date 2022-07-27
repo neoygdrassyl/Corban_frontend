@@ -5,10 +5,10 @@ import { BsStar } from 'react-icons/bs'
 import { RiTeamFill } from 'react-icons/ri'
 import { GiEgyptianBird, GiGems } from 'react-icons/gi'
 import { Style } from './homeStyle.js'
-import IMG1 from '../../resources/images/home/home_image_1.png'
-import GEM1 from '../../resources/images/home/gem_blue.png'
-import GEM2 from '../../resources/images/home/gem_red.png'
-import GEM3 from '../../resources/images/home/gem_pink.png'
+import IMG1 from '../../../resources/images/home/home_image_1.png'
+import GEM1 from '../../../resources/images/home/gem_blue.png'
+import GEM2 from '../../../resources/images/home/gem_red.png'
+import GEM3 from '../../../resources/images/home/gem_pink.png'
 import { useNavigate } from 'react-router-dom';
 
 const DIV = styled.div`${Style}`;

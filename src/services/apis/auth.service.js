@@ -11,6 +11,7 @@ class AtuhService {
 
   // INVITE
   inviteUSer(data) { return http.post(`/invitation`, data, header()) }
+  acceptUSer(data, token) { return http.post(`/accountaccept`, data, { headers: { Authorization: 'Bearer ' + token } }) }
 
   // PASSWORD RESET
   appResetEmail(data) { return http.post(`/reset`, data); }

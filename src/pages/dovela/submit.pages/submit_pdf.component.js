@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 
-import SERVICE_SUBMIT from '../../services/apis/submit.service';
+import SERVICE_SUBMIT from '../../../services/apis/submit.service';
 import { Col, Divider, Grid, Row, toaster } from 'rsuite';
 import { Button as ButtonBP } from '@blueprintjs/core';
 
-import { ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../resources/customs/utils/notifications.vars';
-import BTN_HELP from '../../resources/customs/components/btnHelp.component';
-import BTN_PDF from '../../resources/customs/components/btnPDF.component';
-import FORM from '../../resources/customs/components/form.component';
+import { ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../../resources/customs/utils/notifications.vars';
+import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
+import BTN_PDF from '../../../resources/customs/components/btnPDF.component';
+import FORM from '../../../resources/customs/components/form.component';
 import moment from 'moment';
 
 

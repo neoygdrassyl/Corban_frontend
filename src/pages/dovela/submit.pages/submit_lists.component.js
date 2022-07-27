@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
 
-import SERVICE_SUBMIT from '../../services/apis/submit.service';
+import SERVICE_SUBMIT from '../../../services/apis/submit.service';
 import { Col, Divider, Grid, Panel, PanelGroup, Row, toaster } from 'rsuite';
 import { Button as ButtonBP, FormGroup, Icon, InputGroup, Switch } from '@blueprintjs/core';
 
-import { ALERT_EMPTY_LIST, ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../resources/customs/utils/notifications.vars';
-import DOC_LIST from '../../resources/jsons/fun6DocsList.json'
-import BTN_LIST_DOCS from '../../resources/customs/components/btnListDocs.component';
-import ButtonWhisper from '../../resources/customs/components/btnWhisper.component';
-import BTN_HELP from '../../resources/customs/components/btnHelp.component';
+import { ALERT_EMPTY_LIST, ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../../resources/customs/utils/notifications.vars';
+import DOC_LIST from '../../../resources/jsons/fun6DocsList.json'
+import BTN_LIST_DOCS from '../../../resources/customs/components/btnListDocs.component';
+import ButtonWhisper from '../../../resources/customs/components/btnWhisper.component';
+import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 
 const LISTS = [
     {

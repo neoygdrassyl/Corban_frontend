@@ -15,10 +15,10 @@ import ToolsIcon from '@rsuite/icons/Tools';
 //
 
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider'
-import AtuhService from '../../services/apis/auth.service'
-import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_INVITATION, CONFIRM_USER } from '../../resources/customs/utils/notifications.vars';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider'
+import AtuhService from '../../../services/apis/auth.service'
+import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_INVITATION, CONFIRM_USER } from '../../../resources/customs/utils/notifications.vars';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { Alert } from '@blueprintjs/core';
 
 
@@ -180,19 +180,19 @@ export default function DashboardTeam() {
                                     <label >ROL: </label>
                                 </Col>
                                 <Col xs={18} className="text-left">
-                                    <label className="fw-b">{role.name}</label>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={6} className="text-right">
-                                    <label >DESCRIPCIÓN: </label>
-                                </Col>
-                                <Col xs={18} className="text-left">
-                                    <label className="fw-b">{role.desc}</label>
+                                    <label><label className="fw-b">{role.name}:</label> {role.desc}</label>
                                 </Col>
                             </Row>
                         </>
                         )}
+                        {connection.roles.length == 0 ? <Row>
+                            <Col xs={24} className="text-center">
+                                    <label className='fw-b text-danger'>NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO</label>
+                                </Col>
+                                <Col xs={24} className="text-center">
+                                    <label className=''>COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL. </label>
+                                </Col>
+                            </Row> : ''}
                     </Panel>
                 </Col>
             </Row>
@@ -284,7 +284,7 @@ export default function DashboardTeam() {
         ALERT_WAIT(lang);
         var formData = new FormData();
         formData.append('email', loginUser);
-        formData.append('team', connection.technicalInfo.name);
+        formData.append('team', connection.technicalInfo.id);
         formData.append('lang', lang);
 
         AtuhService.inviteUSer(formData)

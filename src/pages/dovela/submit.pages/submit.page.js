@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UtilContext } from '../../resources/customs/contextProviders/util.provider';
-import { AuthContext } from '../../resources/customs/contextProviders/auth.provider';
+import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
 
-import SERVICE_SUBMIT from '../../services/apis/submit.service';
-import SERVICE_FUN from '../../services/apis/fun.service';
+import SERVICE_SUBMIT from '../../../services/apis/submit.service';
+import SERVICE_FUN from '../../../services/apis/fun.service';
 
-import TABLE_COMPONENT from '../../resources/customs/components/table.component';
+import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { Col, Divider, Row, toaster } from 'rsuite';
-import BTN_HELP from '../../resources/customs/components/btnHelp.component';
+import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import { Button as ButtonBP, Icon } from '@blueprintjs/core';
-import MODAL from '../../resources/customs/components/modal.component';
-import FORM from '../../resources/customs/components/form.component';
-import { GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../resources/customs/utils/lamdas.functions';
-import { formsParser1 } from '../../resources/customs/utils/funParser.module';
-import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../resources/customs/utils/notifications.vars';
+import MODAL from '../../../resources/customs/components/modal.component';
+import FORM from '../../../resources/customs/components/form.component';
+import { GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../../resources/customs/utils/lamdas.functions';
+import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
+import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../../resources/customs/utils/notifications.vars';
 import moment from 'moment';
 import SUBMIT_LISTS from './submit_lists.component';
-import ButtonWhisper from '../../resources/customs/components/btnWhisper.component';
+import ButtonWhisper from '../../../resources/customs/components/btnWhisper.component';
 import SUBMIT_PDF from './submit_pdf.component';
 
 

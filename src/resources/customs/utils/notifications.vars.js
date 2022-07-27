@@ -68,6 +68,21 @@ const trn = {
         msg_confirm_invite_ph: 'Login name of the user',
         msg_confirm_invite_btn: 'INVITE',
 
+        msg_cwarning_expired_title: 'INVITATION EXPIRED',
+        msg_cwarning_expired_body: 'This invitation has expired, contact with the team to send another invitation.',
+
+        msg_warning_notverified_title: 'USER NOT VERIFIED',
+        msg_warning_notverified_body: 'This user has not verified this account, in order to continue first verify the account.',
+
+        msg_warning_onteam_title: 'USER ON TEAM ALREADY',
+        msg_warning_onteam_body: 'This user already belongs to the this team.',
+
+        msg_error_noactive_title : 'ACCESS NOT AUTHORIZED', 
+        msg_error_noactive_body : 'This user has not authorization to perform this action',
+
+        msg_success_join_title : 'JOINED TEAM SUCCESSFULLY', 
+        msg_success_join_body : 'The process to join the team was successful, you may now check your dashboard to join in.',
+
     },
     es: {
         msg_wait_title: 'PROCESANDO FORMULARIO',
@@ -133,6 +148,21 @@ const trn = {
         msg_confirm_invite_body : 'Enviar una invitación a un usuario registrado para formar parte del equipo de trabajo.',
         msg_confirm_invite_ph: 'Nombre de inicio de sesión del usuario',
         msg_confirm_invite_btn: 'INVITAR',
+
+        msg_cwarning_expired_title: 'INVITACIÓN VENCIDA',
+         msg_cwarning_expired_body: 'Esta invitación ha caducado, póngase en contacto con el equipo para enviar otra invitación.',
+
+         msg_warning_notverified_title: 'USUARIO NO VERIFICADO',
+         msg_warning_notverified_body: 'Este usuario no ha verificado esta cuenta, para continuar primero verifique la cuenta.',
+
+         msg_warning_onteam_title: 'USUARIO EN EL EQUIPO',
+         msg_warning_onteam_body: 'Este usuario ya pertenece a este equipo.',
+
+         msg_error_noactive_title: 'ACCESO NO AUTORIZADO', 
+         msg_error_noactive_body: 'Este usuario no tiene autorización para realizar esta acción',
+
+         msg_success_join_title : 'SE UNIÓ AL EQUIPO CON ÉXITO', 
+         msg_success_join_body : 'El proceso para unirse al equipo fue exitoso, ahora puede revisar su panel general para unirse',
 
     }
 };
@@ -340,12 +370,62 @@ const confirm_delete = (lg, theme, id, open, setOpen, cb) => <Alert
 
 </Alert>
 
+const warning_expired = lg => {
+    return <Message showIcon type={'warning'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_cwarning_expired_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_cwarning_expired_body}</p>
+    </Message>
+}
+
+const warning_notverified = lg => {
+    return <Message showIcon type={'warning'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_warning_notverified_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_warning_notverified_body}</p>
+    </Message>
+}
+
+const warning_onteam = lg => {
+    return <Message showIcon type={'warning'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_warning_onteam_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_warning_onteam_body}</p>
+    </Message>
+}
+
+const error_noactive = lg => {
+    return <Message showIcon type={'error'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_error_noactive_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_error_noactive_body}</p>
+    </Message>
+}
+
+const error_noactiveteam = lg => {
+    return <Message showIcon type={'error'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_error_noactive_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_error_noactive_body}</p>
+    </Message>
+}
+
+const success_join = lg => {
+    return <Message showIcon type={'success'} closable duration={-1} style={{ maxWidth: WIDTH }}
+        header={<label className='fw-b'>{trn[lg].msg_success_join_title}</label>}>
+        <p className='txt-j'>{trn[lg].msg_success_join_body}</p>
+    </Message>
+}
+
 export const ALERT_WAIT = (lg) => toaster.push(wait(lg), { placement: 'topEnd' })
 export const ALERT_ERROR = (lg) => { toaster.push(message_noLoad(lg), { placement: 'topEnd' }); }
 export const ALERT_NO_PERMIT = (lg) => { toaster.push(alert_noPermit(lg), { placement: 'topEnd' }); }
 export const ALERT_ERROR_LOGIN = (lg) => { toaster.push(error_login(lg), { placement: 'topEnd' }); }
 export const ALERT_INACTIVE_LOGIN = (lg, email, cb) => { toaster.push(inactive_login(lg, email, cb), { placement: 'topCenter' }); }
 export const ALERT_SUCCESS_ACTIVATE = (lg, email, cb) => { toaster.push(success_activate(lg, email, cb), { placement: 'topCenter' }); }
+
+// USERS INVITATIONS TO TEAMS
+export const ALERT_WARNING_EXPIRED = (lg) => { toaster.push(warning_expired(lg), { placement: 'topEnd' }); }
+export const ALERT_WARNING_NOTVERIFIED = (lg) => { toaster.push(warning_notverified(lg), { placement: 'topEnd' }); }
+export const ALERT_WARNING_ONTEAM = (lg) => { toaster.push(warning_onteam(lg), { placement: 'topEnd' }); }
+export const ALERT_ERROR_NOACTIVE = (lg) => { toaster.push(error_noactive(lg), { placement: 'topEnd' }); }
+export const ALERT_ERROR_NOACTIVETEAM = (lg) => { toaster.push(error_noactiveteam(lg), { placement: 'topEnd' }); }
+export const ALERT_SUCCESS_JOIN = (lg) => { toaster.push(success_join(lg), { placement: 'topCenter' }); }
 
 
 export const ALERT_ERROR_RESET = (lg) => { toaster.push(error_reset(lg), { placement: 'topEnd' }); }
