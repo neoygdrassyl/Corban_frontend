@@ -20,7 +20,7 @@ import { AiTwotoneStar } from 'react-icons/ai'
 
 import { FIND_PERMIT, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
 import { Col, Grid, Row } from 'rsuite';
-import { Button, Button as ButtonBP, NonIdealState, Switch } from '@blueprintjs/core';
+import { Button, Button as ButtonBP, Icon, NonIdealState, Switch } from '@blueprintjs/core';
 import { Tooltip2 } from "@blueprintjs/popover2";
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 
@@ -282,7 +282,7 @@ export default function ROLES() {
                 <h3>{trn.title} <BTN_HELP
                     title={trn.btn_help_tile}
                     text={trn.btn_help_body}
-                    page={[]} focus="title" /></h3>
+                    page={trn.HELP_PAGE} focus="title" /></h3>
             </Row>
 
             {cancreate ? _COMPONENET_MANAGE(false) : ''}

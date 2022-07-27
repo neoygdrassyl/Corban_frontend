@@ -17,7 +17,7 @@ import ToolsIcon from '@rsuite/icons/Tools';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider'
 import AtuhService from '../../../services/apis/auth.service'
-import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_INVITATION, CONFIRM_USER } from '../../../resources/customs/utils/notifications.vars';
+import { ALERT_ERROR, ALERT_ERROR_NOACTIVE, ALERT_ERROR_NOACTIVETEAM, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT, ALERT_WARNING_ONTEAM, CONFIRM_INVITATION, CONFIRM_USER } from '../../../resources/customs/utils/notifications.vars';
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { Alert } from '@blueprintjs/core';
 
@@ -291,8 +291,9 @@ export default function DashboardTeam() {
             .then(response => {
                 if (response.data === 'OK') ALERT_SUCCESS(lang);
                 else if (response.data === 'NO PERMIT') ALERT_NO_PERMIT(lang);
-                else if (response.data === 'NO USER') ALERT_ERROR(lang);
-                else if (response.data === 'ON TEAM') ALERT_ERROR(lang);
+                else if (response.data === 'ON TEAM') ALERT_WARNING_ONTEAM(lang);
+                else if (response.data === 'NOT ACTIVE') ALERT_ERROR_NOACTIVE(lang);
+                else if (response.data === 'NOT ACTIVE TEAM') ALERT_ERROR_NOACTIVETEAM(lang);
                 else ALERT_ERROR(lang);
             })
             .catch(e => {

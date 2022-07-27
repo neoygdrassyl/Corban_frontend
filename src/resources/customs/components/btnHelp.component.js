@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FiHelpCircle, FiHash } from 'react-icons/fi'
 import { Divider, Drawer, IconButton, Popover, Whisper } from 'rsuite';
 import { UtilContext } from '../contextProviders/util.provider';
-import { Button as ButtonPB } from "@blueprintjs/core";
+import { Button as ButtonPB, Drawer as DrawerBP } from "@blueprintjs/core";
 
 export default function BTN_HELP(props) {
     const { title, text, page, focus } = props
@@ -50,11 +50,41 @@ export default function BTN_HELP(props) {
         </Drawer.Body>
     </Drawer>
 
+    const drawer_bp = <DrawerBP
+        className={utilities ? utilities.theme : 'light'}
+        icon="info-sign"
+        onClose={() => setOpen(false)}
+        isOpen={open}
+        size="30%"
+        title={<><label>{trn.about}</label> <label className='fw-b'>{title}</label></>}
+    >
+        <div className='p-3' style={{overflowY: 'auto'}}>
+        {page.map(it => {
+            return <>
+                <p className='fw-b text-uppercase'>{it.lefticon} {it.title}
+                    <IconButton autoFocus={it.focus == focused} circle size='xs' appearance='subtle' id={it.focus} icon={<FiHash />}
+                        onClick={() => { setFocus(it.focus) }} style={it.focus == focused ? { color: 'violet' } : {}} />
+                </p>
+
+                {it.component ? it.component : ''}
+                {it.icon ? it.icon : ''}
+                {it.btn ? <ButtonPB icon={it.btnIcon} intent={it.btnColor} text={it.btn} /> : ''}
+                <p className='text-justify' style={{ paddingTop: '16px' }}>{it.content}</p>
+                {it.list ? <ul>{it.list.map(l => <li>
+                    <label className='fw-b'>{l.subtitle}{l.subtitle ? ':' : ''}</label> <label>{l.text}</label>
+                </li>)}</ul> : ''}
+
+                <hr />
+            </>
+        })}
+        </div>
+    </DrawerBP>
+
     return <>
         <Whisper placement="auto" trigger="hover" controlId="control-id-hover" speaker={speaker}>
             <IconButton icon={<FiHelpCircle className='text-paranoia' />} circle size="lg" appearance='subtle' onClick={() => setOpen(page ? true : false)} />
         </Whisper>
 
-        {drawer}
+        {drawer_bp}
     </>
 }

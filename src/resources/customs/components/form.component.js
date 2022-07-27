@@ -47,7 +47,7 @@ export default function FORM(props) {
                         className={'bp4-input'}
                     >
                         {input.placeholder ? <option value={input.placeholder} disabled>{input.placeholder}</option> : ''}
-                        {input.selectOptions.map(option => <option value={option.value ?? option.label}>{option.label}</option>)}
+                        {input.selectOptions.map(option => <option value={option.value ?? option.label}> {option.label}</option>)}
                     </select>
                     <span class={"bp4-icon bp4-icon-chevron-down"}></span>
                 </div>

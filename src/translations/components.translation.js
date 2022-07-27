@@ -3,6 +3,7 @@ import { Button, Icon, InputGroup } from '@blueprintjs/core';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Col, Grid, Panel, PanelGroup, Row } from 'rsuite';
+import { AiTwotoneStar } from 'react-icons/ai';
 
 
 export let translations = {
@@ -981,6 +982,49 @@ export let translations = {
             adminRole: 'This role is an administrative role, it overpasses the rules from the Workers and Roles rules and CANNOT be eliminated.',
             btn_help_tile: 'WORK TEAM ROLES',
             btn_help_body: 'The list of roles that can be asigned to the users part of the team.',
+            HELP_PAGE: [
+                {
+                    title: 'WORK TEAM ROLES',
+                    content: 'This module manages the different roles of the team, each role can be created and customize to the needs of the organization. Each member of the team can have multiple roles, so it is advised to create a set of various simple roles rather than to create a role specifically made for each team member.',
+                    focus: 'title',
+                },
+                {
+                    title: 'NEW',
+                    content: 'This button opens a new subwindow with a filling form which allows creation of a new role. The description of the form fields are as follows.',
+                    btn: 'NEW', btnColor: 'success', btnIcon: 'add',
+                    list: [
+                        { subtitle: 'ROLE NAME', text: 'The name of the role' },
+                        { subtitle: 'ROLE DESCRIPTION', text: 'A sort description exposing the duties of the role.' },
+                    ],
+                    focus: 'new',
+
+                },
+                {
+                    title: 'SEARCH BAR',
+                    content: <>This button allows to filter the ROLES LIST in order to find one specific entry. To use the search bar, input into the text bar next to the button the value to look for and press the button or press the key Enter.<br />The search patterns can be NAME and  DESCRIPTION.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACTION: EDIT',
+                    content: 'This button opens a new window where the user can update the data and properties of the Item.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACTION: DELETE',
+                    content: <>This button is considered a <label style={{ color: 'red' }}>DANGEROUS ACTION</label>. This button allows the user to delete this Item and all its children and dependencies.</>,
+                    focus: 'delete', icon: <RiDeleteBinLine className='text-danger' size={'24px'} />
+                },
+                {
+                    title: 'ADMINISTRATIVE ROLE',
+                    content: 'This icon marks an administrative role, this is a superior role that always has access and permissions to roles and team members. This role cannot be deleted.',
+                    focus: 'admin', icon: <AiTwotoneStar className='text-paranoia' size={'24px'} />
+                },
+            ],
         },
         es: {
             title: 'ROLES DE EQUIPO DE TRABAJO',
@@ -995,6 +1039,49 @@ export let translations = {
             adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.',
             btn_help_tile: 'ROLES DE EQUIPO DE TRABAJO',
             btn_help_body: 'Lista de roles que pueden ser asignados a los usurios que sean parte del equipo de trabajo.',
+            HELP_PAGE: [
+                {
+                    title: 'ROLES DE EQUIPO DE TRABAJO',
+                    content: 'Este módulo gestiona los diferentes roles del equipo, cada rol se puede crear y personalizar según las necesidades de la organización. Cada miembro del equipo puede tener varios roles, por lo que se recomienda crear un conjunto de varios roles simples en lugar de crear un rol específico para cada miembro del equipo.',
+                    focus: 'title',
+                },
+                {
+                    title: 'nuevo',
+                    content: 'Este botón abre una nueva subventana con un formulario de llenado que permite la creación de un nuevo rol. La descripción de los campos del formulario es la siguiente.',
+                    btn: 'nuevo', btnColor: 'success', btnIcon: 'add',
+                    list: [
+                        { subtitle: 'NOMBRE DEL ROL', text: 'El nombre del nuevo rol a crear' },
+                        { subtitle: 'DESCRIPCIÓN DEL ROLE', text: 'Una descripción corta que expone las funciones del rol.' },
+                    ],
+                    focus: 'new',
+
+                },
+                {
+                    title: 'BARRA DE BUSQUEDA',
+                    content: <>Este botón permite filtrar la LISTA DE ROLES para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de busqueda el texto a buscar y presione el botón de buscar o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser NOMBRE y DESCRIPCIÓN.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACCIÓN: EDITAR',
+                    content: 'Este botón abre una nueva ventana donde el usuario puede actualizar los datos y propiedades del artículo.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACCIÓN: ELIMINAR',
+                    content: <>Este botón se considera una <label style={{ color: 'red' }}>ACCIÓN PELIGROSA</label>. Este botón permite al usuario eliminar este elemento y todos sus elementos secundarios y dependencias.</>,
+                    focus: 'delete', icon: <RiDeleteBinLine className='text-danger' size={'24px'} />
+                },
+                {
+                    title: 'ROL ADMINISTRATIVO',
+                    content: 'Este ícono marca un rol administrativo, este es un rol superior que siempre tiene acceso y permisos para roles y miembros del equipo. Este rol no se puede eliminar.',
+                    focus: 'admin', icon: <AiTwotoneStar className='text-paranoia' size={'24px'} />
+                },
+            ],
         }
     }
 }
