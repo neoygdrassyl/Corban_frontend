@@ -21,6 +21,10 @@ class AtuhService {
   loadCompanies(idUser, token) { return http.get(`/companies/${idUser}`, { headers: { Authorization: 'Bearer ' + token } }); }
   loadWorkers(dbId) { return http.get(`/workers/${dbId}`, header()); }
   loadWorkerData(dbId, idUser) { return http.get(`/workerdata/${dbId}%${idUser}`, header()); }
+
+  // NOTIFICATIONS
+  loadAllNots(email) { return http.get(`/notifications/${email}`); }
+  markNots(data) { return http.post(`/notifications/mark`, data) }
 }
 
 export default new AtuhService();

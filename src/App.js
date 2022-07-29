@@ -25,7 +25,7 @@ import { UtilProvider } from './resources/customs/contextProviders/util.provider
 import DashboardTeam from "./pages/dovela/dashteam.pages/dashteam.page";
 import SUBMIT from "./pages/dovela/submit.pages/submit.page";
 import ROLES from "./pages/dovela/roles.pages/roles.page";
-
+import WORKERS from "./pages/dovela/workers.pages/workers.page";
 
 import Fun from './pages/fun.pages/fun.page' // TODO MOVE
 import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view'; // TODO MOVE
@@ -41,6 +41,7 @@ import Login from './pages/user/login.page/login.page'
 import INVITE from "./pages/user/invite/invite.page";
 import RESET from "./pages/user/reset,pages/reset.page";
 import ACTIVATE from "./pages/user/activate.pages/activate.page";
+
 
 
 
@@ -77,6 +78,7 @@ function App() {
                   <Route exact path="/submit" element={<SUBMIT />} />
 
                   <Route exact path="/roles" element={<ROLES />} />
+                  <Route exact path="/workers" element={<WORKERS />} />
                 </Route>
               </Route>
 

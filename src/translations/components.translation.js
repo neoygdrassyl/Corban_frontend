@@ -165,6 +165,8 @@ export let translations = {
             datatable_body: 'The request was successful and no information was found for this query.',
             permit_title: 'UNAUTHORIZED ACCESS',
             permit_body: "The role of this user has no permits for this action, contact the team leader for more information about the user's role",
+            nots_title: 'NO NOTIFICATIONS FOUND',
+            nots_body: "No unseen notifications had been found, you are up-to-date.",
         },
         es: {
              error_title: 'HUBO UN ERROR',
@@ -175,6 +177,8 @@ export let translations = {
              datatable_body: 'La solicitud fue exitosa y no se encontró información para esta consulta.',
              permit_title: 'ACCESO NO AUTORIZADO',
              permit_body: "El rol de este usuario no tiene permisos para esta acción, comuníquese con el líder del equipo para obtener más información sobre el rol del usuario",
+             nots_title: 'NO SE ENCONTRARON NOTIFICACIONES',
+             nots_body: "No se han encontrado notificaciones no vistas, estás actualizado.",
         }
 
     },

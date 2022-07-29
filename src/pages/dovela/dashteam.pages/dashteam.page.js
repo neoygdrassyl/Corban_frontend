@@ -225,7 +225,7 @@ export default function DashboardTeam() {
                             </Message>
                         </Col>
                         <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                            <Message className="pointer my-1"
+                            <Message className="pointer my-1"  onClick={() => nagivate('/workers')}
                                 header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} ADMINISTRAR TRABAADORES</label>} style={{ backgroundColor: 'forestGreen' }}>
                                 <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
                             </Message>

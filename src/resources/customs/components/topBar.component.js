@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Nav, Navbar, InputGroup, Input, Dropdown, Divider, Badge } from 'rsuite';
 import { Gear, Dashboard, Search, Icon } from '@rsuite/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BsMoonStars, BsSun } from "react-icons/bs";
 import { IoLanguage } from "react-icons/io5";
 import { FaRegUser, FaSignOutAlt } from "react-icons/fa";
@@ -14,6 +14,7 @@ import NoticeIcon from '@rsuite/icons/Notice';
 import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import { AuthContext } from '../contextProviders/auth.provider'
 import { UtilContext } from '../contextProviders/util.provider';
+import AtuhService from '../../../services/apis/auth.service'
 
 // FLAGS FOR LANGAUGE SELECT
 import FLAG_ES from '../../images/flags/ES.png'
@@ -25,8 +26,17 @@ function TopBarComponent() {
     const theme = utilities.theme;
 
     let navigate = useNavigate();
+    let params = useParams();
     let auth = useContext(AuthContext);
     let user = auth.user;
+    const nots = auth.nots ?? [];
+
+
+    React.useEffect(() => {
+        if (user) {
+            loadNotifications(user.email)
+        }
+      }, [params]);
 
     const MyLink = React.forwardRef((props, ref) => {
         const { to, as, ...rest } = props;
@@ -46,6 +56,13 @@ function TopBarComponent() {
         </InputGroup>
     );
 
+    function loadNotifications(email){
+        AtuhService.loadAllNots(email).then(response => {
+            auth.setNots(response.data)
+          })
+        
+    }
+
     return (
         <Navbar className={'bg-dark app_nav ' + theme}>
             <Navbar.Brand as={MyLink} to="/home"><label className="pointer">CORBAN</label></Navbar.Brand>
@@ -57,10 +74,10 @@ function TopBarComponent() {
                 {auth.user
                     ?
                     <Nav.Menu
-                        icon={<FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} />}
+                        icon={nots.length > 0 ? <Badge color="blue"> <FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} /></Badge> : <FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} />}
                         title={<label className="pointer text-uppercase">{user.name}</label>} >
                         <Nav.Item icon={<GridIcon color="dark" />} onClick={() => navigate("/dashboard")}> {trn.dash}</Nav.Item>
-                        <Nav.Item icon={<NoticeIcon color="orange" />} onClick={() => navigate("/dashboard")}> {'notificaciones'} <Badge color="blue" content="1" /></Nav.Item>
+                        <Nav.Item icon={<NoticeIcon color="orange" />} onClick={() => navigate("/dashboard")}> {'notificaciones'} {nots.length > 0 ? <Badge color="blue" content={nots.length} /> : ''}</Nav.Item>
                         <Nav.Item icon={<DetailIcon color="red" />} onClick={() => navigate("/dashboard")}> {'mis proyectos'}</Nav.Item>
                         <Nav.Item icon={<PeoplesIcon color="blue" />} onClick={() => navigate("/dashboard")}> {'mis equipos'}</Nav.Item>
                         <Nav.Item icon={<GearIcon color="green" />} onClick={() => navigate("/dashboard")}> {'Configuracion'}</Nav.Item>

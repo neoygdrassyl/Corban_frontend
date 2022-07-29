@@ -10,18 +10,20 @@ export function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
   let [token, setToken] = React.useState(null);
   let [conn, setCon] = React.useState(null);
+  let [nots, setNots] = React.useState([]);
 
   React.useEffect(() => {
     if (user == null && token == null) check((cb) => cb);
-  });
+  }, [user, token, conn]);
 
   let signin = (_user, callback) => {
     let validatedUser = validateUser(_user);
     setUser(validatedUser);
-    updateToken(_user.token, () => {});
+    updateToken(_user.token, () => { });
     localStorage.removeItem('corban_user')
     sessionStorage.setItem('corban_logOn', true);
     localStorage.setItem('corban_user', JSON.stringify(validatedUser));
+    loadNots(_user.loginUser)
     callback();
   };
 
@@ -63,7 +65,8 @@ export function AuthProvider({ children }) {
     let _conn = localStorage.getItem('corban_conn');
 
     let logOn = sessionStorage.getItem('corban_logOn');
-    
+
+
     if (_jwt && _user) {
       if (!logOn) {
         AtuhService.verifyLogin(_jwt).then(response => {
@@ -87,13 +90,18 @@ export function AuthProvider({ children }) {
           setUser(JSON.parse(_user));
         }
         if (_conn && !conn) setCon(JSON.parse(_conn));
+        
         return callback(true)
       }
-
-
-    } else  callback(false);
+    } else  {return callback(false);}
   }
-  let value = { user: user, token, conn, signin, signout, updateToken, check, setConn, clearConn };
+
+  function loadNots(email){
+    AtuhService.loadAllNots(email).then(response => {
+      setNots(response.data)
+    }).finally(e => {return true})
+  }
+  let value = { user: user, token, conn, nots, signin, signout, updateToken, check, setConn, clearConn, loadNots, setNots };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -108,6 +116,7 @@ function validateUser(_user) {
   user.id = _user.id;
   user.userInfo = _user.userInfo;
   user.workList = work_group_list;
+  user.email = _user.loginUser;
 
   return user
 }
@@ -130,11 +139,11 @@ function validateConn(_conn) {
 
   for (var i = 0; i < totalRoles; i++) {
     let name = _conn.roleName ? _conn.roleName.split(';')[i] : '';
-    let desc =  _conn.roleInfo ? _conn.roleInfo.split(';')[i] : '';
-    let priority =  _conn.rolePriority ? _conn.rolePriority.split(';')[i] : '';
-    let permits =  _conn.rolePermits ? _conn.rolePermits.split(';')[i] :'';
+    let desc = _conn.roleInfo ? _conn.roleInfo.split(';')[i] : '';
+    let priority = _conn.rolePriority ? _conn.rolePriority.split(';')[i] : '';
+    let permits = _conn.rolePermits ? _conn.rolePermits.split(';')[i] : '';
 
-    roles.push({name, desc, priority, permits})
+    roles.push({ name, desc, priority, permits })
   }
   conn.connections = connections;
   conn.conn = _conn.bdname;
