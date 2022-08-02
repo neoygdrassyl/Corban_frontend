@@ -16,6 +16,7 @@ import { FaEdit } from 'react-icons/fa'
 import UserInfoIcon from '@rsuite/icons/UserInfo';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { AiTwotoneStar } from 'react-icons/ai'
+import { CgDanger } from 'react-icons/cg'
 
 
 import { FIND_PERMIT, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
@@ -44,6 +45,8 @@ export default function ROLES() {
     const canEdit = FIND_PERMIT(permits, 'roles', 3);
     const canDelete = FIND_PERMIT(permits, 'roles', 4);
 
+    const dangerous = <Tooltip2 content={'THIS IS A DANGEROUS ACTION'}><CgDanger className='text-danger' /> </Tooltip2>
+
     var [load, setLoad] = useState(0);
     var [data, setData] = useState([]);
 
@@ -54,17 +57,17 @@ export default function ROLES() {
     const ROLES_PERMITS = [
         {
             id: 'worker', isAdmin: true, name: 'TRABAJADORES', permits: [
-                { name: 'INVITAR TRABAJADORES', value: 1 }, { name: 'ASIGNAR ROLES', value: 2 }, { name: 'HABILITAR/INHABILITAR TRABAJADORES', value: 3 },
+                { name: 'INVITAR TRABAJADORES', value: 1 }, { name: 'ASIGNAR ROLES', value: 2 }, { name: 'HABILITAR/INHABILITAR TRABAJADORES', value: 3, danger: true, },
             ]
         },
         {
             id: 'roles', isAdmin: true, name: 'ROLES', permits: [
-                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger' },
+                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, },
             ]
         },
         {
             id: 'submit', name: 'VENTANILLA ÚNICA DE RADICACIÓN', permits: [
-                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger' }, { name: 'SUBIR ARCHIVOS', value: 5 }, { name: 'GENERAR ARCHIVOS', value: 6 },
+                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, }, { name: 'SUBIR ARCHIVOS', value: 5 }, { name: 'GENERAR ARCHIVOS', value: 6 },
             ]
         }
     ]
@@ -100,7 +103,7 @@ export default function ROLES() {
     // ************************** JSX ELEMENTS **************************** //
     let _COMPONENET_MANAGE = (edit) => {
         return <>
-            <DIALOG title={edit ? 'EDIT ROLE: ' + edit.name : "NEW ROLE"}
+            <DIALOG title={edit ? btn.edit + ': ' + edit.name : btn.new}
                 icon={edit ? 'annotation' : "add"}
                 hideClose forceClose={load == 0}
                 btn={!edit ? { text: btn.new, icon: 'add', intent: 'success' } : false}
@@ -164,7 +167,10 @@ export default function ROLES() {
                             let rowPermit = rowPermits[role.id] ?? [];
                             let adminRole = isAdmin && role.isAdmin;
                             return <Switch name={'swtchs_' + data.id + '_' + role.id} defaultChecked={adminRole ? true : rowPermit.includes(permit.value)}
-                                label={permit.name} onChange={() => { }} inline alignIndicator="right" disabled={adminRole} />
+                                onChange={() => { }} inline alignIndicator="right" disabled={adminRole}
+                                label={permit.danger ?
+                                    <strong>{permit.name} {dangerous}</strong> 
+                                    : permit.name} />
                         })}
                     </Col>
                 </Row>)}
@@ -190,7 +196,8 @@ export default function ROLES() {
     function loadData() {
         SERVICE_ROLES.getAll(conn.id, user.id)
             .then(response => {
-                setData(response.data)
+                if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
+                else setData(response.data)
             })
             .catch(e => {
                 console.log(e);

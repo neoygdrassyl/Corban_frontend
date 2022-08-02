@@ -1,7 +1,7 @@
 import http from "../../http-common";
 import { header } from "../auth/auth";
 
-const route = "workers"
+const route = "workersc"
 
 class SERVICE_WORKERS {
 
@@ -15,6 +15,9 @@ class SERVICE_WORKERS {
 
     update(id, data) {
         return http.put(`/${route}/${id}`, data, header());
+    }
+    active(id, data) {
+        return http.put(`/${route}/activate/${id}`, data, header());
     }
 
     delete(id) {

@@ -149,6 +149,7 @@ function validateConn(_conn) {
   conn.conn = _conn.bdname;
   conn.id = conn.technicalInfo.id
   conn.roles = roles;
+  conn.active = _conn.active;
 
   return conn
 }

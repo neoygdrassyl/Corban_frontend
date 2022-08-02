@@ -20,6 +20,7 @@ import AtuhService from '../../../services/apis/auth.service'
 import { ALERT_ERROR, ALERT_ERROR_NOACTIVE, ALERT_ERROR_NOACTIVETEAM, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT, ALERT_WARNING_ONTEAM, CONFIRM_INVITATION, CONFIRM_USER } from '../../../resources/customs/utils/notifications.vars';
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { Alert } from '@blueprintjs/core';
+import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
 
 
 export default function DashboardTeam() {
@@ -34,10 +35,17 @@ export default function DashboardTeam() {
     const team = params.team;
 
     const user = auth.user ?? {};
+    const conn = auth.conn ?? {};
     var [load, setLoad] = useState(0);
     var [loading, setLoading] = useState(false);
     var [openInvite, setInvite] = useState(false);
     let connection = auth.conn ?? {};
+
+    const isSuperAdmin = connection.roles ? connection.roles.some(role => role.priority >= 10) : false;
+    const permits = conn.roles ?? [];
+    const canInviteWorker = FIND_PERMIT(permits, 'worker', 1);
+    const canVieweWorker = FIND_PERMIT(permits, 'worker', 2);
+    const canViewRoles = FIND_PERMIT(permits, 'roles', 1);
 
     let makeConnection = (_conn) => {
         if (_conn) auth.setConn(_conn, () => setLoad(1))
@@ -174,6 +182,13 @@ export default function DashboardTeam() {
                         <Row className="text-center" style={{ width: '100%' }} >
                             <h4>INFORMCION DE ROLES</h4>
                         </Row>
+                        {connection.active == 0 && !isSuperAdmin?
+                            <Row>
+                                <Col xs={24} className="text-justify">
+                                    <label><label className="fw-b text-danger">TRABAJADOR INHABILIDATO: </label>Este trabajador ha sido deastivado por el administrador y no puede realizar ninguna accion, comuniquese con el director del equipo para mos información.</label>
+                                </Col>
+                            </Row>
+                            : ''}
                         {connection.roles.map(role => <>
                             <Row>
                                 <Col xs={6} className="text-right">
@@ -187,12 +202,12 @@ export default function DashboardTeam() {
                         )}
                         {connection.roles.length == 0 ? <Row>
                             <Col xs={24} className="text-center">
-                                    <label className='fw-b text-danger'>NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO</label>
-                                </Col>
-                                <Col xs={24} className="text-center">
-                                    <label className=''>COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL. </label>
-                                </Col>
-                            </Row> : ''}
+                                <label className='fw-b text-danger'>NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO</label>
+                            </Col>
+                            <Col xs={24} className="text-center">
+                                <label className=''>COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL. </label>
+                            </Col>
+                        </Row> : ''}
                     </Panel>
                 </Col>
             </Row>
@@ -211,31 +226,37 @@ export default function DashboardTeam() {
         </>
     }
     let _COMPONENT_MANAGE_COMPANY = () => {
-        let isSuperAdmin = connection.roles.some(role => role.priority >= 10)
         return <>
             {CONFIRM_INVITATION(lang, theme, openInvite, setInvite, (value) => setInvitation(value), loading)}
             <div className="my-3">
                 <Divider>ADMINISTRAR</Divider>
                 <Grid fluid>
                     <Row style={{ width: '100%' }} >
-                        <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                            <Message onClick={() => setInvite(!openInvite)} className="pointer my-1"
-                                header={<label className='text-light fw-b pointer'>{<SearchPeopleIcon style={{ fontSize: '24px' }} />} INVITAR TRABAJADORES</label>} style={{ backgroundColor: 'dodgerblue' }}>
-                                <label className='text-light pointer'>Invita otros usuarios para ser parte de este equipo de trabajo</label>
-                            </Message>
-                        </Col>
-                        <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                            <Message className="pointer my-1"  onClick={() => nagivate('/workers')}
-                                header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} ADMINISTRAR TRABAADORES</label>} style={{ backgroundColor: 'forestGreen' }}>
-                                <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
-                            </Message>
-                        </Col>
-                        <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                            <Message className="pointer my-1" onClick={() => nagivate('/roles')}
-                                header={<label className='text-dark fw-b'>{<UserInfoIcon style={{ fontSize: '24px' }} />} CONFIGURACION ROLES</label>} style={{ backgroundColor: 'gold' }}>
-                                <label className='text-dark'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
-                            </Message>
-                        </Col>
+                        {canInviteWorker ?
+                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+                                <Message onClick={() => setInvite(!openInvite)} className="pointer my-1"
+                                    header={<label className='text-light fw-b pointer'>{<SearchPeopleIcon style={{ fontSize: '24px' }} />} INVITAR TRABAJADORES</label>} style={{ backgroundColor: 'dodgerblue' }}>
+                                    <label className='text-light pointer'>Invita otros usuarios para ser parte de este equipo de trabajo</label>
+                                </Message>
+                            </Col>
+                            : ''}
+                        {canViewRoles ?
+                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+                                <Message className="pointer my-1" onClick={() => nagivate('/roles')}
+                                    header={<label className='text-dark fw-b'>{<UserInfoIcon style={{ fontSize: '24px' }} />} CONFIGURACION ROLES</label>} style={{ backgroundColor: 'gold' }}>
+                                    <label className='text-dark'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                </Message>
+                            </Col>
+                            : ''}
+                        {canVieweWorker ?
+                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+                                <Message className="pointer my-1" onClick={() => nagivate('/workers')}
+                                    header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} ADMINISTRAR TRABAADORES</label>} style={{ backgroundColor: 'forestGreen' }}>
+                                    <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                </Message>
+                            </Col>
+                            : ''}
+
                         {isSuperAdmin ?
                             <>
                                 <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
@@ -269,9 +290,12 @@ export default function DashboardTeam() {
     function loadCompanies() {
         AtuhService.loadCompanies(user.id, auth.token)
             .then(response => {
-                let listConn = response.data ? response.data : [];
-                let newConn = listConn.find(conn => conn.id_public == team);
-                makeConnection(newConn);
+                if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
+                else {
+                    let listConn = response.data ? response.data : [];
+                    let newConn = listConn.find(conn => conn.id_public == team);
+                    makeConnection(newConn);
+                }
             })
             .catch(e => {
                 console.log(e);
@@ -299,7 +323,7 @@ export default function DashboardTeam() {
             .catch(e => {
                 console.log(e);
                 ALERT_ERROR(lang);
-            }).finally(() => {setLoading(false); setInvite(false)});
+            }).finally(() => { setLoading(false); setInvite(false) });
     }
 
     return (
@@ -312,11 +336,9 @@ export default function DashboardTeam() {
                 : connection.conn
                     ? <>
                         {_COMPONENT_INFOBOX()}
-
-                        {connection.roles.some(role => role.priority >= 9) ?
-                            _COMPONENT_MANAGE_COMPANY()
-                            : ''}
-
+                        {canInviteWorker || canViewRoles || canVieweWorker || isSuperAdmin ?
+                            _COMPONENT_MANAGE_COMPANY() : ''
+                        }
                         {_COMPONENT_MODULE_SELECTOR()}
                     </>
                     : "NO WORK TEAMS FOUNDS"}

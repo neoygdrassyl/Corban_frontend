@@ -4,6 +4,7 @@ import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Col, Grid, Panel, PanelGroup, Row } from 'rsuite';
 import { AiTwotoneStar } from 'react-icons/ai';
+import { IoIosSwitch } from 'react-icons/io';
 
 
 export let translations = {
@@ -169,16 +170,16 @@ export let translations = {
             nots_body: "No unseen notifications had been found, you are up-to-date.",
         },
         es: {
-             error_title: 'HUBO UN ERROR',
-             error_body: 'Ocurrió un error al cargar la información, espera unos minutos antes de volver a intentarlo.',
-             noload_title: 'NO SE PUEDE CARGAR',
-             noload_body: 'No se pudo cargar la información solicitada, espere unos minutos antes de volver a intentarlo.',
-             datatable_title: 'NO SE ENCONTRARON DATOS',
-             datatable_body: 'La solicitud fue exitosa y no se encontró información para esta consulta.',
-             permit_title: 'ACCESO NO AUTORIZADO',
-             permit_body: "El rol de este usuario no tiene permisos para esta acción, comuníquese con el líder del equipo para obtener más información sobre el rol del usuario",
-             nots_title: 'NO SE ENCONTRARON NOTIFICACIONES',
-             nots_body: "No se han encontrado notificaciones no vistas, estás actualizado.",
+            error_title: 'HUBO UN ERROR',
+            error_body: 'Ocurrió un error al cargar la información, espera unos minutos antes de volver a intentarlo.',
+            noload_title: 'NO SE PUEDE CARGAR',
+            noload_body: 'No se pudo cargar la información solicitada, espere unos minutos antes de volver a intentarlo.',
+            datatable_title: 'NO SE ENCONTRARON DATOS',
+            datatable_body: 'La solicitud fue exitosa y no se encontró información para esta consulta.',
+            permit_title: 'ACCESO NO AUTORIZADO',
+            permit_body: "El rol de este usuario no tiene permisos para esta acción, comuníquese con el líder del equipo para obtener más información sobre el rol del usuario",
+            nots_title: 'NO SE ENCONTRARON NOTIFICACIONES',
+            nots_body: "No se han encontrado notificaciones no vistas, estás actualizado.",
         }
 
     },
@@ -979,8 +980,8 @@ export let translations = {
             tableCl: ['NAME', 'DESCRIPTION', 'ACTION'],
             newtitle: 'CREATE NEW ROLE',
             form: [
-                {label: 'ROLE NAME', ph: 'Name of te role'},
-                {label: 'ROLE DESCRIPTION', ph: 'Short description'},
+                { label: 'ROLE NAME', ph: 'Name of te role' },
+                { label: 'ROLE DESCRIPTION', ph: 'Short description' },
             ],
             confirm: "Are you sure you want to permanently delete this role? the information won't be recoverable.",
             adminRole: 'This role is an administrative role, it overpasses the rules from the Workers and Roles rules and CANNOT be eliminated.',
@@ -1036,8 +1037,8 @@ export let translations = {
             tableCl: ['NOMBRE', 'DESCRIPCIÓN', 'ACCIÓN'],
             newtitle: 'CREAR NUEVO ROL',
             form: [
-                {label: 'NOMBRE DEL ROL', ph: 'Nombre de la función'},
-                {label: 'DESCRIPCIÓN DEL ROL', ph: 'Descripción breve'},
+                { label: 'NOMBRE DEL ROL', ph: 'Nombre de la función' },
+                { label: 'DESCRIPCIÓN DEL ROL', ph: 'Descripción breve' },
             ],
             confirm: "¿Está seguro de que desea eliminar esto rol de forma permanente? la información no será recuperable.",
             adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.',
@@ -1083,6 +1084,91 @@ export let translations = {
                 {
                     title: 'ROL ADMINISTRATIVO',
                     content: 'Este ícono marca un rol administrativo, este es un rol superior que siempre tiene acceso y permisos para roles y miembros del equipo. Este rol no se puede eliminar.',
+                    focus: 'admin', icon: <AiTwotoneStar className='text-paranoia' size={'24px'} />
+                },
+            ],
+        }
+    },
+    workers: {
+        en: {
+            title: 'ROLE ASSIGNMENT OF WORKERS',
+            tableHd: 'WORKERS LIST',
+            tableCl: ['WORKER NAME', 'ROLES OF WORKER', 'SET ROLES', 'ACTIVATE / DEACTIVATE'],
+            edit_rw : 'ASIGN ROLES TO WORKER',
+            admin_alert : 'This is an ADMIN role.',
+            btn_help_tile: 'ROLE ASSIGNMENT OF WORKERS',
+            btn_help_body: 'This list allows to asign different roles to each worker.',
+            HELP_PAGE: [
+                {
+                    title: 'ROLE ASSIGNMENT OF WORKERS',
+                    content: 'This module manages the assignment of roles to the workers of the team, multiple roles can be assigned to a single worker, additionally, the workers of the team can also be activated / deactivated in order to negate all their functions in the team.',
+                    focus: 'title',
+                },
+                {
+                    title: 'SEARCH BAR',
+                    content: <>This button allows filtering the <strong>WORKER LIST</strong> in order to find one specific entry. To use the search bar, input into the text bar next to the button the value to look for and press the button or press the key Enter.<br />The search patterns can be <strong>WORKER NAME</strong> and  <strong>ROLES OF WORKERS</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACTION: ASIGN ROLES',
+                    content: 'This button opens a new window where the user can set the roles of a worker.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACTION: ACTIVATE / DEACTIVATE',
+                    content: <>This switch changes the state of a worker of the team to "ACTIVE" and "INACTIVE", this is a state that blocks the user of interacting with the team when it is deactivated. Changing this state is considered a <strong className='text-danger'>DANGEROUS ACTION</strong></>,
+                    focus: 'active', icon: <IoIosSwitch className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ADMINISTRATIVE ROLE',
+                    content: 'This icon marks an administrative role, this is a superior role that always has access and permissions to roles and team members. This role cannot be assigned or deactivated unless by another role with the same authority.',
+                    focus: 'admin', icon: <AiTwotoneStar className='text-paranoia' size={'24px'} />
+                },
+            ],
+
+        },
+        es: {
+            title: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+            tableHd: 'LISTA DE TRABAJADORES',
+            tableCl: ['NOMBRE DEL TRABAJADOR', 'FUNCIONES DEL TRABAJADOR', 'ESTABLECER FUNCIONES', 'HABILITAR / DESHABILITAR'],
+            edit_rw : 'ASIGNAR ROLES PARA TRABAJADOR',
+            admin_alert : 'Este es un rol de ADMINISTRADOR.',
+            btn_help_tile: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+            btn_help_body: 'Esta lista permite la asignacion de diferentes roles a los mienbros del equipo.',
+            HELP_PAGE: [
+                {
+                    title: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+                    content: 'Este módulo administra la asignación de roles a los trabajadores del equipo, se pueden asignar múltiples roles a un solo trabajador, adicionalmente, los trabajadores del equipo también se pueden  HABILITAR / DESHABILITAR para negar todas sus funciones en el equipo ',
+                    focus: 'title',
+                },
+                {
+                    title: 'ARRA DE BÚSQUEDA',
+                    content:  <>Este botón permite filtrar la <strong>LISTA DE TRABAJADORES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>NOMBRE DEL TRABAJADOR</strong> y < strong>FUNCIONES DEL TRABAJADOR</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACCIÓN: ASIGNAR ROLES',
+                    content: 'Este botón abre una nueva ventana donde el usuario puede asignar los roles de un trabajador.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACCIÓN: HABILITAR / DESHABILITAR',
+                    content: <>Este interruptor cambia el estado de un trabajador del equipo a "ACTIVO" e "INACTIVO", este es un estado que bloquea al usuario de interactuar con el equipo cuando está desactivado. Cambiar este estado se considera una <strong className='text-danger'>ACCIÓN PELIGROSA</strong></>,
+                    focus: 'detail', icon: <IoIosSwitch className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ROL ADMINISTRATIVO',
+                    content: 'Este ícono marca un rol administrativo, este es un rol superior que siempre tiene acceso y permisos para roles y miembros del equipo. Este rol no se puede asignar ni desactivar a menos que lo haga otro rol con la misma autoridad.',
                     focus: 'admin', icon: <AiTwotoneStar className='text-paranoia' size={'24px'} />
                 },
             ],

@@ -10,7 +10,7 @@ const trn = {
         msg_wait_body: 'The system is processing the data, one moment please.',
 
         msg_noPermit_title: 'PERMIT DENIED',
-        msg_noPermi_body: 'This action was cancelled because the roles of this user does not have enought permits.',
+        msg_noPermit_body: 'This action was cancelled because the roles of this user does not have enought permits.',
 
         msg_error_login_title: 'AUTHENTICATION FAILED',
         msg_error_login_body: 'This email and password combination is not valid, please make sure the authentication credentials are correct.',
@@ -89,7 +89,7 @@ const trn = {
         msg_wait_body: 'El sistema está procesando los datos, un momento por favor.',
 
         msg_noPermit_title: 'NO TIENE PERMISOS',
-        msg_noPermi_body: 'La acción fue cancelada por que el rol de este usuario no tiene permisos suficientes.',
+        msg_noPermit_body: 'La acción fue cancelada por que el rol de este usuario no tiene permisos suficientes.',
 
         msg_error_login_title: 'AUTENTIFICACIÓN FALLIDA',
         msg_error_login_body: 'Esta combinación de email y contraseña no son valida, asegúrese de que las credenciales de autentificación sean correctas.',

@@ -91,14 +91,10 @@ export function GET_JSON_FULL(objec) {
 
 export function FIND_PERMIT(permits, id, value) {
     if (permits.some(permit => permit.priority == 11)) return true;
-
-    permits.some(permit => {
+    return permits.some(permit => {
         let objPermit = GET_JSON_FULL(permit.permits);
-        if (id in objPermit) {
-            if (objPermit[id].includes(value)) return true;
-            else return false;
-        }
+       
+        if (id in objPermit) return objPermit[id].includes(value)
         return false;
     })
-
 }

@@ -24,11 +24,17 @@ export default function TABLE_COMPONENT(props) {
 
     function filter_data(d) {
         if (filter == '') return true;
-        return search.some(f => {
+        let find1 = search.some(f => {
             if (!d[f]) return false;
             let curatedText = d[f].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             return curatedText.includes(filter);
         })
+        let find2 = columns.some(c => {
+            if (!c.selector) return false;
+            let curatedText = c.selector(d).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            return curatedText.includes(filter);
+        })
+        return find1 || find2
     }
 
     return (
