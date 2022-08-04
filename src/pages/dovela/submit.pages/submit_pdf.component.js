@@ -10,15 +10,24 @@ import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import BTN_PDF from '../../../resources/customs/components/btnPDF.component';
 import FORM from '../../../resources/customs/components/form.component';
 import moment from 'moment';
+import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
+import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
 
 
 export default function SUBMIT_PDF(props) {
     const { currentItem } = props;
     const utilities = useContext(UtilContext);
+    const auth = useContext(AuthContext);
     const trn = utilities.getTranslation('submit');
     const btrn = utilities.getTranslation('btns');
     const lang = utilities.lang;
     const files = utilities.files;
+    const conn = auth.conn ?? {};
+
+
+    const permits = conn.roles ?? [];
+    const canUpload = FIND_PERMIT(permits, 'submit', 5);
+    const canDownload = FIND_PERMIT(permits, 'submit', 6);
 
     // ************************** HELP FUCTIONS **************************** //
     let _GET_DOC = () => {
@@ -52,7 +61,7 @@ export default function SUBMIT_PDF(props) {
         ]
 
         return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); addDocument() }} upload
-            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save}/>}  btnAlignment='txt-r' 
+            submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save} />} btnAlignment='txt-r'
         />
     }
     const BTN_COMPONENT = () => {
@@ -158,20 +167,22 @@ export default function SUBMIT_PDF(props) {
 
     return (
         <>
-            <Divider>{trn.title_pdf}  <BTN_HELP
-                title={trn.INFO_CERT_TITLE}
-                text={trn.INFO_CERT_BODY}
-                page={trn.INFO_CERT_HELP} focus="doc_cert" /></Divider>
-            <Grid className='my-1' fluid>
-                <Row style={{ width: '100%' }}>
-                    <Col xl={4} lg={6} md={8} sm={12} xs={24}>
-                        {BTN_COMPONENT()}
-                    </Col>
-                    <Col xl={20} lg={18} md={16} sm={12} xs={24}>
-                        {FORM_COMPONENT()}
-                    </Col>
-                </Row>
-            </Grid>
+            {canDownload || canUpload ? <>
+                <Divider>{trn.title_pdf}  <BTN_HELP
+                    title={trn.INFO_CERT_TITLE}
+                    text={trn.INFO_CERT_BODY}
+                    page={trn.INFO_CERT_HELP} focus="doc_cert" /></Divider>
+                <Grid className='my-1' fluid>
+                    <Row style={{ width: '100%' }}>
+                        {canDownload ? <Col xl={4} lg={6} md={8} sm={12} xs={24}>
+                            {BTN_COMPONENT()}
+                        </Col> : ''}
+                        {canUpload ? <Col xl={20} lg={18} md={16} sm={12} xs={24}>
+                            {FORM_COMPONENT()}
+                        </Col> : ''}
+                    </Row>
+                </Grid>
+            </> : ''}
         </>
     );
 }

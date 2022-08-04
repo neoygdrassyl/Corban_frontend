@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Nav, Navbar, InputGroup, Input, Dropdown, Divider, Badge } from 'rsuite';
 import { Gear, Dashboard, Search, Icon } from '@rsuite/icons';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -15,14 +15,19 @@ import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import { AuthContext } from '../contextProviders/auth.provider'
 import { UtilContext } from '../contextProviders/util.provider';
 import AtuhService from '../../../services/apis/auth.service'
+import InfoRoundIcon from '@rsuite/icons/InfoRound';
 
 // FLAGS FOR LANGAUGE SELECT
 import FLAG_ES from '../../images/flags/ES.png'
 import FLAG_US from '../../images/flags/US.png'
+import MODAL from './modal.component';
+import FORM from './form.component';
+import { Button } from '@blueprintjs/core';
 
 function TopBarComponent() {
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('topBar');
+    const btn = utilities.getTranslation('btns');
     const theme = utilities.theme;
 
     let navigate = useNavigate();
@@ -31,12 +36,41 @@ function TopBarComponent() {
     let user = auth.user;
     const nots = auth.nots ?? [];
 
+    var [modal, setModal] = useState(false);
 
     React.useEffect(() => {
         if (user) {
             loadNotifications(user.email)
         }
-      }, [params]);
+    }, [params]);
+
+
+    const FORM_INPUTS = [
+
+        {
+            inputs: [
+
+                {
+                    label: 'product', placeholder: 'product', req: true,
+                    type: 'select', leftIcon: 'property', id: 'error_form_product',
+                    selectOptions: [
+                        { value: 'dovela', label: 'Dovela', },
+                        { value: 'other', label: 'Otros', },
+                    ]
+                },
+            ],
+        },
+        {
+            inputs: [
+                {
+                    label: 'desc', placeholder: 'desc', type: "textarea", length: 4000,
+                    id: 'error_form_desc', req: true, dv: `Descripción del error:\n\n¿Que estaba haciendo?\n\n¿Que resultado esperaba?\n\n¿Que paso en realidad?\n\n¿Puede reproducir el error? ¿como?\n`
+                },
+            ],
+        },
+    ]
+
+
 
     const MyLink = React.forwardRef((props, ref) => {
         const { to, as, ...rest } = props;
@@ -47,23 +81,29 @@ function TopBarComponent() {
         );
     });
 
-    const CustomInputGroupWidthButton = ({ placeholder, ...props }) => (
-        <InputGroup inside style={{}}>
-            <Input />
-            <InputGroup.Button>
-                <Search />
-            </InputGroup.Button>
-        </InputGroup>
-    );
-
-    function loadNotifications(email){
+    function loadNotifications(email) {
         AtuhService.loadAllNots(email).then(response => {
             auth.setNots(response.data)
-          })
-        
+        })
+
     }
 
-    return (
+    function sendBugReport(data) {
+        let formData = data.formData;
+        let reporter = user.id + ' @ ' + user.name;
+        let browser = navigator.userAgent;
+        let url = window.location.href;
+
+        formData.append('reporter', reporter)
+        formData.append('browser', browser)
+        formData.append('url', url)
+
+
+        console.log(reporter)
+
+    }
+
+    return <>
         <Navbar className={'bg-dark app_nav ' + theme}>
             <Navbar.Brand as={MyLink} to="/home"><label className="pointer">CORBAN</label></Navbar.Brand>
             <Nav >
@@ -81,7 +121,8 @@ function TopBarComponent() {
                         <Nav.Item icon={<DetailIcon color="red" />} onClick={() => navigate("/dashboard")}> {'mis proyectos'}</Nav.Item>
                         <Nav.Item icon={<PeoplesIcon color="blue" />} onClick={() => navigate("/dashboard")}> {'mis equipos'}</Nav.Item>
                         <Nav.Item icon={<GearIcon color="green" />} onClick={() => navigate("/dashboard")}> {'Configuracion'}</Nav.Item>
-                        <Nav.Item icon={<HelpOutlineIcon color="violet" />} onClick={() => navigate("/dashboard")}> {'ayuda'}</Nav.Item>
+                        <Nav.Item icon={<HelpOutlineIcon color="violet" />} onClick={() => navigate("/dashboard")}> {'Ayuda'}</Nav.Item>
+                        <Nav.Item icon={<InfoRoundIcon color="red" />} onClick={() => setModal(!modal)}> <strong className='text-danger'>{'Reportar Error'}</strong></Nav.Item>
                         {<hr />}
                         <Nav.Item icon={<FaSignOutAlt style={{ fontSize: '1.2em' }} />} onClick={() => auth.signout(() => navigate("/"))}> {trn.lout}</Nav.Item>
                     </Nav.Menu>
@@ -119,7 +160,18 @@ function TopBarComponent() {
 
 
         </Navbar>
-    );
+
+        <MODAL
+            open={modal}
+            setOpen={setModal}
+            title={'REPORT AN ERROR'}
+            icon={<InfoRoundIcon />}
+            size="md"
+        >
+            <FORM form={FORM_INPUTS} id="error_form" onSubmit={(e) => sendBugReport(e)}
+                submitBtn={<Button icon="add" intent="success" type="submit" text={btn.new} />} />
+        </MODAL>
+    </>;
 
 }
 

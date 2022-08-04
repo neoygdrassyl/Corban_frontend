@@ -120,16 +120,12 @@ function validateUser(_user) {
     return obj
   })
 
- 
-
   user.fullname = `${_user.name ?? ''} ${_user.name_2 ?? ''} ${_user.surname ?? ''} ${_user.surname_2 ?? ''}`;
   user.name = `${_user.name ?? ''} ${_user.surname ?? ''}`;
   user.id = _user.id;
   user.userInfo = _user.userInfo;
   user.workList = work_group_list;
   user.email = _user.loginUser;
-
-  console.log(_user)
 
   return user
 }

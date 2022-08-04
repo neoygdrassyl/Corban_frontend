@@ -13,22 +13,30 @@ import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import { Button as ButtonBP, Icon } from '@blueprintjs/core';
 import MODAL from '../../../resources/customs/components/modal.component';
 import FORM from '../../../resources/customs/components/form.component';
-import { GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../../resources/customs/utils/lamdas.functions';
+import { FIND_PERMIT, GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../../resources/customs/utils/lamdas.functions';
 import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
 import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../../resources/customs/utils/notifications.vars';
 import moment from 'moment';
 import SUBMIT_LISTS from './submit_lists.component';
 import ButtonWhisper from '../../../resources/customs/components/btnWhisper.component';
 import SUBMIT_PDF from './submit_pdf.component';
+import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 
 
 export default function SUBMIT() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
+    const conn = auth.conn ?? {};
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('submit');
     const lang = utilities.lang;
+
+    const permits = conn.roles ?? [];
+    const canView = FIND_PERMIT(permits, 'submit', 1);
+    const cancreate = FIND_PERMIT(permits, 'submit', 2);
+    const canEdit = FIND_PERMIT(permits, 'submit', 3);
+    const canDelete = FIND_PERMIT(permits, 'submit', 4);
 
     var [load, setLoad] = useState(0);
     var [editItem, setEdit] = useState(false);
@@ -184,13 +192,15 @@ export default function SUBMIT() {
             name: <label>{trn.table_columns[5]}</label>,
             button: true,
             minWidth: '100px',
+            omit: !canEdit && !canDelete,
             cell: row => <>
-                <ButtonWhisper whisper={trn.pop_texts[0]} subtle onClick={() => { setEdit(row); setModal(!modal) }}>
+                {canEdit ? <ButtonWhisper whisper={trn.pop_texts[0]} subtle onClick={() => { setEdit(row); setModal(!modal) }}>
                     <FaEdit className='text-primary' />
-                </ButtonWhisper>
-                <ButtonWhisper whisper={trn.pop_texts[1]} subtle onClick={() => CONFIRM_DELETE(lang, row.id_public, () => remove(row.id))}>
+                </ButtonWhisper> : ''}
+                {canDelete ? <ButtonWhisper whisper={trn.pop_texts[1]} subtle onClick={() => CONFIRM_DELETE(lang, row.id_public, () => remove(row.id))}>
                     <RiDeleteBinLine className='text-danger' />
-                </ButtonWhisper>
+                </ButtonWhisper> : ''}
+
             </>,
         },
     ]
@@ -198,10 +208,11 @@ export default function SUBMIT() {
     function loadData(updateEdit) {
         SERVICE_SUBMIT.getAll()
             .then(response => {
-                setData(response.data);
-                if (updateEdit) setEdit(response.data.find(d => d.id == editItem.id));
+                if (Array.isArray(response.data)) {
+                    setData(response.data);
+                    if (updateEdit) setEdit(response.data.find(d => d.id == editItem.id));
+                }
                 setLoad(1);
-
             })
             .catch(e => {
                 console.log(e);
@@ -370,37 +381,43 @@ export default function SUBMIT() {
                     title={trn.btn_help_texts[0]}
                     text={trn.btn_help_texts[1]}
                     page={trn.HELP_PAGE} focus="title" /></h3>
-                <Col className="txt-l m-2">
+                {cancreate ? <Col className="txt-l">
                     <ButtonBP icon="add" intent="success" text={trn.new} onClick={() => { setEdit(false); setModal(!modal) }} />
-                </Col>
+                </Col> : ''}
             </Row>
 
-            <TABLE_COMPONENT
-                title={trn.table_title}
-                titleIcon={<Icon icon={'paperclip'} intent={'primary'} size="24" />}
-                columns={columns}
-                data={data}
-                load={load == 0}
-                search={['id_public', 'id_related', 'type', 'date', 'owner', 'name_retriever', 'id_number_retriever']}
-            />
+            {canView ? <>
+                <TABLE_COMPONENT
+                    title={trn.table_title}
+                    titleIcon={<Icon icon={'paperclip'} intent={'primary'} size="24" />}
+                    columns={columns}
+                    data={data}
+                    load={load == 0}
+                    search={['id_public', 'id_related', 'type', 'date', 'owner', 'name_retriever', 'id_number_retriever']}
+                />
 
-            <MODAL
-                open={modal}
-                setOpen={setModal}
-                title={editItem ? trn.edit + ': ' + editItem.id_public : trn.new}
-                icon={editItem ? <Icon icon={'annotation'} intent={'primary'} size="25" /> : <Icon icon={'add'} intent={'success'} size="25" />}
-                size="lg"
-                helpBtn={<BTN_HELP
-                    title={trn.btn_help_texts[0]}
-                    text={trn.btn_help_texts[1]}
-                    page={editItem ? trn.EDIT_HELP_PAGE : trn.NEW_HELP_PAGE} focus={editItem ? 'edit' : "title"} />}
-            >
-                {MANAGE_COMPONENT(editItem)}
-                {editItem ? <>
-                    <SUBMIT_LISTS currentItem={editItem} />
-                    <SUBMIT_PDF currentItem={editItem} reload={() => setLoad(2)} />
-                </> : ''}
-            </MODAL>
+                <MODAL
+                    open={modal}
+                    setOpen={setModal}
+                    title={editItem ? trn.edit + ': ' + editItem.id_public : trn.new}
+                    icon={editItem ? <Icon icon={'annotation'} intent={'primary'} size="25" /> : <Icon icon={'add'} intent={'success'} size="25" />}
+                    size="lg"
+                    helpBtn={<BTN_HELP
+                        title={trn.btn_help_texts[0]}
+                        text={trn.btn_help_texts[1]}
+                        page={editItem ? trn.EDIT_HELP_PAGE : trn.NEW_HELP_PAGE} focus={editItem ? 'edit' : "title"} />}
+                >
+                    {MANAGE_COMPONENT(editItem)}
+                    {editItem ? <>
+                        <SUBMIT_LISTS currentItem={editItem} />
+                        <SUBMIT_PDF currentItem={editItem} reload={() => setLoad(2)} />
+                    </> : ''}
+                </MODAL>
+            </> : <NON_IDEAL_STATE type="permit" />
+
+            }
+
+
         </>
     );
 }

@@ -37,6 +37,7 @@ export default function NON_IDEAL_STATE(props) {
     return (
         <>
             <NonIdealState
+                className='my-3'
                 icon={icon}
 
                 title={trn[type+'_title']}
