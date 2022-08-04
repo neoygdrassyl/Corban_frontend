@@ -7,23 +7,19 @@ import SERVICE_ROLES from '../../../services/apis/roles.services';
 // COMPONENTS
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
 import DIALOG from '../../../resources/customs/components/dialog.component';
-import ALERT_CONFIRM from '../../../resources/customs/utils/notCofirm.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
-import FORM from '../../../resources/customs/components/form.component';
 import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
 
 // ICONS
 import { FaEdit } from 'react-icons/fa'
-import UserInfoIcon from '@rsuite/icons/UserInfo';
-import { RiDeleteBinLine } from 'react-icons/ri'
 import { AiTwotoneStar } from 'react-icons/ai'
 import { MdWork } from 'react-icons/md'
 import PeoplesIcon from '@rsuite/icons/Peoples';
 
 
-import { FIND_PERMIT, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
-import { Col, Grid, Row } from 'rsuite';
-import { Button, Button as ButtonBP, Icon, NonIdealState, Switch } from '@blueprintjs/core';
+import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
+import { Row } from 'rsuite';
+import { Button as ButtonBP, Switch } from '@blueprintjs/core';
 import { Tooltip2 } from "@blueprintjs/popover2";
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 

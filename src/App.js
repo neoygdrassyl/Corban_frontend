@@ -41,6 +41,7 @@ import Login from './pages/user/login.page/login.page'
 import INVITE from "./pages/user/invite/invite.page";
 import RESET from "./pages/user/reset,pages/reset.page";
 import ACTIVATE from "./pages/user/activate.pages/activate.page";
+import DOVELA_CONFIG from "./pages/dovela/config.pages/config.page";
 
 
 
@@ -79,6 +80,7 @@ function App() {
 
                   <Route exact path="/roles" element={<ROLES />} />
                   <Route exact path="/workers" element={<WORKERS />} />
+                  <Route exact path="/dconfig" element={<DOVELA_CONFIG />} />
                 </Route>
               </Route>
 

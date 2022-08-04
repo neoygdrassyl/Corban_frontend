@@ -979,6 +979,7 @@ export let translations = {
             tableHd: 'ROLES LIST',
             tableCl: ['NAME', 'DESCRIPTION', 'ACTION'],
             newtitle: 'CREATE NEW ROLE',
+            danger: 'THIS IS A DANGEROUS ACTION',
             form: [
                 { label: 'ROLE NAME', ph: 'Name of te role' },
                 { label: 'ROLE DESCRIPTION', ph: 'Short description' },
@@ -1036,6 +1037,7 @@ export let translations = {
             tableHd: 'LISTA DE ROLES',
             tableCl: ['NOMBRE', 'DESCRIPCIÓN', 'ACCIÓN'],
             newtitle: 'CREAR NUEVO ROL',
+            danger: 'ESTA ES UNA ACCIÓN PELIGROSA',
             form: [
                 { label: 'NOMBRE DEL ROL', ph: 'Nombre de la función' },
                 { label: 'DESCRIPCIÓN DEL ROL', ph: 'Descripción breve' },
@@ -1093,7 +1095,7 @@ export let translations = {
         en: {
             title: 'ROLE ASSIGNMENT OF WORKERS',
             tableHd: 'WORKERS LIST',
-            tableCl: ['WORKER NAME', 'ROLES OF WORKER', 'SET ROLES', 'ACTIVATE / DEACTIVATE'],
+            tableCl: ['WORKER NAME', 'ROLES OF WORKER', 'ASIGN ROLES', 'ACTIVATE / DEACTIVATE'],
             edit_rw : 'ASIGN ROLES TO WORKER',
             admin_alert : 'This is an ADMIN role.',
             btn_help_tile: 'ROLE ASSIGNMENT OF WORKERS',

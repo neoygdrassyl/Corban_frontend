@@ -108,8 +108,19 @@ export function AuthProvider({ children }) {
 
 function validateUser(_user) {
   var user = {}
+  var teamNames =  _user.teamNames ? _user.teamNames.split('&&') : [];
+  var teamIds =  _user.teamIds ? _user.teamIds.split('&&') : [];
+
   var work_group_list = _user.technicalInfo ? _user.technicalInfo.split('&&') : [];
-  work_group_list = work_group_list.map(wgl => GET_JSON_FULL(wgl))
+  work_group_list = work_group_list.map((wgl, i) => {
+    let obj = GET_JSON_FULL(wgl)
+    obj.name = teamNames[i]
+    obj.id = teamIds[i]
+
+    return obj
+  })
+
+ 
 
   user.fullname = `${_user.name ?? ''} ${_user.name_2 ?? ''} ${_user.surname ?? ''} ${_user.surname_2 ?? ''}`;
   user.name = `${_user.name ?? ''} ${_user.surname ?? ''}`;
@@ -117,6 +128,8 @@ function validateUser(_user) {
   user.userInfo = _user.userInfo;
   user.workList = work_group_list;
   user.email = _user.loginUser;
+
+  console.log(_user)
 
   return user
 }
@@ -147,9 +160,10 @@ function validateConn(_conn) {
   }
   conn.connections = connections;
   conn.conn = _conn.bdname;
-  conn.id = conn.technicalInfo.id
+  conn.id = _conn.id_public
   conn.roles = roles;
   conn.active = _conn.active;
+  conn.name = _conn.name;
 
   return conn
 }

@@ -124,7 +124,7 @@ export default function DashboardTeam() {
                 <Col xs={24} sm={24} md={12} lg={16} xl={16} xxl={16}>
                     <Panel className="border">
                         <Row className="text-center" style={{ width: '100%' }} >
-                            <h4>{connection.companiyInfo.publicName}</h4>
+                            <h4>{connection.name}</h4>
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
@@ -260,7 +260,7 @@ export default function DashboardTeam() {
                         {isSuperAdmin ?
                             <>
                                 <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                    <Message className="pointer my-1"
+                                    <Message className="pointer my-1" onClick={() => nagivate('/dconfig')}
                                         header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} CONFIGURACION ORGANIZACION</label>} style={{ backgroundColor: 'crimson' }}>
                                         <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
                                     </Message>

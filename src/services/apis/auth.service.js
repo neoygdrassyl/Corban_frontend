@@ -19,6 +19,7 @@ class AtuhService {
   appResetVerify(token) { return http.get(`/resetverify`, { headers: { Authorization: 'Bearer ' + token } }); }
 
   loadCompanies(idUser, token) { return http.get(`/companies/${idUser}`, { headers: { Authorization: 'Bearer ' + token } }); }
+  saveCompany(data) { return http.post(`/companies/save/`,  data, header());  }
   loadWorkers(dbId) { return http.get(`/workers/${dbId}`, header()); }
   loadWorkerData(dbId, idUser) { return http.get(`/workerdata/${dbId}%${idUser}`, header()); }
 

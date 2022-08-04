@@ -45,7 +45,7 @@ export default function ROLES() {
     const canEdit = FIND_PERMIT(permits, 'roles', 3);
     const canDelete = FIND_PERMIT(permits, 'roles', 4);
 
-    const dangerous = <Tooltip2 content={'THIS IS A DANGEROUS ACTION'}><CgDanger className='text-danger' /> </Tooltip2>
+    const dangerous = <Tooltip2 content={trn.danger}><CgDanger className='text-danger' /> </Tooltip2>
 
     var [load, setLoad] = useState(0);
     var [data, setData] = useState([]);
