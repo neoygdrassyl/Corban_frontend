@@ -21,4 +21,10 @@ const header = () => {
   return { headers: { Authorization: 'Bearer ' + token, dbIndex: connection.conn || '', dbId: connection.id, userId : userInfo.id} }
 }
 
-  export { fakeAuthProvider, header };
+const Logheader = () => {
+  let token = localStorage.getItem('corban_jwt');
+
+  return { headers: { Authorization: 'Bearer ' + token} }
+}
+
+  export { fakeAuthProvider, header, Logheader };

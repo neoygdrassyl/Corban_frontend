@@ -80,6 +80,8 @@ export default function DOVELA_CONFIG() {
     ]
 
     const SYSTEM_CONFIG_VARS = [
+        { id: 'factor_m', name: 'Factor municipal', ph: '0.760', dv: conn.technicalInfo.m,
+        help: 'Indice dado a cada curaduria para el calculo de sus expensas.' },
         { id: 'law', name: 'Nombre Subdirector', ph: 'DRA. MARÍA MARGARITA JEREZ', dv: conn.technicalInfo.law,
         help: 'Profesional adicional que puede firmar los documentos expedidos.' },
         { id: 'lawt', name: 'Titulo Subdirector', ph: 'Asesora Jurídica', dv: conn.technicalInfo.lawt, 
@@ -150,6 +152,7 @@ export default function DOVELA_CONFIG() {
         technicalInfo.imgs = {}
         technicalInfo.email = {}
 
+        technicalInfo.m = document.getElementById('factor_m').value;
         technicalInfo.law = document.getElementById('law').value;
         technicalInfo.lawt = document.getElementById('lawt').value;
         //technicalInfo.concent = document.getElementById('concent').value;

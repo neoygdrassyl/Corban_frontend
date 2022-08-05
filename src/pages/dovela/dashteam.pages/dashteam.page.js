@@ -3,15 +3,18 @@ import { Badge, Button, ButtonGroup, Col, Divider, Grid, IconButton, Loader, Mes
 
 // ICONS
 import { BiBuildingHouse } from 'react-icons/bi'
-import { VscLaw } from 'react-icons/vsc'
+import { BsBookmarkCheck } from 'react-icons/bs'
 import { IoDocumentAttachOutline } from 'react-icons/io5'
 import { BiLinkExternal } from 'react-icons/bi'
-import { BsSignpost2 } from 'react-icons/bs'
+import { RiBook2Line } from 'react-icons/ri'
+import { BiCalculator } from 'react-icons/bi'
 import PeoplesIcon from '@rsuite/icons/Peoples';
 import UserInfoIcon from '@rsuite/icons/UserInfo';
 import InfoRoundIcon from '@rsuite/icons/InfoRound';
 import SearchPeopleIcon from '@rsuite/icons/SearchPeople';
 import ToolsIcon from '@rsuite/icons/Tools';
+import MessageIcon from '@rsuite/icons/Message';
+
 //
 
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +24,7 @@ import { ALERT_ERROR, ALERT_ERROR_NOACTIVE, ALERT_ERROR_NOACTIVETEAM, ALERT_NO_P
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { Alert } from '@blueprintjs/core';
 import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
+import PATCH_NOTES from '../../../resources/customs/components/patchnotes.component';
 
 
 export default function DashboardTeam() {
@@ -52,6 +56,10 @@ export default function DashboardTeam() {
         else auth.clearConn(() => { });
     }
 
+    // ADMIN : BILLING, DOCUMENTATIO API, TEMPLATES (ARC, RES, TAXES)
+    // MODULES:  SUBMIT - FUN RAD - FUN MANAGE - PH - PUBLISH - ARHIVE
+    // MODULES OTHER: NOMENCLATURE - URBAN NORM - PQRS
+    // TOOLS: DICTIONARY - CALC - DICTIONARY - CERTIFICATIONS
     const DASHBOARD_INFO = [
         {
             header: "VENTANILLA ÚNICA",
@@ -60,40 +68,29 @@ export default function DashboardTeam() {
             color: "violet",
             to: "/submit"
         },
+    ]
+
+    const TOOL_INFO = [
         {
-            header: "LICENCIAS Y SOLICITUDES",
-            icon: <BiBuildingHouse style={{ fontSize: '5em' }} />,
-            text: "Administra las licencias y otras actuaciones de la Organizacion, permite el seguimiento de desistimientos y el analisis mediante graficas.",
+            header: "CALCULADORA",
+            icon: <BiCalculator style={{ fontSize: '5em' }} />,
+            text: "Calculadora de expensas fijas y varibles, tablas de precios y gestor de costos de impuestos.",
             color: "blue",
-            to: "/fun"
+            to: "/submit"
         },
         {
-            header: "PQRS",
-            icon: <VscLaw style={{ fontSize: '5em' }} />,
-            text: "Administra y gestiona los procesos de Peticioes, Quejas, Reclamos y Soliciudes de la organizacion.",
+            header: "DICCIOARIO",
+            icon: <RiBook2Line style={{ fontSize: '5em' }} />,
+            text: "Conglomerado de todos los concecutivos de control, de los profesionales y actuadores de las licencias",
+            color: "green",
+            to: "/submit"
+        },
+        {
+            header: "CERTIFICACION",
+            icon: <BsBookmarkCheck style={{ fontSize: '5em' }} />,
+            text: "Genera un documento especial de certificacion profesional y de vecinoss.",
             color: "red",
-            to: "/fun"
-        },
-        {
-            header: "ARCHIVO",
-            icon: <BsSignpost2 style={{ fontSize: '5em' }} />,
-            text: "Gestiona el proceso de nomenclaturas de la organizacion.",
-            color: "green",
-            to: "/fun"
-        },
-        {
-            header: "DICCIONARIO",
-            icon: <BsSignpost2 style={{ fontSize: '5em' }} />,
-            text: "Gestiona el proceso de nomenclaturas de la organizacion.",
-            color: "green",
-            to: "/fun"
-        },
-        {
-            header: "PUBLICACIONES",
-            icon: <BsSignpost2 style={{ fontSize: '5em' }} />,
-            text: "Gestiona el proceso de nomenclaturas de la organizacion.",
-            color: "green",
-            to: "/fun"
+            to: "/submit"
         },
     ]
 
@@ -108,11 +105,11 @@ export default function DashboardTeam() {
             <Row className="text-center">
                 <Link to={props.to}><IconButton icon={props.icon} circle size="lg" color={props.color} appearance='primary' /></Link>
             </Row>
-            <Row className="text-justify">
+            <Row className="text-justify m-1">
                 {props.text}
             </Row>
             <Row className="text-right">
-                <Link to={props.to}><h6 className="text-secondary">Continuar a modulo</h6></Link>
+                <Link to={props.to}><h6 className="text-secondary">Continuar...</h6></Link>
             </Row>
         </Panel>
     );
@@ -121,10 +118,10 @@ export default function DashboardTeam() {
         return <>
             <Row style={{ width: '100%' }}>
 
-                <Col xs={24} sm={24} md={12} lg={16} xl={16} xxl={16}>
+                <Col  xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
                     <Panel className="border">
                         <Row className="text-center" style={{ width: '100%' }} >
-                            <h4>{connection.name}</h4>
+                            <h5>{connection.name}</h5>
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
@@ -174,13 +171,9 @@ export default function DashboardTeam() {
                                 <label className="fw-b"><a href={connection.companiyInfo.page} target="_blank"><BiLinkExternal style={{ paddingTop: '1px' }} />{connection.companiyInfo.page}</a></label>
                             </Col>
                         </Row>
-                    </Panel>
-                </Col>
-
-                <Col xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
-                    <Panel className="border">
+                        <br/>
                         <Row className="text-center" style={{ width: '100%' }} >
-                            <h4>INFORMCION DE ROLES</h4>
+                            <h5>INFORMCION DE ROLES</h5>
                         </Row>
                         {connection.active == 0 && !isSuperAdmin?
                             <Row>
@@ -208,6 +201,16 @@ export default function DashboardTeam() {
                                 <label className=''>COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL. </label>
                             </Col>
                         </Row> : ''}
+
+                    </Panel>
+                </Col>
+
+                <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
+                    <Panel className="border">
+                        <Row className="text-center" style={{ width: '100%' }} >
+                            <h5>ULTIMAS NOTAS DE PARCHE</h5>
+                            <PATCH_NOTES type='dovela' />
+                        </Row>
                     </Panel>
                 </Col>
             </Row>
@@ -218,6 +221,18 @@ export default function DashboardTeam() {
             <Divider>MODULOS</Divider>
             <Row className="my-6" style={{ width: '100%' }}>
                 {DASHBOARD_INFO.map(it => <Col lg={4} md={6} sm={12} xs={24}>
+                    <Card
+                        {...it}
+                    />
+                </Col>)}
+            </Row>
+        </>
+    }
+    let _COMPONENT_TOOLS_SELECTOR = () => {
+        return <>
+            <Divider>HERRAMIENTAS</Divider>
+            <Row className="my-6" style={{ width: '100%' }}>
+                {TOOL_INFO.map(it => <Col lg={4} md={6} sm={12} xs={24}>
                     <Card
                         {...it}
                     />
@@ -266,14 +281,8 @@ export default function DashboardTeam() {
                                     </Message>
                                 </Col>
                                 <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                    <Message className="pointer my-1"
-                                        header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} BILLIG</label>} style={{ backgroundColor: 'MediumOrchid' }}>
-                                        <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
-                                    </Message>
-                                </Col>
-                                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                    <Message className="pointer my-1"
-                                        header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} AUDITS</label>} style={{ backgroundColor: 'LightSeaGreen' }}>
+                                    <Message className="pointer my-1" onClick={() => nagivate('/daudit')}
+                                        header={<label className='text-light fw-b'>{<MessageIcon style={{ fontSize: '24px' }} />} AUDITS</label>} style={{ backgroundColor: 'LightSeaGreen' }}>
                                         <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
                                     </Message>
                                 </Col>
@@ -340,6 +349,7 @@ export default function DashboardTeam() {
                             _COMPONENT_MANAGE_COMPANY() : ''
                         }
                         {_COMPONENT_MODULE_SELECTOR()}
+                        {_COMPONENT_TOOLS_SELECTOR()}
                     </>
                     : "NO WORK TEAMS FOUNDS"}
         </div>

@@ -1,5 +1,5 @@
 import http from "../../http-common";
-import { header } from "../auth/auth";
+import { header, Logheader } from "../auth/auth";
 
 class AtuhService {
   appLogin(data) { return http.post(`/login`, data); }
@@ -19,13 +19,20 @@ class AtuhService {
   appResetVerify(token) { return http.get(`/resetverify`, { headers: { Authorization: 'Bearer ' + token } }); }
 
   loadCompanies(idUser, token) { return http.get(`/companies/${idUser}`, { headers: { Authorization: 'Bearer ' + token } }); }
-  saveCompany(data) { return http.post(`/companies/save/`,  data, header());  }
+  saveCompany(data) { return http.post(`/companies/save/`, data, header()); }
   loadWorkers(dbId) { return http.get(`/workers/${dbId}`, header()); }
   loadWorkerData(dbId, idUser) { return http.get(`/workerdata/${dbId}%${idUser}`, header()); }
 
   // NOTIFICATIONS
   loadAllNots(email) { return http.get(`/notifications/${email}`); }
   markNots(data) { return http.post(`/notifications/mark`, data) }
+
+  // REPORT  BUG
+  reportBug(data) { return http.post(`/bugs`, data, Logheader()); }
+
+  // LOAD AUDITS
+  loadAuditTeam() { return http.get(`/audit/team`, header()); }
+  loadAuditApp() { return http.get(`/audit/app`, header()); }
 }
 
 export default new AtuhService();

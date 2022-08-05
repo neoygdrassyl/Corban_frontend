@@ -13,7 +13,7 @@ export let translations = {
     topBar: {
         en: {
             home: 'HOME',
-            bedrock: 'BEDROCK',
+            bedrock: 'DOVELA',
             lang: 'LANGUAGE',
             log: 'LOG IN',
             sign: 'SIGN IN',
@@ -23,10 +23,19 @@ export let translations = {
             t_dark: 'Dark Mode',
             t_light: 'Light Mode',
             t_contrast: 'Hight Constrast Mode',
+            bug_title : 'REPORT A BUG',
+            bug_body : 'In order to ensure maximum quality for our products and services, it is important to follow a constant process of updates that correct all errors that arise. Use this form to report a bug.',
+            FORM: [
+                {label: 'Product', ph: 'Product', options: ['Dovela', 'Other'], values: ['dovela', 'other']},
+                {label: 'Information about the bug', ph: `Description of the error:\n\nWhat were you doing?\n\nWhat result did you expect?\n\nWhat actually happened?\n\nCan you reproduce the error? how?\n`}
+            ],
+            menu: [
+                'Notificacions', 'My projects', 'My teams', 'Configuration', 'Help', 'Report bug'
+            ],
         },
         es: {
             home: 'INICIO',
-            bedrock: 'BEDROCK',
+            bedrock: 'DOVELA',
             lang: 'IDIOMA',
             log: 'INICIAR SESIÓN',
             sign: 'REGISTRARSE',
@@ -36,6 +45,15 @@ export let translations = {
             t_dark: 'Tema Oscuro',
             t_light: 'Tema Claro',
             t_contrast: 'Alto Contraste',
+            bug_title : 'REPORTAR UN ERROR',
+            bug_body : 'Para poder asegurar un máximo de calidad para nuestros productos y servicios, es impórtate seguir un proceso constante de actualizaciones que corrijan todos los errores que se presenten. Utilice este formulario para reportar un error.',
+            FORM: [
+                {label: 'Producto', ph: 'Producto', options: ['Dovela', 'Otro'], values: ['dovela', 'other']},
+                {label: 'Información acerca del error', ph: `Descripción del error:\n\n¿Que estaba haciendo?\n\n¿Que resultado esperaba?\n\n¿Que paso en realidad?\n\n¿Puede reproducir el error? ¿como?\n` }
+            ],
+            menu: [
+                'Notificaciones', 'Mis proyectos', 'Mis equipos', 'Configuración', 'Ayuda', 'Reportar error'
+            ],
         }
     },
     footer: {
@@ -115,6 +133,7 @@ export let translations = {
             confirm: 'CONFIRM',
             close: 'CLOSE',
             nopermit: 'THIS USER HAS NO PERMITS',
+            send: 'SEND',
         },
         es: {
             save: 'GUARDAR',
@@ -130,6 +149,7 @@ export let translations = {
             confirm: 'CONFIRMAR',
             close: 'CERRAR',
             nopermit: 'ESTE USUARIO NO TIENE PERMISOS',
+            send:'ENVIAR',
         }
 
     },
@@ -244,7 +264,20 @@ export let translations = {
             _validate_rps: (name) => `El campo ${name} debe coincidir.`,
         }
     },
-
+    patchNotes: {
+        en: {
+            seall: 'See All',
+            seallt: 'See all Patch Notes',
+            changes: 'CHANGES',
+            bugfix: 'BUG FIXES',
+        },
+        es: {
+            seall: 'Ver todos',
+            seallt: 'Ver todos los parches de notas',
+            changes: 'CAMBIOS',
+            bugfix: 'CORRECIONES DE ERRORES',
+        }
+    },
 
     // ******************** PAGES ************************ // 
     login: {
@@ -1149,11 +1182,11 @@ export let translations = {
                     focus: 'title',
                 },
                 {
-                    title: 'ARRA DE BÚSQUEDA',
+                    title: 'BARRA DE BÚSQUEDA',
                     content:  <>Este botón permite filtrar la <strong>LISTA DE TRABAJADORES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>NOMBRE DEL TRABAJADOR</strong> y < strong>FUNCIONES DEL TRABAJADOR</strong>.</>,
                     component: <div class="bp4-input-group .modifier">
                         <span class="bp4-icon bp4-icon-search"></span>
-                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <input type="text" class="bp4-input" placeholder={'Buscar...'} />
                         <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
                     </div>,
                     focus: 'search',
@@ -1175,5 +1208,90 @@ export let translations = {
                 },
             ],
         }
-    }
+    },
+    audits: {
+        en: {
+            title: 'TEAM AUDIT',
+            tableHdTeam: 'MAIN EVENT AUDIT',
+            tableHdApp: 'SPECIAL EVENT AUDIT',
+            tableCl: ['EVENT', 'DETAILS', 'PERFORMING USER', 'DATE & TIME'],
+            btn_help_tile: 'TEAM AUDIT',
+            btn_help_body: 'This module contains an entry of every important actions that has happened in the team, who dit it and when.',
+            HELP_PAGE: [
+                {
+                    title: 'MAIN EVENT AUDIT',
+                    content: 'This list tracks all main actions in the team, related directly to the control and flow of processes.',
+                    focus: 'title',
+                },
+                {
+                    title: 'SPECIAL EVENT AUDIT',
+                    content: 'This list tracks all special actions in the team, related mostly to the control and administration of the team.',
+                    focus: 'title2',
+                },
+
+                {
+                    title: 'TABLE COLUMNS',
+                    content: 'Both lists share the same columns but show different data.',
+                    focus: 'list', list: [
+                        { subtitle: 'EVENT', text: 'The name of the action that happened, divided in type and module, type can be among create, update, delete and others.' },
+                        { subtitle: 'DETAILS', text: 'What was modified specifically, the systems saves the target values and not the previous ones.' },
+                        { subtitle: 'PERFORMING USER', text: 'Name of the user that performed the action, internally it also saves the ID of the user in case there is an ambiguity issue.' },
+                        { subtitle: 'DATE & TIME', text: 'The moment the action was performed, saved in ISO Format 8601 at UTC-05:00.' },
+                    ]
+                },
+                {
+                    title: 'SEARCH BAR',
+                    content: <>This button allows filtering the <strong>MAIN EVENT AUDIT & SPECIAL EVENT AUDIT</strong> lits in order to find one specific entry. To use the search bar, input into the text bar next to the button the value to look for and press the button or press the key Enter.<br />The search patterns can be <strong>EVENT</strong>, <strong>PERFORMING USER</strong> & <strong>DATE & TIME</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+               
+            ],
+        },
+        es:{
+            title: 'AUDITORIA DEL EQUIPO',
+            tableHdTeam: 'EVENTOS PRINCIPALES',
+            tableHdApp: 'EVENTOS ESPECIALES',
+            tableCl: ['EVENTO', 'DETALLES', 'USUARIO QUE ACTUÓ', 'FECHA Y HORA'],
+            btn_help_tile: 'AUDITORIA DEL EQUIPO',
+            btn_help_body: 'Este modulo contiene inforacion sobre las acciones y eventualidades del equipo.',
+            HELP_PAGE: [
+                {
+                    title: 'EVENTOS PRINCIPALES',
+                    content: 'Esta lista rastrea todas las acciones principales en el equipo, relacionadas directamente con el control y flujo de procesos.',
+                    focus: 'title',
+                },
+                {
+                    title: 'EVENTOS ESPECIALES',
+                    content: 'Esta lista rastrea todas las acciones especiales en el equipo, relacionadas principalmente con el control y la administración del equipo.',
+                    focus: 'title2',
+                },
+                {
+                    title: 'COLUMNAS DE LAS LISTAS',
+                    content: 'Ambas listas comparten las mismas columnas pero muestran datos diferentes.',
+                    focus: 'list', list: [
+                        { subtitle: 'EVENTO', text: 'El nombre de la acción que sucedió, dividido en tipo y módulo, el tipo puede ser entre crear, actualizar, eliminar y otros.' },
+                        { subtitle: 'DETALLES', text: 'Lo que se modificó específicamente, el sistema guarda los valores objetivo y no los anteriores.' },
+                        { subtitle: 'USUARIO QUE ACTUÓ', text: 'Nombre del usuario que realizó la acción, internamente también guarda el ID del usuario por si hay algún problema de ambigüedad.' },
+                        { subtitle: 'FECHA Y HORA', text: 'El momento en que se realizó la acción, guardado en formato ISO 8601 en UTC-05:00.' },
+                    ]
+                },
+                {
+                    title: 'BARRA DE BÚSQUEDA',
+                    content:  <>Este botón permite filtrar laS listas de  <strong>EVENTOS PRINCIPALES & EVENTOS ESPECIALES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>EVENTO</strong>, <strong>USUARIO QUE ACTUÓ</strong> & < strong>FECHA Y HORA</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Buscar...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+               
+            ],
+        }
+    },
 }
