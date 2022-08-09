@@ -43,6 +43,8 @@ import RESET from "./pages/user/reset,pages/reset.page";
 import ACTIVATE from "./pages/user/activate.pages/activate.page";
 import DOVELA_CONFIG from "./pages/dovela/config.pages/config.page";
 import AUDITS_DOVELA from "./pages/dovela/audit.pages/audit.page";
+import CALCULATOR_DOVELA from "./pages/dovela/tools.pages/cacl.page";
+import TEMPLATES from "./pages/dovela/temaplates.pages/templates.page";
 
 
 
@@ -83,6 +85,9 @@ function App() {
                   <Route exact path="/workers" element={<WORKERS />} />
                   <Route exact path="/dconfig" element={<DOVELA_CONFIG />} />
                   <Route exact path="/daudit" element={<AUDITS_DOVELA />} />
+                  <Route exact path="/dtemplates" element={<TEMPLATES />} />
+
+                  <Route exact path="/dcalc" element={<CALCULATOR_DOVELA />} />
                 </Route>
               </Route>
 

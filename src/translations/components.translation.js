@@ -23,11 +23,11 @@ export let translations = {
             t_dark: 'Dark Mode',
             t_light: 'Light Mode',
             t_contrast: 'Hight Constrast Mode',
-            bug_title : 'REPORT A BUG',
-            bug_body : 'In order to ensure maximum quality for our products and services, it is important to follow a constant process of updates that correct all errors that arise. Use this form to report a bug.',
+            bug_title: 'REPORT A BUG',
+            bug_body: 'In order to ensure maximum quality for our products and services, it is important to follow a constant process of updates that correct all errors that arise. Use this form to report a bug.',
             FORM: [
-                {label: 'Product', ph: 'Product', options: ['Dovela', 'Other'], values: ['dovela', 'other']},
-                {label: 'Information about the bug', ph: `Description of the error:\n\nWhat were you doing?\n\nWhat result did you expect?\n\nWhat actually happened?\n\nCan you reproduce the error? how?\n`}
+                { label: 'Product', ph: 'Product', options: ['Dovela', 'Other'], values: ['dovela', 'other'] },
+                { label: 'Information about the bug', ph: `Description of the error:\n\nWhat were you doing?\n\nWhat result did you expect?\n\nWhat actually happened?\n\nCan you reproduce the error? how?\n` }
             ],
             menu: [
                 'Notificacions', 'My projects', 'My teams', 'Configuration', 'Help', 'Report bug'
@@ -45,11 +45,11 @@ export let translations = {
             t_dark: 'Tema Oscuro',
             t_light: 'Tema Claro',
             t_contrast: 'Alto Contraste',
-            bug_title : 'REPORTAR UN ERROR',
-            bug_body : 'Para poder asegurar un máximo de calidad para nuestros productos y servicios, es impórtate seguir un proceso constante de actualizaciones que corrijan todos los errores que se presenten. Utilice este formulario para reportar un error.',
+            bug_title: 'REPORTAR UN ERROR',
+            bug_body: 'Para poder asegurar un máximo de calidad para nuestros productos y servicios, es impórtate seguir un proceso constante de actualizaciones que corrijan todos los errores que se presenten. Utilice este formulario para reportar un error.',
             FORM: [
-                {label: 'Producto', ph: 'Producto', options: ['Dovela', 'Otro'], values: ['dovela', 'other']},
-                {label: 'Información acerca del error', ph: `Descripción del error:\n\n¿Que estaba haciendo?\n\n¿Que resultado esperaba?\n\n¿Que paso en realidad?\n\n¿Puede reproducir el error? ¿como?\n` }
+                { label: 'Producto', ph: 'Producto', options: ['Dovela', 'Otro'], values: ['dovela', 'other'] },
+                { label: 'Información acerca del error', ph: `Descripción del error:\n\n¿Que estaba haciendo?\n\n¿Que resultado esperaba?\n\n¿Que paso en realidad?\n\n¿Puede reproducir el error? ¿como?\n` }
             ],
             menu: [
                 'Notificaciones', 'Mis proyectos', 'Mis equipos', 'Configuración', 'Ayuda', 'Reportar error'
@@ -113,9 +113,11 @@ export let translations = {
     btnPdf: {
         en: {
             btn: 'GENERATE PDF',
+            btn2: 'GENERATE CSV',
         },
         es: {
             btn: 'GENERAR PDF',
+            btn2: 'GENERAR CSV',
         }
     },
     btns: {
@@ -134,6 +136,9 @@ export let translations = {
             close: 'CLOSE',
             nopermit: 'THIS USER HAS NO PERMITS',
             send: 'SEND',
+            build: 'BUILD',
+            calculate: 'CALCULATE',
+            download: 'DOWLOAD',
         },
         es: {
             save: 'GUARDAR',
@@ -149,7 +154,10 @@ export let translations = {
             confirm: 'CONFIRMAR',
             close: 'CERRAR',
             nopermit: 'ESTE USUARIO NO TIENE PERMISOS',
-            send:'ENVIAR',
+            send: 'ENVIAR',
+            build: 'COMPILAR',
+            calculate: 'CALCULAR',
+            download: 'DESCARGAR',
         }
 
     },
@@ -178,6 +186,7 @@ export let translations = {
     },
     nonIdealState: {
         en: {
+            more_info: 'MORE INFORMATION',
             error_title: 'THERE WAS A MISTAKE',
             error_body: 'An error occurred while loading the information, wait a few minutes before you try again.',
             noload_title: 'UNABLE TO LOAD',
@@ -188,8 +197,13 @@ export let translations = {
             permit_body: "The role of this user has no permits for this action, contact the team leader for more information about the user's role",
             nots_title: 'NO NOTIFICATIONS FOUND',
             nots_body: "No unseen notifications had been found, you are up-to-date.",
+            template_title: 'NOT A VALID TEMPLATE',
+            template_body: "The parser could not build the template properly, check your template model model for more information.",
+            no_templates_title: 'NO TEMPLATES FOUND',
+            no_templates_body: "No templates found for this query, check your templates for more information.",
         },
         es: {
+            more_info: 'MAS INFORMAIÓN',
             error_title: 'HUBO UN ERROR',
             error_body: 'Ocurrió un error al cargar la información, espera unos minutos antes de volver a intentarlo.',
             noload_title: 'NO SE PUEDE CARGAR',
@@ -200,6 +214,10 @@ export let translations = {
             permit_body: "El rol de este usuario no tiene permisos para esta acción, comuníquese con el líder del equipo para obtener más información sobre el rol del usuario",
             nots_title: 'NO SE ENCONTRARON NOTIFICACIONES',
             nots_body: "No se han encontrado notificaciones no vistas, estás actualizado.",
+            template_title: 'PLANTILLA NO VALIDA',
+            template_body: "El sistema no fue capas de compilar la plantilla, revise el modelo de plantilla para mas información.",
+            no_templates_title: 'NO SE ENCONTRARON PLANTILLAS',
+            no_templates_body: "Ninguna plantilla fue encontrada para esta solicitud, revise sus plantillas para mas informacion.",
         }
 
     },
@@ -273,12 +291,27 @@ export let translations = {
         },
         es: {
             seall: 'Ver todos',
-            seallt: 'Ver todos los parches de notas',
+            seallt: 'Ver todas las Notas de parches',
             changes: 'CAMBIOS',
             bugfix: 'CORRECIONES DE ERRORES',
         }
     },
-
+    bodyTemplates: {
+        en: {
+            mult: 'Multiplier',
+            round: 'Rounded',
+            r1000: 'To 1000 units',
+            value: 'Value',
+            form_calc: ['Tax', 'Tax specification', 'Area', 'Percentage %']
+        },
+        es: {
+            mult: 'Multipliador',
+            round: 'Redondeo',
+            r1000: 'A 1000 unidades',
+            value: 'Valor',
+            form_calc: ['Impuesto', 'Especificación de impuesto', 'Área', 'Porcentaje %']
+        }
+    },
     // ******************** PAGES ************************ // 
     login: {
         en: {
@@ -1129,8 +1162,8 @@ export let translations = {
             title: 'ROLE ASSIGNMENT OF WORKERS',
             tableHd: 'WORKERS LIST',
             tableCl: ['WORKER NAME', 'ROLES OF WORKER', 'ASIGN ROLES', 'ACTIVATE / DEACTIVATE'],
-            edit_rw : 'ASIGN ROLES TO WORKER',
-            admin_alert : 'This is an ADMIN role.',
+            edit_rw: 'ASIGN ROLES TO WORKER',
+            admin_alert: 'This is an ADMIN role.',
             btn_help_tile: 'ROLE ASSIGNMENT OF WORKERS',
             btn_help_body: 'This list allows to asign different roles to each worker.',
             HELP_PAGE: [
@@ -1168,22 +1201,22 @@ export let translations = {
 
         },
         es: {
-            title: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+            title: 'GESTIÓN DE TRABAJADORES',
             tableHd: 'LISTA DE TRABAJADORES',
             tableCl: ['NOMBRE DEL TRABAJADOR', 'FUNCIONES DEL TRABAJADOR', 'ESTABLECER FUNCIONES', 'HABILITAR / DESHABILITAR'],
-            edit_rw : 'ASIGNAR ROLES PARA TRABAJADOR',
-            admin_alert : 'Este es un rol de ADMINISTRADOR.',
-            btn_help_tile: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+            edit_rw: 'ASIGNAR ROLES PARA TRABAJADOR',
+            admin_alert: 'Este es un rol de ADMINISTRADOR.',
+            btn_help_tile: 'GESTIÓN DE TRABAJADORES',
             btn_help_body: 'Esta lista permite la asignacion de diferentes roles a los mienbros del equipo.',
             HELP_PAGE: [
                 {
-                    title: 'ASIGNACIÓN DE FUNCIONES DE LOS TRABAJADORES',
+                    title: 'GESTIÓN DE TRABAJADORES',
                     content: 'Este módulo administra la asignación de roles a los trabajadores del equipo, se pueden asignar múltiples roles a un solo trabajador, adicionalmente, los trabajadores del equipo también se pueden  HABILITAR / DESHABILITAR para negar todas sus funciones en el equipo ',
                     focus: 'title',
                 },
                 {
                     title: 'BARRA DE BÚSQUEDA',
-                    content:  <>Este botón permite filtrar la <strong>LISTA DE TRABAJADORES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>NOMBRE DEL TRABAJADOR</strong> y < strong>FUNCIONES DEL TRABAJADOR</strong>.</>,
+                    content: <>Este botón permite filtrar la <strong>LISTA DE TRABAJADORES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>NOMBRE DEL TRABAJADOR</strong> y < strong>FUNCIONES DEL TRABAJADOR</strong>.</>,
                     component: <div class="bp4-input-group .modifier">
                         <span class="bp4-icon bp4-icon-search"></span>
                         <input type="text" class="bp4-input" placeholder={'Buscar...'} />
@@ -1249,10 +1282,10 @@ export let translations = {
                     </div>,
                     focus: 'search',
                 },
-               
+
             ],
         },
-        es:{
+        es: {
             title: 'AUDITORIA DEL EQUIPO',
             tableHdTeam: 'EVENTOS PRINCIPALES',
             tableHdApp: 'EVENTOS ESPECIALES',
@@ -1282,7 +1315,7 @@ export let translations = {
                 },
                 {
                     title: 'BARRA DE BÚSQUEDA',
-                    content:  <>Este botón permite filtrar laS listas de  <strong>EVENTOS PRINCIPALES & EVENTOS ESPECIALES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>EVENTO</strong>, <strong>USUARIO QUE ACTUÓ</strong> & < strong>FECHA Y HORA</strong>.</>,
+                    content: <>Este botón permite filtrar laS listas de  <strong>EVENTOS PRINCIPALES & EVENTOS ESPECIALES</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de texto al lado del botón el valor a buscar y presione el botón o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>EVENTO</strong>, <strong>USUARIO QUE ACTUÓ</strong> & < strong>FECHA Y HORA</strong>.</>,
                     component: <div class="bp4-input-group .modifier">
                         <span class="bp4-icon bp4-icon-search"></span>
                         <input type="text" class="bp4-input" placeholder={'Buscar...'} />
@@ -1290,7 +1323,284 @@ export let translations = {
                     </div>,
                     focus: 'search',
                 },
-               
+
+            ],
+        }
+    },
+    dashteam: {
+        en: {
+            title: 'WORK TEAM',
+            role_title: 'ROLES INFORMATION',
+            team_data: ['LEADER', 'LOCATION', 'NUMBERS', 'EMAILS', 'ADDRESS', 'WEB PAGE'],
+            role_data: ['ROLE', 'NO ROLES ASIGNED TO THIS USER', 'COMUNICATE WITH YOUR TEAM LEADER IN ORDER TO BE SET A NEW ROLE', 'DEACTIVATED USER', 'This user has been deactivated and cannot perfom any action, comunicate to your team leader for more information.'],
+            patch: 'LAST PATCH NOTES DOVELA',
+            admin_title: 'ADMINISTRATE',
+            modules_title: 'MODULES',
+            tools_title: 'TOOLS',
+            continue: 'Continue...',
+            wait: 'WAIT A MOMENT PLEASE...',
+            admin: [
+                { title: 'INVITE WORKER', desc: 'Send and invitation to others users to be part of this team.' },
+                { title: 'ROLES MANAGEMENT', desc: 'Creates and sets the different roles of the team, allows setting permits to each role.' },
+                { title: 'WORKERS MANAGEMENT', desc: 'Allows to set different roles to each member of the team. At least one role and one member must be associated to the team.' },
+                { title: 'VARIABLES CONFIGURATION', desc: 'Configure different variables that Dovela will use. Allows to set public, system and email variables amongst others.' },
+                { title: 'AUDITS', desc: 'Shows all the events and updates of the team through all the different modules.' },
+                { title: 'BILLING', desc: 'Shows the total usage of storage of the system.' },
+                { title: 'DOCUMENTATION API', desc: 'Information and documentation on how to synchronize the data of the system withing your personal web page.' },
+                { title: 'TEMPLATES', desc: 'Special templates that Dovela uses in order to create custom Architecture reports, Resolutions and Tax bills.' },
+            ],
+            modules: [
+                { title: 'FILING BOOTH', desc: 'Manages the entry of documents of the organization through the use of an Entry code that is unique for each one.' },
+                { title: 'PUBLICATIONS', desc: 'Manages publications of all documents from the organization, in order to be listed publicly' },
+                { title: 'FILL LICENSE', desc: 'Manages the creation of new license process, allows the synchronization of these process with the projects generated by users.' },
+                { title: 'CONTROL LICENSE', desc: 'Controls the flow and progress of the process, through the used of various charts and tables.' },
+                { title: 'HORIZONTAL PROPERTY', desc: 'Manages and controls the PH processes of the organization.' },
+                { title: 'ARCHIVE', desc: 'Allows to view all the digitalized documents of all the licenses easily, additionally allows to associate a digital position to a physical one.' },
+                { title: 'URBAN NORM', desc: 'Manages and control the Urban Norms processes of the organization.' },
+                { title: 'NOMENCLATURES', desc: 'Creates a nomenclature entry in the system.' },
+                { title: 'PQRS', desc: 'Creates and manages the process of all the PQRS requests of the organization.' },
+            ],
+            tools: [
+                { title: 'CALCULATOR', desc: 'Useful for generating a quick overview of fixed and variables costs for each type of license.' },
+                { title: 'DICTIONARY', desc: 'A ledger containing the lists of all the unique codes and ids generated by Dovela.' },
+                { title: 'CERTIFICATIONS', desc: 'Generates and lists special certifications useful for professionals or neighbors that are interested in a license.' },
+            ]
+        },
+        es: {
+            title: 'EQUIPO DE TRABAJO',
+            role_title: 'NFORMACIÓN DE FUNCIONES',
+            team_data: ['LÍDER', 'UBICACIÓN', 'TELEFONOS', 'CORREOS', 'DIRECCIÓN', 'PÁGINA WEB'],
+            role_data: ['ROL', 'NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO', 'COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL.', 'TRABAJADOR DESHABILITADO', 'Este trabajador ha sido desactivado por el administrador y no puede realizar ninguna acción, comuníquese con el director del equipo para mos información.'],
+            patch: 'ULTIMAS NOTAS DE PARCHE DOVELA',
+            admin_title: 'ADMINISTRAR',
+            modules_title: 'MÓDULOS',
+            tools_title: 'HERRAMIENTAS',
+            continue: 'Continuar...',
+            wait: 'ESPERE UN MOMENT POR FAVOR...',
+            admin: [
+                { title: 'INVITAR TRABAJADOR', desc: 'Enviar una invitación a otros usuarios para que formen parte de este equipo.' },
+                { title: 'ADMINISTRACIÓN DE ROLES', desc: 'Crea y establece los diferentes roles del equipo, permite configurar permisos para cada rol.' },
+                { title: 'GESTIÓN DE TRABAJADORES', desc: 'Permite establecer diferentes roles para cada miembro del equipo. Al menos un rol y un miembro deben estar asociados al equipo.' },
+                { title: 'CONFIGURACIÓN DE VARIABLES', desc: 'Configurar diferentes variables que utilizará Dovela. Permite establecer variables públicas, de sistema y de correo electrónico, entre otras.' },
+                { title: 'AUDITORIAS', desc: 'Muestra todos los eventos y actualizaciones del equipo a través de todos los diferentes módulos.' },
+                { title: 'FACTURACIÓN', desc: 'Muestra el uso total de almacenamiento del sistema.' },
+                { title: 'DOCUMENTACIÓN API', desc: 'Información y documentación sobre cómo sincronizar los datos del sistema con su página web personal.' },
+                { title: 'PLANTILLAS', desc: 'Plantillas especiales que utiliza Dovela para crear informes de Arquitectura personalizados, Resoluciones y Facturas de Impuestos.' },
+            ],
+            modules: [
+                { title: 'VENTANILLA ÚNICA DE RADICACIÓN', desc: 'Gestiona el ingreso de documentos de la organización mediante el uso de un código de Ingreso único para cada uno.' },
+                { title: 'PUBLICACIONES', desc: 'Gestiona las publicaciones de todos los documentos de la organización, con el fin de ser listados públicamente' },
+                { title: 'RADICAR LICENCIAS', desc: 'Gestiona el proceso de creación de nuevas licencias, permite sincronizar estos procesos con los proyectos generados por los usuarios.' },
+                { title: 'CONTROL LICENCIAS', desc: 'Controla el flujo y el progreso del proceso, mediante el uso de varios gráficos y tablas.' },
+                { title: 'PROPIEDAD HORIZONTAL', desc: 'Gestiona y controla los procesos de PH de la organización.' },
+                { title: 'ARCHIVO', desc: 'Permite visualizar fácilmente todos los documentos digitalizados de todas las licencias, adicionalmente permite asociar una posición digital a una física.' },
+                { title: 'NORMA URBANA', desc: 'Gestiona y controla los procesos de Normas Urbanas de la organización.' },
+                { title: 'NOMENCLATURAS', desc: 'Crea una entrada de nomenclatura en el sistema.' },
+                { title: 'PQRS', desc: 'Crea y gestiona el proceso de todas las solicitudes PQRS de la organización.' },
+            ],
+            tools: [
+                { title: 'CALCULADORA', desc: 'Útil para generar un resumen rápido de costos fijos y variables para cada tipo de licencia.' },
+                { title: 'DICCIONARIOS', desc: 'Un libro de contabilidad que contiene las listas de todos los códigos e identificaciones únicos generados por Dovela.' },
+                { title: 'CERTIFICACIONES', desc: 'Genera y enumera certificaciones especiales útiles para profesionales o vecinos que estén interesados en una licencia.' },
+            ]
+        }
+    },
+    templates: {
+        en: {
+            title: 'Templates',
+            tableHd: 'TEMPLATE LIST',
+            tableCl: ['TEMPLATE NAME', 'TEMPLATE TYPE', 'ACTION'],
+            template_types: { calc: 'Tax calculation', tax: 'Tax bill', arc: 'Architecture Stufy', res: 'Resolution' },
+            template_types_info: {
+                calc: <>This template is use for the calculators, allows creating a customized calculator that will process all tax expenses. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong></>,
+                tax: <>This template creates a form that can be filled with variable information to later generate a PDF with a tax bill. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong> </>,
+                arc: <>These templates creates a form to control the Architecture study of each license. The system saves both the template and the data it was created with and uses this to generate the final PDF of the study. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></>,
+                res: <>This template creates a form to control the resolutions of each license, when saving a resolution, the systems saves both the template and the data it was created with and uses this to generate the final PDF of the resolution. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></>,
+            },
+            template_model: 'Tempplate model',
+            template_body: 'Template output',
+            form: ['Template name', 'Template type'],
+            btn_help_tile: 'TEMPLATES',
+            btn_help_body: 'This module allows the creation of templates, these are usefull tools to process iformation custom tailored for the team processes.',
+            HELP_PAGE: [
+                {
+                    title: 'TEMPLATE LIST',
+                    content: 'This list tracks all templates generated in the system.',
+                    focus: 'title', list: [
+                        { subtitle: 'TEMPLATE NAME', text: 'Name that identified the template.' },
+                        { subtitle: 'TEMPLATE TYPE', text: 'The type of the template, there are four different types of templates: Tax calculations, Tax bill, Architecture study and Resolution' },
+                        { subtitle: 'ACTION', text: 'Allows editing and deleting the different templates.' },
+                        { subtitle: 'EXPANDABLE', text: '(Little arrow at the start of each row) Opens the template model editor, which allows to saves and build the template model, giving a preview how the final product will look.' },
+                    ]
+                },
+                {
+                    title: 'NEW',
+                    content: 'This button opens a new subwindow with a filling form which allows creation of a new template. The description of the form fields are as follows.',
+                    btn: 'NEW', btnColor: 'success', btnIcon: 'add',
+                    list: [
+                        { subtitle: 'TEMPLATE NAME', text: 'The name of the template, this is a open text input.' },
+                        { subtitle: 'TEMPLATE TYPE', text: 'The type of the template, this is a select with four possible options: Tax calculations, Tax bill, Architecture study and Resolution' },
+                    ],
+                    focus: 'new',
+                },
+                {
+                    title: 'SEARCH BAR',
+                    content: <>This button allows filtering the <strong>TEMPLATE LIST</strong> in order to find one specific entry. To use the search bar, input into the text bar next to the button the value to look for and press the button or press the key Enter.<br />The search patterns can be <strong>TEMPLATE NAME</strong> & <strong>TEMPLATE NAME</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Search...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACTION: EDIT',
+                    content: 'This button opens a new window where the user can update the data and properties of the Item.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACTION: DELETE',
+                    content: <>This button is considered a <label style={{ color: 'red' }}>DANGEROUS ACTION</label>. This button allows the user to delete this Item and all its children and dependencies.</>,
+                    focus: 'delete', icon: <RiDeleteBinLine className='text-danger' size={'24px'} />
+                },
+                {
+                    title: 'TEMPLATE TYPES',
+                    content: 'There are four different types of templates, each one with a different purpose.',
+                    focus: 'tenplate_list', list: [
+                        { subtitle: 'Tax calculation', text: <>This template is use for the calculators, allows creating a customized calculator that will process all tax expenses. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong></> },
+                        { subtitle: 'Tax bill', text: <>This template creates a form that can be filled with variable information to later generate a PDF with a tax bill. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong> </> },
+                        { subtitle: 'Architecture study', text: <>These templates creates a form to control the Architecture study of each license. The system saves both the template and the data it was created with and uses this to generate the final PDF of the study. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></> },
+                        { subtitle: 'Resolution', text: <>This template creates a form to control the resolutions of each license, when saving a resolution, the systems saves both the template and the data it was created with and uses this to generate the final PDF of the resolution. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></> },
+                    ]
+                },
+                {
+                    title: <label className='text-primary fw-b'>MODELING TEMPLATES</label>,
+                    content: 'Each template type has their own model that determines their structure and physical attributes, but in general they all consist in text based models, which the system parsers to create the output product, the syntax and structure to each one of the these models varies from each type. Once modelled, the model can be saved or built to have an overview of the final product.',
+                    focus: 'create',
+                },
+                {
+                    title: 'SAVE',
+                    content: 'Saves the model of the template.',
+                    btn: 'SAVE', btnColor: 'success', btnIcon: 'floppy-disk',
+                    focus: 'save',
+                },
+                {
+                    title: 'BUILD',
+                    content: 'Compiles the current model and creates a preview of the output product, if the text in the input is not valid, it will inform of a failed build model.',
+                    btn: 'BUILD', btnColor: 'warning', btnIcon: 'build',
+                    focus: 'build',
+                },
+                {
+                    title: <label className='text-primary fw-b'>MODELING TEMPLATES: TAX CALCULATION</label>,
+                    content: <><p>The default model of this template is:</p>
+                        <p className='fw-b'>@[PARENT_NAME] : r p <br />
+                            #[CHILD_NAME] : mult <br />
+                            #[CHILD_NAME] : mult</p>
+                            <p>The model consists of an N number of rows, each one containing: [name] : [options]</p>
+                        <p>The first line starts with <strong className='fw-b'>@</strong> and determines the name of the tax to calculate, the options for these lines are <strong className='fw-b'>r</strong> for rounded, which rounds the final value to thousands and <strong className='fw-b'>p</strong> for percentage, which allows to calculate a percentage of the total value. </p>
+                        <p>After the first line, the children are next, identified with the <strong className='fw-b'>#</strong>, they can be N total and have the option <strong className='fw-b'>mult</strong> which is a numeric value that will calculate the final value (value = mult * area), if mult is not a number the system can determine, it will use the default value 1000.</p>
+                    </>,
+                    focus: 'create_tc',
+                },
+            ],
+        },
+        es: {
+            title: 'Plantillas',
+            tableHd: 'LISTA DE PLANTILLAS',
+            tableCl: ['NOMBRE DE PLANTILLA', 'TIPO DE PLANTILLA', 'ACCIÓN'],
+            template_types: { calc: 'Cálculo de impuesto', tax: 'Liquidación de impuesto', arc: 'Estudio arquitectÓnico', res: 'Resolución' },
+            template_types_info: {
+                calc: <>Esta plantilla se usa para las calculadoras, permite crear una calculadora personalizada que procesará todos los gastos de impuestos. <strong>Editar o eliminar una plantilla existente no tendrá un impacto importante en los procesos.</strong></>,
+                tax: <>Esta plantilla crea un formulario que se puede llenar con información variable para luego generar un PDF con una factura de impuestos. <strong>Editar o eliminar una plantilla existente no tendrá mayor impacto en los procesos.</strong></>,
+                arc: <>Estas plantillas crean un formulario para controlar el estudio de Arquitectura de cada licencia. El sistema guarda tanto la plantilla como los datos con los que se creó y los utiliza para generar el PDF final del estudio. <strong className='text-danger'>Editar o eliminar una plantilla existente TENDRÁ un gran impacto en la licencia, por lo que se recomienda en su lugar crear una nueva plantilla y aplicarla a las licencias afectadas.</strong></>,
+                res: <>Esta plantilla crea un formulario para controlar las resoluciones de cada licencia, al guardar una resolución, el sistema guarda tanto la plantilla como los datos con los que se creó y los usa para generar el PDF final de la resolucion <strong className='text-danger'>Editar o eliminar una plantilla existente TENDRÁ un gran impacto en la licencia, por lo que se recomienda en su lugar crear una nueva plantilla y aplicarla a las licencias afectadas.</strong></>,
+            },
+            template_model: 'Modelo de plantilla',
+            template_body: 'Salidad de plantilla',
+            form: ['Nombre de plantilla', 'Tipo de plantilla'],
+            btn_help_tile: 'PLANTILLAS',
+            btn_help_body: 'Este módulo permite la creación de plantillas, estas son herramientas útiles para procesar información personalizada para los procesos del equipo.',
+            
+            HELP_PAGE: [
+                {
+                    title: 'LISTA DE PLANTILLAS',
+                    content: 'Esta lista rastrea todas las plantillas generadas en el sistema.',
+                    foco: 'title', list: [
+                        { subtítulo: 'NOMBRE DE LA PLANTILLA', texto: 'Nombre que identificó la plantilla.' },
+                        { subtitle: 'TIPO DE PLANTILLA', text: 'El tipo de plantilla, hay cuatro tipos diferentes de plantillas: Cálculo de impuestos, Factura de impuestos, Estudio de arquitectura y Resolución' },
+                        { subtítulo: 'ACCIÓN', texto: 'Permite editar y eliminar las diferentes plantillas.' },
+                        { subtitle: 'EXPANDIBLE', text: '(Pequeña flecha al comienzo de cada fila) Abre el editor de modelo de plantilla, que permite guardar y construir el modelo de plantilla, brindando una vista previa de cómo se verá el producto final.' },
+                    ]
+                },
+                {
+                    title: 'NUEVO',
+                    content: 'Este botón abre una nueva subventana con un formulario de llenado que permite la creación de una nueva plantilla. La descripción de los campos del formulario es la siguiente.',
+                    btn: 'NUEVO', btnColor: 'success', btnIcon: 'add',
+                    lista: [
+                        { subtítulo: 'NOMBRE DE LA PLANTILLA', texto: 'El nombre de la plantilla, esta es una entrada de texto abierta.' },
+                        { subtitle: 'TIPO DE PLANTILLA', text: 'El tipo de plantilla, esta es una selección con cuatro opciones posibles: Cálculo de impuestos, Factura de impuestos, Estudio de arquitectura y Resolución' },
+                    ],
+                    foco: 'new',
+                },
+                {
+                    title: 'BARRA DE BUSQUEDA',
+                    content: <>Este botón permite filtrar las <strong>LISTA DE PLANTILLAS</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de busqueda el texto a buscar y presione el botón de buscar o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>NOMBRE DE LA PLANTILLA</strong> & <strong>TIPO DE PLANTILLA</strong>.</>,
+                    component: <div class="bp4-input-group .modifier">
+                        <span class="bp4-icon bp4-icon-search"></span>
+                        <input type="text" class="bp4-input" placeholder={'Buscar...'} />
+                        <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+                    </div>,
+                    focus: 'search',
+                },
+                {
+                    title: 'ACCIÓN: EDITAR',
+                    content: 'Este botón abre una nueva ventana donde el usuario puede actualizar los datos y propiedades del artículo.',
+                    focus: 'detail', icon: <FaEdit className='text-primary' size={'24px'} />
+                },
+                {
+                    title: 'ACCIÓN: ELIMINAR',
+                    content:  <>Este botón se considera una <label style={{ color: 'red' }}>ACCIÓN PELIGROSA</label>. Este botón permite al usuario eliminar este elemento y todos sus elementos secundarios y dependencias.</>,
+                    focus: 'delete', icon: <RiDeleteBinLine className='text-danger' size={'24px'} />
+                },
+                {
+                    title: 'TTIPOS DE PLANTILLA',
+                    content: 'Hay cuatro tipos diferentes de plantillas, cada una con un propósito diferente.',
+                    focus: 'tenplate_list', list: [
+                        { subtitle: 'Cálculo de impuesto', text: <>Esta plantilla se usa para las calculadoras, permite crear una calculadora personalizada que procesará todos los gastos de impuestos. <strong>Editar o eliminar una plantilla existente no tendrá un impacto importante en los procesos.</strong></> },
+                        { subtitle: 'Liquidacion de impuesto', text: <>Esta plantilla crea un formulario que se puede llenar con información variable para luego generar un PDF con una factura de impuestos. <strong>Editar o eliminar una plantilla existente no tendrá mayor impacto en los procesos.</strong> </> },
+                        { subtitle: 'Estudio arquitectónico', text: <>Estas plantillas crean un formulario para controlar el estudio de Arquitectura de cada licencia. El sistema guarda tanto la plantilla como los datos con los que se creó y los utiliza para generar el PDF final del estudio. <strong className='text-danger'>Editar o eliminar una plantilla existente TENDRÁ un gran impacto en la licencia, por lo que se recomienda en su lugar crear una nueva plantilla y aplicarla a las licencias afectadas.</strong></ > },
+                        { subtitle: 'Resolución', text: <>Esta plantilla crea un formulario para controlar las resoluciones de cada licencia, al guardar una resolución, el sistema guarda tanto la plantilla como los datos con los que se creó y los usa para generar el PDF final de la resolucion <strong className='text-danger'>Editar o eliminar una plantilla existente TENDRÁ un gran impacto en la licencia, por lo que se recomienda en su lugar crear una nueva plantilla y aplicarla a las licencias afectadas.</strong></ > },
+                    ]
+                },
+                {
+                    title: <label className='text-primary fw-b'>MODELANDO LAS PLANTILLAS</label>,
+                    content: 'Cada tipo de plantilla tiene su propio modelo que determina su estructura y atributos físicos, pero en general todos consisten en modelos basados ​​en texto, que el sistema analiza para crear el producto de salida, la sintaxis y la estructura de cada uno de estos modelos varía de cada tipo. Una vez modelado, el modelo se puede guardar o compilar para tener una visión general del producto final.',
+                     focus: 'create',
+                },
+                {
+                    title: 'GUARDAR',
+                    content: 'Guarda el modelo de la plantilla.',
+                    btn: 'GUARDAR', btnColor: 'success', btnIcon: 'floppy-disk',
+                    focus: 'save',
+                },
+                {
+                    title: 'COMPILAR',
+                    content: 'Compila el modelo actual y crea una vista previa del producto de salida, si el texto en la entrada no es válido, informará de un modelo de construcción fallido.',
+                    btn: 'COMPILAR', btnColor: 'warning', btnIcon: 'build',
+                    focus: 'build',
+                },
+                {
+                    title: <label className='text-primary fw-b'>PLANTILLAS: CÁLCULO DE IMPUESTOS</label>,
+                    content: <><p>El modelo predeterminado de esta plantilla es:</p>
+                        <p className='fw-b'>@[NOMBRE_PADRE] : r p <br />
+                            #[NOMBRE_HIJO] : mult <br />
+                            #[NOMBRE_HIJO] : mult</p>
+                            <p>El modelo consta de un número N de filas, cada una de las cuales contiene: [nombre] : [opciones]</p>
+                            <p>La primera línea comienza con <strong className='fw-b'>@</strong> y determina el nombre del impuesto a calcular, las opciones para estas líneas son <strong className='fw-b'>r</strong> para redondeado, que redondea el valor final a miles y <strong className='fw-b'>p</strong> para porcentaje, que permite calcular un porcentaje del valor total. </p>
+                        <p>Después de la primera línea, le siguen los hijos, identificados con el <strong className='fw-b'>#</strong>, pueden ser N totales y tienen la opción <strong className='fw-b'>mult</strong> que es un valor numérico que calculará el valor final (valor = mult * área), si mult no es un número que el sistema puede determinar, utilizará el valor predeterminado 1000.</p>
+                         </>,
+                    focus: 'create_tc',
+                },
             ],
         }
     },

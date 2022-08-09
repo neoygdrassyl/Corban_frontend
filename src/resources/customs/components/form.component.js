@@ -8,6 +8,7 @@ import PASSWORD from './form.components/password.component';
 import INPUTTEXT from './form.components/inputText.component';
 import { useState } from 'react';
 import INPUTNUMBER from './form.components/inputNumber.component';
+import SELECT from './form.components/select.compontnt';
 
 
 export default function FORM(props) {
@@ -37,20 +38,7 @@ export default function FORM(props) {
                 </div>
 
             case 'select':
-                return <div class="bp4-input-group">
-                    <span class={"bp4-icon bp4-icon-" + input.leftIcon}></span>
-                    <select
-                        id={input.id} name={input.name} disabled={input.disabled} value={input.value} defaultValue={input.df} readOnly={input.readOnly} required={input.req}
-                        onChange={input.onChange}
-                        onSelect={input.onSelect}
-                        onBlur={input.onBlur}
-                        className={'bp4-input'}
-                    >
-                        {input.placeholder ? <option value={input.placeholder} disabled>{input.placeholder}</option> : ''}
-                        {input.selectOptions.map(option => <option value={option.value ?? option.label}> {option.label}</option>)}
-                    </select>
-                    <span class={"bp4-icon bp4-icon-chevron-down"}></span>
-                </div>
+                return <SELECT {...input}/>
 
             case 'textarea':
                 return <TEXTAREA {...input} />

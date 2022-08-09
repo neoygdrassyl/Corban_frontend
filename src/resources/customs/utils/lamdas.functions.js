@@ -98,3 +98,8 @@ export function FIND_PERMIT(permits, id, value) {
         return false;
     })
 }
+
+export function CONVERT_INT_TO_MONEY(money){
+    var moneyDots = String(Math.round(money)).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+    return `$${moneyDots}`
+}

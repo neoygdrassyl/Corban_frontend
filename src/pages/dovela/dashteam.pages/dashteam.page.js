@@ -14,6 +14,7 @@ import InfoRoundIcon from '@rsuite/icons/InfoRound';
 import SearchPeopleIcon from '@rsuite/icons/SearchPeople';
 import ToolsIcon from '@rsuite/icons/Tools';
 import MessageIcon from '@rsuite/icons/Message';
+import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
 
 //
 
@@ -25,15 +26,15 @@ import { UtilContext } from '../../../resources/customs/contextProviders/util.pr
 import { Alert } from '@blueprintjs/core';
 import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
 import PATCH_NOTES from '../../../resources/customs/components/patchnotes.component';
+import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 
 
 export default function DashboardTeam() {
-    //  CONTEXT INITILIAZATION & CONTROL
     let params = useParams();
     const nagivate = useNavigate();
     const auth = useContext(AuthContext);
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('submit');
+    const trn = utilities.getTranslation('dashteam');
     const lang = utilities.lang;
     const theme = utilities.theme;
     const team = params.team;
@@ -50,6 +51,7 @@ export default function DashboardTeam() {
     const canInviteWorker = FIND_PERMIT(permits, 'worker', 1);
     const canVieweWorker = FIND_PERMIT(permits, 'worker', 2);
     const canViewRoles = FIND_PERMIT(permits, 'roles', 1);
+    const canViewTemplates = FIND_PERMIT(permits, 'templates', 1);
 
     let makeConnection = (_conn) => {
         if (_conn) auth.setConn(_conn, () => setLoad(1))
@@ -57,14 +59,14 @@ export default function DashboardTeam() {
     }
 
     // ADMIN : BILLING, DOCUMENTATIO API, TEMPLATES (ARC, RES, TAXES)
-    // MODULES:  SUBMIT - FUN RAD - FUN MANAGE - PH - PUBLISH - ARHIVE
+    // MODULES:  SUBMIT - PUBLISH - FUN RAD - FUN MANAGE - PH -  ARHIVE
     // MODULES OTHER: NOMENCLATURE - URBAN NORM - PQRS
-    // TOOLS: DICTIONARY - CALC - DICTIONARY - CERTIFICATIONS
+    // TOOLS: DICTIONARY - CALC - CERTIFICATIONS - MASS UPLOAD
     const DASHBOARD_INFO = [
         {
-            header: "VENTANILLA ÚNICA",
+            header: trn.modules[0].title,
             icon: <IoDocumentAttachOutline style={{ fontSize: '5em' }} />,
-            text: "Gestiona el ingreso de documentos a la ventanilla única y comparte automaticamente la informacion pertinente con los otros modulos. (Licencias y PQRS)",
+            text: trn.modules[0].desc,
             color: "violet",
             to: "/submit"
         },
@@ -72,23 +74,23 @@ export default function DashboardTeam() {
 
     const TOOL_INFO = [
         {
-            header: "CALCULADORA",
+            header: trn.tools[0].title,
             icon: <BiCalculator style={{ fontSize: '5em' }} />,
-            text: "Calculadora de expensas fijas y varibles, tablas de precios y gestor de costos de impuestos.",
+            text: trn.tools[0].desc,
             color: "blue",
-            to: "/submit"
+            to: "/dcalc"
         },
         {
-            header: "DICCIOARIO",
+            header: trn.tools[1].title,
             icon: <RiBook2Line style={{ fontSize: '5em' }} />,
-            text: "Conglomerado de todos los concecutivos de control, de los profesionales y actuadores de las licencias",
+            text: trn.tools[1].desc,
             color: "green",
             to: "/submit"
         },
         {
-            header: "CERTIFICACION",
+            header: trn.tools[2].title,
             icon: <BsBookmarkCheck style={{ fontSize: '5em' }} />,
-            text: "Genera un documento especial de certificacion profesional y de vecinoss.",
+            text: trn.tools[2].desc,
             color: "red",
             to: "/submit"
         },
@@ -109,7 +111,7 @@ export default function DashboardTeam() {
                 {props.text}
             </Row>
             <Row className="text-right">
-                <Link to={props.to}><h6 className="text-secondary">Continuar...</h6></Link>
+                <Link to={props.to}><h6 className="text-secondary">{trn.continue}</h6></Link>
             </Row>
         </Panel>
     );
@@ -118,14 +120,14 @@ export default function DashboardTeam() {
         return <>
             <Row style={{ width: '100%' }}>
 
-                <Col  xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
                     <Panel className="border">
                         <Row className="text-center" style={{ width: '100%' }} >
                             <h5>{connection.name}</h5>
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >DIRECTOR: </label>
+                                <label >{trn.team_data[0]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b">{connection.companiyInfo.dir_title + ' ' + connection.companiyInfo.director}</label>
@@ -133,7 +135,7 @@ export default function DashboardTeam() {
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >UBICACION: </label>
+                                <label >{trn.team_data[1]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b">{connection.companiyInfo.state + ' - ' + connection.companiyInfo.city}</label>
@@ -141,7 +143,7 @@ export default function DashboardTeam() {
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >TELÉFONOS: </label>
+                                <label >{trn.team_data[2]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b">{connection.companiyInfo.number1 + ' /  ' + connection.companiyInfo.number2}</label>
@@ -149,7 +151,7 @@ export default function DashboardTeam() {
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >EMAIL: </label>
+                                <label >{trn.team_data[3]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b">{connection.companiyInfo.email1}</label>
@@ -157,7 +159,7 @@ export default function DashboardTeam() {
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >LOCALIZACION: </label>
+                                <label >{trn.team_data[4]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b">{connection.companiyInfo.address}</label>
@@ -165,27 +167,27 @@ export default function DashboardTeam() {
                         </Row>
                         <Row>
                             <Col xs={6} className="text-right">
-                                <label >PAGINA WEB: </label>
+                                <label >{trn.team_data[5]}: </label>
                             </Col>
                             <Col xs={18} className="text-left">
                                 <label className="fw-b"><a href={connection.companiyInfo.page} target="_blank"><BiLinkExternal style={{ paddingTop: '1px' }} />{connection.companiyInfo.page}</a></label>
                             </Col>
                         </Row>
-                        <br/>
+                        <br />
                         <Row className="text-center" style={{ width: '100%' }} >
-                            <h5>INFORMCION DE ROLES</h5>
+                            <h5>{trn.role_title}</h5>
                         </Row>
-                        {connection.active == 0 && !isSuperAdmin?
+                        {connection.active == 0 && !isSuperAdmin ?
                             <Row>
                                 <Col xs={24} className="text-justify">
-                                    <label><label className="fw-b text-danger">TRABAJADOR INHABILIDATO: </label>Este trabajador ha sido deastivado por el administrador y no puede realizar ninguna accion, comuniquese con el director del equipo para mos información.</label>
+                                    <label><label className="fw-b text-danger">{trn.role_data[3]}: </label>{trn.role_data[4]}</label>
                                 </Col>
                             </Row>
                             : ''}
                         {connection.roles.map(role => <>
                             <Row>
                                 <Col xs={6} className="text-right">
-                                    <label >ROL: </label>
+                                    <label >{trn.role_data[0]}: </label>
                                 </Col>
                                 <Col xs={18} className="text-left">
                                     <label><label className="fw-b">{role.name}:</label> {role.desc}</label>
@@ -195,10 +197,10 @@ export default function DashboardTeam() {
                         )}
                         {connection.roles.length == 0 ? <Row>
                             <Col xs={24} className="text-center">
-                                <label className='fw-b text-danger'>NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO</label>
+                                <label className='fw-b text-danger'>{trn.role_data[1]}</label>
                             </Col>
                             <Col xs={24} className="text-center">
-                                <label className=''>COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL. </label>
+                                <label className=''>{trn.role_data[2]}</label>
                             </Col>
                         </Row> : ''}
 
@@ -208,7 +210,7 @@ export default function DashboardTeam() {
                 <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
                     <Panel className="border">
                         <Row className="text-center" style={{ width: '100%' }} >
-                            <h5>ULTIMAS NOTAS DE PARCHE</h5>
+                            <h5>{trn.patch}</h5>
                             <PATCH_NOTES type='dovela' />
                         </Row>
                     </Panel>
@@ -218,7 +220,7 @@ export default function DashboardTeam() {
     }
     let _COMPONENT_MODULE_SELECTOR = () => {
         return <>
-            <Divider>MODULOS</Divider>
+            <Divider>{trn.modules_title}</Divider>
             <Row className="my-6" style={{ width: '100%' }}>
                 {DASHBOARD_INFO.map(it => <Col lg={4} md={6} sm={12} xs={24}>
                     <Card
@@ -230,7 +232,7 @@ export default function DashboardTeam() {
     }
     let _COMPONENT_TOOLS_SELECTOR = () => {
         return <>
-            <Divider>HERRAMIENTAS</Divider>
+            <Divider>{trn.tools_title}</Divider>
             <Row className="my-6" style={{ width: '100%' }}>
                 {TOOL_INFO.map(it => <Col lg={4} md={6} sm={12} xs={24}>
                     <Card
@@ -244,46 +246,52 @@ export default function DashboardTeam() {
         return <>
             {CONFIRM_INVITATION(lang, theme, openInvite, setInvite, (value) => setInvitation(value), loading)}
             <div className="my-3">
-                <Divider>ADMINISTRAR</Divider>
+                <Divider>{trn.admin_title}</Divider>
                 <Grid fluid>
                     <Row style={{ width: '100%' }} >
                         {canInviteWorker ?
                             <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
                                 <Message onClick={() => setInvite(!openInvite)} className="pointer my-1"
-                                    header={<label className='text-light fw-b pointer'>{<SearchPeopleIcon style={{ fontSize: '24px' }} />} INVITAR TRABAJADORES</label>} style={{ backgroundColor: 'dodgerblue' }}>
-                                    <label className='text-light pointer'>Invita otros usuarios para ser parte de este equipo de trabajo</label>
+                                    header={<label className='text-light fw-b pointer'>{<SearchPeopleIcon style={{ fontSize: '24px' }} />} {trn.admin[0].title}</label>} style={{ backgroundColor: 'dodgerblue' }}>
+                                    <label className='text-light pointer'>{trn.admin[0].desc}</label>
                                 </Message>
                             </Col>
                             : ''}
                         {canViewRoles ?
                             <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
                                 <Message className="pointer my-1" onClick={() => nagivate('/roles')}
-                                    header={<label className='text-dark fw-b'>{<UserInfoIcon style={{ fontSize: '24px' }} />} CONFIGURACION ROLES</label>} style={{ backgroundColor: 'gold' }}>
-                                    <label className='text-dark'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                    header={<label className='text-dark fw-b'>{<UserInfoIcon style={{ fontSize: '24px' }} />} {trn.admin[1].title}</label>} style={{ backgroundColor: 'gold' }}>
+                                    <label className='text-dark'>{trn.admin[1].desc}</label>
                                 </Message>
                             </Col>
                             : ''}
                         {canVieweWorker ?
                             <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
                                 <Message className="pointer my-1" onClick={() => nagivate('/workers')}
-                                    header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} ADMINISTRAR TRABAADORES</label>} style={{ backgroundColor: 'forestGreen' }}>
-                                    <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                    header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} {trn.admin[2].title}</label>} style={{ backgroundColor: 'forestGreen' }}>
+                                    <label className='text-light'>{trn.admin[2].desc}</label>
                                 </Message>
                             </Col>
                             : ''}
+                        {canViewTemplates ? <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+                            <Message className="pointer my-1" onClick={() => nagivate('/dtemplates')}
+                                header={<label className='text-light fw-b'>{<ViewsAuthorizeIcon style={{ fontSize: '24px' }} />} {trn.admin[7].title}</label>} style={{ backgroundColor: 'DarkOrchid' }}>
+                                <label className='text-light'>{trn.admin[7].desc}</label>
+                            </Message>
+                        </Col> : ''}
 
                         {isSuperAdmin ?
                             <>
                                 <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
                                     <Message className="pointer my-1" onClick={() => nagivate('/dconfig')}
-                                        header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} CONFIGURACION ORGANIZACION</label>} style={{ backgroundColor: 'crimson' }}>
-                                        <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                        header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} {trn.admin[3].title}</label>} style={{ backgroundColor: 'crimson' }}>
+                                        <label className='text-light'>{trn.admin[3].desc}</label>
                                     </Message>
                                 </Col>
                                 <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
                                     <Message className="pointer my-1" onClick={() => nagivate('/daudit')}
-                                        header={<label className='text-light fw-b'>{<MessageIcon style={{ fontSize: '24px' }} />} AUDITS</label>} style={{ backgroundColor: 'LightSeaGreen' }}>
-                                        <label className='text-light'>Determina funciones especificas a cada rol y permite asociar un role a cada trabajador</label>
+                                        header={<label className='text-light fw-b'>{<MessageIcon style={{ fontSize: '24px' }} />} {trn.admin[4].title}</label>} style={{ backgroundColor: 'LightSeaGreen' }}>
+                                        <label className='text-light'>{trn.admin[4].desc}</label>
                                     </Message>
                                 </Col>
                             </>
@@ -338,10 +346,10 @@ export default function DashboardTeam() {
     return (
         <div className="my-6 px-0">
             <Row className="text-center" style={{ width: '100%' }}>
-                <h3>EQUIPO DE TRABAJO</h3>
+                <h3>{trn.title}</h3>
             </Row>
             {load === 0 ?
-                <div className='txt-c my-3'><Loader size="lg" content={'WAIT A MOMENT PLEASE'} vertical /></div>
+                <div className='txt-c my-3'><Loader size="lg" content={trn.wait} vertical /></div>
                 : connection.conn
                     ? <>
                         {_COMPONENT_INFOBOX()}
@@ -351,7 +359,7 @@ export default function DashboardTeam() {
                         {_COMPONENT_MODULE_SELECTOR()}
                         {_COMPONENT_TOOLS_SELECTOR()}
                     </>
-                    : "NO WORK TEAMS FOUNDS"}
+                    : <NON_IDEAL_STATE type="permit" />}
         </div>
     );
 }

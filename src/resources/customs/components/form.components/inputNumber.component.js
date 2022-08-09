@@ -15,6 +15,7 @@ export default function INPUTNUMBER(props) {
 
         <NumericInput id={props.id} name={props.name} placeholder={props.placeholder} disabled={props.disabled} value={props.value} defaultValue={props.dv} readOnly={props.readOnly} required={props.req}
                     leftIcon={props.leftIcon}
+                    rightElement={props.rightIcon}
                     intent={currentIntent || props.intent}
                     onValueChange={(e) => {
                         let value = e;

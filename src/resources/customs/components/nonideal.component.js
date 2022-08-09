@@ -3,9 +3,10 @@ import { UtilContext } from '../../../resources/customs/contextProviders/util.pr
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
 
 import { NonIdealState } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
 
 export default function NON_IDEAL_STATE(props) {
-    var { type } = props;
+    var { type, link } = props;
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
@@ -24,7 +25,7 @@ export default function NON_IDEAL_STATE(props) {
     // *************************** DATA TABLE  **************************** //
 
     // ******************************** APIS ****************************** //
-    let types = ['datatable', 'permit', 'noload', 'error', 'nots']
+    let types = ['datatable', 'permit', 'noload', 'error', 'nots', 'template', 'no_templates',]
     if (!types.includes(type)) type = 'error'
 
     let icon = 'cross'
@@ -33,6 +34,8 @@ export default function NON_IDEAL_STATE(props) {
     if(type == 'permit') icon = 'blocked-person'
     if(type == 'datatable') icon = 'database'
     if(type == 'nots') icon = 'inbox'
+    if(type == 'template') icon = 'exclude-row'
+    if(type == 'no_templates') icon = 'exclude-row'
     
     return (
         <>
@@ -42,8 +45,7 @@ export default function NON_IDEAL_STATE(props) {
 
                 title={trn[type+'_title']}
                 description={trn[type+'_body']}
-
-                action={undefined}
+                action={link ? <Link to={link}>{trn.more_info}</Link>: false}
                 layout={"vertical"}
             />
         </>

@@ -9,6 +9,12 @@ export default function MODAL(props) {
     const trn = utilities.getTranslation('modalComponent');
     const theme = utilities.theme;
 
+    /**
+     * 
+     * 
+     * 
+     */
+
     return (
         <Modal size={size ?? 'md'} open={open} onClose={() => setOpen(false)} dialogClassName={theme + " modal-container"}>
             <Modal.Header>

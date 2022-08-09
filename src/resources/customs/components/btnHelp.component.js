@@ -3,6 +3,7 @@ import { FiHelpCircle, FiHash } from 'react-icons/fi'
 import { Divider, Drawer, IconButton, Popover, Whisper } from 'rsuite';
 import { UtilContext } from '../contextProviders/util.provider';
 import { Button as ButtonPB, Drawer as DrawerBP } from "@blueprintjs/core";
+import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 
 export default function BTN_HELP(props) {
     const { title, text, page, focus } = props
@@ -21,15 +22,12 @@ export default function BTN_HELP(props) {
         {page ? <p className='text-right fw-b'>{trn.click}</p> : ''}
     </Popover>
 
-    const drawer = <Drawer size={'sm'} placement={'right'} open={open} onClose={() => setOpen(false)}>
-        <Drawer.Header className={utilities ? utilities.theme : 'light'}>
-            <Drawer.Title><label>{trn.about}</label> <label className='fw-b'>{title}</label></Drawer.Title>
-            <Drawer.Actions>
-                <ButtonPB icon="cross" intent="primary" text={trn.close} onClick={() => setOpen(false)} />
-            </Drawer.Actions>
+    const drawer = <Drawer open={open} onClose={() => setOpen(false)} size="sm" className={utilities ? utilities.theme : 'light'}>
+        <Drawer.Header>
+            <div className='py-1'><HelpOutlineIcon style={{fontSize: '20px'}} className="text-paranoia"/> <label>{trn.about}</label> <label className='fw-b'>{title}</label></div>
         </Drawer.Header>
-        <Drawer.Body className={utilities ? utilities.theme : 'light'} >
-            {page.map(it => {
+        <Drawer.Body>
+            {page ? page.map(it => {
                 return <>
                     <p className='fw-b text-uppercase'>{it.lefticon} {it.title}
                         <IconButton autoFocus={it.focus == focused} circle size='xs' appearance='subtle' id={it.focus} icon={<FiHash />}
@@ -44,9 +42,9 @@ export default function BTN_HELP(props) {
                         <label className='fw-b'>{l.subtitle}{l.subtitle ? ':' : ''}</label> <label>{l.text}</label>
                     </li>)}</ul> : ''}
 
-                    <Divider />
+                    <hr />
                 </>
-            })}
+            }) : ''}
         </Drawer.Body>
     </Drawer>
 
@@ -58,25 +56,25 @@ export default function BTN_HELP(props) {
         size="30%"
         title={<><label>{trn.about}</label> <label className='fw-b'>{title}</label></>}
     >
-        <div className='p-3' style={{overflowY: 'auto'}}>
-        {page.map(it => {
-            return <>
-                <p className='fw-b text-uppercase'>{it.lefticon} {it.title}
-                    <IconButton autoFocus={it.focus == focused} circle size='xs' appearance='subtle' id={it.focus} icon={<FiHash />}
-                        onClick={() => { setFocus(it.focus) }} style={it.focus == focused ? { color: 'violet' } : {}} />
-                </p>
+        <div className='p-3' style={{ overflowY: 'auto' }}>
+            {page ? page.map(it => {
+                return <>
+                    <p className='fw-b text-uppercase'>{it.lefticon} {it.title}
+                        <IconButton autoFocus={it.focus == focused} circle size='xs' appearance='subtle' id={it.focus} icon={<FiHash />}
+                            onClick={() => { setFocus(it.focus) }} style={it.focus == focused ? { color: 'violet' } : {}} />
+                    </p>
 
-                {it.component ? it.component : ''}
-                {it.icon ? it.icon : ''}
-                {it.btn ? <ButtonPB icon={it.btnIcon} intent={it.btnColor} text={it.btn} /> : ''}
-                <p className='text-justify' style={{ paddingTop: '16px' }}>{it.content}</p>
-                {it.list ? <ul>{it.list.map(l => <li>
-                    <label className='fw-b'>{l.subtitle}{l.subtitle ? ':' : ''}</label> <label>{l.text}</label>
-                </li>)}</ul> : ''}
+                    {it.component ? it.component : ''}
+                    {it.icon ? it.icon : ''}
+                    {it.btn ? <ButtonPB icon={it.btnIcon} intent={it.btnColor} text={it.btn} /> : ''}
+                    <p className='text-justify' style={{ paddingTop: '16px' }}>{it.content}</p>
+                    {it.list ? <ul>{it.list.map(l => <li>
+                        <label className='fw-b'>{l.subtitle}{l.subtitle ? ':' : ''}</label> <label>{l.text}</label>
+                    </li>)}</ul> : ''}
 
-                <hr />
-            </>
-        })}
+                    <hr />
+                </>
+            }) : ''}
         </div>
     </DrawerBP>
 
@@ -85,6 +83,6 @@ export default function BTN_HELP(props) {
             <IconButton icon={<FiHelpCircle className='text-paranoia' />} circle size="lg" appearance='subtle' onClick={() => setOpen(page ? true : false)} />
         </Whisper>
 
-        {drawer_bp}
+        {drawer}
     </>
 }

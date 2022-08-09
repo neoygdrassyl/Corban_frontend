@@ -7,7 +7,7 @@ import { Button as ButtonBP } from '@blueprintjs/core';
 
 import { ALERT_ERROR, ALERT_SUCCESS, ALERT_WAIT, CONFIRM_DELETE } from '../../../resources/customs/utils/notifications.vars';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
-import BTN_PDF from '../../../resources/customs/components/btnPDF.component';
+import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.component';
 import FORM from '../../../resources/customs/components/form.component';
 import moment from 'moment';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
@@ -67,7 +67,7 @@ export default function SUBMIT_PDF(props) {
     const BTN_COMPONENT = () => {
         return <>
             <p><label>{trn.generate_pdf}</label></p>
-            <BTN_PDF onClick={() => pdf_gen()} />
+            <BTN_DOWNLOAD onClick={() => pdf_gen()} />
         </>
     }
     // *************************** DATA TABLE  **************************** //
