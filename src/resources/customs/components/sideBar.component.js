@@ -36,7 +36,7 @@ function SideBarComponent(props) {
             </NavLink>
         </Sidenav.Header>
 
-        <Sidenav expanded={props.expand} defaultOpenKeys={['0']} appearance="primary">
+        <Sidenav expanded={props.expand} defaultOpenKeys={['0']} appearance="primary" >
             <Sidenav.Body>
                 <Nav>
                     <Nav.Menu

@@ -26,16 +26,16 @@ const ModuleLayout = ({ children, ...rest }) => {
         <Container>
             <Container>
 
-                <Sidebar className='sideBarMain'
+                <Sidebar className='sideBarMain border bg-mist'
                     width={expand ? 260 : 56}
                     collapsible >
                     <SideBarComponent expand={expand} />
-                    <Divider />
+                    <Divider className='border'/>
                     <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
                 </Sidebar>
 
                 <Container>
-                    <Content>
+                    <Content className="p-1">
                         <Outlet />
                     </Content>
                 </Container>

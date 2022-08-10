@@ -1,10 +1,12 @@
 import React from 'react'
-import { Button, Icon, InputGroup } from '@blueprintjs/core';
+import { Button, FormGroup, Icon, InputGroup } from '@blueprintjs/core';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Col, Grid, Panel, PanelGroup, Row } from 'rsuite';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { IoIosSwitch } from 'react-icons/io';
+import SELECT from '../resources/customs/components/form.components/select.compontnt';
+import { Link } from 'react-router-dom';
 
 
 export let translations = {
@@ -310,6 +312,88 @@ export let translations = {
             r1000: 'A 1000 unidades',
             value: 'Valor',
             form_calc: ['Impuesto', 'Especificación de impuesto', 'Área', 'Porcentaje %']
+        }
+    },
+    tutorial:{
+        en:{
+            tutorial: 'TUTORIAL',
+            csv_note: 'NOTE',
+            csv_note_b: 'DOVELA has a preference on how it parses its CSV files, for this case unmark the Comma checkbox and mark the Semicolon checkbox, the character set used is UTF-8',
+            csv_body: <>
+            <p>Comma Separated Values (CSV) is a text file format that you can use to exchange data from a database or a spreadsheet between applications. Each line in a Text CSV file represents a record in the database, or a row in a spreadsheet. Each field in a database record or cell in a spreadsheet row is usually separated by a comma. However, you can use other characters to delimit a field, such as a tabulator character.</p>
+            <p>If the field or cell contains a comma, the field or cell must be enclosed by single quotes (') or double quotes (").</p>
+            </>,
+            
+            csv_lo_title: 'To Open a Text CSV File in Calc',
+            csv_lo_steps: [
+                'Choose File - Open.',
+                'Locate the CSV file that you want to open. If the file has a *.csv extension, select the file. If the CSV file has another extension, select the file, and then select "Text CSV" in the Filter box',
+                'Click Open. The Text Import dialog opens.',
+                'Specify the options to divide the text in the file into columns. You can preview the layout of the imported data at the bottom of the Text Import dialog. Right-click a column in the preview to set the format or to hide the column.',
+                'Click OK.',
+            ],
+            csv_lo_link: 'https://help.libreoffice.org/latest/en-US/text/scalc/guide/csv_files.html',
+            csv_lo_link_b: 'For more information check the official',
+            csv_lo_link_l: 'LibreOffice documentation',
+
+            csv_e_title: 'To Open a Text CSV File in Excel',
+            csv_e_steps: [
+                'Go to the Data tab and click on “Get External Data”',
+                'Then click on “Data from a text file”.',
+                <>
+                <p>An explorer window will appear to search and select the CSV file that we want to open. After choosing it, click on “open”.</p>
+                <p>Immediately afterwards, a wizard will pop up to guide us through the process of importing and converting the data to our Excel workbook.</p>
+                </>,
+                'Most likely our CSV file is comma delimited so we select the “Delimited” option. If the file includes headers or titles for the fields, do not forget to select the option “My data has headers”. Once this is done, click next.',
+                'We come to the most important step, where we choose the delimiter, which is usually a comma. When selecting it we will see that it shows us an example of how our data will be selected and finally we can see the columns as they should be.',
+                'We arrive at the step where we can indicate what type each column is. Select each column in the preview and indicate the type of data it is. If we leave it in “General” it will take it as a numerical value. We can also select the date format, where DMY stands for day, month and year. Then click on "Finish".',
+                'Once this is done, a final window will appear indicating whether we want the data to be imported into the current document or if we want it in a new document. If you have already opened a new document before starting this, the behavior is exactly the same.'
+
+
+            ],
+            csv_e_link: 'https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba#ID0EBBN=Newer_versions',
+            csv_e_link_b: 'For more information check the official',
+            csv_e_link_l: 'Microsot Office documentation',
+        },
+        es:{
+            tutorial: 'TUTORIAL',
+            csv_note: 'NOTA',
+            csv_note_b: 'DOVELA tiene una preferencia en como formatea sus archivos de CSV, para este caso unmarque la casilla de Coma, y marque la casilla de Punto y coma, el conjunto de caracteres a elejir será UTF-8.',
+            csv_body: <>
+            <p>Los archivos con valores separados por comas (CSV) son archivos de texto que puede utilizar para intercambiar datos entre aplicaciones desde una base de datos u hoja de cálculo. Cada línea de un archivo de texto CSV representa un registro de la base de datos o una fila de la hoja de cálculo. Los campos de un registro de base de datos o las celdas de una fila de hoja de cálculo suelen estar separados por comas. Sin embargo, pueden utilizarse otros caracteres para delimitar los campos, como el tabulador.</p>
+            <p>Si el contenido de un campo o una celda incluye una coma, dicho contenido debe estar encerrado entre comillas simples (') o dobles (").</p>
+            </>,
+            
+            csv_lo_title: 'Como abrir un archivo CSV en Calc',
+            csv_lo_steps: [
+                'Elija Archivo ▸ Abrir, Busque el archivo CSV que desee abrir. Si el archivo tiene la extensión *.csv, selecciónelo.Si el archivo CSV tiene otra extensión, selecciónelo y, a continuación, elija «Texto CSV» en el cuadro Filtro',
+                'Busque el archivo CSV que desee abrir. Si el archivo tiene la extensión *.csv, selecciónelo. Si el archivo CSV tiene otra extensión, selecciónelo y, a continuación, elija «Texto CSV» en el cuadro Filtro',
+                'Pulse en Abrir.Se abre el diálogo Importar texto',
+                'Especifique las opciones para dividir el texto del archivo en columnas. En la parte inferior del diálogo Importar texto obtendrá una previsualización de la disposición de los datos importados. Con el botón secundario del ratón, pulse en una columna de la previsualización para ajustar su formato u ocultarla.',
+                'Pulse en Aceptar.',
+            ],
+            csv_lo_link: 'https://help.libreoffice.org/latest/es/text/scalc/guide/csv_files.html',
+            csv_lo_link_b: 'Para mayor información puede visitar la',
+            csv_lo_link_l: 'documentación de LibreOffice',
+
+            csv_e_title: 'Como abrir un archivo CSV en Excel',
+            csv_e_steps: [
+                'Ve a la pestaña Datos y haz clic sobre “Obtener datos externos”.',
+                'Después haz clic sobre “Datos de un archivo de texto”.',
+                <>
+                <p>aldrá una ventana de explorador para buscar y seleccionar el archivo CSV que queremos abrir. Tras elegirlo haz clic en “abrir”.</p>
+                <p>Inmediatamente después nos saltará un asistente para guiarnos en el proceso de importación y conversión de los datos a nuestro libro de Excel.</p>
+                </>,
+                'Lo más probable es que nuestro archivo CSV esté delimitado por comas por lo que seleccionamos la opción “Delimitados”. Si el archivo incluye encabezados o títulos para los campos no olvides seleccionar la opción “Mis datos tienen encabezados”. Hecho esto haz clic en siguiente.',
+                'Llegamos al paso más importante, donde elegimos el delimitador, que generalmente suele ser coma. Al seleccionarlo veremos que nos muestra un ejemplo de cómo se van a seleccionar nuestros datos y por fin podemos ver las columnas como deberían ser.',
+                'Llegamos al paso donde podemos indicar de qué tipo es cada columna. Selecciona cada columna en la vista previa e indica el tipo de dato que es. Si lo dejamos en “General” lo tomará como un valor numérico. Podemos seleccionar el formato de la fecha también, dónde DMA abrevian día, mes y año. Pulsamos sobre “Finalizar” ',
+                'Hecho esto nos saldrá una última ventana indicando si queremos que los datos se importen al documento actual o si los queremos en un documento nuevo. Si has abierto ya un documento nuevo antes de iniciar esto, el comportamiento es exactamente el mismo. '
+
+
+            ],
+            csv_e_link: 'https://support.microsoft.com/es-es/office/importar-o-exportar-archivos-de-texto-txt-o-csv-5250ac4c-663c-47ce-937b-339e391393ba#ID0EBBN=Newer_versions',
+            csv_e_link_b: 'FPara mayor información puede visitar la',
+            csv_e_link_l: 'documentacion oficial de Microsot Office.',
         }
     },
     // ******************** PAGES ************************ // 
@@ -1467,7 +1551,7 @@ export let translations = {
                     title: 'TEMPLATE TYPES',
                     content: 'There are four different types of templates, each one with a different purpose.',
                     focus: 'tenplate_list', list: [
-                        { subtitle: 'Tax calculation', text: <>This template is use for the calculators, allows creating a customized calculator that will process all tax expenses. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong></> },
+                        { subtitle: 'Tax calculation', text: <>This template is used for the calculators, allows creating a customized calculator that will process all tax expenses. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong></> },
                         { subtitle: 'Tax bill', text: <>This template creates a form that can be filled with variable information to later generate a PDF with a tax bill. <strong>Editing or deleting an existing template will not have major impact in the processes.</strong> </> },
                         { subtitle: 'Architecture study', text: <>These templates creates a form to control the Architecture study of each license. The system saves both the template and the data it was created with and uses this to generate the final PDF of the study. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></> },
                         { subtitle: 'Resolution', text: <>This template creates a form to control the resolutions of each license, when saving a resolution, the systems saves both the template and the data it was created with and uses this to generate the final PDF of the resolution. <strong className='text-danger'>Editing or deleting an existing template WILL have major impact in the license, so it is VERY recommended to instead create a new template and apply that template to the target licenses.</strong></> },
@@ -1496,7 +1580,7 @@ export let translations = {
                         <p className='fw-b'>@[PARENT_NAME] : r p <br />
                             #[CHILD_NAME] : mult <br />
                             #[CHILD_NAME] : mult</p>
-                            <p>The model consists of an N number of rows, each one containing: [name] : [options]</p>
+                        <p>The model consists of an N number of rows, each one containing: [name] : [options]</p>
                         <p>The first line starts with <strong className='fw-b'>@</strong> and determines the name of the tax to calculate, the options for these lines are <strong className='fw-b'>r</strong> for rounded, which rounds the final value to thousands and <strong className='fw-b'>p</strong> for percentage, which allows to calculate a percentage of the total value. </p>
                         <p>After the first line, the children are next, identified with the <strong className='fw-b'>#</strong>, they can be N total and have the option <strong className='fw-b'>mult</strong> which is a numeric value that will calculate the final value (value = mult * area), if mult is not a number the system can determine, it will use the default value 1000.</p>
                     </>,
@@ -1520,15 +1604,15 @@ export let translations = {
             form: ['Nombre de plantilla', 'Tipo de plantilla'],
             btn_help_tile: 'PLANTILLAS',
             btn_help_body: 'Este módulo permite la creación de plantillas, estas son herramientas útiles para procesar información personalizada para los procesos del equipo.',
-            
+
             HELP_PAGE: [
                 {
                     title: 'LISTA DE PLANTILLAS',
                     content: 'Esta lista rastrea todas las plantillas generadas en el sistema.',
-                    foco: 'title', list: [
-                        { subtítulo: 'NOMBRE DE LA PLANTILLA', texto: 'Nombre que identificó la plantilla.' },
+                    focus: 'title', list: [
+                        { subtitle: 'NOMBRE DE LA PLANTILLA', text: 'Nombre que identificó la plantilla.' },
                         { subtitle: 'TIPO DE PLANTILLA', text: 'El tipo de plantilla, hay cuatro tipos diferentes de plantillas: Cálculo de impuestos, Factura de impuestos, Estudio de arquitectura y Resolución' },
-                        { subtítulo: 'ACCIÓN', texto: 'Permite editar y eliminar las diferentes plantillas.' },
+                        { subtitle: 'ACCIÓN', text: 'Permite editar y eliminar las diferentes plantillas.' },
                         { subtitle: 'EXPANDIBLE', text: '(Pequeña flecha al comienzo de cada fila) Abre el editor de modelo de plantilla, que permite guardar y construir el modelo de plantilla, brindando una vista previa de cómo se verá el producto final.' },
                     ]
                 },
@@ -1537,10 +1621,10 @@ export let translations = {
                     content: 'Este botón abre una nueva subventana con un formulario de llenado que permite la creación de una nueva plantilla. La descripción de los campos del formulario es la siguiente.',
                     btn: 'NUEVO', btnColor: 'success', btnIcon: 'add',
                     lista: [
-                        { subtítulo: 'NOMBRE DE LA PLANTILLA', texto: 'El nombre de la plantilla, esta es una entrada de texto abierta.' },
+                        { subtitle: 'NOMBRE DE LA PLANTILLA', text: 'El nombre de la plantilla, esta es una entrada de texto abierta.' },
                         { subtitle: 'TIPO DE PLANTILLA', text: 'El tipo de plantilla, esta es una selección con cuatro opciones posibles: Cálculo de impuestos, Factura de impuestos, Estudio de arquitectura y Resolución' },
                     ],
-                    foco: 'new',
+                    focus: 'new',
                 },
                 {
                     title: 'BARRA DE BUSQUEDA',
@@ -1559,7 +1643,7 @@ export let translations = {
                 },
                 {
                     title: 'ACCIÓN: ELIMINAR',
-                    content:  <>Este botón se considera una <label style={{ color: 'red' }}>ACCIÓN PELIGROSA</label>. Este botón permite al usuario eliminar este elemento y todos sus elementos secundarios y dependencias.</>,
+                    content: <>Este botón se considera una <label style={{ color: 'red' }}>ACCIÓN PELIGROSA</label>. Este botón permite al usuario eliminar este elemento y todos sus elementos secundarios y dependencias.</>,
                     focus: 'delete', icon: <RiDeleteBinLine className='text-danger' size={'24px'} />
                 },
                 {
@@ -1575,7 +1659,7 @@ export let translations = {
                 {
                     title: <label className='text-primary fw-b'>MODELANDO LAS PLANTILLAS</label>,
                     content: 'Cada tipo de plantilla tiene su propio modelo que determina su estructura y atributos físicos, pero en general todos consisten en modelos basados ​​en texto, que el sistema analiza para crear el producto de salida, la sintaxis y la estructura de cada uno de estos modelos varía de cada tipo. Una vez modelado, el modelo se puede guardar o compilar para tener una visión general del producto final.',
-                     focus: 'create',
+                    focus: 'create',
                 },
                 {
                     title: 'GUARDAR',
@@ -1595,11 +1679,263 @@ export let translations = {
                         <p className='fw-b'>@[NOMBRE_PADRE] : r p <br />
                             #[NOMBRE_HIJO] : mult <br />
                             #[NOMBRE_HIJO] : mult</p>
-                            <p>El modelo consta de un número N de filas, cada una de las cuales contiene: [nombre] : [opciones]</p>
-                            <p>La primera línea comienza con <strong className='fw-b'>@</strong> y determina el nombre del impuesto a calcular, las opciones para estas líneas son <strong className='fw-b'>r</strong> para redondeado, que redondea el valor final a miles y <strong className='fw-b'>p</strong> para porcentaje, que permite calcular un porcentaje del valor total. </p>
+                        <p>El modelo consta de un número N de filas, cada una de las cuales contiene: [nombre] : [opciones]</p>
+                        <p>La primera línea comienza con <strong className='fw-b'>@</strong> y determina el nombre del impuesto a calcular, las opciones para estas líneas son <strong className='fw-b'>r</strong> para redondeado, que redondea el valor final a miles y <strong className='fw-b'>p</strong> para porcentaje, que permite calcular un porcentaje del valor total. </p>
                         <p>Después de la primera línea, le siguen los hijos, identificados con el <strong className='fw-b'>#</strong>, pueden ser N totales y tienen la opción <strong className='fw-b'>mult</strong> que es un valor numérico que calculará el valor final (valor = mult * área), si mult no es un número que el sistema puede determinar, utilizará el valor predeterminado 1000.</p>
-                         </>,
+                    </>,
                     focus: 'create_tc',
+                },
+            ],
+        }
+    },
+    dcalc: {
+        en: {
+            title: 'DOVELA CALCULATOR',
+            infoFixed: ['Calculator model', 'Units', 'Value', 'cvi', 'cfi', 'CV', 'CF', 'AVT'],
+            infoVaried: ['TRIBUTARY UNIT VALUE', 'TUV', 'MINIMUM MONTHLY LEGAL WAGE', 'MMLW'],
+
+            calc_title: 'Fixed and variable expenses calculator',
+            calc_form: ['Entry data', 'Output data', 'Process type', 'Mode', 'Use', 'Strata', 'Area', 'Multiplier factor m', 'Fixed charge', 'Variable charge', 'Total charge'],
+            calc_process_type: ['Construction  or acknowledgment', 'Urbanism', 'Parceling'],
+            calc_mod_1: ['New Construction', 'Ampliation', 'Modification', 'Structural reinforcement', 'Adequation (with construction)', 'Adequation (without construction)', 'Total demolition', 'Partial demolition', 'Enclosure', 'Restoration', 'Reconstruction', 'Acknowledgment'],
+            calc_mod_2: ['Development', 'Sanitation', 'Reurbanism'],
+            calc_mod_3: ['Parceling'],
+            cacl_use: ['Residential (NO SIR)', 'Residential (SIR)', 'Residential (PIR)', 'Trade and services', 'Dotational', 'Industrial', 'Multiple'],
+            calc_strate: ['Strata 1', 'Strata 2', 'Strata 3', 'Strata 4', 'Strata 5', 'Strata 6'],
+
+            templ_title: 'Tax calculator',
+            templ_form: ['Tax calculation template'],
+
+            nis_title: 'NO DATA IN THE BILL',
+            nis_body: 'Add at least one value to generate a bill.',
+
+            table_title: 'Expenses that do not authorize constructions',
+            table_columns: ['EXPENSES', 'AVT', 'TOTAL'],
+            table_body: [
+                { title: 'Subdivision license 2.2.6.6.8.10', list: ['Urban and rural, without range m2', 'Rebatching, useful  area to urbanize (0 to 1000 m2)', 'Rebatching, useful  area to urbanize (1001 to 5000 m2)', 'Rebatching, useful  area to urbanize (5001 to 10000 m2)', 'Urban and rural, without range m2', 'Urban and rural, without range m2'] },
+                { title: 'License prolongation or revalidation', list: ['Each one', 'Each one (SIR)', 'Second prolongation or second revalidation'] },
+                { title: 'Dimension adjustment', list: ['Strata 1 and 2', 'Strata 3 and 4', 'Strata 5 and 6'] },
+                { title: 'Certified blueprint copy', list: ['Each one'] },
+                { title: 'Blueprint approval of H.P', list: ['Up to 250 m2', 'From 251 to 500 m2', 'From 501 to 1000 m2', 'From 1001 to 5000 m2', 'From 5001 to 10000 m2', 'From 10001 to 20000 m2', 'More than 20000 m2'] },
+                { title: 'Ground displacement and swimming pool construction', list: ['Up to 100 m3', 'From 101 to 500 m3', 'From 501 to 1000 m3', 'From 1001 to 5000 m3', 'From 5001 to 10000 m3', 'From 10001 to 20000 m3', 'More than 20000 m3'] },
+                { title: 'Urban blueprint modification', list: ['Each one'] },
+                { title: 'Urban norm concept', list: ['Each one'] },
+                { title: 'Soil use concept', list: ['Each one'] },
+            ],
+            table_extra: 'Article 2.2.6.6.8.15 Expenses for other actions. Urban curators may charge the following expenses for the other actions referred to in article 2.2.6.1.3.1 of this decree, as long as these are executed independently of the issuance of the license:',
+
+            bill_title: 'Bill preview',
+            bill_table: ['ITEM DESCRIPTION', 'VALUES', 'TOTAL'],
+            bill_link1: 'How to open a CSV file in Excel',
+            bill_link2: 'How to open a CSV file in LibreOffice',
+
+            btn_help_tile: 'DOVELA CALCULATOR',
+            btn_help_body: 'Dovela calculator is a tool for estimating all kinds of expenses from the organization, from fixed and variable charges, to tax charges and other charges based on the type of process.',
+            HELP_PAGE: [
+                {
+                    title: 'DOVELA CALCULATOR',
+                    content: 'This is a tool for estimating all expenses and taxes produced in the processes of the team, this module contains one calculator for fixed and variable charges, another tax calculator that uses the Tax Calculation templates and a table for processes that do not required constructions. Each one of these tools can add their value to a preview bill and create a final estimate.',
+                    focus: 'title',
+                },
+                {
+                    title: 'MODEL CALCULATOR',
+                    content: 'Due to legal precedents, the base values on which the expenses are calculated change from year to year, this select allows to choose the year from which the estimate is aim at.',
+                    focus: 'model',
+                    component: <FormGroup label={'Calculator model'} inline>
+                        <SELECT selectOptions={[{ value: '2021', label: '2021' }, { value: '2022', label: '2022' }]} leftIcon="calendar" />
+                    </FormGroup>
+                },
+                {
+                    title: 'CALCULATOR BASE UNITS',
+                    content: 'These are the base values from which the tool calculate the final charge.',
+                    focus: 'units', list: [
+                        { subtitle: 'Units', text: 'The name of the base unit, define legally as either MINIMUM MONTHLY LEGAL WAGE (MMLW) or TRIBUTARY UNIT VALUE (TUV)' },
+                        { subtitle: 'Value', text: 'The value of the base unit, defined legally as 908526 for MMLW or 38004 for TUV' },
+                        { subtitle: 'cvi', text: 'The base value of the variable charge.' },
+                        { subtitle: 'cfi', text: 'The base value of the fixed charge.' },
+                        { subtitle: 'CV', text: 'The product of cvi and value. A base value use in the calculations.' },
+                        { subtitle: 'CF', text: 'The product of cfi and value. A base value use in the calculations.' },
+                        { subtitle: 'AVT', text: 'The added value tax in added to all expenses, defined as a percentage of the total charge, the tax calculations do not add this value since they are tax themselves.' },
+                    ]
+                },
+                {
+                    title: 'CALCULATE',
+                    content: 'This button will process the input data from the calculator and set the output values.',
+                    btn: 'CALCULATE', btnColor: 'primary', btnIcon: 'calculator',
+                    focus: 'calculate',
+                },
+                {
+                    title: 'ADD',
+                    content: 'This button will take the output values generate by the calculator and add then to the preview bill.',
+                    btn: 'ADD', btnColor: 'warning', btnIcon: 'th',
+                    focus: 'add',
+                },
+                {
+                    title: 'FIXED AND VARIABLE EXPENSES CALCULATOR',
+                    content: 'This tool allows to estimate the expenses of the most common license processes of the team.',
+                    focus: 'calc', list: [
+                        { subtitle: 'Process type', text: 'The main processes types derived from the licenses.' },
+                        { subtitle: 'Mode', text: 'The mode of the process type,  each process type has their own modes.' },
+                        { subtitle: 'Use', text: 'The use destination of the process.' },
+                        { subtitle: 'Strata', text: 'The strata in which the building is located.' },
+                        { subtitle: 'Area', text: 'Total affected area of the process.' },
+                        { subtitle: 'Multiplier factor m', text: <>This is an unique constant present in the calculation of the expense, this value is unique for each team and can be set at the <Link to="/dconfig" target="_blank">Configuration page</Link>.</> },
+                        { subtitle: 'Fixed charge', text: 'The final CF value' },
+                        { subtitle: 'Variable charge', text: 'The final CV value' },
+                        { subtitle: 'Total charge', text: 'The sum of the previous values' },
+                    ]
+                },
+                {
+                    title: 'TAX CALCULATOR',
+                    content: 'This tool will gather all Tax Calculation templates created by the team and will display them as forms. If no templates are found, it will show a message informing about it.',
+                    focus: 'tax', list: [
+                        { subtitle: 'Tax calculation template', text: 'This is a list that contains the names of all the tax calculation templates, chancing this select changes the displayed calculator.' },
+                        { subtitle: 'Tax ', text: 'The PARENT_NAME of the template.' },
+                        { subtitle: 'Tax specification', text: 'The CHILDREN of the template.' },
+                        { subtitle: 'Area ', text: 'Affected area to be taxed.' },
+                        { subtitle: 'Percentage %', text: 'This is an input data that can appear or not depending on the configuration of the template.' },
+                        { subtitle: 'Multiplier', text: 'This is the final value that will calculate the total charge, changes on the configuration of the template.' },
+                        { subtitle: 'Rounded ', text: 'A configuration text, that may or not appear depending on the configuration of the template.' },
+                        { subtitle: 'Value ', text: 'The final value to be taxed in the bill.' },
+                    ]
+                },
+                {
+                    title: 'BILL PREVIEW',
+                    content: 'When at least one value has been added to the bill preview, it will display a table adding all expenses in an organized bill, some values can be removed from the bill easily pressing the red button next to each entry.',
+                    focus: 'bill', list: [
+                        { subtitle: 'Generate CSV', text: 'This button will gather all information in the bill and generate a CSV (Comma separated value) file, that can later be managed with a sheet processor such as Excel or LibreOffice.' },
+                        { subtitle: 'Generate PDF', text: 'This button will gather all information in the bill and generate a PDF (Portable document format) file.' },
+                    ]
+                },
+                {
+                    title: 'EXPENSES THAT DO NOT AUTHORIZE CONSTRUCTIONS',
+                    content: 'This table contains all other processes that are not calculated using an affected area, due to them not having any kind of construction, due to this, the charge for this process is calculated with a sheet. ',
+                    focus: 'table',
+                },
+            ],
+        },
+        es: {
+            title: 'CALCULADORA DOVELA',
+            infoFixed: ['Modelo de Calculadora', 'Unidades', 'Valor', 'cvi', 'cfi', 'CV', 'CF', 'IVA'],
+            infoVaried: ['UNIDAD DE VALOR TRIBUTARIO', 'UVT', 'SALARIO MINIMO MENSUAL VIGENTE', 'SMLV'],
+
+            calc_title: 'Calculadora de expensas fijas y variables',
+            calc_form: ['Entrada de datos', 'Salida de datos', 'Tipo de actuación', 'Modalidad', 'Uso', 'Estrato', 'Área', 'Factor Municipal m', 'Cargo fijo', 'Cargo variable', 'Cobro total'],
+            calc_process_type: ['Construcción o reconocimiento', 'Urbanismo', 'Parcelación'],
+            calc_mod_1: ['Obra nueva', 'Ampliación', 'Modificación', 'Reforzamiento estructural', 'Adecuación (con obras)', 'Adecuación (sin obras)', 'Demolición total', 'Demolición parcial', 'Cerramiento', 'Restauración', 'Reconstrucción', 'Reconocimiento'],
+            calc_mod_2: ['Desarrollo', 'Saneamiento', 'Reurbanización'],
+            calc_mod_3: ['Parcelación'],
+            cacl_use: ['Residencial (NO VIS)', 'Residencial (VIS)', 'Residencial (VIP)', 'Comercial y de Servicios', 'Dotacional', 'Industrial', 'Multiple'],
+            calc_strate: ['Estrato 1', 'Estrato 2', 'Estrato 3', 'Estrato 4', 'Estrato 5', 'Estrato 6'],
+
+            templ_title: 'Calculadora de impuestos',
+            templ_form: ['Plantila de calculo de impuesto'],
+
+            nis_title: 'No HAY DATOS EN LA LIQUIDACIÓN',
+            nis_body: 'Añade al menos un valor para generar la liquidación',
+
+            table_title: 'Expensas que no autorizan obras',
+            table_columns: ['EXPENSAS', 'IVA', 'TOTAL'],
+            table_body: [
+                { title: 'Licencia de subdivisión 2.2.6.6.8.10', list: ['Urbana y Rural, Sin rango. m2', 'Reloteo, Área útil urbanizable (0 a 1000 m2)', 'Reloteo, Área útil urbanizable (1001 a 5000 m2)', 'Reloteo, Área útil urbanizable (5001 a 10000 m2)', 'Urbana y Rural, Sin rango. m2', 'Urbana y Rural, Sin rango. m2'] },
+                { title: 'Prorroga o revalidación de licencia', list: ['Cada Una', 'Cada Una (VIS)', 'Segunda Prorroga o Segunda revalidación'] },
+                { title: 'Ajuste de cotas', list: ['Estrato 1 y 2', 'Estrato 3 y 4', 'Estrato 5 y 6'] },
+                { title: 'Copia certificada de Planos', list: ['Por cada plano'] },
+                { title: 'Aprovación de planos de P.H.', list: ['Hasta 250 m2', 'De 251 a 500 m2', 'De 501 a 1000 m2', 'De 1001 a 5000 m2', 'De 5001 a 10000 m2', 'De 10001 a 20000 m2', 'Mas de 20000 m2'] },
+                { title: 'Movimiento de tierras y construcción de piscinas', list: ['Hasta 100 m3', 'De 101 a 500 m3', 'De 501 a 1000 m3', 'De 1001 a 5000 m3', 'De 5001 a 10000 m3', 'De 10001 a 20000 m3', 'Mas de 20000 m3'] },
+                { title: 'Modificación Planos Urbanisticos', list: ['Cada Uno'] },
+                { title: 'Concepto Norma Urbanistica', list: ['Cada Uno'] },
+                { title: 'Concepto Uso del suelo', list: ['Cada Uno'] },
+            ],
+            table_extra: 'Articulo 2.2.6.6.8.15 Expensas por otras actuaciones. Los curadores urbanos podrán cobrar las siguientes expensas por las otras actuaciones de que trata el artículo 2.2.6.1.3.1 del presente decreto, siempre y cuando estas se ejecuten de manera independiente a la expedición de la licencia:',
+
+            bill_title: 'Vista previa de liquidación',
+            bill_table: ['DESCRIPTICÓN', 'VALOR', 'TOTAL'],
+            bill_link1: 'Como abrir un archivo CSV en Excel',
+            bill_link2: 'Como abrir un archivo CSV en LibreOffice',
+
+            btn_help_tile: 'CALCULADORA DOVELA',
+            btn_help_body: 'La calculadora Dovela es una herramienta para estimar todo tipo de gastos de la organización, desde cargos fijos y variables, hasta cargos por impuestos y otros cargos según el tipo de proceso.',
+            HELP_PAGE: [
+                {
+                    title: 'CALCULADORA DOVELA',
+                    content: 'Esta es una herramienta para estimar todos los gastos e impuestos que se producen en los procesos del equipo, este módulo contiene una calculadora para cargos fijos y variables, otra calculadora de impuestos que utiliza las plantillas de Cálculo de Impuestos y una tabla para procesos que no requieren construcciones. Cada una de estas herramientas puede agregar su valor a una liquidación preliminar y crear una estimación final.',
+                    focus: 'title',
+                },
+                {
+                    title: 'MODELO DE CALCULADORA',
+                    content: 'Debido a la jurisprudencia, los valores base sobre los que se calculan los gastos varían de un año a otro, esta selección permite elegir el año al que se destina la estimación.',
+                    focus: 'model',
+                    component: <FormGroup label={'Calculator model'} inline>
+                        <SELECT selectOptions={[{ value: '2021', label: '2021' }, { value: '2022', label: '2022' }]} leftIcon="calendar" />
+                    </FormGroup>
+                },
+                {
+                    title: 'UNIDEADES DE LA CALCULADORA',
+                    content: 'Estos son los valores base a partir de los cuales la herramienta calcula el valor final.',
+                    focus: 'units', list: [
+                        { subtitle: 'Unidades', text: 'El nombre de la unidad base, definida legalmente como SALARIO MÍNIMO MENSUAL VIGENTE (SMMV) o UNIDAD DE VALOR TRIBUTARIA (UVT)' },
+                        { subtitle: 'Valor', text: 'TEl valor de la unidad base, definido legalmente como 908526 para SMMV o 38004 para UVT' },
+                        { subtitle: 'cvi', text: 'El valor base para el cargo variable.' },
+                        { subtitle: 'cfi', text: 'El valor base para el cargo fijo.' },
+                        { subtitle: 'CV', text: 'El producto de cvi y Valor. Un valor base utilizado en los cálculos.' },
+                        { subtitle: 'CF', text: 'El producto de cfi y valor. Un valor base utilizado en los cálculos.' },
+                        { subtitle: 'IVA', text: 'El impuesto al valor agregado se agrega a todos los gastos, definido como un porcentaje del cargo total, los cálculos de impuestos no agregan este valor ya que son impuestos en sí mismos.' },
+                    ]
+                },
+                {
+                    title: 'CALCULAR',
+                    content: 'Este botón procesará los datos de entrada de la calculadora y establecerá los valores de salida.',
+                    btn: 'CALCULAR', btnColor: 'primary', btnIcon: 'calculator',
+                    focus: 'calculate',
+                },
+                {
+                    title: 'AÑADIR',
+                    content: 'Este botón tomará los valores de salida generados por la calculadora y los agregará a la vista previa de la liquidación.',
+                    btn: 'AÑADIR', btnColor: 'warning', btnIcon: 'th',
+                    focus: 'add',
+                },
+                {
+                    title: 'CALCULADORA DE EXPENSAS FIJAS Y VARIABLES',
+                    content: 'Esta herramienta permite estimar los gastos de los procesos de licencia más comunes del equipo.',
+                    focus: 'calc', list: [
+                        { subtitle: 'Tipo de actuación', text: 'Los principales tipos de actuación derivados de las licencias.' },
+                        { subtitle: 'Modalidad', text: 'La modadlidad del tipo de actuación, cada tipo de actuación tiene sus propias modalidades.' },
+                        { subtitle: 'Uso', text: 'El uso destinado de la actuación.' },
+                        { subtitle: 'Estrato', text: 'El estrato perteneciente al inmueble.' },
+                        { subtitle: 'Área', text: 'Área afectada total de la actuación.' },
+                        { subtitle: 'Factor Municipal m', text: <>Esta es una constante única presente en el cálculo de expensas, este valor es único para cada equipo y se puede configurar en la <Link to="/dconfig" target="_blank">pagina de configuración</Link>.</> },
+                        { subtitle: 'Cargo fijo', text: 'El valor final de CF.' },
+                        { subtitle: 'Cargo variable', text: 'El valor final de CV.' },
+                        { subtitle: 'Cobro total', text: 'La sumatoria del cargo fijo y cargo variable.' },
+                    ]
+                },
+                {
+                    title: 'CALCULADORA DE IMPUESTOS',
+                    content: 'This tool will gather all Tax Calculation templates created by the team and will display them as forms. If no templates are found, it will show a message informing about it.',
+                    focus: 'tax', list: [
+                        { subtitle: 'Plantila de calculo de impuesto', text: 'Esta es una lista que contiene los nombres de todas las plantillas de cálculo de impuestos, al cambiar esta selección cambia la calculadora mostrada.' },
+                        { subtitle: 'Impuesto ', text: 'El NOMBRE_PADRE de la plantilla.' },
+                        { subtitle: 'Especificación de impuesto', text: 'Los HIJOS de las plantillas.' },
+                        { subtitle: 'Área ', text: 'Área afectada la cual sera cobrada el impuesto.' },
+                        { subtitle: 'Porcentaje %', text: 'Este es un dato de entrada que puede aparecer o no dependiendo de la configuración de la plantilla.' },
+                        { subtitle: 'Multipliador', text: 'Este es el valor final que calculará el cargo total, cambia dependiendo de la configuración de la plantilla.' },
+                        { subtitle: 'Redondeo', text: 'Un texto de información, que puede aparecer o no según la configuración de la plantilla.' },
+                        { subtitle: 'Valor', text: 'El valor final a gravar en la liquidación.' },
+                    ]
+                },
+                {
+                    title: 'VISTA PREVIA DE LIQUIDACIÓN',
+                    content: 'Cuando se haya agregado al menos un valor a la vista previa de la liquidación, se mostrará una tabla que agrega todas las expensas en una factura organizada, algunos valores se pueden eliminar de la factura fácilmente presionando el botón rojo al lado de cada entrada.',
+                    focus: 'bill', list: [
+                        { subtitle: 'Generar CSV', text: 'Este botón recopilará toda la información de la liquidación y generará un archivo CSV (valores separados por comas), que luego se puede abrir con un procesador de hojas de calculo como Excel o LibreOffice.' },
+                        { subtitle: 'Generar PDF', text: 'Este botón recopilará toda la información de la liquidación y generará un archivo PDF (formato de documento portátil).' },
+                    ]
+                },
+                {
+                    title: 'EXPENSAS QUE NO AUTORIZAN OBRAS',
+                    content: 'Esta tabla contiene todos los demás procesos que no se calculan utilizando un área afectada, debido a que no tienen ningún tipo de construcción, por lo que el cargo de este proceso se calcula con una tabla.',
+                    focus: 'table',
                 },
             ],
         }

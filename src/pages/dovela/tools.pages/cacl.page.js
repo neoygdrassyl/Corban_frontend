@@ -1,28 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
-import SERVICE_AUTH from '../../../services/apis/auth.service';
 import SERVICE_TEMPLATES from '../../../services/apis/templates.service';
 
 // COMPONENTS
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
-import { ALERT_NO_PERMIT } from '../../../resources/customs/utils/notifications.vars';
-import { Col, FlexboxGrid, Grid, IconButton, Panel, Row } from 'rsuite';
-import { Tooltip2 } from "@blueprintjs/popover2";
+import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
+import { Col, FlexboxGrid, Grid, IconButton, Panel, Row, toaster } from 'rsuite';
+import { CONVERT_INT_TO_MONEY, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
+import { Button, FormGroup, NonIdealState, NumericInput } from '@blueprintjs/core';
+import SELECT from '../../../resources/customs/components/form.components/select.compontnt';
+import TEMPLATES_BODY from '../temaplates.pages/body.template';
+import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.component';
 
 // ICONS
 import { AiTwotoneStar } from 'react-icons/ai'
 import MessageIcon from '@rsuite/icons/Message';
 import CloseOutlineIcon from '@rsuite/icons/CloseOutline';
 import MinusIcon from '@rsuite/icons/Minus';
-
-import { CONVERT_INT_TO_MONEY, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
-import { Button, FormGroup, NonIdealState, NumericInput } from '@blueprintjs/core';
-import SELECT from '../../../resources/customs/components/form.components/select.compontnt';
-import TEMPLATES_BODY from '../temaplates.pages/body.template';
-import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.component';
+import TUTORIAL from '../../../resources/customs/components/tutorial.component';
 
 var moment = require('moment');
 
@@ -32,7 +30,7 @@ export default function CALCULATOR_DOVELA() {
     const conn = auth.conn ?? {};
 
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('audits');
+    const trn = utilities.getTranslation('dcalc');
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
 
@@ -40,121 +38,120 @@ export default function CALCULATOR_DOVELA() {
     const IVA = 0.16;
 
     const CUR_USES = [
-        'Residencial (NO VIS)',
-        'Residencial (VIS)',
-        'Residencial (VIP)',
-        'Comercial y de Servicios',
-        'Dotacional',
-        'Industrial',
-        'Multiple'
+        trn.cacl_use[0],
+        trn.cacl_use[1],
+        trn.cacl_use[2],
+        trn.cacl_use[3],
+        trn.cacl_use[4],
+        trn.cacl_use[5],
+        trn.cacl_use[6]
     ]
     const CUR_MATRIX = [
         {
-            name: 'Construcción o reconocimiento', value: 'conrec',
+            name: trn.calc_process_type[0], value: 'conrec',
             subrules: [
-                { name: 'Obra nueva', value: 'on', },
-                { name: 'Ampliación', value: 'amp', },
-                { name: 'Modificación', value: 'mod', },
-                { name: 'Reforzamiento estructural', value: 'ref', },
-                { name: 'Adecuación (con obras)', value: 'adec', },
-                { name: 'Adecuación (sin obras)', value: 'ades', },
-                { name: 'Demolición total', value: 'dt', },
-                { name: 'Demolición parcial', value: 'dp', },
-                { name: 'Cerramiento', value: 'cer', },
-                { name: 'Restauración', value: 'res', },
-                { name: 'Reconstrucción', value: 'rec', },
-                { name: 'Reconocimiento', value: 'rcn', },
+                { name: trn.calc_mod_1[0], value: 'on', },
+                { name: trn.calc_mod_1[1], value: 'amp', },
+                { name: trn.calc_mod_1[2], value: 'mod', },
+                { name: trn.calc_mod_1[3], value: 'ref', },
+                { name: trn.calc_mod_1[4], value: 'adec', },
+                { name: trn.calc_mod_1[5], value: 'ades', },
+                { name: trn.calc_mod_1[6], value: 'dt', },
+                { name: trn.calc_mod_1[7], value: 'dp', },
+                { name: trn.calc_mod_1[8], value: 'cer', },
+                { name: trn.calc_mod_1[9], value: 'res', },
+                { name: trn.calc_mod_1[10], value: 'rec', },
+                { name: trn.calc_mod_1[11], value: 'rcn', },
             ]
         },
         {
-            name: 'Urbanismo', value: 'urb',
+            name: trn.calc_process_type[1], value: 'urb',
             subrules: [
-                { name: 'Desarrollo', value: 'des', },
-                { name: 'Saneamiento', value: 'san', },
-                { name: 'Reurbanización', value: 'reu', },
+                { name: trn.calc_mod_2[0], value: 'des', },
+                { name: trn.calc_mod_2[1], value: 'san', },
+                { name: trn.calc_mod_2[2], value: 'reu', },
             ]
         },
         {
-            name: 'Parcelación', value: 'par',
+            name: trn.calc_process_type[2], value: 'par',
             subrules: [
-                { name: 'Parcelación', value: 'par', },
+                { name: trn.calc_mod_3[0], value: 'par', },
             ]
         },
 
     ]
     const CALC_YEARS = [{ value: '2021', label: '2021' }, { value: '2022', label: '2022' }]
     const MULTS = {
-        '2021': { mult: 908526, units: 'SMLV', name: 'SALARIO MINIMO MENSUAL VIGENTE', cfi: 0.4, cvi: 0.8 },
-        '2022': { mult: 38004, units: 'UVT', name: 'UNIDAD DE VALOR TRIBUTARIO', cfi: 10.01, cvi: 20.02 },
+        '2021': { mult: 908526, units: trn.infoVaried[3], name: trn.infoVaried[2], cfi: 0.4, cvi: 0.8 },
+        '2022': { mult: 38004, units: trn.infoVaried[1], name: trn.infoVaried[0], cfi: 10.01, cvi: 20.02 },
     }
-    const model2TableStr1 = 'Articulo 2.2.6.6.8.15 Expensas por otras actuaciones. Los curadores urbanos podrán cobrar las siguientes expensas por las otras actuaciones de que trata el artículo 2.2.6.1.3.1 del presente decreto, siempre y cuando estas se ejecuten de manera independiente a la expedición de la licencia:';
+    const model2TableStr1 = trn.table_extra;
 
     const model2Table = [
         {
-            title: 'Licencia de subdivisión 2.2.6.6.8.10', list: [
-                { name: 'Urbana y Rural, Sin rango. m2', const: { '2021': [1], '2022': [25.02] } },
-                { name: 'Reloteo, Área útil urbanizable (0 a 1000m2)', const: { '2021': [2 / 30, 'SMLD', 2], '2022': [1.67] } },
-                { name: 'Reloteo, Área útil urbanizable (1001 a 5000m2)', const: { '2021': [0.5], '2022': [12.51] } },
-                { name: 'Reloteo, Área útil urbanizable (5001 a 10000m2)', const: { '2021': [1], '2022': [25.02] } },
-                { name: 'Urbana y Rural, Sin rango. m2', const: { '2021': [1.5], '2022': [37.53] } },
-                { name: 'Urbana y Rural, Sin rango. m2', const: { '2021': [2], '2022': [50.05] } },
+            title: trn.table_body[0].title, list: [
+                { name: trn.table_body[0].list[0], const: { '2021': [1], '2022': [25.02] } },
+                { name: trn.table_body[0].list[1], const: { '2021': [2 / 30, 'SMLD', 2], '2022': [1.67] } },
+                { name: trn.table_body[0].list[2], const: { '2021': [0.5], '2022': [12.51] } },
+                { name: trn.table_body[0].list[3], const: { '2021': [1], '2022': [25.02] } },
+                { name: trn.table_body[0].list[4], const: { '2021': [1.5], '2022': [37.53] } },
+                { name: trn.table_body[0].list[5], const: { '2021': [2], '2022': [50.05] } },
             ]
         },
         {
-            title: 'Prorroga o revalidación de licencia', list: [
-                { name: 'Cada Una', const: { '2021': [1], '2022': [25.02] } },
-                { name: 'Cada Una (VIS)', const: { '2021': false, '2022': [1.67] } },
-                { name: 'Segunda Prorroga o Segunda revalidación', const: { '2021': false, '2022': [50.05] } },
-            ]
-        },
-        { title: model2TableStr1 },
-        {
-            title: 'Ajuste de cotas', list: [
-                { name: 'Estrato 1 y 2', const: { '2021': [4 * 1 / 30, 'SMLD', 4], '2022': [3.34] } },
-                { name: 'Estrato 3 y 4', const: { '2021': [8 * 1 / 30, 'SMLD', 8], '2022': [6.67] } },
-                { name: 'Estrato 3 y 4', const: { '2021': [1], '2022': [10.01] } },
+            title: trn.table_body[1].title, list: [
+                { name: trn.table_body[1].list[0], const: { '2021': [1], '2022': [25.02] } },
+                { name: trn.table_body[1].list[1], const: { '2021': false, '2022': [1.67] } },
+                { name: trn.table_body[1].list[2], const: { '2021': false, '2022': [50.05] } },
             ]
         },
         {
-            title: 'Copia certificada de Planos', list: [
-                { name: 'Por cada plano', const: { '2021': [1 * 1 / 30, 'SMLD', 1], '2022': [0.834] } },
+            title: trn.table_body[2].title, list: [
+                { name: trn.table_body[2].list[0], const: { '2021': [4 * 1 / 30, 'SMLD', 4], '2022': [3.34] } },
+                { name: trn.table_body[2].list[1], const: { '2021': [8 * 1 / 30, 'SMLD', 8], '2022': [6.67] } },
+                { name: trn.table_body[2].list[2], const: { '2021': [1], '2022': [10.01] } },
             ]
         },
         {
-            title: 'Visto bueno P.H.', list: [
-                { name: 'Hasta 250 m2', const: { '2021': [0.25], '2022': [6.26] } },
-                { name: 'De 251 a 500 m2', const: { '2021': [0.5], '2022': [12.51] } },
-                { name: 'De 501 a 1000 m2', const: { '2021': [1], '2022': [25.02] } },
-                { name: 'De 1001 a 5000 m2', const: { '2021': [2], '2022': [50.05] } },
-                { name: 'De 5001 a 10000 m2', const: { '2021': [3], '2022': [75.07] } },
-                { name: 'De 10001 a 20000 m2', const: { '2021': [4], '2022': [100.09] } },
-                { name: 'Mas de 20000 m2', const: { '2021': [5], '2022': [125.11] } },
+            title: trn.table_body[3].title, list: [
+                { name: trn.table_body[3].list[0], const: { '2021': [1 * 1 / 30, 'SMLD', 1], '2022': [0.834] } },
             ]
         },
         {
-            title: 'Movimiento de tierras y construcción de piscinas', list: [
-                { name: 'Hasta 100 m3', const: { '2021': [2 * 1 / 30, 'SMLD', 2], '2022': [1.67] } },
-                { name: 'De 101 a 500 m3', const: { '2021': [4 * 1 / 30, 'SMLD', 4], '2022': [3.34] } },
-                { name: 'De 501 a 1000 m3', const: { '2021': [1], '2022': [25.02] } },
-                { name: 'De 1001 a 5000 m3', const: { '2021': [2], '2022': [50.05] } },
-                { name: 'De 5001 a 10000 m3', const: { '2021': [3], '2022': [75.07] } },
-                { name: 'De 10001 a 20000 m3', const: { '2021': [4], '2022': [100.09] } },
-                { name: 'Mas de 20000 m3', const: { '2021': [5], '2022': [125.11] } },
+            title: trn.table_body[4].title, list: [
+                { name: trn.table_body[4].list[0], const: { '2021': [0.25], '2022': [6.26] } },
+                { name: trn.table_body[4].list[1], const: { '2021': [0.5], '2022': [12.51] } },
+                { name: trn.table_body[4].list[2], const: { '2021': [1], '2022': [25.02] } },
+                { name: trn.table_body[4].list[3], const: { '2021': [2], '2022': [50.05] } },
+                { name: trn.table_body[4].list[4], const: { '2021': [3], '2022': [75.07] } },
+                { name: trn.table_body[4].list[5], const: { '2021': [4], '2022': [100.09] } },
+                { name: trn.table_body[4].list[6], const: { '2021': [5], '2022': [125.11] } },
             ]
         },
         {
-            title: 'Modificación Planos Urbanisticos', list: [
-                { name: 'Cada Una', const: { '2021': [1], '2022': [25.02] } },
+            title: trn.table_body[5].title, list: [
+                { name: trn.table_body[5].list[0], const: { '2021': [2 * 1 / 30, 'SMLD', 2], '2022': [1.67] } },
+                { name: trn.table_body[5].list[1], const: { '2021': [4 * 1 / 30, 'SMLD', 4], '2022': [3.34] } },
+                { name: trn.table_body[5].list[2], const: { '2021': [1], '2022': [25.02] } },
+                { name: trn.table_body[5].list[3], const: { '2021': [2], '2022': [50.05] } },
+                { name: trn.table_body[5].list[4], const: { '2021': [3], '2022': [75.07] } },
+                { name: trn.table_body[5].list[5], const: { '2021': [4], '2022': [100.09] } },
+                { name: trn.table_body[5].list[6], const: { '2021': [5], '2022': [125.11] } },
             ]
         },
         {
-            title: 'Concepto Norma Urbanistica', list: [
-                { name: 'Cada Uno', const: { '2021': [10 * 1 / 30, 'SMLD', 10], '2022': [8.34] } },
+            title: trn.table_body[6].title, list: [
+                { name: trn.table_body[6].list[0], const: { '2021': [1], '2022': [25.02] } },
             ]
         },
         {
-            title: 'Concepto Uso del suelo', list: [
-                { name: 'Cada Uno', const: { '2021': [2 * 1 / 30, 'SMLD', 2], '2022': [1.67] } },
+            title: trn.table_body[7].title, list: [
+                { name: trn.table_body[7].list[0], const: { '2021': [10 * 1 / 30, 'SMLD', 10], '2022': [8.34] } },
+            ]
+        },
+        {
+            title: trn.table_body[8].title, list: [
+                { name: trn.table_body[8].list[0], const: { '2021': [2 * 1 / 30, 'SMLD', 2], '2022': [1.67] } },
             ]
         },
     ]
@@ -274,11 +271,11 @@ export default function CALCULATOR_DOVELA() {
     // *************************** JXS ELEMENTS **************************** //
     let COMPONENT_CALC_CUR = () => {
         return <Row>
-            <Row className='p-1 text-center fw-b'><h5 className='fw-bold'>Calculadora de Expensas Fijas y variables</h5></Row>
+            <Row className='p-1 text-center fw-b'><h5 className='fw-bold'>{trn.calc_title}</h5></Row>
             <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-                <Row className='p-1'><label className='fw-bold'>Entrada de datos</label></Row>
+                <Row className='p-1'><label className='fw-bold'>{trn.calc_form[0]}</label></Row>
                 <Row className='px-1'>
-                    <FormGroup label={"Tipo actuacion"}>
+                    <FormGroup label={trn.calc_form[2]}>
                         <div class="bp4-input-group">
                             <span class={"bp4-icon bp4-icon-book"}></span>
                             <select id={'calc_rule'} onChange={(e) => SET_CUR_MODS(e.target.value)}
@@ -291,7 +288,7 @@ export default function CALCULATOR_DOVELA() {
                     </FormGroup>
                 </Row>
                 <Row className='px-1 '>
-                    <FormGroup label={"Modalidad"}>
+                    <FormGroup label={trn.calc_form[3]}>
                         <div class="bp4-input-group">
                             <span class={"bp4-icon bp4-icon-book"}></span>
                             <select id={'calc_subrule'}
@@ -304,7 +301,7 @@ export default function CALCULATOR_DOVELA() {
                     </FormGroup>
                 </Row>
                 <Row className='px-1'>
-                    <FormGroup label={"Uso"}>
+                    <FormGroup label={trn.calc_form[4]}>
                         <div class="bp4-input-group">
                             <span class={"bp4-icon bp4-icon-home"}></span>
                             <select id={'calc_use'}
@@ -317,25 +314,25 @@ export default function CALCULATOR_DOVELA() {
                     </FormGroup>
                 </Row>
                 <Row className='px-1'>
-                    <FormGroup label={"Estrato"}>
+                    <FormGroup label={trn.calc_form[5]}>
                         <div class="bp4-input-group">
                             <span class={"bp4-icon bp4-icon-home"}></span>
                             <select id={'calc_strata'}
                                 className={'bp4-input'}
                             >
-                                <option value={0}>Estrato 1</option>
-                                <option value={1}>Estrato 2</option>
-                                <option value={2}>Estrato 3</option>
-                                <option value={3}>Estrato 4</option>
-                                <option value={4}>Estrato 5</option>
-                                <option value={5}>Estrato 6</option>
+                                <option value={0}>{trn.calc_strate[0]}</option>
+                                <option value={1}>{trn.calc_strate[1]}</option>
+                                <option value={2}>{trn.calc_strate[2]}</option>
+                                <option value={3}>{trn.calc_strate[3]}</option>
+                                <option value={4}>{trn.calc_strate[4]}</option>
+                                <option value={5}>{trn.calc_strate[5]}</option>
                             </select>
                             <span class={"bp4-icon bp4-icon-chevron-down"}></span>
                         </div>
                     </FormGroup>
                 </Row>
                 <Row className='px-1'>
-                    <FormGroup label={"Área"}>
+                    <FormGroup label={trn.calc_form[6]}>
                         <NumericInput
                             leftIcon={'rectangle'} id={'calc_area'}
                             step={0.01}
@@ -348,11 +345,11 @@ export default function CALCULATOR_DOVELA() {
 
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-                <Row className='p-1'><label className='fw-bold'>Salida de datos</label></Row>
-                <Row className='p-1'><label className='fw-normal'> Factor Municipal m:  <label className='fw-bold'>{m}</label></label></Row>
-                <Row className='p-1'><label className='fw-normal'> Cargo fijo:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mf)}</label></label></Row>
-                <Row className='p-1'><label className='fw-normal'> Cargo variable:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mv)}</label></label></Row>
-                <Row className='p-1'><label className='fw-normal'> Cobro total:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mt)}</label></label></Row>
+                <Row className='p-1'><label className='fw-bold'>{trn.calc_form[1]}</label></Row>
+                <Row className='p-1'><label className='fw-normal'> {trn.calc_form[7]}:  <label className='fw-bold'>{m}</label></label></Row>
+                <Row className='p-1'><label className='fw-normal'> {trn.calc_form[8]}:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mf)}</label></label></Row>
+                <Row className='p-1'><label className='fw-normal'> {trn.calc_form[9]}:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mv)}</label></label></Row>
+                <Row className='p-1'><label className='fw-normal'> {trn.calc_form[10]}:  <label className='fw-bold'>{CONVERT_INT_TO_MONEY(str_mt)}</label></label></Row>
                 <hr className='border' />
                 <Button className='mx-1 my-1' icon="calculator" onClick={() => CALCULATE_VALUE_CUR()} intent="primary">{btn.calculate}</Button>
                 <Button className='mx-1 my-1' icon="th" onClick={() => {
@@ -368,7 +365,7 @@ export default function CALCULATOR_DOVELA() {
     }
     let COMPONENT_CALC_TAX = () => {
         return <>
-            <FormGroup label={'PLANTILLA DE CALCULO DE IMPUESTO'}>
+            <FormGroup label={trn.templ_form[0]}>
                 <SELECT selectOptions={data.map(t => { return { value: t.template_data, label: t.template_name } })}
                     id={'template_choose'} onChange={(e) => setCalc(e.target.value)} />
             </FormGroup>
@@ -377,13 +374,13 @@ export default function CALCULATOR_DOVELA() {
     }
     let COMPONENT_BILL = () => {
         return <> <Grid fluid>
-            <Row className='text-center fw-b'><h5 className='fw-bold'>Liquidacion previa</h5></Row>
+            <Row className='text-center fw-b'><h5 className='fw-bold'>{trn.bill_title}</h5></Row>
             <Row justify="center" className='fw-b'>
                 <FlexboxGrid.Item xs={18} sm={18} md={18} lg={18} xl={18} xxl={18} as={Col}>
-                    {'DESCRIPTION'}
+                    {trn.bill_table[0]}
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} as={Col}>
-                    {'VALOR'}
+                    {trn.bill_table[1]}
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
                 </FlexboxGrid.Item>
@@ -403,7 +400,7 @@ export default function CALCULATOR_DOVELA() {
             <Row justify="center" ><hr className='border' /></Row>
             <Row justify="center" className='py-1 fw-b'>
                 <FlexboxGrid.Item xs={18} sm={18} md={18} lg={18} xl={18} xxl={18} as={Col} className="txt-r">
-                    <label >TOTAL: </label>
+                    <label >{trn.bill_table[2]}: </label>
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} as={Col}>
                     {CONVERT_INT_TO_MONEY(bill.reduce((total, curr) => Number(total) + Number(curr.value), 0))}
@@ -411,12 +408,22 @@ export default function CALCULATOR_DOVELA() {
                 <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
                 </FlexboxGrid.Item>
             </Row>
-            <Row className='txt-c' >
-                <FlexboxGrid.Item xs={24} sm={24} md={24} lg={24} xl={24} xxl={24} as={Col}>
-                    <BTN_DOWNLOAD csv color='green' onClick={() => { }} />
-                    <BTN_DOWNLOAD pdf onClick={() => { }} />
+            <Row justify="center" ><hr className='border' /></Row>
+            <Row className='txt-r' >
+                <FlexboxGrid.Item xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} as={Col}>
+                    <Row className='txt-l p-1' >
+                        <TUTORIAL text={trn.bill_link1} tutorial="csv_e" />
+                    </Row>
+                    <Row className='txt-l p-1' >
+                        <TUTORIAL text={trn.bill_link2} tutorial="csv_lo"/>
+                    </Row>
+                </FlexboxGrid.Item>
+                <FlexboxGrid.Item xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} as={Col}>
+                    <BTN_DOWNLOAD csv color='green' onClick={() => genCSV()} />
+                    <BTN_DOWNLOAD pdf onClick={() => genPDF()} />
                 </FlexboxGrid.Item>
             </Row>
+
         </Grid>
         </>
     }
@@ -424,7 +431,7 @@ export default function CALCULATOR_DOVELA() {
         return <>
             {model2Table.map(row => {
                 if (row.list) return <>
-                    <Row justify="center" className='fw-b bg-dark'>
+                    <Row justify="center" className='fw-b bg-dark text-light'>
                         <FlexboxGrid.Item xs={24} sm={24} md={16} lg={12} xl={12} xxl={12} as={Col}>
                             {row.title}
                         </FlexboxGrid.Item>
@@ -493,22 +500,71 @@ export default function CALCULATOR_DOVELA() {
                 console.log(e);
             }).finally(() => setLoad(1));
     }
+    function genCSV() {
+        const headers = 'DESCRIPCION;VALOR\n'
+
+        let csvContent = "data:text/csv;charset=utf-8," + headers
+            + bill.map(e => e.name + ';' + CONVERT_INT_TO_MONEY(e.value)).join("\n");
+
+        csvContent += `\nTOTAL;${CONVERT_INT_TO_MONEY(bill.reduce((total, curr) => Number(total) + Number(curr.value), 0))}`
+
+        var encodedUri = encodeURI(csvContent);
+        const fixedEncodedURI = encodedUri.replaceAll('#', '%23').replaceAll('°', 'r');
+
+        var link = document.createElement("a");
+        link.setAttribute("href", fixedEncodedURI);
+        link.setAttribute("download", `${'LIQUIDACION PREVIA'}.csv`);
+        document.body.appendChild(link); // Required for FF
+
+        link.click();
+    }
+    function genPDF() {
+        var formData = new FormData();
+
+        let descs = bill.map(b => b.name).join(';')
+        let values = bill.map(b => CONVERT_INT_TO_MONEY(b.value)).join(';')
+        let total = CONVERT_INT_TO_MONEY(bill.reduce((total, sum) => total + Number(sum.value), 0))
+
+        formData.append('descs', descs)
+        formData.append('values', values)
+        formData.append('total', total)
+
+
+        ALERT_WAIT(lang)
+        SERVICE_TEMPLATES.genPDF_TaxCalculation(formData)
+            .then(response => {
+                if (response.data === 'OK') {
+                    toaster.remove()
+                    window.open(process.env.REACT_APP_API_URL + "/pdf/taxc/" + "Liquidacion previa.pdf");
+                } else ALERT_ERROR(lang)
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang)
+            });
+    }
     return (
         <div className='my-3'>
 
             <Row className="text-center" style={{ width: '100%' }}>
-                <h3>{'CALCULATOR'} <BTN_HELP
-                    title={'title'}
-                    text={'subtitle'} page={false} /></h3>
+                <h3>{trn.title} <BTN_HELP title={trn.btn_help_tile} text={trn.btn_help_body} page={trn.HELP_PAGE} /></h3>
             </Row>
 
             <Grid fluid className='py-2'>
                 <Row style={{ width: '100%' }}>
                     <FlexboxGrid justify="center">
                         <FlexboxGrid.Item xs={24} sm={24} md={20} lg={16} xl={12} xxl={12} as={Col}>
-                            <FormGroup label={'Modelo de Calculadora'} inline>
+                            <FormGroup label={trn.infoFixed[0]} inline>
                                 <SELECT selectOptions={CALC_YEARS} df={year} id={'template_year'} onChange={(e) => setYear(e.target.value)} leftIcon="calendar" />
                             </FormGroup>
+                            <Row><label className='mx-1'>{trn.infoFixed[1]}: <label className='fw-b'>{MULTS[year].name} ({MULTS[year].units})</label></label>
+                                <label className='mx-1'>{trn.infoFixed[2]}: <label className='fw-b'>{MULTS[year].mult}</label></label>
+                                <label className='mx-1'>{trn.infoFixed[3]}: <label className='fw-b'>{MULTS[year].cvi}</label></label>
+                                <label className='mx-1'>{trn.infoFixed[4]}: <label className='fw-b'>{MULTS[year].cfi}</label></label>
+                                <label className='mx-1'>{'CV'}: <label className='fw-b'>{Math.round(MULTS[year].cvi * MULTS[year].mult)}</label></label>
+                                <label className='mx-1'>{'CF'}: <label className='fw-b'>{Math.round(MULTS[year].cfi * MULTS[year].mult)}</label></label>
+                                <label className='mx-1'>{trn.infoFixed[7]}: <label className='fw-b'>{IVA * 100}%</label></label>
+                            </Row>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>
                 </Row>
@@ -524,7 +580,7 @@ export default function CALCULATOR_DOVELA() {
                         </FlexboxGrid.Item>
                         <FlexboxGrid.Item xs={24} sm={24} md={10} lg={8} xl={8} xxl={8} as={Col}>
                             <Panel className="border">
-                                <Row className='text-center fw-b'><h5 className='fw-bold'>Calculadora de impuestos</h5></Row>
+                                <Row className='text-center fw-b'><h5 className='fw-bold'>{trn.templ_title}</h5></Row>
                                 <Row className='py-1'>
                                     {data.length > 0 ?
                                         COMPONENT_CALC_TAX()
@@ -547,8 +603,8 @@ export default function CALCULATOR_DOVELA() {
                                     : <NonIdealState
                                         className='py-2'
                                         icon={'dollar'}
-                                        title={'NO DATA IN BILL'}
-                                        description={'Add one value to generate a bill'}
+                                        title={trn.nis_title}
+                                        description={trn.nis_body}
                                         action={false}
                                         layout={"vertical"}
                                     />}
@@ -563,7 +619,7 @@ export default function CALCULATOR_DOVELA() {
                     <FlexboxGrid justify="center">
                         <FlexboxGrid.Item xs={24} sm={24} md={20} lg={16} xl={12} xxl={12} as={Col}>
                             <Panel className="border">
-                                <Row className='text-center fw-b'><h5 className='fw-bold'>Expensas que no autorizan obras</h5></Row>
+                                <Row className='text-center fw-b'><h5 className='fw-bold'>{trn.table_title}</h5></Row>
                                 {COMPONENT_TABLE_2()}
                             </Panel>
                         </FlexboxGrid.Item>

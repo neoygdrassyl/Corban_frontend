@@ -154,6 +154,10 @@ border-color: darkgray;
 .bg-cold{background-color: #0047ca83;}
 .bg-blood{background-color: darkred;}
 .bg-paranoia{background-color: #af00afb2;}
+.bg-mist{background-color: gainsboro;}
+
+
+.dark .bg-mist{background-color: #353839;}
 
 .border{border: 0.5px solid; border-color: darkgray;}
 .border-primary{border: 1px solid; border-color: #0044cc;}
@@ -167,6 +171,7 @@ border-color: darkgray;
 .border-cold{border: 1px solid; border-color: #0047ca83;}
 .border-blood{border: 1px solid; border-color: darkred;}
 .border-paranoia{border: 1px solid; border-color: #af00afb2;}
+.border-mist{border: 1px solid; border-color: gainsboro;}
 
 .text-primary,    .light .text-primary      {color:#0044cc;}
 .text-secondary,  .light .text-secondary    {color: black;}
@@ -279,6 +284,7 @@ border-color: darkgray;
 }
 
 .pointer{ cursor: pointer; }
+.under:hover{text-decoration: underline}
 .clean-link{text-decoration: none;}
 .text-icon{font-size: 1.5em; vertical-align: middle; cursor: pointer}
 

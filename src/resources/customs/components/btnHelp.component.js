@@ -23,10 +23,10 @@ export default function BTN_HELP(props) {
     </Popover>
 
     const drawer = <Drawer open={open} onClose={() => setOpen(false)} size="sm" className={utilities ? utilities.theme : 'light'}>
-        <Drawer.Header>
+        <Drawer.Header className={utilities ? utilities.theme : 'light'}>
             <div className='py-1'><HelpOutlineIcon style={{fontSize: '20px'}} className="text-paranoia"/> <label>{trn.about}</label> <label className='fw-b'>{title}</label></div>
         </Drawer.Header>
-        <Drawer.Body>
+        <Drawer.Body className={utilities ? utilities.theme : 'light'}>
             {page ? page.map(it => {
                 return <>
                     <p className='fw-b text-uppercase'>{it.lefticon} {it.title}
@@ -42,7 +42,7 @@ export default function BTN_HELP(props) {
                         <label className='fw-b'>{l.subtitle}{l.subtitle ? ':' : ''}</label> <label>{l.text}</label>
                     </li>)}</ul> : ''}
 
-                    <hr />
+                    <hr className='border'/>
                 </>
             }) : ''}
         </Drawer.Body>

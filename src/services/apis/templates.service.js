@@ -25,6 +25,10 @@ class SERVICE_TEMPLATES {
         return http.delete(`/${route}/${id}`, header());
     }
 
+    genPDF_TaxCalculation(data) {
+        return http.post(`/calc/tc`, data, header());
+    }
+
 }
 
 export default new SERVICE_TEMPLATES();
