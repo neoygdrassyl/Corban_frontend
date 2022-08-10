@@ -5,7 +5,7 @@ import { UtilContext } from '../contextProviders/util.provider';
 import { Button as ButtonPB, Drawer as DrawerBP } from "@blueprintjs/core";
 import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 import InfoOutlineIcon from '@rsuite/icons/InfoOutline';
-
+import ExitIcon from '@rsuite/icons/Exit';
 // IMAGES
 
 // CVS EXCELL
@@ -59,7 +59,7 @@ export default function TUTORIAL(props) {
        <p className='txt-c'><img src={imgs[lang][4]}/></p>
        <p><label className='fw-b'>7.</label> {trn.csv_e_steps[6]}</p>
        <p className='txt-c'><img src={imgs[lang][5]}/></p>
-       <p>{trn.csv_e_link_b} <a className='fw-b' href={trn.csv_e_link} target="_blank">{trn.csv_e_link_l}</a> </p>
+       <p>{trn.csv_e_link_b} <a className='fw-b' href={trn.csv_e_link} target="_blank"><ExitIcon /> {trn.csv_e_link_l}</a> </p>
    </div>
     }
 
@@ -80,7 +80,7 @@ export default function TUTORIAL(props) {
             <p><label className='fw-b'>{trn.csv_note}: </label> {trn.csv_note_b}</p>
             <p className='txt-c'><img src={imgs[lang]}/></p>
             <p><label className='fw-b'>5.</label> {trn.csv_lo_steps[4]}</p>
-            <p>{trn.csv_lo_link_b} <a className='fw-b' href={trn.csv_lo_link} target="_blank">{trn.csv_lo_link_l}</a> </p>
+            <p>{trn.csv_lo_link_b} <a className='fw-b' href={trn.csv_lo_link} target="_blank"><ExitIcon /> {trn.csv_lo_link_l}</a> </p>
         </div>
     }
 

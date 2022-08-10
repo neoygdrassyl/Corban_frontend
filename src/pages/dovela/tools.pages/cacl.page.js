@@ -528,7 +528,7 @@ export default function CALCULATOR_DOVELA() {
         formData.append('descs', descs)
         formData.append('values', values)
         formData.append('total', total)
-
+        formData.append('lang', lang)
 
         ALERT_WAIT(lang)
         SERVICE_TEMPLATES.genPDF_TaxCalculation(formData)

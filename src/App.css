@@ -193,7 +193,7 @@ border-color: darkgray;
 .dark .text-warning      {color: goldenrod;}
 .dark .text-info         {color: #0099cc;}
 .dark .text-dark         {color: dimgray;}
-.dark .text-light        {color: whitesmoke;}
+.dark .text-light        {color: darkgray;}
 .dark .text-cold         {color: #0047ca83;}
 .dark .text-blood        {color: darkred;}
 .dark .text-paranoia     {color: #af00afb2;}

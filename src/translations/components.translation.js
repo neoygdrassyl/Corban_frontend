@@ -1831,7 +1831,7 @@ export let translations = {
             templ_title: 'Calculadora de impuestos',
             templ_form: ['Plantila de calculo de impuesto'],
 
-            nis_title: 'No HAY DATOS EN LA LIQUIDACIÓN',
+            nis_title: 'NO HAY DATOS EN LA LIQUIDACIÓN',
             nis_body: 'Añade al menos un valor para generar la liquidación',
 
             table_title: 'Expensas que no autorizan obras',
