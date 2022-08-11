@@ -1,3 +1,8 @@
+
+//--------------------------------------------------------------------//
+//------------------------ SERIES & SUBSERIES ------------------------//
+//--------------------------------------------------------------------//
+
 export const SERIES_DOCS = {
     'GENERIC': {
         'DOCUMENTOS GENERALES': [700, 803, 511, 512, 514, 513, 516, 517, 900,
@@ -131,7 +136,7 @@ export const SUBSERIES_MODULES_RELATION = {
     '1100-190.09': ['1:D', '5:H'],
     '1100-190.10': ['1:D', '5:I'],
     '1100-190.11': ['1:D', '5:B', '5:D'],
-    '1100-190.12': ['1:D', '5:C', 'D:C'],
+    '1100-190.12': ['1:D', '5:C', '5:D'],
     '1100-190.13': ['1:D', '5:B', '5:C'],
     '1100-190.14': ['1:D', '5:B', '5:F'],
     '1100-190.15': ['1:D', '5:C', '5:D', '5:F'],
@@ -154,6 +159,9 @@ export const SUBSERIES_MODULES_RELATION = {
     '1100-190.32': ['1:D', '5:D', '5:F', '5:G'],
     '1100-190.33': ['1:D', '5:B', '5:C', '5:D', '5:F'],
     '1100-190.34': ['1:D', '5:B', '5:C', '5:D', '5:g'],
+    '1100-190.35': ['1:D', '5:B', '5:D', '5:F'],
+    '1100-190.36': ['1:D', '5:B', '5:D', '5:F', '5:g'],
+    '1100-190.37': ['1:D', '5:B', '5:D', '5:g'],
 
     '1100-250.01': ['1:G', '2:B'],
     //'1100-250.02': ['1:G', '2:B'],
@@ -180,10 +188,114 @@ export const SUBSERIES_MODULES_RELATION = {
     '1100-260.19': ['1:D', '1:F', '5:B', '5:C', '5:D', '5:g'],
     '1100-260.20': ['1:D', '1:F', '5:C', '5:D', '5:F', '5:g'],
     '1100-260.21': ['1:D', '1:F', '5:B', '5:D', '5:g'],
+    '1100-260.22': ['1:D', '1:F', '5:B', '5:D', '5:F', '5:g'],
+    '1100-260.23': ['1:D', '1:F', '5:C', '5:D', '5:G'],
 }
 
+export function _IDENTIFY_SERIES(_CHILD_1, select = [1, 1, 1, 1, 1], isOA) {
+    let _CONDITONS = [];
+    let _CHILD = _CHILD_1;
+    if ([_CHILD.item_1, _CHILD.item_2, _CHILD.item_3, _CHILD.item_4, _CHILD.item_5].some(ch => ch == null || ch == undefined)) return _CONDITONS;
+    if (select[0]) {
+        if (_CHILD.item_1.includes('A')) _CONDITONS.push('1:A');
+        if (_CHILD.item_1.includes('B')) _CONDITONS.push('1:B');
+        if (_CHILD.item_1.includes('C')) _CONDITONS.push('1:C');
+        if (_CHILD.item_1.includes('D')) _CONDITONS.push('1:D');
+        if (_CHILD.item_1.includes('E')) _CONDITONS.push('1:E');
+        if (_CHILD.item_1.includes('F')) _CONDITONS.push('1:F');
+        if (_CHILD.item_1.includes('G')) _CONDITONS.push('1:G');
+    }
 
-// FUN CONST PARSER
+    if (select[1]) {
+        if (_CHILD.item_2 == 'A') _CONDITONS.push('2:A');
+        if (_CHILD.item_2 == 'B') _CONDITONS.push('2:B');
+        if (_CHILD.item_2 == 'C') _CONDITONS.push('2:C');
+        if (_CHILD.item_2 == 'D') _CONDITONS.push('2:D');
+        if (REGEX_MATCH_1100_40_01(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_02(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_03(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_04(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_05(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_06(_CHILD.item_2) ||
+            REGEX_MATCH_1100_40_07(_CHILD.item_2)) _CONDITONS.push('2:OA');
+        if (REGEX_MATCH_1100_40_01(_CHILD.item_2) && isOA) _CONDITONS.push('2:COTAS');
+        if (REGEX_MATCH_1100_40_02(_CHILD.item_2) && isOA) _CONDITONS.push('2:PH');
+        if (REGEX_MATCH_1100_40_03(_CHILD.item_2) && isOA) _CONDITONS.push('2:TIERRA');
+        if (REGEX_MATCH_1100_40_04(_CHILD.item_2) && isOA) _CONDITONS.push('2:PISCINA');
+        if (REGEX_MATCH_1100_40_05(_CHILD.item_2) && isOA) _CONDITONS.push('2:PLANOS');
+        if (REGEX_MATCH_1100_40_06(_CHILD.item_2) && isOA) _CONDITONS.push('2:BIENES');
+        if (REGEX_MATCH_1100_40_07(_CHILD.item_2) && isOA) _CONDITONS.push('2:ESTRUCTURAL');
+    }
+    if (select[2]) {
+        if (_CHILD.item_3 == 'A') _CONDITONS.push('3:A');
+        if (_CHILD.item_3 == 'B') _CONDITONS.push('3:B');
+        if (_CHILD.item_3 == 'C') _CONDITONS.push('3:C');
+    }
+    if (select[3]) {
+        if (_CHILD.item_4 == 'A') _CONDITONS.push('4:A');
+        if (_CHILD.item_4 == 'B') _CONDITONS.push('4:B');
+        if (_CHILD.item_4 == 'C') _CONDITONS.push('4:C');
+    }
+    if (select[4]) {
+        if (_CHILD.item_5.includes('A')) _CONDITONS.push('5:A');
+        if (_CHILD.item_5.includes('B')) _CONDITONS.push('5:B');
+        if (_CHILD.item_5.includes('C')) _CONDITONS.push('5:C');
+        if (_CHILD.item_5.includes('D')) _CONDITONS.push('5:D');
+        if (_CHILD.item_5.includes('E')) _CONDITONS.push('5:E');
+        if (_CHILD.item_5.includes('F')) _CONDITONS.push('5:F');
+        if (_CHILD.item_5.includes('G')) _CONDITONS.push('5:G');
+        if (_CHILD.item_5.includes('g')) _CONDITONS.push('5:g');
+        if (_CHILD.item_5.includes('H')) _CONDITONS.push('5:H');
+        if (_CHILD.item_5.includes('I')) _CONDITONS.push('5:I');
+    }
+    return _CONDITONS;
+
+}
+
+export function _GET_SERIE_COD(_CHILD) {
+    let _CONDITONS = _IDENTIFY_SERIES(_CHILD, [1, 0, 0, 0, 0]);
+    let _SERIES = [];
+    for (var ITEM in SERIES_MODULES_RELATION) {
+        let isFounded = false;
+        if (SERIES_MODULES_RELATION[ITEM].includes(_CONDITONS.join(','))) isFounded = true;
+        if (isFounded) _SERIES.push(ITEM)
+    }
+    return _SERIES;
+}
+export function _GET_SERIE_STR(_CHILD) {
+    let _SERIES = _GET_SERIE_COD(_CHILD);
+    var COD_SERIES = require('../../jsons/funCodes.json');
+    let _SERIES_STR = [];
+    for (var i = 0; i < _SERIES.length; i++) {
+        _SERIES_STR.push(COD_SERIES[_SERIES[i]])
+    }
+    return _SERIES_STR;
+}
+export function _GET_SUBSERIE_COD(_CHILD) {
+    let _CONDITONS = _IDENTIFY_SERIES(_CHILD, [1, 0, 1, 1, 1], true);
+    let _SUBSERIES = [];
+    for (var ITEM in SUBSERIES_MODULES_RELATION) {
+        let isFounded = false;
+        if (SUBSERIES_MODULES_RELATION[ITEM].join('') === _CONDITONS.join('')) isFounded = true;
+        if (isFounded) _SUBSERIES.push(ITEM)
+    }
+    return _SUBSERIES;
+    // 1100-70.01 1100-70.02 1100-70.03 1100-70.04
+}
+export function _GET_SUBSERIE_STR(_CHILD) {
+    let _SERIES = _GET_SUBSERIE_COD(_CHILD);
+    var COD_SERIES = require('../../jsons/funCodes.json');
+    let _SERIES_STR = [];
+    for (var i = 0; i < _SERIES.length; i++) {
+        _SERIES_STR.push(COD_SERIES[_SERIES[i]])
+    }
+    return _SERIES_STR;
+}
+
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+
 const _FUN_1_1 = ['A. LICENCIA DE URBANIZACION',
     'B. LICENCIA DE PARCELACION',
     'C. LICENCIA DE SUBDIVISION',
@@ -312,379 +424,6 @@ const _FUN_2_5 = ['A. PLANO DE LOTEO',
     'B. PLANO TOPOGRAFICO'];
 
 const _FUN_2_5_HELPER = ['A', 'B'];
-
-
-
-// RECIEVES AN OBJECT FUN 1 ONLY CARING ABOUT 5 OF ITS PROPERTIES
-// RETURNS A STRING TRANSFORMING ALL THE INPUT VALUE INTO CONTEXTUALIZED INFORMATION
-// IE A -> LICENCIA X
-
-export function formsParser1(object) {
-    if (!object) return "";
-    let f_11 = object.tipo ? object.tipo : "";
-    let f_12 = object.tramite ? object.tramite : "";
-    let f_13 = object.m_urb ? object.m_urb : "";
-    let f_14 = object.m_sub ? object.m_sub : "";
-    let f_15 = object.m_lic ? object.m_lic : "";
-
-    let textToParse = [];
-    let arrayHelper = null;
-    let arrayHelper2 = null;
-    let defaultValue = null;
-
-    // 1.1 CAN BE MULTIPLE
-    defaultValue = f_11
-    arrayHelper = ['LICENCIA DE URBANIZACION',
-        'LICENCIA DE PARCELACION',
-        'LICENCIA DE SUBDIVICION',
-        'LICENCIA DE CONSTRUCCION',
-        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-        'OTRAS ACTUACIONES'];
-    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-    for (var i = 0; i < defaultValue.length; i++) {
-        for (var j = 0; j < arrayHelper2.length; j++) {
-            if (arrayHelper2[j] == defaultValue[i]) {
-                textToParse.push(arrayHelper[j]);
-            }
-        }
-    }
-
-    // 1.2 CAN HAVE OTHER OPTIONS
-    arrayHelper = ['INICIAL',
-        'PRORROGA',
-        'MODIFICACION DE LICENCIA VIGENTE',
-        'REVALIDACION'];
-    arrayHelper2 = ['A', 'B', 'C', 'D'];
-    defaultValue = f_12;
-    for (var i = 0; i < arrayHelper2.length; i++) {
-        if (arrayHelper2[i] == defaultValue) {
-            defaultValue = arrayHelper[i];
-            break;
-        }
-    }
-    if (defaultValue) {
-        textToParse.push(defaultValue);
-    }
-
-
-    // 1.3 CAN BE NULL
-    defaultValue = f_13
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['DESARROLLO',
-            'SANEAMIENTO',
-            'RECUPERACION'];
-        arrayHelper2 = ['A', 'B', 'C'];
-        for (var i = 0; i < arrayHelper2.length; i++) {
-            if (arrayHelper2[i] == defaultValue) {
-                textToParse.push(arrayHelper[j]);
-                break;
-            }
-        }
-    }
-
-    // 1.4 CAN BE NULL
-    defaultValue = f_14
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['SUBDIVISION RURAL',
-            'SUBDIVISION URBANA',
-            'RELOTEO'];
-        arrayHelper2 = ['A', 'B', 'C'];
-        for (var i = 0; i < arrayHelper2.length; i++) {
-            if (arrayHelper2[i] == defaultValue) {
-                textToParse.push(arrayHelper[j]);
-                break;
-            }
-        }
-    }
-
-    // 1.5 CAN BE NULL && CAN BE MULTILPLE
-    defaultValue = f_15
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['OBRA NUEVA',
-            'AMPLIACION',
-            'ADECUACION',
-            'MODIFICACION',
-            'RESTAURACION',
-            'REFORZAMIENTO ESTRUCTURAL',
-            'DEMOLICION TOTAL',
-            'DEMOLICION PARCIAL',
-            'RECONSTRUCCION',
-            'CERRAMIENTO'];
-        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
-        for (var i = 0; i < defaultValue.length; i++) {
-            for (var j = 0; j < arrayHelper2.length; j++) {
-                if (arrayHelper2[j] == defaultValue[i]) {
-                    textToParse.push(arrayHelper[j]);
-                }
-            }
-        }
-    }
-    var striing = textToParse.join()
-    return striing.replace(/,/g, ", ");
-}
-
-
-export function formsParser1_exlucde2(object) {
-    if (!object) return "";
-    let f_11 = object.tipo ? object.tipo : "";
-    let f_12 = object.tramite ? object.tramite : "";
-    let f_13 = object.m_urb ? object.m_urb : "";
-    let f_14 = object.m_sub ? object.m_sub : "";
-    let f_15 = object.m_lic ? object.m_lic : "";
-
-    let textToParse = [];
-    let arrayHelper = null;
-    let arrayHelper2 = null;
-    let defaultValue = null;
-
-    // 1.1 CAN BE MULTIPLE
-    defaultValue = f_11
-    arrayHelper = ['LICENCIA DE URBANIZACION',
-        'LICENCIA DE PARCELACION',
-        'LICENCIA DE SUBDIVICION',
-        'LICENCIA DE CONSTRUCCION',
-        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-        'OTRAS ACTUACIONES'];
-    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-    for (var i = 0; i < defaultValue.length; i++) {
-        for (var j = 0; j < arrayHelper2.length; j++) {
-            if (arrayHelper2[j] == defaultValue[i]) {
-                textToParse.push(arrayHelper[j]);
-            }
-        }
-    }
-
-
-    // 1.3 CAN BE NULL
-    defaultValue = f_13
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['DESARROLLO',
-            'SANEAMIENTO',
-            'RECUPERACION'];
-        arrayHelper2 = ['A', 'B', 'C'];
-        for (var i = 0; i < arrayHelper2.length; i++) {
-            if (arrayHelper2[i] == defaultValue) {
-                textToParse.push(arrayHelper[j]);
-                break;
-            }
-        }
-    }
-
-    // 1.4 CAN BE NULL
-    defaultValue = f_14
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['SUBDIVISION RURAL',
-            'SUBDIVISION URBANA',
-            'RELOTEO'];
-        arrayHelper2 = ['A', 'B', 'C'];
-        for (var i = 0; i < arrayHelper2.length; i++) {
-            if (arrayHelper2[i] == defaultValue) {
-                textToParse.push(arrayHelper[j]);
-                break;
-            }
-        }
-    }
-
-    // 1.5 CAN BE NULL && CAN BE MULTILPLE
-    defaultValue = f_15
-    if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['OBRA NUEVA',
-            'AMPLIACION',
-            'ADECUACION',
-            'MODIFICACION',
-            'RESTAURACION',
-            'REFORZAMIENTO ESTRUCTURAL',
-            'DEMOLICION TOTAL',
-            'DEMOLICION PARCIAL',
-            'RECONSTRUCCION',
-            'CERRAMIENTO'];
-        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
-        for (var i = 0; i < defaultValue.length; i++) {
-            for (var j = 0; j < arrayHelper2.length; j++) {
-                if (arrayHelper2[j] == defaultValue[i]) {
-                    textToParse.push(arrayHelper[j]);
-                }
-            }
-        }
-    }
-
-    var striing = textToParse.join()
-    return striing.replace(/,/g, ", ");
-}
-
-// REGEX GROUP
-export function regexChecker_isPh(input, parser) {
-    if (parser) return REGEX_MATCH_1100_40_02(formsParser1(input))
-    return REGEX_MATCH_1100_40_02(input)
-}
-export function regexChecker_isOA(input) {
-    let modalidad = input.tramite;
-    let tipo = input.tipo;
-    if (!modalidad) return false;
-    if (!tipo) tipo = "";
-    if (modalidad == 'B' || modalidad == 'D' || tipo.includes('G')) return true;
-    return false;
-}
-export function regexChecker_isOA_2(input) {
-    if (!input) return false;
-    let modalidad = input.tramite;
-    let tipo = input.tipo;
-    if (!modalidad) return false;
-    if (!tipo) tipo = "";
-    if (modalidad == 'B') return true;
-    return false;
-}
-export function regexChecker_isOA_3(input) {
-    if (!input) return false;
-    let modalidad = input.tramite;
-    let tipo = input.tipo;
-    if (!modalidad) return false;
-    if (!tipo) tipo = "";
-    if (modalidad == 'B' || modalidad == 'D') return true;
-    return false;
-}
-export function regexChecker_movTierra(input) {
-    return REGEX_MATCH_1100_40_03(input)
-}
-
-// REGEXES... REGI?
-function REGEX_MATCH_1100_40_01(input) {
-    let regex = /ajuste.*cota/i;
-    return regex.test(input);
-}
-function REGEX_MATCH_1100_40_02(_string) {
-    let regex0 = /p\.\s+h/i;
-    let regex1 = /p\.h/i;
-    let regex2 = /PROPIEDAD\s+HORIZONTAL/i;
-    let regex3 = /p\s+h/i;
-    if (regex0.test(_string) || regex2.test(_string) || regex1.test(_string) || regex3.test(_string)) return true;
-    return false
-}
-function REGEX_MATCH_1100_40_03(input) {
-    let regex = /movimiento.*tierra/i;
-    return regex.test(input);
-}
-function REGEX_MATCH_1100_40_04(input) {
-    let regex = /piscina/i;
-    return regex.test(input);
-}
-function REGEX_MATCH_1100_40_05(input) {
-    let regex = /modificacion.*plano.*urbanistico/i;
-    return regex.test(input);
-}
-function REGEX_MATCH_1100_40_06(input) {
-    let regex = /bien.*destin.*publico/i;
-    return regex.test(input);
-}
-function REGEX_MATCH_1100_40_07(input) {
-    let regex = /revision.*independiente.*estructural/i;
-    return regex.test(input);
-}
-
-
-// SERIES AND SUBSERIES IDENTIFIER
-
-export function _IDENTIFY_SERIES(_CHILD_1, select = [1, 1, 1, 1, 1], isOA) {
-    let _CONDITONS = [];
-    let _CHILD = _CHILD_1;
-    if ([_CHILD.item_1, _CHILD.item_2, _CHILD.item_3, _CHILD.item_4, _CHILD.item_5].some(ch => ch == null || ch == undefined)) return _CONDITONS;
-    if (select[0]) {
-        if (_CHILD.item_1.includes('A')) _CONDITONS.push('1:A');
-        if (_CHILD.item_1.includes('B')) _CONDITONS.push('1:B');
-        if (_CHILD.item_1.includes('C')) _CONDITONS.push('1:C');
-        if (_CHILD.item_1.includes('D')) _CONDITONS.push('1:D');
-        if (_CHILD.item_1.includes('E')) _CONDITONS.push('1:E');
-        if (_CHILD.item_1.includes('F')) _CONDITONS.push('1:F');
-        if (_CHILD.item_1.includes('G')) _CONDITONS.push('1:G');
-    }
-
-    if (select[1]) {
-        if (_CHILD.item_2 == 'A') _CONDITONS.push('2:A');
-        if (_CHILD.item_2 == 'B') _CONDITONS.push('2:B');
-        if (_CHILD.item_2 == 'C') _CONDITONS.push('2:C');
-        if (_CHILD.item_2 == 'D') _CONDITONS.push('2:D');
-        if (REGEX_MATCH_1100_40_01(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_02(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_03(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_04(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_05(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_06(_CHILD.item_2) ||
-            REGEX_MATCH_1100_40_07(_CHILD.item_2)) _CONDITONS.push('2:OA');
-        if (REGEX_MATCH_1100_40_01(_CHILD.item_2) && isOA) _CONDITONS.push('2:COTAS');
-        if (REGEX_MATCH_1100_40_02(_CHILD.item_2) && isOA) _CONDITONS.push('2:PH');
-        if (REGEX_MATCH_1100_40_03(_CHILD.item_2) && isOA) _CONDITONS.push('2:TIERRA');
-        if (REGEX_MATCH_1100_40_04(_CHILD.item_2) && isOA) _CONDITONS.push('2:PISCINA');
-        if (REGEX_MATCH_1100_40_05(_CHILD.item_2) && isOA) _CONDITONS.push('2:PLANOS');
-        if (REGEX_MATCH_1100_40_06(_CHILD.item_2) && isOA) _CONDITONS.push('2:BIENES');
-        if (REGEX_MATCH_1100_40_07(_CHILD.item_2) && isOA) _CONDITONS.push('2:ESTRUCTURAL');
-    }
-    if (select[2]) {
-        if (_CHILD.item_3 == 'A') _CONDITONS.push('3:A');
-        if (_CHILD.item_3 == 'B') _CONDITONS.push('3:B');
-        if (_CHILD.item_3 == 'C') _CONDITONS.push('3:C');
-    }
-    if (select[3]) {
-        if (_CHILD.item_4 == 'A') _CONDITONS.push('4:A');
-        if (_CHILD.item_4 == 'B') _CONDITONS.push('4:B');
-        if (_CHILD.item_4 == 'C') _CONDITONS.push('4:C');
-    }
-    if (select[4]) {
-        if (_CHILD.item_5.includes('A')) _CONDITONS.push('5:A');
-        if (_CHILD.item_5.includes('B')) _CONDITONS.push('5:B');
-        if (_CHILD.item_5.includes('C')) _CONDITONS.push('5:C');
-        if (_CHILD.item_5.includes('D')) _CONDITONS.push('5:D');
-        if (_CHILD.item_5.includes('E')) _CONDITONS.push('5:E');
-        if (_CHILD.item_5.includes('F')) _CONDITONS.push('5:F');
-        if (_CHILD.item_5.includes('G')) _CONDITONS.push('5:G');
-        if (_CHILD.item_5.includes('g')) _CONDITONS.push('5:g');
-        if (_CHILD.item_5.includes('H')) _CONDITONS.push('5:H');
-        if (_CHILD.item_5.includes('I')) _CONDITONS.push('5:I');
-    }
-    return _CONDITONS;
-
-}
-
-export function _GET_SERIE_COD(_CHILD) {
-    let _CONDITONS = _IDENTIFY_SERIES(_CHILD, [1, 1, 0, 0, 0]);
-    let _SERIES = [];
-    for (var ITEM in SERIES_MODULES_RELATION) {
-        let isFounded = false;
-        if (SERIES_MODULES_RELATION[ITEM].includes(_CONDITONS.join(','))) isFounded = true;
-        if (isFounded) _SERIES.push(ITEM)
-    }
-    return _SERIES;
-}
-export function _GET_SERIE_STR(_CHILD) {
-    let _SERIES = _GET_SERIE_COD(_CHILD);
-    var COD_SERIES = require('../../jsons/funCodes.json');
-    let _SERIES_STR = [];
-    for (var i = 0; i < _SERIES.length; i++) {
-        _SERIES_STR.push(COD_SERIES[_SERIES[i]])
-    }
-    return _SERIES_STR;
-}
-export function _GET_SUBSERIE_COD(_CHILD) {
-    let _CONDITONS = _IDENTIFY_SERIES(_CHILD, [1, 1, 1, 1, 1], true);
-    let _SUBSERIES = [];
-    for (var ITEM in SUBSERIES_MODULES_RELATION) {
-        let isFounded = false;
-        if (SUBSERIES_MODULES_RELATION[ITEM].join('') === _CONDITONS.join('')) isFounded = true;
-        if (isFounded) _SUBSERIES.push(ITEM)
-    }
-    return _SUBSERIES;
-    // 1100-70.01 1100-70.02 1100-70.03 1100-70.04
-}
-export function _GET_SUBSERIE_STR(_CHILD) {
-    let _SERIES = _GET_SUBSERIE_COD(_CHILD);
-    var COD_SERIES = require('../../jsons/funCodes.json');
-    let _SERIES_STR = [];
-    for (var i = 0; i < _SERIES.length; i++) {
-        _SERIES_STR.push(COD_SERIES[_SERIES[i]])
-    }
-    return _SERIES_STR;
-}
 
 
 // 1.1 CAN BE MULTIPLE
@@ -905,6 +644,279 @@ export const _FUN_25_PARSER = (_ARRAY) => {
         }
     }
     return _finalStr;
+}
+
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+
+
+
+// RECIEVES AN OBJECT FUN 1 ONLY CARING ABOUT 5 OF ITS PROPERTIES
+// RETURNS A STRING TRANSFORMING ALL THE INPUT VALUE INTO CONTEXTUALIZED INFORMATION
+// IE A -> LICENCIA X
+
+export function formsParser1(object) {
+    if (!object) return "";
+    let f_11 = object.tipo ? object.tipo : "";
+    let f_12 = object.tramite ? object.tramite : "";
+    let f_13 = object.m_urb ? object.m_urb : "";
+    let f_14 = object.m_sub ? object.m_sub : "";
+    let f_15 = object.m_lic ? object.m_lic : "";
+
+    let textToParse = [];
+    let arrayHelper = null;
+    let arrayHelper2 = null;
+    let defaultValue = null;
+
+    // 1.1 CAN BE MULTIPLE
+    defaultValue = f_11
+    arrayHelper = ['LICENCIA DE URBANIZACION',
+        'LICENCIA DE PARCELACION',
+        'LICENCIA DE SUBDIVICION',
+        'LICENCIA DE CONSTRUCCION',
+        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
+        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
+        'OTRAS ACTUACIONES'];
+    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    for (var i = 0; i < defaultValue.length; i++) {
+        for (var j = 0; j < arrayHelper2.length; j++) {
+            if (arrayHelper2[j] == defaultValue[i]) {
+                textToParse.push(arrayHelper[j]);
+            }
+        }
+    }
+
+    // 1.2 CAN HAVE OTHER OPTIONS
+    arrayHelper = ['INICIAL',
+        'PRORROGA',
+        'MODIFICACION DE LICENCIA VIGENTE',
+        'REVALIDACION'];
+    arrayHelper2 = ['A', 'B', 'C', 'D'];
+    defaultValue = f_12;
+    for (var i = 0; i < arrayHelper2.length; i++) {
+        if (arrayHelper2[i] == defaultValue) {
+            defaultValue = arrayHelper[i];
+            break;
+        }
+    }
+    if (defaultValue) {
+        textToParse.push(defaultValue);
+    }
+
+
+    // 1.3 CAN BE NULL
+    defaultValue = f_13
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['DESARROLLO',
+            'SANEAMIENTO',
+            'RECUPERACION'];
+        arrayHelper2 = ['A', 'B', 'C'];
+        for (var i = 0; i < arrayHelper2.length; i++) {
+            if (arrayHelper2[i] == defaultValue) {
+                textToParse.push(arrayHelper[j]);
+                break;
+            }
+        }
+    }
+
+    // 1.4 CAN BE NULL
+    defaultValue = f_14
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['SUBDIVISION RURAL',
+            'SUBDIVISION URBANA',
+            'RELOTEO'];
+        arrayHelper2 = ['A', 'B', 'C'];
+        for (var i = 0; i < arrayHelper2.length; i++) {
+            if (arrayHelper2[i] == defaultValue) {
+                textToParse.push(arrayHelper[j]);
+                break;
+            }
+        }
+    }
+
+    // 1.5 CAN BE NULL && CAN BE MULTILPLE
+    defaultValue = f_15
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['OBRA NUEVA',
+            'AMPLIACION',
+            'ADECUACION',
+            'MODIFICACION',
+            'RESTAURACION',
+            'REFORZAMIENTO ESTRUCTURAL',
+            'DEMOLICION TOTAL',
+            'DEMOLICION PARCIAL',
+            'RECONSTRUCCION',
+            'CERRAMIENTO'];
+        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
+        for (var i = 0; i < defaultValue.length; i++) {
+            for (var j = 0; j < arrayHelper2.length; j++) {
+                if (arrayHelper2[j] == defaultValue[i]) {
+                    textToParse.push(arrayHelper[j]);
+                }
+            }
+        }
+    }
+    var striing = textToParse.join()
+    return striing.replace(/,/g, ", ");
+}
+
+export function formsParser1_exlucde2(object) {
+    if (!object) return "";
+    let f_11 = object.tipo ? object.tipo : "";
+    let f_12 = object.tramite ? object.tramite : "";
+    let f_13 = object.m_urb ? object.m_urb : "";
+    let f_14 = object.m_sub ? object.m_sub : "";
+    let f_15 = object.m_lic ? object.m_lic : "";
+
+    let textToParse = [];
+    let arrayHelper = null;
+    let arrayHelper2 = null;
+    let defaultValue = null;
+
+    // 1.1 CAN BE MULTIPLE
+    defaultValue = f_11
+    arrayHelper = ['LICENCIA DE URBANIZACION',
+        'LICENCIA DE PARCELACION',
+        'LICENCIA DE SUBDIVICION',
+        'LICENCIA DE CONSTRUCCION',
+        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
+        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
+        'OTRAS ACTUACIONES'];
+    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    for (var i = 0; i < defaultValue.length; i++) {
+        for (var j = 0; j < arrayHelper2.length; j++) {
+            if (arrayHelper2[j] == defaultValue[i]) {
+                textToParse.push(arrayHelper[j]);
+            }
+        }
+    }
+
+
+    // 1.3 CAN BE NULL
+    defaultValue = f_13
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['DESARROLLO',
+            'SANEAMIENTO',
+            'RECUPERACION'];
+        arrayHelper2 = ['A', 'B', 'C'];
+        for (var i = 0; i < arrayHelper2.length; i++) {
+            if (arrayHelper2[i] == defaultValue) {
+                textToParse.push(arrayHelper[j]);
+                break;
+            }
+        }
+    }
+
+    // 1.4 CAN BE NULL
+    defaultValue = f_14
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['SUBDIVISION RURAL',
+            'SUBDIVISION URBANA',
+            'RELOTEO'];
+        arrayHelper2 = ['A', 'B', 'C'];
+        for (var i = 0; i < arrayHelper2.length; i++) {
+            if (arrayHelper2[i] == defaultValue) {
+                textToParse.push(arrayHelper[j]);
+                break;
+            }
+        }
+    }
+
+    // 1.5 CAN BE NULL && CAN BE MULTILPLE
+    defaultValue = f_15
+    if (defaultValue != "" && defaultValue != null) {
+        arrayHelper = ['OBRA NUEVA',
+            'AMPLIACION',
+            'ADECUACION',
+            'MODIFICACION',
+            'RESTAURACION',
+            'REFORZAMIENTO ESTRUCTURAL',
+            'DEMOLICION TOTAL',
+            'DEMOLICION PARCIAL',
+            'RECONSTRUCCION',
+            'CERRAMIENTO'];
+        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
+        for (var i = 0; i < defaultValue.length; i++) {
+            for (var j = 0; j < arrayHelper2.length; j++) {
+                if (arrayHelper2[j] == defaultValue[i]) {
+                    textToParse.push(arrayHelper[j]);
+                }
+            }
+        }
+    }
+
+    var striing = textToParse.join()
+    return striing.replace(/,/g, ", ");
+}
+
+// REGEX GROUP
+export function regexChecker_isPh(input, parser) {
+    if (parser) return REGEX_MATCH_1100_40_02(formsParser1(input))
+    return REGEX_MATCH_1100_40_02(input)
+}
+export function regexChecker_isOA(input) {
+    let modalidad = input.tramite;
+    let tipo = input.tipo;
+    if (!modalidad) return false;
+    if (!tipo) tipo = "";
+    if (modalidad == 'B' || modalidad == 'D' || tipo.includes('G')) return true;
+    return false;
+}
+export function regexChecker_isOA_2(input) {
+    if (!input) return false;
+    let modalidad = input.tramite;
+    let tipo = input.tipo;
+    if (!modalidad) return false;
+    if (!tipo) tipo = "";
+    if (modalidad == 'B') return true;
+    return false;
+}
+export function regexChecker_isOA_3(input) {
+    if (!input) return false;
+    let modalidad = input.tramite;
+    let tipo = input.tipo;
+    if (!modalidad) return false;
+    if (!tipo) tipo = "";
+    if (modalidad == 'B' || modalidad == 'D') return true;
+    return false;
+}
+export function regexChecker_movTierra(input) {
+    return REGEX_MATCH_1100_40_03(input)
+}
+
+// REGEXES... REGI?
+function REGEX_MATCH_1100_40_01(input) {
+    let regex = /ajuste.*cota/i;
+    return regex.test(input);
+}
+function REGEX_MATCH_1100_40_02(_string) {
+    let regex0 = /p\.\s+h/i;
+    let regex1 = /p\.h/i;
+    let regex2 = /PROPIEDAD\s+HORIZONTAL/i;
+    let regex3 = /p\s+h/i;
+    if (regex0.test(_string) || regex2.test(_string) || regex1.test(_string) || regex3.test(_string)) return true;
+    return false
+}
+function REGEX_MATCH_1100_40_03(input) {
+    let regex = /movimiento.*tierra/i;
+    return regex.test(input);
+}
+function REGEX_MATCH_1100_40_04(input) {
+    let regex = /piscina/i;
+    return regex.test(input);
+}
+function REGEX_MATCH_1100_40_05(input) {
+    let regex = /modificacion.*plano.*urbanistico/i;
+    return regex.test(input);
+}
+function REGEX_MATCH_1100_40_06(input) {
+    let regex = /bien.*destin.*publico/i;
+    return regex.test(input);
+}
+function REGEX_MATCH_1100_40_07(input) {
+    let regex = /revision.*independiente.*estructural/i;
+    return regex.test(input);
 }
 
 // EXPORT VARS

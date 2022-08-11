@@ -9,16 +9,13 @@ import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.comp
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
 import { Col, FlexboxGrid, Grid, IconButton, Panel, Row, toaster } from 'rsuite';
-import { CONVERT_INT_TO_MONEY, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
+import { CONVERT_INT_TO_MONEY } from '../../../resources/customs/utils/lamdas.functions';
 import { Button, FormGroup, NonIdealState, NumericInput } from '@blueprintjs/core';
 import SELECT from '../../../resources/customs/components/form.components/select.compontnt';
 import TEMPLATES_BODY from '../temaplates.pages/body.template';
 import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.component';
 
 // ICONS
-import { AiTwotoneStar } from 'react-icons/ai'
-import MessageIcon from '@rsuite/icons/Message';
-import CloseOutlineIcon from '@rsuite/icons/CloseOutline';
 import MinusIcon from '@rsuite/icons/Minus';
 import TUTORIAL from '../../../resources/customs/components/tutorial.component';
 

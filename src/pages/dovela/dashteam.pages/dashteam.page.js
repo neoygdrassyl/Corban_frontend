@@ -85,7 +85,7 @@ export default function DashboardTeam() {
             icon: <RiBook2Line style={{ fontSize: '5em' }} />,
             text: trn.tools[1].desc,
             color: "green",
-            to: "/submit"
+            to: "/dictionary"
         },
         {
             header: trn.tools[2].title,

@@ -1,12 +1,12 @@
 {
     "0": "SIN DEFINIR",
 
-    "1100-20": "ACTAS EMERGENIA",
+    "1100-20": "ACTAS EMERGENCIA",
     "1100-20.03": "Actas Comité Brigada  de Emergencia",
     "1100-20.01": "Actas Comité Paritario de la Salud y Seguridad en el Trabajo",
     "1100-20.02": "Actas Comité Técnico",
 
-    "1100-40": "AUTORIZACIONES URBANISTICAS",
+    "1100-40": "AUTORIZACIONES URBANÍSTICAS",
     "1100-40.01": "Ajustes cotas de áreas",
     "1100-40.02": "Autorización Aprobación planos de propiedad horizontal",
     "1100-40.03": "Autorización para movimiento de tierras",
@@ -15,13 +15,13 @@
     "1100-40.06": "Autorización de bienes destinados a uso público",
     "1100-40.07": "Autorización revisión independiente diseños estructurales",
 
-    "1100-70": "CONCEPTOS URBANISTICOS",
+    "1100-70": "CONCEPTOS URBANÍSTICAS",
     "1100-70.01": "Concepto Norma Urbanística",
     "1100-70.02": "Concepto de suelos",
     "1100-70.03": "Concepto al Curador",
     "1100-70.04": "Concepto de Nomenclatura",
 
-    "1100-190": "LICENCIAS URBANISTICA DE CONSTRUCCION",
+    "1100-190": "LICENCIAS URBANÍSTICAS DE CONSTRUCCIÓN",
     "1100-190.01": "Licencia de Construcción Obra Nueva",
     "1100-190.02": "Licencia de Construcción, Demolición Obra Nueva",
     "1100-190.03": "Licencia de Construcción Demolición, Cerramiento",
@@ -32,7 +32,7 @@
     "1100-190.08": "Licencia de Construcción, Restauración",
     "1100-190.09": "Licencia de Construcción, Reconstrucción",
     "1100-190.10": "Licencia de Construcción, Cerramiento",
-    "1100-190.11": "Licencia de Construcción, Modalidad Ampliación",
+    "1100-190.11": "Licencia de Construcción, Modalidad Ampliación, Modificación",
     "1100-190.12": "Licencia de Construcción Modalidad Adecuación, Modificación",
     "1100-190.13": "Licencia de Construcción Modalidad Adecuación, Ampliación",
     "1100-190.14": "Licencia de Construcción, Modalidad  Ampliación Reforzamiento EstructuraL",
@@ -52,8 +52,20 @@
     "1100-190.28": "Licencia de Urbanización de Reurbanización",
     "1100-190.29": "Licencia de Parcelación",
     "1100-190.30": "Licencia de Intervención y Ocupación Espacio Público",
+    "1100-190.31": "Licencia de Construcción, Modalidad Ampliación, Adecuación, Modificación",
+    "1100-190.32": "Licencia de Construcción, Modalidad Modificación, Reforzamiento Estructural, Demolición",
+    "1100-190.33": "Licencia de Construcción, Modalidad Modificación, Ampliación, Adecuación, Reforzamiento Estructural",
+    "1100-190.34": "Licencia de Construcción, Modalidad Modificación, Ampliación, Adecuación, Demolición",
+    "1100-190.35": "Licencia de Construcción, Modalidad Modificación, Ampliación, Reforzamiento Estructural",
+    "1100-190.36": "Licencia de Construcción, Modalidad Modificación, Ampliación, Reforzamiento Estructural, Demolición",
+    "1100-190.37": "Licencia de Construcción, Modalidad Modificación, Ampliación, Demolición",
 
     "1100-200": "MODIFICACIONES DE LICENCIAS VIGENTES",
+    "1100-200.02": "Modificación de licencia vigente, Adecuación",
+    "1100-200.03": "Modificación de licencia vigente, Ampliación",
+    "1100-200.04": "Modificación de licencia vigente, Reforzamiento Estructural",
+    "1100-200.05": "Modificación de licencia vigente, Demolición",
+
 
     "1100-220": "PETICIONES, QUEJAS, RECLAMOS Y SOLUCIONES (PQRS)",
 
@@ -62,6 +74,7 @@
     "1100-250.02": "Prórroga de la Revalidación",
 
     "1100-260": "RECONOCIMIENTO EXISTENCIA DE LAS EDIFICACIONES",
+    "1100-260.00": "Reconocimiento de edificación",
     "1100-260.01": "Reconocimiento de edificación, Modificación",
     "1100-260.02": "Reconocimiento de edificación, Ampliación",
     "1100-260.03": "Reconocimiento de edificación, Adecuación",
@@ -71,12 +84,20 @@
     "1100-260.07": "Reconocimiento de edificación, Modificación, Ampliación, Adecuación,  Reforzamiento Estructural, Demolición Parcial",
     "1100-260.08": "Reconocimiento de edificación, Ampliación, Reforzamiento Estructural",
     "1100-260.09": "Reconocimiento de edificación, Modificación, Reforzamiento Estructural",
-    "1100-260.10": "Reconocimiento de edificación, Adecuación, reforzamiento Estructural",
+    "1100-260.10": "Reconocimiento de edificación, Adecuación, Reforzamiento Estructural",
     "1100-260.11": "Reconocimiento de edificación, Ampliación Demolición Parcial",
     "1100-260.12": "Reconocimiento de edificación, Adecuación, Demolición Parcial",
     "1100-260.13": "Reconocimiento de edificación, Ampliación, Modificación",
     "1100-260.14": "Reconocimiento de edificación, Modificación, Adecuación",
     "1100-260.15": "Reconocimiento de edificación, Ampliación, Adecuación",
+    "1100-260.16": "Reconocimiento de edificación, Ampliación, Modificación, Reforzamiento Estructural",
+    "1100-260.17": "Reconocimiento de edificación, Modificación, Reforzamiento Estructural, Demolición Parcial",
+    "1100-260.18": "Reconocimiento de edificación, Ampliación, Adecuación, Modificación",
+    "1100-260.19": "Reconocimiento de edificación, Ampliación, Adecuación, Modificación, Demolición Parcial",
+    "1100-260.20": "Reconocimiento de edificación, Modificación, Reforzamiento Estructural, Demolición Parcial, Adecuación",
+    "1100-260.21": "Reconocimiento de edificación, Ampliación, Modificación, Demolición Parcial",
+    "1100-260.22": "Reconocimiento de edificación, Ampliación, Modificación, Demolición Parcial, Reforzamiento Estructural ",
+    "1100-260.23": "Reconocimiento de edificación, Modificación, Demolición Parcial, Adecuación ",
 
     "1100-270": "REVALIDACION DE LICENCIAS",
 
@@ -113,10 +134,10 @@
     "1300-230": "PLANES Y PROGRAMAS INSTITUCIONALES",
     "1300-230.01": "Programa de Salud en el Trabajo",
 
-    "1300-240": "POLITICAS INSTITUCIONALES",
+    "1300-240": "POLÍTICAS INSTITUCIONALES",
     "1300-240.01": "Políticas de Seguridad de la Información",
     "1300-240.02": "Registro de Backup de los sistemas de Información",
 
-    "1300-280": "PROYECTOS TECNOLOGICOS INFORMATICOS",
+    "1300-280": "PROYECTOS TECNOLÓGICOS INFORMÁTICOS",
     "1300-280.01": "Software BEDROCK"
 }

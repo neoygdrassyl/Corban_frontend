@@ -11,6 +11,30 @@ export default function TABLE_COMPONENT(props) {
     const trn = utilities.getTranslation('tableComponent');
     var [filter, setFilter] = useState('');
 
+    const theme = utilities.theme
+
+    const customStyles = {
+        rows: {
+            style: {
+
+            },
+        },
+        headCells: {
+            style: {
+                backgroundColor: props.headerColor || 'gainsboro',
+                border: '0.2px solid',
+                borderColor: 'gainsboro',
+            },
+        },
+        cells: {
+            style: {
+                border: '0.2px solid',
+                borderColor: 'gainsboro',
+            },
+        },
+    };
+
+    
     function search_data() {
         let newValue = document.getElementById('DATA_TABLE_' + title).value;
         newValue = newValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -37,6 +61,8 @@ export default function TABLE_COMPONENT(props) {
         return find1 || find2
     }
 
+    
+
     return (
         <DATATABLE
             title={search ? <Row>
@@ -55,7 +81,7 @@ export default function TABLE_COMPONENT(props) {
             columns={columns.map(column => {
                 return {
                     ...column,
-                    name: <label className="text-center fw-bold">{column.name}</label>,
+                    name: <label className="text-center fw-bold text-dark">{column.name}</label>,
                     sortable: column.selector ? true : false,
                     filterable: column.selector ? true : false,
                     center: column.center ?? true,
@@ -70,7 +96,7 @@ export default function TABLE_COMPONENT(props) {
             noDataComponent={<NON_IDEAL_STATE type="datatable" />}
             noHeader={!title}
 
-            striped="true"
+            striped={ theme == 'light'  ? true: false}
             highlightOnHover
 
             defaultSortFieldId={1}
@@ -84,10 +110,15 @@ export default function TABLE_COMPONENT(props) {
 
             dense
 
-            theme={utilities ? utilities.theme == 'light' ? 'default' : 'dark' : 'default'}
+            theme={utilities ? theme == 'light' ? 'default' : 'dark' : 'default'}
 
             expandableRowsComponent={props.expand}
             expandableRows={props.expand}
+
+            customStyles={customStyles}
+
+            pointerOnHover={props.pointer}
+
 
         />);
 }
