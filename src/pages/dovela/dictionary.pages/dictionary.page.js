@@ -5,35 +5,30 @@ import SERVICE_COMPANY from '../../../services/apis/company.services';
 
 // COMPONENTS
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
-import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
-import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
-import { Col, FlexboxGrid, Grid, IconButton, Nav, Panel, Row, toaster } from 'rsuite';
-import { CONVERT_INT_TO_MONEY, GET_FUN_STATE, GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
-import { Button, FormGroup, NonIdealState, NumericInput } from '@blueprintjs/core';
-import SELECT from '../../../resources/customs/components/form.components/select.compontnt';
-import TEMPLATES_BODY from '../temaplates.pages/body.template';
-import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.component';
-import TUTORIAL from '../../../resources/customs/components/tutorial.component';
+import { ALERT_NO_PERMIT } from '../../../resources/customs/utils/notifications.vars';
+import { Badge, Col, Nav, Row } from 'rsuite';
+import { GET_FUN_STATE } from '../../../resources/customs/utils/lamdas.functions';
 
 // ICONS
-import { AiTwotoneStar } from 'react-icons/ai'
-import MessageIcon from '@rsuite/icons/Message';
-import CloseOutlineIcon from '@rsuite/icons/CloseOutline';
-import MinusIcon from '@rsuite/icons/Minus';
 import TableIcon from '@rsuite/icons/Table';
 import PageIcon from '@rsuite/icons/Page';
 import DocPassIcon from '@rsuite/icons/DocPass';
 import PeoplesIcon from '@rsuite/icons/Peoples';
 import TagIcon from '@rsuite/icons/Tag';
 import HomeIcon from '@rsuite/icons/legacy/Home';
-import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
+
 
 import FUN_SS_CODES from '../../../resources/jsons/funCodes.json'
 import FUN_T_CODES from '../../../resources/jsons/fun6DocsList.json'
 import GRID from '../../../resources/customs/components/grid.component';
+import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
 
 var moment = require('moment');
+
+
+// TODO DOCS VIEWER
+// NO CONFIG ALERT
 
 export default function DICTIONARY() {
     const auth = useContext(AuthContext);
@@ -41,8 +36,9 @@ export default function DICTIONARY() {
     const conn = auth.conn ?? {};
 
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('dcalc');
+    const trn = utilities.getTranslation('dictioary');
     const btn = utilities.getTranslation('btns');
+    const funt = utilities.getTranslation('fun');
     const lang = utilities.lang;
 
 
@@ -102,90 +98,92 @@ export default function DICTIONARY() {
     let COMPONENT_LIC = () => {
         const columns = [
             {
-                name: 'LIC_0',
+                name: trn.lic_th[0],
                 minWidth: '30%',
                 width: '15%',
                 selector: row => row.id_public,
                 cell: row => row.id_public,
             },
             {
-                name: 'LIC_01',
+                name: trn.lic_th[1],
                 minWidth: '30%',
                 width: '15%',
                 selector: row => GET_FUN_STATE(row.state, lang, true),
                 cell: row => GET_FUN_STATE(row.state, lang, false),
             },
             {
-                name: 'LIC_02',
+                name: trn.lic_th[2],
                 minWidth: '40%',
                 width: '70%',
-                selector: row => formsParser1(row.fun_1s[0]),
-                cell: row => formsParser1(row.fun_1s[0]),
+                selector: row => formsParser1(row.fun_1s[0], lang),
+                cell: row => formsParser1(row.fun_1s[0], lang),
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'LICENCIAS'}
+            title={trn.dicts[0]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-success" />}
             columns={columns}
             data={dataLic}
             load={loadLic == 0}
             search={[]}
             headerColor={'LightGreen'}
+            csv
         />
     }
     let COMPONENT_OA = () => {
         const columns = [
             {
-                name: 'LIC_0',
+                name: trn.oa_th[0],
                 selector: row => row.id_public,
                 cell: row => row.id_public,
             },
             {
-                name: 'LIC_01',
+                name: trn.oa_th[1],
                 selector: row => GET_FUN_STATE(row.state, lang, true),
                 cell: row => GET_FUN_STATE(row.state, lang, false),
             },
             {
-                name: 'LIC_02',
+                name: trn.oa_th[2],
                 minWidth: '40%',
                 width: '70%',
-                selector: row => formsParser1(row.fun_1s[0]),
-                cell: row => formsParser1(row.fun_1s[0]),
+                selector: row => formsParser1(row.fun_1s[0], lang),
+                cell: row => formsParser1(row.fun_1s[0], lang),
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'OTRAS ACTUACIONES'}
+            title={trn.dicts[1]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-primary" />}
             columns={columns}
             data={dataOa}
             load={loadOa == 0}
             search={[]}
             headerColor={'lightblue'}
+            csv
         />
     }
     let COMPONENT_IN = () => {
         const columns = [
             {
-                name: '01',
+                name: trn.in_th[0],
                 selector: row => row.id_related,
                 cell: row => row.id_related,
             },
             {
-                name: '02',
+                name: trn.in_th[1],
                 selector: row => row.type,
                 cell: row => row.type,
             },
             {
-                name: '03',
+                name: trn.in_th[2],
                 selector: row => row.date + ' ' + (row.time || ''),
                 cell: row => row.date + ' ' + (row.time || ''),
             },
         ]
 
         return <GRID
-            title={'CONCECUTIVOS DE ENTRADA'}
+            title={trn.dicts[2]}
             cellText={'id_public'}
             titleIcon={<TableIcon style={{ fontSize: '24px' }} />}
             data={dataIn}
@@ -196,19 +194,19 @@ export default function DICTIONARY() {
     let COMPONENT_OUT = () => {
         const columns = [
             {
-                name: '01',
+                name: trn.out_th[0],
                 selector: row => row.id,
                 cell: row => row.id,
             },
             {
-                name: '02',
-                selector: row => row.res,
-                cell: row => row.res,
+                name: trn.out_th[1],
+                selector: row => funt.cubs[row.res] || '',
+                cell: row => funt.cubs[row.res] || '',
             },
         ]
 
         return <GRID
-            title={'CONCECUTIVOS DE SALIDA'}
+            title={trn.dicts[3]}
             cellText={'cub'}
             titleIcon={<TableIcon style={{ fontSize: '24px' }} />}
             data={dataOut}
@@ -219,24 +217,24 @@ export default function DICTIONARY() {
     let COMPONENT_RES = () => {
         const columns = [
             {
-                name: '01',
-                selector: row =>row.fun_0.id_public,
+                name: trn.res_th[0],
+                selector: row => row.fun_0.id_public,
                 cell: row => row.fun_0.id_public,
             },
             {
-                name: '02',
+                name: trn.res_th[1],
                 selector: row => GET_FUN_STATE(row.fun_0.state, lang, true),
                 cell: row => GET_FUN_STATE(row.fun_0.state, lang, false),
             },
             {
-                name: '03',
-                selector: row => formsParser1(row.fun_0.fun_1s[0] || {}),
-                cell: row => formsParser1(row.fun_0.fun_1s[0] || {}),
+                name: trn.res_th[2],
+                selector: row => formsParser1(row.fun_0.fun_1s[0] || {}, lang),
+                cell: row => formsParser1(row.fun_0.fun_1s[0] || {}, lang),
             },
         ]
 
         return <GRID
-            title={'CONCECUTIVOS DE RESOLUCIONES'}
+            title={trn.dicts[4]}
             cellText={'id_public'}
             titleIcon={<TableIcon style={{ fontSize: '24px' }} />}
             data={dataRes.filter(d => d.id_public.length > 0)}
@@ -247,169 +245,202 @@ export default function DICTIONARY() {
     let COMPONENT_CERT = () => {
         const columns = [
             {
-                name: 'LIC_0',
+                name: trn.cert_th[0],
                 selector: row => row.id_public,
                 cell: row => row.id_public,
             },
             {
-                name: 'LIC_01',
+                name: trn.cert_th[1],
                 minWidth: '40%',
-                width: '70%',
+                width: '60%',
                 selector: row => row.description,
                 cell: row => row.description,
             },
             {
-                name: 'LIC_02',
+                name: trn.cert_th[2],
+                selector: row => moment(row.createdAt).format('YYYY-MM-DD HH:mm'),
+                cell: row => moment(row.createdAt).format('YYYY-MM-DD HH:mm'),
+            },
+            {
+                name: trn.cert_th[3],
                 selector: row => row.id_related || '',
+                ignoreCSV: true,
                 cell: row => row.id_related,
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'CERTIFICACIONES'}
+            title={trn.dicts[5]}
             titleIcon={<DocPassIcon style={{ fontSize: '24px' }} className="text-warning" />}
             columns={columns}
             data={dataCert}
             load={loadCert == 0}
             search={[]}
             headerColor={'lightyellow'}
+            csv 
         />
     }
     let COMPONENT_TIT = () => {
         const columns = [
             {
-                name: '00',
+                name: trn.tit_th[0],
                 selector: row => row.name + ' ' + row.surname,
                 cell: row => row.name + ' ' + row.surname,
             },
             {
-                name: '01',
+                name: trn.tit_th[1],
+                width: '10%',
                 selector: row => row.id_number,
                 cell: row => row.id_number,
             },
             {
-                name: '02',
+                name: trn.tit_th[2],
                 selector: row => row.email,
                 cell: row => row.email,
             },
             {
-                name: '03',
+                name: trn.tit_th[3],
+                width: '10%',
                 selector: row => row.nunber,
                 cell: row => row.nunber,
             },
             {
-                name: '04',
+                name: trn.tit_th[4],
                 selector: row => row.rep_name,
                 cell: row => row.rep_name,
+            },
+            {
+                name: trn.tit_th[5],
+                selector: row => row.id_related,
+                cell: row => row.id_related,
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'TITULARES'}
+            title={trn.dicts[6]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-info" />}
             columns={columns}
             data={dataTit}
             load={loadTit == 0}
             search={[]}
             headerColor={'lightcyan'}
+            csv desc
         />
     }
     let COMPONENT_PROF = () => {
         const columns = [
             {
-                name: '00',
+                name: trn.prof_th[0],
                 selector: row => row.name + ' ' + row.surname,
                 cell: row => row.name + ' ' + row.surname,
             },
             {
-                name: '01',
+                name: trn.prof_th[1],
+                width: '10%',
                 selector: row => row.id_number,
                 cell: row => row.id_number,
             },
             {
-                name: '02',
+                name: trn.prof_th[2],
                 selector: row => row.email,
                 cell: row => row.email,
             },
             {
-                name: '03',
+                name: trn.prof_th[3],
+                width: '10%',
                 selector: row => row.number,
                 cell: row => row.number,
             },
             {
-                name: '04',
+                name: trn.prof_th[4],
                 selector: row => row.registration,
                 cell: row => row.registration,
             },
             {
-                name: '05',
+                name: trn.prof_th[5],
+                width: '10%',
                 cell: row => row.docs,
+
+            },
+            {
+                name: trn.prof_th[6],
+                selector: row => row.id_related,
+                cell: row =>row.id_related,
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'PROFESIONALES'}
+            title={trn.dicts[7]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-danger" />}
             columns={columns}
             data={dataProf}
             load={loadProf == 0}
             search={[]}
             headerColor={'LightPink'}
+            csv desc
         />
     }
     let COMPONENT_PREV = () => {
         const columns = [
             {
-                name: '00',
+                name: trn.prev_th[0],
+                width: '30%',
                 selector: row => row.direccion,
                 cell: row => row.direccion,
             },
             {
-                name: '01',
+                name: trn.prev_th[1],
                 selector: row => row.matricula,
                 cell: row => row.matricula,
             },
             {
-                name: '02',
+                name: trn.prev_th[2],
                 selector: row => row.catastral,
                 cell: row => row.catastral,
             },
             {
-                name: '03',
+                name: trn.prev_th[3],
                 selector: row => row.catastral_2,
                 cell: row => row.catastral_2,
             },
             {
-                name: '04',
-                selector: row => row.estrato,
+                name: trn.prev_th[4],
+                width: '10%',
+                selector: row => trn.prev_th[4] +' '+ row.estrato,
                 cell: row => row.estrato,
             },
             {
-                name: '05',
+                name: trn.prev_th[5],
                 selector: row => row.barrio,
                 cell: row => row.barrio,
+            },
+            {
+                name: trn.prev_th[6],
+                selector: row => row.id_related,
+                cell: row => row.id_related,
             },
         ]
 
         return <TABLE_COMPONENT
-            title={'PREVIOS'}
+            title={trn.dicts[8]}
             titleIcon={<HomeIcon style={{ fontSize: '24px' }} className="text-paranoia" />}
             columns={columns}
             data={dataPrev}
             load={loadPrev == 0}
             search={[]}
             headerColor={'Plum'}
+            csv desc
         />
     }
     let COMPONENT_SS = () => {
         const columns = [
             {
-                name: '00',
+                name: trn.ss_th[0],
                 selector: row => row.code,
                 cell: row => row.code,
             },
             {
-                name: '01',
+                name: trn.ss_th[1],
                 minWidth: '50%',
                 width: '80%',
                 selector: row => row.name,
@@ -418,24 +449,25 @@ export default function DICTIONARY() {
         ]
 
         return <TABLE_COMPONENT
-            title={'SERIES Y SUBSERIES'}
+            title={trn.dicts[9]}
             titleIcon={<TagIcon style={{ fontSize: '24px' }} className="text-cold" />}
             columns={columns}
             data={dataCodesSS}
             load={load == 0}
             search={[]}
             headerColor={'PowderBlue'}
+            csv desc
         />
     }
     let COMPONENT_T = () => {
         const columns = [
             {
-                name: '00',
+                name: trn.t_th[0],
                 selector: row => row.code,
                 cell: row => row.code,
             },
             {
-                name: '01',
+                name: trn.t_th[1],
                 minWidth: '50%',
                 width: '80%',
                 selector: row => row.name,
@@ -444,13 +476,14 @@ export default function DICTIONARY() {
         ]
 
         return <TABLE_COMPONENT
-            title={'TIPOLOGIA DOCUMENTAL'}
+            title={trn.dicts[10]}
             titleIcon={<TagIcon style={{ fontSize: '24px' }} className="text-blood" />}
             columns={columns}
             data={dataCodesT}
             load={load == 0}
             search={[]}
             headerColor={'LightCoral'}
+            csv desc
         />
     }
     // ******************************** APIS ****************************** //
@@ -556,27 +589,31 @@ export default function DICTIONARY() {
         setDataCodesT(codes_t);
     }
 
+    function loadFun6(id){
+
+    }
+
     return (
         <div className='my-3'>
 
             <Row className="text-center" style={{ width: '100%' }}>
-                <h3>{'THIS IS THE DICTIONARY!'} <BTN_HELP title={'TITLE'} text={'BODY'} page={[]} /></h3>
+                <h3>{trn.title} <BTN_HELP title={trn.btn_help_tile} text={trn.btn_help_body} page={trn.HELP_PAGE} /></h3>
             </Row>
 
             <Row >
                 <Col xs={24} sm={24} md={4} lg={3} xl={3} xxl={2}>
                     <Nav activeKey={active} onSelect={setActive} style={{ marginBottom: 50 }} appearance="tabs" vertical>
-                        <Nav.Item eventKey="lic" icon={<PageIcon />}>LICENCIAS</Nav.Item>
-                        <Nav.Item eventKey="oa" icon={<PageIcon />}>OTRAS ACTUACIONES</Nav.Item>
-                        <Nav.Item eventKey="in" icon={<TableIcon />}>CONCECUTIVOS ENTRADA</Nav.Item>
-                        <Nav.Item eventKey="out" icon={<TableIcon />}>CONCECUTIVOS SALIDA</Nav.Item>
-                        <Nav.Item eventKey="res" icon={<TableIcon />}>CONSECUTIVOS RESOLUCION</Nav.Item>
-                        <Nav.Item eventKey="cert" icon={<DocPassIcon />}>CERTIFICACIONES</Nav.Item>
-                        <Nav.Item eventKey="tit" icon={<PeoplesIcon />}>TITULARES</Nav.Item>
-                        <Nav.Item eventKey="prof" icon={<PeoplesIcon />}>PROFESIONALES</Nav.Item>
-                        <Nav.Item eventKey="prev" icon={<HomeIcon />}>PREVIOS</Nav.Item>
-                        <Nav.Item eventKey="ss" icon={<TagIcon />}>SERIES & SUBSERIES</Nav.Item>
-                        <Nav.Item eventKey="tip" icon={<TagIcon />}>TIPOLOGIAS</Nav.Item>
+                        <Nav.Item eventKey="lic" icon={<PageIcon />}>{trn.dicts[0]}</Nav.Item>
+                        <Nav.Item eventKey="oa" icon={<PageIcon />}>{trn.dicts[1]}</Nav.Item>
+                        <Nav.Item eventKey="in" icon={<TableIcon />}>{trn.dicts[2]}</Nav.Item>
+                        <Nav.Item eventKey="out" icon={<TableIcon />}>{trn.dicts[3]}</Nav.Item>
+                        <Nav.Item eventKey="res" icon={<TableIcon />}>{trn.dicts[4]}</Nav.Item>
+                        <Nav.Item eventKey="cert" icon={<DocPassIcon />}>{trn.dicts[5]}</Nav.Item>
+                        <Nav.Item eventKey="tit" icon={<PeoplesIcon />}>{trn.dicts[6]}</Nav.Item>
+                        <Nav.Item eventKey="prof" icon={<PeoplesIcon />}>{trn.dicts[7]}</Nav.Item>
+                        <Nav.Item eventKey="prev" icon={<HomeIcon />}>{trn.dicts[8]}</Nav.Item>
+                        <Nav.Item eventKey="ss" icon={<TagIcon />}>{trn.dicts[9]}</Nav.Item>
+                        <Nav.Item eventKey="tip" icon={<TagIcon />}>{trn.dicts[10]}</Nav.Item>
                     </Nav>
                 </Col>
 

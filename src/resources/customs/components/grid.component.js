@@ -7,7 +7,7 @@ import NON_IDEAL_STATE from './nonideal.component';
 export default function GRID(props) {
     const { data, title, search, titleIcon, columns, cellText, load } = props;
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('tableComponent');
+    const trn = utilities.getTranslation('gridComponent');
     const theme = utilities.theme;
 
     // ****************************** CONSTS ****************************** //
@@ -89,6 +89,7 @@ export default function GRID(props) {
             activePage={pag}
             onChangePage={setPag}
             onChangeLimit={setLimit}
+            locale={trn.pagination}
         />
     }
 

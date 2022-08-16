@@ -295,164 +295,303 @@ export function _GET_SUBSERIE_STR(_CHILD) {
 //--------------------------------------------------------------------//
 //--------------------------------------------------------------------//
 //--------------------------------------------------------------------//
-
-const _FUN_1_1 = ['A. LICENCIA DE URBANIZACION',
-    'B. LICENCIA DE PARCELACION',
-    'C. LICENCIA DE SUBDIVISION',
-    'D. LICENCIA DE CONSTRUCCION',
-    'E. INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-    'F. RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-    'G. OTRAS ACTUACIONES'];
-
-const _FUN_1_1a = ['LICENCIA DE URBANIZACION',
-    'LICENCIA DE PARCELACION',
-    'LICENCIA DE SUBDIVISION',
-    'LICENCIA DE CONSTRUCCION',
-    'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-    'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-    'OTRAS ACTUACIONES'];
-
 const _FUN_1_1_HELPER = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-
-const _FUN_1_2 = ['A. INICIAL',
-    'B. PRORROGA',
-    'C. MODIFICACION DE LICENCIA VIGENTE',
-    'D. REVALIDACION'];
-const _FUN_1_2a = ['INICIAL',
-    'PRORROGA',
-    'MODIFICACION DE LICENCIA VIGENTE',
-    'REVALIDACION'];
-
 const _FUN_1_2_HELPER = ['A', 'B', 'C', 'D'];
-
-const _FUN_1_3 = ['A. DESARROLLO',
-    'B. SANEAMIENTO',
-    'C. RECUPERACION'];
-const _FUN_1_3a = ['DESARROLLO',
-    'SANEAMIENTO',
-    'RECUPERACION'];
-
 const _FUN_1_3_HELPER = ['A', 'B', 'C'];
-
-const _FUN_1_4 = ['A. SUBDIVISION RURAL',
-    'B. SUBDIVISION URBANA',
-    'C. RELOTEO'];
-const _FUN_1_4a = ['SUBDIVISION RURAL',
-    'SUBDIVISION URBANA',
-    'RELOTEO'];
-
 const _FUN_1_4_HELPER = ['A', 'B', 'C'];
-
-const _FUN_1_5 = ['A. OBRA NUEVA',
-    'B. AMPLIACION',
-    'C. ADECUACION',
-    'D. MODIFICACION',
-    'E. RESTAURACION',
-    'F. REFORZAMIENTO ESTRUCTURAL',
-    'G.1 DEMOLICION TOTAL',
-    'G.2 DEMOLICION PARCIAL',
-    'H. RECONSTRUCCION',
-    'I. CERRAMIENTO'];
-const _FUN_1_5a = ['OBRA NUEVA',
-    'AMPLIACION',
-    'ADECUACION',
-    'MODIFICACION',
-    'RESTAURACION',
-    'REFORZAMIENTO ESTRUCTURAL',
-    'DEMOLICION TOTAL',
-    'DEMOLICION PARCIAL',
-    'RECONSTRUCCION',
-    'CERRAMIENTO'];
-
 const _FUN_1_5_HELPER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
-
-const _FUN_1_6 = ['A. VIVIENDA',
-    'B. COMERCIO Y/O SERVICIOS',
-    'C. INSTITUCIONAL',
-    'D. INDUSTRIAL'];
-
-const _FUN_1_6_SIMPLYFY = ['VIVIENDA',
-    'COMERCIO Y/O SERVICIOS',
-    'INSTITUCIONAL',
-    'INDUSTRIAL'];
-
 const _FUN_1_6_HELPER = ['A', 'B', 'C', 'D'];
-
-const _FUN_1_7 = ['A. MENOR A 2000 m2',
-    'B. IGUAL O MAYOR A 2000 m2',
-    'C. ALCANZA O SUPERA MEDIANTE AMPLIACION LOS 2000 m2'];
-
 const _FUN_1_7_HELPER = ['A', 'B', 'C'];
-
-const _FUN_1_8 = ['A. VIP',
-    'B. VIS',
-    'C. NO VIS'];
-const _FUN_1_8a = ['VIP',
-    'VIS',
-    'NO VIS'];
-
 const _FUN_1_8_HELPER = ['A', 'B', 'C'];
-
-const _FUN_1_9 = ['A. SI',
-    'B. NO'];
-
 const _FUN_1_9_HELPER = ['A', 'B'];
-
-const _FUN_1_101 = ['A. MEDIDAS PASIVAS',
-    'B. MEDIDAS ACTIVAS',
-    'C. MEDIDAS ACTIVAS Y PASIVAS'];
-
 const _FUN_1_101_HELPER = ['A', 'B', 'C'];
-
-const _FUN_1_102 = ['A. FRIO',
-    'B. TEMPLADO',
-    'C. CALIDO SECO',
-    'D. CALIDO HUMEDO'];
-
 const _FUN_1_102_HELPER = ['A', 'B', 'C', 'D'];
-
-const _FUN_2_4 = ['A. URBANO',
-    'B. RURAL',
-    'C. DE EXPANSION'];
-const _FUN_2_4a = ['URBANO',
-    'RURAL',
-    'DE EXPANSION'];
-
 const _FUN_2_4_HELPER = ['A', 'B', 'C'];
-
-const _FUN_2_5 = ['A. PLANO DE LOTEO',
-    'B. PLANO TOPOGRAFICO'];
-
 const _FUN_2_5_HELPER = ['A', 'B'];
 
+const _FUN_1_1 = (useLeter, lang) => {
+    let letters = _FUN_1_1_HELPER
+    let trn = {
+        en: ['URBAN LICENSE',
+            'PARCELLING LICENSE',
+            'SUBDIVISION LICENSE',
+            'CONSTRUCTION LICENSE',
+            'PUBLIC SPACE INTERVENTION AND OCUPATION',
+            'BUILDING ACKNOWLEDGEMENT',
+            'OTHER PROCESS'],
+        es: ['LICENCIA DE URBANIZACION',
+            'LICENCIA DE PARCELACION',
+            'LICENCIA DE SUBDIVISION',
+            'LICENCIA DE CONSTRUCCION',
+            'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
+            'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
+            'OTRAS ACTUACIONES']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_2 = (useLeter, lang) => {
+    let letters = _FUN_1_2_HELPER
+    let trn = {
+        en: ['INITIAL',
+            'EXTENSION',
+            'VALID LICENSE MODIFICATION',
+            'REVALIDATION'],
+        es: ['INICIAL',
+            'PRORROGA',
+            'MODIFICACION DE LICENCIA VIGENTE',
+            'REVALIDACION']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_3 = (useLeter, lang) => {
+    let letters = _FUN_1_3_HELPER
+    let trn = {
+        en: ['DEVELOPMENT',
+            'SANITATION',
+            'RECLAMATION'],
+        es: ['DESARROLLO',
+            'SANEAMIENTO',
+            'RECUPERACION']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_4 = (useLeter, lang) => {
+    let letters = _FUN_1_4_HELPER
+    let trn = {
+        en: ['RURAL SUBDIVISION',
+            'URBAN SUBDIVISION',
+            'REBATCHING'],
+        es: ['SUBDIVISION RURAL',
+            'SUBDIVISION URBANA',
+            'RELOTEO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_5 = (useLeter, lang) => {
+    let letters = _FUN_1_5_HELPER
+    let trn = {
+        en: ['NEW CONSTRUCTION',
+            'AMPLIATION',
+            'ADEQUACY',
+            'MODIFICATION',
+            'RESTORATION',
+            'STRUCTURAL REINFORCEMENT',
+            'TOTAL DEMOLITION',
+            'PARTIAL DEMOLITION',
+            'RECONSTRUCTION',
+            'ENCLOSURE'],
+        es: ['OBRA NUEVA',
+            'AMPLIACION',
+            'ADECUACION',
+            'MODIFICACION',
+            'RESTAURACION',
+            'REFORZAMIENTO ESTRUCTURAL',
+            'DEMOLICION TOTAL',
+            'DEMOLICION PARCIAL',
+            'RECONSTRUCCION',
+            'CERRAMIENTO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_6 = (useLeter, lang) => {
+    let letters = _FUN_1_6_HELPER
+    let trn = {
+        en: ['RESIDENCE',
+            'TRADE AND/OR SERVICES',
+            'INSTITUTIONAL',
+            'INDUSTRIAL'],
+        es: ['VIVIENDA',
+            'COMERCIO Y/O SERVICIOS',
+            'INSTITUCIONAL',
+            'INDUSTRIAL']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_7 = (useLeter, lang) => {
+    let letters = _FUN_1_7_HELPER
+    let trn = {
+        en: ['LESS THAN 2000 m2',
+            'EQUAL OR MORE THAN 2000 m2',
+            'REACHES OR SURPASSES THE AREA OF 2000 m2 THROUGH AMPLIATION'],
+        es: ['MENOR A 2000 m2',
+            'IGUAL O MAYOR A 2000 m2',
+            'ALCANZA O SUPERA MEDIANTE AMPLIACION LOS 2000 m2']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_8 = (useLeter, lang) => {
+    let letters = _FUN_1_8_HELPER
+    let trn = {
+        en: ['PIR',
+            'SIR',
+            'NO SIR'],
+        es: ['VIP',
+            'VIS',
+            'NO VIS']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_9 = (useLeter, lang) => {
+    let letters = _FUN_1_9_HELPER
+    let trn = {
+        en: ['YES',
+            'NO'],
+        es: ['SI',
+            'NO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_101 = (useLeter, lang) => {
+    let letters = _FUN_1_101_HELPER
+    let trn = {
+        en: ['PASSIVE MEASURES',
+            'ACTIVE MEASURES',
+            'PASSIVE AND ACTIVE MEASURES'],
+        es: ['MEDIDAS PASIVAS',
+            'MEDIDAS ACTIVAS',
+            'MEDIDAS ACTIVAS Y PASIVAS']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_1_102 = (useLeter, lang) => {
+    let letters = _FUN_1_102_HELPER
+    let trn = {
+        en: ['COLD',
+            'TEMPERATE',
+            'WARM DRY',
+            'WARM HUMID'],
+        es: ['FRIO',
+            'TEMPLADO',
+            'CALIDO SECO',
+            'CALIDO HUMEDO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_2_4 = (useLeter, lang) => {
+    let letters = _FUN_2_4_HELPER
+    let trn = {
+        en: ['URBAN',
+            'RURAL',
+            'EXPANTION'],
+        es: ['URBANO',
+            'RURAL',
+            'DE EXPANSION']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+
+const _FUN_2_5 = (useLeter, lang) => {
+    let letters = _FUN_2_5_HELPER
+    let trn = {
+        en: ['LOT PLAN',
+            'TOPOGRAPHIC MAP'],
+        es: ['LANO DE LOTEO',
+            'PLANO TOPOGRAFICO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
 
 // 1.1 CAN BE MULTIPLE
-export const _FUN_1_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_1_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalArray = []
-    var _finalStr = ""
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_1_HELPER.length; j++) {
             if (_FUN_1_1_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalArray.push(_FUN_1_1a[j]);
-                else _finalArray.push(_FUN_1_1[j]);
+                _finalArray.push(_FUN_1_1(useLetter, lang)[j]);
             }
         }
     }
-    return _finalStr = _finalArray.join();
+    return _finalArray.join();
 }
 
 // 1.2 CAN BE OPTIONS && CAN BE EMPTY STRING
-export const _FUN_2_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_2_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_2_HELPER.length; j++) {
             if (_FUN_1_2_HELPER[j] == _defaultValue) {
-                if (noLetters) _finalStr = _FUN_1_2a[j];
-                else _finalStr = _FUN_1_2[j];
+                _finalStr = _FUN_1_2(useLetter, lang)[j];
                 break;
             }
         }
@@ -461,15 +600,14 @@ export const _FUN_2_PARSER = (_ARRAY, noLetters) => {
 }
 
 //  1.3 CAN BE EMPTY STRING
-export const _FUN_3_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_3_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_3_HELPER.length; j++) {
             if (_FUN_1_3_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalStr = _FUN_1_3a[j];
-                else _finalStr = _FUN_1_3[j];
+                _finalStr = _FUN_1_3(useLetter, lang)[j];
                 break;
             }
         }
@@ -478,15 +616,14 @@ export const _FUN_3_PARSER = (_ARRAY, noLetters) => {
 }
 
 // 1.4 CAN BE EMPTY STRING
-export const _FUN_4_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_4_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_4_HELPER.length; j++) {
             if (_FUN_1_4_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalStr = _FUN_1_4a[j];
-                else _finalStr = _FUN_1_4[j];
+                _finalStr = _FUN_1_4(useLetter, lang)[j];
                 break;
             }
         }
@@ -495,7 +632,7 @@ export const _FUN_4_PARSER = (_ARRAY, noLetters) => {
 }
 
 // 1.5 CAN BE EMPTY STRING && CAN BE MULTILPLE
-export const _FUN_5_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_5_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalArray = []
@@ -503,8 +640,7 @@ export const _FUN_5_PARSER = (_ARRAY, noLetters) => {
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_5_HELPER.length; j++) {
             if (_FUN_1_5_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalArray.push(_FUN_1_5a[j]);
-                else _finalArray.push(_FUN_1_5[j]);
+                _finalArray.push(_FUN_1_5(useLetter, lang)[j]);
             }
         }
     }
@@ -512,7 +648,7 @@ export const _FUN_5_PARSER = (_ARRAY, noLetters) => {
 }
 
 // 1.6 CAN BE MULTILPLE && CAN BE OTHERS && CAN BE EMPTY STRING
-export const _FUN_6_PARSER = (_ARRAY, useSimplyfy) => {
+export const _FUN_6_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalArray = []
@@ -521,7 +657,7 @@ export const _FUN_6_PARSER = (_ARRAY, useSimplyfy) => {
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_6_HELPER.length; j++) {
             if (_FUN_1_6_HELPER[j] == _defaultValue[i]) {
-                _finalArray.push(useSimplyfy ? _FUN_1_6_SIMPLYFY[j] : _FUN_1_6[j]);
+                _finalArray.push(_FUN_1_6(useLetter, lang)[j]);
                 flag = true;
             }
         }
@@ -533,14 +669,14 @@ export const _FUN_6_PARSER = (_ARRAY, useSimplyfy) => {
 }
 
 // 1.7 CAN BE EMPTY STRING
-export const _FUN_7_PARSER = (_ARRAY) => {
+export const _FUN_7_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_7_HELPER.length; j++) {
             if (_FUN_1_7_HELPER[j] == _defaultValue[i]) {
-                _finalStr = _FUN_1_7[j];
+                _finalStr = _FUN_1_7(useLetter, lang)[j];
                 break;
             }
         }
@@ -549,15 +685,14 @@ export const _FUN_7_PARSER = (_ARRAY) => {
 }
 
 // 1.8 CAN BE EMPTY STRING
-export const _FUN_8_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_8_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_8_HELPER.length; j++) {
             if (_FUN_1_8_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalStr = _FUN_1_8a[j];
-                else _finalStr = _FUN_1_8[j];
+                _finalStr = _FUN_1_8(useLetter, lang)[j];
                 break;
             }
         }
@@ -566,14 +701,14 @@ export const _FUN_8_PARSER = (_ARRAY, noLetters) => {
 }
 
 // 1.9 CAN BE EMPTY STRING
-export const _FUN_9_PARSER = (_ARRAY) => {
+export const _FUN_9_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_9_HELPER.length; j++) {
             if (_FUN_1_9_HELPER[j] == _defaultValue[i]) {
-                _finalStr = _FUN_1_9[j];
+                _finalStr = _FUN_1_9(useLetter, lang)[j];
                 break;
             }
         }
@@ -582,14 +717,14 @@ export const _FUN_9_PARSER = (_ARRAY) => {
 }
 
 // 1.101 CAN BE EMPTY STRING
-export const _FUN_101_PARSER = (_ARRAY) => {
+export const _FUN_101_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_101_HELPER.length; j++) {
             if (_FUN_1_101_HELPER[j] == _defaultValue[i]) {
-                _finalStr = _FUN_1_101[j];
+                _finalStr = _FUN_1_101(useLetter, lang)[j];
                 break;
             }
         }
@@ -598,14 +733,14 @@ export const _FUN_101_PARSER = (_ARRAY) => {
 }
 
 // 1.102 CAN BE EMPTY STRING && CAN BE OTHERS
-export const _FUN_102_PARSER = (_ARRAY) => {
+export const _FUN_102_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY) return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_1_102_HELPER.length; j++) {
             if (_FUN_1_102_HELPER[j] == _defaultValue[i]) {
-                _finalStr = _FUN_1_102[j];
+                _finalStr = _FUN_1_102(useLetter, lang)[j];
                 break;
             }
         }
@@ -614,15 +749,14 @@ export const _FUN_102_PARSER = (_ARRAY) => {
 }
 
 // 2.4 CAN BE EMPTY STRING && CAN BE OTHERS
-export const _FUN_24_PARSER = (_ARRAY, noLetters) => {
+export const _FUN_24_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY || _ARRAY == 'null') return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_2_4_HELPER.length; j++) {
             if (_FUN_2_4_HELPER[j] == _defaultValue[i]) {
-                if (noLetters) _finalStr = _FUN_2_4a[j];
-                else _finalStr = _FUN_2_4[j];
+                _finalStr = _FUN_2_4(useLetter, lang)[j];
                 break;
             }
         }
@@ -631,14 +765,14 @@ export const _FUN_24_PARSER = (_ARRAY, noLetters) => {
 }
 
 // 2.5 CAN HAVE OTHER OPTIONS
-export const _FUN_25_PARSER = (_ARRAY) => {
+export const _FUN_25_PARSER = (_ARRAY, useLetter, lang) => {
     if (!_ARRAY || _ARRAY == 'null') return ""
     var _defaultValue = _ARRAY
     var _finalStr = _defaultValue;
     for (var i = 0; i < _defaultValue.length; i++) {
         for (var j = 0; j < _FUN_2_5_HELPER.length; j++) {
             if (_FUN_2_5_HELPER[j] == _defaultValue[i]) {
-                _finalStr = _FUN_2_5[j];
+                _finalStr = _FUN_2_5(useLetter, lang)[j];
                 break;
             }
         }
@@ -656,7 +790,7 @@ export const _FUN_25_PARSER = (_ARRAY) => {
 // RETURNS A STRING TRANSFORMING ALL THE INPUT VALUE INTO CONTEXTUALIZED INFORMATION
 // IE A -> LICENCIA X
 
-export function formsParser1(object) {
+export function formsParser1(object, lang) {
     if (!object) return "";
     let f_11 = object.tipo ? object.tipo : "";
     let f_12 = object.tramite ? object.tramite : "";
@@ -671,14 +805,8 @@ export function formsParser1(object) {
 
     // 1.1 CAN BE MULTIPLE
     defaultValue = f_11
-    arrayHelper = ['LICENCIA DE URBANIZACION',
-        'LICENCIA DE PARCELACION',
-        'LICENCIA DE SUBDIVICION',
-        'LICENCIA DE CONSTRUCCION',
-        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-        'OTRAS ACTUACIONES'];
-    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    arrayHelper = _FUN_1_1(false, lang);
+    arrayHelper2 = _FUN_1_1_HELPER;
     for (var i = 0; i < defaultValue.length; i++) {
         for (var j = 0; j < arrayHelper2.length; j++) {
             if (arrayHelper2[j] == defaultValue[i]) {
@@ -688,11 +816,8 @@ export function formsParser1(object) {
     }
 
     // 1.2 CAN HAVE OTHER OPTIONS
-    arrayHelper = ['INICIAL',
-        'PRORROGA',
-        'MODIFICACION DE LICENCIA VIGENTE',
-        'REVALIDACION'];
-    arrayHelper2 = ['A', 'B', 'C', 'D'];
+    arrayHelper = _FUN_1_2(false, lang);
+    arrayHelper2 = _FUN_1_2_HELPER;
     defaultValue = f_12;
     for (var i = 0; i < arrayHelper2.length; i++) {
         if (arrayHelper2[i] == defaultValue) {
@@ -708,10 +833,8 @@ export function formsParser1(object) {
     // 1.3 CAN BE NULL
     defaultValue = f_13
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['DESARROLLO',
-            'SANEAMIENTO',
-            'RECUPERACION'];
-        arrayHelper2 = ['A', 'B', 'C'];
+        arrayHelper = _FUN_1_3(false, lang);
+        arrayHelper2 = _FUN_1_3_HELPER;
         for (var i = 0; i < arrayHelper2.length; i++) {
             if (arrayHelper2[i] == defaultValue) {
                 textToParse.push(arrayHelper[j]);
@@ -723,10 +846,8 @@ export function formsParser1(object) {
     // 1.4 CAN BE NULL
     defaultValue = f_14
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['SUBDIVISION RURAL',
-            'SUBDIVISION URBANA',
-            'RELOTEO'];
-        arrayHelper2 = ['A', 'B', 'C'];
+        arrayHelper = _FUN_1_4(false, lang);
+        arrayHelper2 = _FUN_1_4_HELPER;
         for (var i = 0; i < arrayHelper2.length; i++) {
             if (arrayHelper2[i] == defaultValue) {
                 textToParse.push(arrayHelper[j]);
@@ -738,17 +859,8 @@ export function formsParser1(object) {
     // 1.5 CAN BE NULL && CAN BE MULTILPLE
     defaultValue = f_15
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['OBRA NUEVA',
-            'AMPLIACION',
-            'ADECUACION',
-            'MODIFICACION',
-            'RESTAURACION',
-            'REFORZAMIENTO ESTRUCTURAL',
-            'DEMOLICION TOTAL',
-            'DEMOLICION PARCIAL',
-            'RECONSTRUCCION',
-            'CERRAMIENTO'];
-        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
+        arrayHelper = _FUN_1_5(false, lang);
+        arrayHelper2 = _FUN_1_5_HELPER;
         for (var i = 0; i < defaultValue.length; i++) {
             for (var j = 0; j < arrayHelper2.length; j++) {
                 if (arrayHelper2[j] == defaultValue[i]) {
@@ -761,7 +873,7 @@ export function formsParser1(object) {
     return striing.replace(/,/g, ", ");
 }
 
-export function formsParser1_exlucde2(object) {
+export function formsParser1_exlucde2(object, lang) {
     if (!object) return "";
     let f_11 = object.tipo ? object.tipo : "";
     let f_12 = object.tramite ? object.tramite : "";
@@ -776,14 +888,8 @@ export function formsParser1_exlucde2(object) {
 
     // 1.1 CAN BE MULTIPLE
     defaultValue = f_11
-    arrayHelper = ['LICENCIA DE URBANIZACION',
-        'LICENCIA DE PARCELACION',
-        'LICENCIA DE SUBDIVICION',
-        'LICENCIA DE CONSTRUCCION',
-        'INTERVENCION Y OCUPACION DEL ESPACIO PUBLICO',
-        'RECONOCIMIENTO DE LA EXISTENCIA DE UNA EDIFICACION',
-        'OTRAS ACTUACIONES'];
-    arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    arrayHelper = _FUN_1_1(false, lang);
+    arrayHelper2 = _FUN_1_1_HELPER;
     for (var i = 0; i < defaultValue.length; i++) {
         for (var j = 0; j < arrayHelper2.length; j++) {
             if (arrayHelper2[j] == defaultValue[i]) {
@@ -796,10 +902,8 @@ export function formsParser1_exlucde2(object) {
     // 1.3 CAN BE NULL
     defaultValue = f_13
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['DESARROLLO',
-            'SANEAMIENTO',
-            'RECUPERACION'];
-        arrayHelper2 = ['A', 'B', 'C'];
+        arrayHelper = _FUN_1_3(false, lang);
+        arrayHelper2 = _FUN_1_3_HELPER;
         for (var i = 0; i < arrayHelper2.length; i++) {
             if (arrayHelper2[i] == defaultValue) {
                 textToParse.push(arrayHelper[j]);
@@ -811,10 +915,8 @@ export function formsParser1_exlucde2(object) {
     // 1.4 CAN BE NULL
     defaultValue = f_14
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['SUBDIVISION RURAL',
-            'SUBDIVISION URBANA',
-            'RELOTEO'];
-        arrayHelper2 = ['A', 'B', 'C'];
+        arrayHelper = _FUN_1_4(false, lang);
+        arrayHelper2 = _FUN_1_4_HELPER;
         for (var i = 0; i < arrayHelper2.length; i++) {
             if (arrayHelper2[i] == defaultValue) {
                 textToParse.push(arrayHelper[j]);
@@ -826,17 +928,8 @@ export function formsParser1_exlucde2(object) {
     // 1.5 CAN BE NULL && CAN BE MULTILPLE
     defaultValue = f_15
     if (defaultValue != "" && defaultValue != null) {
-        arrayHelper = ['OBRA NUEVA',
-            'AMPLIACION',
-            'ADECUACION',
-            'MODIFICACION',
-            'RESTAURACION',
-            'REFORZAMIENTO ESTRUCTURAL',
-            'DEMOLICION TOTAL',
-            'DEMOLICION PARCIAL',
-            'RECONSTRUCCION',
-            'CERRAMIENTO'];
-        arrayHelper2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'g', 'H', 'I'];
+        arrayHelper = _FUN_1_5(false, lang);
+        arrayHelper2 = _FUN_1_5_HELPER;
         for (var i = 0; i < defaultValue.length; i++) {
             for (var j = 0; j < arrayHelper2.length; j++) {
                 if (arrayHelper2[j] == defaultValue[i]) {
@@ -925,7 +1018,7 @@ export const CATEGORY = { '0': 'SIN CATEGORIZAR', 'i': 'CATEGORIA I', 'ii': "CAT
 export let STATE = _state => {
     if (_state < -100) return <label className="fw-b text-danger">DISISTIMIENTO</label>;
     if (_state == -1) return <label className="text-danger">INCOMPLETO</label>
-    if (_state == 1) return  <label className="fw-b">SIN DEFINIR</label>
+    if (_state == 1) return <label className="fw-b">SIN DEFINIR</label>
     if (_state == 5) return 'LYDF'
     if (_state == 50) return 'EXPEDICION'
     if (_state == 100) return 'ARCHIVADO'

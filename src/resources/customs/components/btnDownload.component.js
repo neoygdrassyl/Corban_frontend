@@ -7,18 +7,21 @@ import { FaFileCsv } from 'react-icons/fa';
 
 
 export default function BTN_DOWNLOAD(props) {
-    const { onClick, color, pdf, csv } = props;
+    const { onClick, color, pdf, csv, sm } = props;
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('btnPdf');
+    let fontSize = sm ? '18px': '50px'
     let text = pdf ? trn.btn : csv ? trn.btn2 : trn.btn
-    let icon = pdf ?<BsFilePdf style={{ fontSize: '50px' }} /> : csv ? <FaFileCsv style={{ fontSize: '50px' }} /> : <BsFilePdf style={{ fontSize: '50px' }} />
+    let icon = pdf ? <BsFilePdf style={{ fontSize: fontSize }} /> : csv ? <FaFileCsv style={{ fontSize: fontSize }} /> : <BsFilePdf style={{ fontSize: fontSize }} />
+    let text_content = sm ? <label className='fw-b mx-2' style={{ }}>{text}</label>  : <h6 className='fw-b' style={{ paddingTop: '12px' }}>{text}</h6>;
+    let btnCols = sm ? [5, 19] : [8, 16];
     return (
-        <Button color={color || 'red'} appearance='ghost' style={{ width: '200px' }} onClick={onClick} className="mx-1">
+        <Button color={color || 'red'} appearance='ghost' style={{ width: !sm ? '200px' : '' }} onClick={onClick} className="mx-1">
             <Grid className='my-1' fluid>
                 <Row style={{ width: '100%' }}>
-                    <Col xl={8} lg={8} md={8} sm={8} xs={8}>{icon}</Col>
-                    <Col xl={14} lg={14} md={14} sm={14} xs={14} className="txt-c">
-                        <h6 className='fw-b' style={{ paddingTop: '12px' }}>{text}</h6>
+                    <Col xl={btnCols[0]} lg={btnCols[0]} md={btnCols[0]} sm={btnCols[0]} xs={btnCols[0]}>{icon}</Col>
+                    <Col xl={btnCols[1]} lg={btnCols[1]} md={btnCols[1]} sm={btnCols[1]} xs={btnCols[1]} className="txt-c">
+                        {text_content}
                     </Col>
                 </Row>
             </Grid>

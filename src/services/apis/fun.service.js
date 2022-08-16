@@ -9,6 +9,8 @@ class FunService {
   getGeneral(id) { return http.get(`/${route}/${id}`, header()); }
   get_fun_IdPublic(id_public) { return http.get(`/${route}/get/idpublic/${id_public}`, header()); }
   getLastIdPublic() {return http.get(`/${route}/getlast/id`, header());}
+
+  loadFun6(id) {return http.get(`/${route}/fun6d/${id}`, header());}
 }
 
 

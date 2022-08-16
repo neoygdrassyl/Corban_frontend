@@ -3,10 +3,18 @@ import { Button, FormGroup, Icon, InputGroup } from '@blueprintjs/core';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Col, Grid, Panel, PanelGroup, Row } from 'rsuite';
-import { AiTwotoneStar } from 'react-icons/ai';
-import { IoIosSwitch } from 'react-icons/io';
 import SELECT from '../resources/customs/components/form.components/select.compontnt';
 import { Link } from 'react-router-dom';
+
+// ICONS
+import TableIcon from '@rsuite/icons/Table';
+import PageIcon from '@rsuite/icons/Page';
+import DocPassIcon from '@rsuite/icons/DocPass';
+import PeoplesIcon from '@rsuite/icons/Peoples';
+import TagIcon from '@rsuite/icons/Tag';
+import HomeIcon from '@rsuite/icons/legacy/Home';
+import { AiTwotoneStar } from 'react-icons/ai';
+import { IoIosSwitch } from 'react-icons/io';
 
 
 export let translations = {
@@ -141,6 +149,8 @@ export let translations = {
             build: 'BUILD',
             calculate: 'CALCULATE',
             download: 'DOWLOAD',
+            tut_1: 'How to open a CSV file in Excel',
+            tut_2: 'How to open a CSV file in LibreOffice',
         },
         es: {
             save: 'GUARDAR',
@@ -160,6 +170,8 @@ export let translations = {
             build: 'COMPILAR',
             calculate: 'CALCULAR',
             download: 'DESCARGAR',
+            tut_1: 'Como abrir un archivo CSV en Excel',
+            tut_2: 'Como abrir un archivo CSV en LibreOffice',
         }
 
     },
@@ -223,6 +235,34 @@ export let translations = {
         }
 
     },
+    fun: {
+        en: {
+            cubs: {
+                rec: 'Acknowledgement report',
+                inc: 'Letter incomplete',
+                ldf: 'Letter legal and complete',
+                lob: 'Letter observations',
+                pqr: 'PQRS peticion',
+                cvc: 'Adjoining Neighbor Summon',
+                via: 'Viability act',
+                dut: 'Urban duties',
+                res: 'Citation Notification Resolution'
+            },
+        },
+        es: {
+            cubs: {
+                rec: 'Reporte de reconocimiento',
+                inc: 'Carta Incompleto',
+                ldf: 'Carta LyDF',
+                lob: 'Carta Acta Observaciones',
+                pqr: 'Peticion PQRS',
+                cvc: 'Citacion Vecino Colindante',
+                via: 'Acta de Viabilidad',
+                dut: 'Deberes Urbanisticos',
+                res: 'Citacion Notificación Resolución'
+            },
+        }
+    },
     // ******************** COMPONENTS ************************ // 
     tableComponent: {
         en: {
@@ -238,6 +278,42 @@ export let translations = {
             publish: 'PUBLICACIONES POR PAGINA',
             of: 'DE',
             search: 'Buscar...',
+        }
+    },
+    gridComponent: {
+        en: {
+            loading: 'LOADING...',
+            nodata: 'NO DATA ENTRIES',
+            publish: 'ITEMS PER PAGE',
+            of: 'OF',
+            search: 'Search...',
+            pagination: {
+                more: 'More',
+                prev: 'Prev',
+                next: 'Next',
+                first: 'First',
+                last: 'Last',
+                limit: '{0} / page',
+                total: 'Total items: {0}',
+                skip: 'Go to {0}',
+            }
+        },
+        es: {
+            loading: 'CARGANDO INFORMACIÓN...',
+            nodata: 'NO HAY INFORMACIÓN',
+            publish: 'PUBLICACIONES POR PAGINA',
+            of: 'DE',
+            search: 'Buscar...',
+            pagination: {
+                more: 'Mas',
+                prev: 'Anterior',
+                next: 'Siguiente',
+                first: 'Primero',
+                last: 'Ultimo',
+                limit: '{0} / pagina',
+                total: 'Entradas Totales: {0}',
+                skip: 'Ir a {0}',
+            }
         }
     },
     modalComponent: {
@@ -314,16 +390,16 @@ export let translations = {
             form_calc: ['Impuesto', 'Especificación de impuesto', 'Área', 'Porcentaje %']
         }
     },
-    tutorial:{
-        en:{
+    tutorial: {
+        en: {
             tutorial: 'TUTORIAL',
             csv_note: 'NOTE',
             csv_note_b: 'DOVELA has a preference on how it parses its CSV files, for this case unmark the Comma checkbox and mark the Semicolon checkbox, the character set used is UTF-8',
             csv_body: <>
-            <p>Comma Separated Values (CSV) is a text file format that you can use to exchange data from a database or a spreadsheet between applications. Each line in a Text CSV file represents a record in the database, or a row in a spreadsheet. Each field in a database record or cell in a spreadsheet row is usually separated by a comma. However, you can use other characters to delimit a field, such as a tabulator character.</p>
-            <p>If the field or cell contains a comma, the field or cell must be enclosed by single quotes (') or double quotes (").</p>
+                <p>Comma Separated Values (CSV) is a text file format that you can use to exchange data from a database or a spreadsheet between applications. Each line in a Text CSV file represents a record in the database, or a row in a spreadsheet. Each field in a database record or cell in a spreadsheet row is usually separated by a comma. However, you can use other characters to delimit a field, such as a tabulator character.</p>
+                <p>If the field or cell contains a comma, the field or cell must be enclosed by single quotes (') or double quotes (").</p>
             </>,
-            
+
             csv_lo_title: 'To Open a Text CSV File in Calc',
             csv_lo_steps: [
                 'Choose File - Open.',
@@ -341,8 +417,8 @@ export let translations = {
                 'Go to the Data tab and click on “Get External Data”',
                 'Then click on “Data from a text file”.',
                 <>
-                <p>An explorer window will appear to search and select the CSV file that we want to open. After choosing it, click on “open”.</p>
-                <p>Immediately afterwards, a wizard will pop up to guide us through the process of importing and converting the data to our Excel workbook.</p>
+                    <p>An explorer window will appear to search and select the CSV file that we want to open. After choosing it, click on “open”.</p>
+                    <p>Immediately afterwards, a wizard will pop up to guide us through the process of importing and converting the data to our Excel workbook.</p>
                 </>,
                 'Most likely our CSV file is comma delimited so we select the “Delimited” option. If the file includes headers or titles for the fields, do not forget to select the option “My data has headers”. Once this is done, click next.',
                 'We come to the most important step, where we choose the delimiter, which is usually a comma. When selecting it we will see that it shows us an example of how our data will be selected and finally we can see the columns as they should be.',
@@ -355,15 +431,15 @@ export let translations = {
             csv_e_link_b: 'For more information check the official',
             csv_e_link_l: 'Microsot Office documentation',
         },
-        es:{
+        es: {
             tutorial: 'TUTORIAL',
             csv_note: 'NOTA',
             csv_note_b: 'DOVELA tiene una preferencia en como formatea sus archivos de CSV, para este caso unmarque la casilla de Coma, y marque la casilla de Punto y coma, el conjunto de caracteres a elejir será UTF-8.',
             csv_body: <>
-            <p>Los archivos con valores separados por comas (CSV) son archivos de texto que puede utilizar para intercambiar datos entre aplicaciones desde una base de datos u hoja de cálculo. Cada línea de un archivo de texto CSV representa un registro de la base de datos o una fila de la hoja de cálculo. Los campos de un registro de base de datos o las celdas de una fila de hoja de cálculo suelen estar separados por comas. Sin embargo, pueden utilizarse otros caracteres para delimitar los campos, como el tabulador.</p>
-            <p>Si el contenido de un campo o una celda incluye una coma, dicho contenido debe estar encerrado entre comillas simples (') o dobles (").</p>
+                <p>Los archivos con valores separados por comas (CSV) son archivos de texto que puede utilizar para intercambiar datos entre aplicaciones desde una base de datos u hoja de cálculo. Cada línea de un archivo de texto CSV representa un registro de la base de datos o una fila de la hoja de cálculo. Los campos de un registro de base de datos o las celdas de una fila de hoja de cálculo suelen estar separados por comas. Sin embargo, pueden utilizarse otros caracteres para delimitar los campos, como el tabulador.</p>
+                <p>Si el contenido de un campo o una celda incluye una coma, dicho contenido debe estar encerrado entre comillas simples (') o dobles (").</p>
             </>,
-            
+
             csv_lo_title: 'Como abrir un archivo CSV en Calc',
             csv_lo_steps: [
                 'Elija Archivo ▸ Abrir, Busque el archivo CSV que desee abrir. Si el archivo tiene la extensión *.csv, selecciónelo.Si el archivo CSV tiene otra extensión, selecciónelo y, a continuación, elija «Texto CSV» en el cuadro Filtro',
@@ -381,8 +457,8 @@ export let translations = {
                 'Ve a la pestaña Datos y haz clic sobre “Obtener datos externos”.',
                 'Después haz clic sobre “Datos de un archivo de texto”.',
                 <>
-                <p>aldrá una ventana de explorador para buscar y seleccionar el archivo CSV que queremos abrir. Tras elegirlo haz clic en “abrir”.</p>
-                <p>Inmediatamente después nos saltará un asistente para guiarnos en el proceso de importación y conversión de los datos a nuestro libro de Excel.</p>
+                    <p>aldrá una ventana de explorador para buscar y seleccionar el archivo CSV que queremos abrir. Tras elegirlo haz clic en “abrir”.</p>
+                    <p>Inmediatamente después nos saltará un asistente para guiarnos en el proceso de importación y conversión de los datos a nuestro libro de Excel.</p>
                 </>,
                 'Lo más probable es que nuestro archivo CSV esté delimitado por comas por lo que seleccionamos la opción “Delimitados”. Si el archivo incluye encabezados o títulos para los campos no olvides seleccionar la opción “Mis datos tienen encabezados”. Hecho esto haz clic en siguiente.',
                 'Llegamos al paso más importante, donde elegimos el delimitador, que generalmente suele ser coma. Al seleccionarlo veremos que nos muestra un ejemplo de cómo se van a seleccionar nuestros datos y por fin podemos ver las columnas como deberían ser.',
@@ -1726,8 +1802,6 @@ export let translations = {
 
             bill_title: 'Bill preview',
             bill_table: ['ITEM DESCRIPTION', 'VALUES', 'TOTAL'],
-            bill_link1: 'How to open a CSV file in Excel',
-            bill_link2: 'How to open a CSV file in LibreOffice',
 
             btn_help_tile: 'DOVELA CALCULATOR',
             btn_help_body: 'Dovela calculator is a tool for estimating all kinds of expenses from the organization, from fixed and variable charges, to tax charges and other charges based on the type of process.',
@@ -1851,8 +1925,6 @@ export let translations = {
 
             bill_title: 'Vista previa de liquidación',
             bill_table: ['DESCRIPTICÓN', 'VALOR', 'TOTAL'],
-            bill_link1: 'Como abrir un archivo CSV en Excel',
-            bill_link2: 'Como abrir un archivo CSV en LibreOffice',
 
             btn_help_tile: 'CALCULADORA DOVELA',
             btn_help_body: 'La calculadora Dovela es una herramienta para estimar todo tipo de gastos de la organización, desde cargos fijos y variables, hasta cargos por impuestos y otros cargos según el tipo de proceso.',
@@ -1940,4 +2012,279 @@ export let translations = {
             ],
         }
     },
+    dictioary: {
+        en: {
+            title: 'DOVELA DICTIONARY',
+            dicts: ['LICENSES', 'OTHER PROCESSES', 'IN IDS', 'OUT IDS', 'RESOLUTION IDS', 'CERTIFICATIONS', 'TITULARS', 'PROFESIONALS', 'BUILDINGS', 'SERIES & SUBSERIES', 'TYPOLOGIES'],
+            lic_th: ['ID', 'STATE', 'TYPE'],
+            oa_th: ['ID', 'STATE', 'TYPE'],
+            in_th: ['RELATED ID', 'DESCRIPTION', 'DATE'],
+            out_th: ['RELATED ID', 'RELATED PROCESS'],
+            res_th: ['RELATED ID', 'STATE', 'TYPE'],
+            cert_th: ['ID', 'TYPE', 'DATE', 'RELATED ID'],
+            tit_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'LEGAL REP.', 'RELATED IDS'],
+            prof_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'REGISTRATION', 'DOCUMENTS', 'RELATED IDS'],
+            prev_th: ['ADDRESS', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'STRATA', 'LOCATION', 'RELATED IDS'],
+            ss_th: ['CODE', 'DESCRIPTION'],
+            t_th: ['CODE', 'DESCRIPTION'],
+            btn_help_tile: 'DOVELA DICTIONARY',
+            btn_help_body: 'Dovela dictionary is a tool that gathers all relevant information about all the processes created in the database and organized them in tables separately for an easy way to consult them. Additionally, some tables can generate CSV files for each one',
+            HELP_PAGE: [
+                {
+                    title: 'DOVELA DICTIONARY',
+                    content: 'Dovela dictionary is a tool that gathers all relevant information about all the processes created in the database and organized them in tables separately for an easy way to consult them. Additionally, some tables can generate CSV files for each one',
+                    focus: 'title', 
+                },
+                {
+                    title: 'LICENSES',  lefticon: <PageIcon />,
+                    content: 'A lists of all the main processes of the team.',
+                    focus: 'lic', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
+                        { subtitle: 'STATE', text: 'The current state of the process.' },
+                        { subtitle: 'TYPE', text: 'A classification for the general mode of the process.' },
+                    ]
+                },
+                {
+                    title: 'OTHER PROCESSES',  lefticon: <PageIcon />,
+                    content: 'A lists of all other processes of the team.',
+                    focus: 'oa', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
+                        { subtitle: 'STATE', text: 'The current state of the process.' },
+                        { subtitle: 'TYPE', text: 'A classification for the general mode of the process.' },
+                    ]
+                },
+                {
+                    title:'IN IDS', lefticon: <TableIcon />,
+                    content: 'All entries generated in the Filling both are marked with an unique ID this list gathers all those entries.',
+                    focus: 'in', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
+                        { subtitle: 'RELATED ID', text: 'The ID of the process that is associated to this entry.' },
+                        { subtitle: 'DESCRIPTION', text: 'A description of the process related to the entry. ' },
+                        { subtitle: 'DATE', text: 'The moment the entry was submitted to the team, ISO 8601 format (YYYY-MM-DD HH:mm)' },
+                    ]
+                },
+                {
+                    title:'OUT IDS', lefticon: <TableIcon />,
+                    content: 'In the course of any process, the action of such result in the creation of exit documents that have to be saved and controlled, with the use of an exit ID that allows the identification of each document separately',
+                    focus: 'out', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
+                        { subtitle: 'RELATED ID', text: 'The ID of the process that is associated to this entry.' },
+                        { subtitle: 'RELATED PROCESS:', text: 'A description of exit document that was associated to the out ID.' },
+                    ]
+                },
+                {
+                    title:'RESOLUTION IDS', lefticon: <TableIcon />,
+                    content: 'The final product of any process is a resolution, each one needs to have an unique ID that identifies each one.',
+                    focus: 'res', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the resolution, this is unique for each one.' },
+                        { subtitle: 'STATE', text: 'The current state of the process.' },
+                        { subtitle: 'TYPE', text: 'A classification for the general mode of the process.' },
+                    ]
+                },
+                {
+                    title:'CERTIFICATIONS', lefticon: <DocPassIcon />,
+                    content: 'Dovela can generate special documents that certify the actions of certain individuals or the validity of the information of certain processes, each one of this can be issued freely at any moment and are identified by a unique ID.',
+                    focus: 'res', list: [
+                        { subtitle: 'ID', text: 'The number that identifies the resolution, this is unique for each one.' },
+                        { subtitle: 'TYPE', text: 'A short description of the certification' },
+                        { subtitle: 'DATE', text: 'The moment the entry was submitted to the team, ISO 8601 format (YYYY-MM-DD HH:mm)' },
+                        { subtitle: 'RELATED ID', text: 'The ID of the process that is associated to this entry. This ID may or not be present.' },
+                    ]
+                },
+                {
+                    title:'TITULARS',  lefticon: <PeoplesIcon />,
+                    content: 'Each process is done by titulars, this lists gathers them all in an individual list',
+                    focus: 'tit', list: [
+                        { subtitle: 'NAME', text: 'The name of the titular.' },
+                        { subtitle: 'ID NUMBER', text: 'The number of the legal identification document of the titular.' },
+                        { subtitle: 'EMAIL', text: 'Electronic address of the titular.' },
+                        { subtitle: 'CONTACT NUMBER', text: 'Phone or mobile number of the titular.' },
+                        { subtitle: 'LEGAL REP.', text: 'In case the titular is a judicial individual, this marks the name of the person that is legally representing the titular.' },
+                        { subtitle: 'RELATED IDS', text: 'All the different processes this titular has been part of.' },
+                    ]
+                },
+                {
+                    title:'PROFESSIONALS', lefticon: <PeoplesIcon />,
+                    content: 'On each process there are professionals involve, this lists gathers them all in an individual list',
+                    focus: 'prof', list: [
+                        { subtitle: 'NAME', text: 'The name of the professional.' },
+                        { subtitle: 'ID NUMBER', text: 'The number of the legal identification document of the professional.' },
+                        { subtitle: 'EMAIL', text: 'Electronic address of the professional.' },
+                        { subtitle: 'CONTACT NUMBER', text: 'Phone or mobile number of the professional.' },
+                        { subtitle: 'REGISTRATION.', text: 'The identifier of the professional registration of the professional.' },
+                        { subtitle: 'DOCUMENTS.', text: 'In case the documents have been uploaded to the system, this shows a quick access to them.' },
+                        { subtitle: 'RELATED IDS', text: 'All the different processes this professional has been part of.' },
+                    ]
+                },
+                {
+                    title:'BUILDINGS', lefticon: <HomeIcon />,
+                    content: 'On each process there is a building intervened, this lists gathers them all in an individual list',
+                    focus: 'prev', list: [
+                        { subtitle: 'ADDRESS', text: 'The local address of the building.' },
+                        { subtitle: 'REGISTRATION', text: 'The registration number identifier.' },
+                        { subtitle: 'PREDIAL', text: 'The predial number identifier.' },
+                        { subtitle: 'NEW PREDIAL', text: 'The new version of the predal number identifier.' },
+                        { subtitle: 'STRATA.', text: 'The social strata of the building.' },
+                        { subtitle: 'LOCATION.', text: 'The neighbor of the building.' },
+                        { subtitle: 'RELATED IDS', text: 'All the different processes this building has been part of.' },
+                    ]
+                },
+                {
+                    title:'SERIES & SUBSERIES', lefticon: <TagIcon />,
+                    content: 'In order to identified each process, Dovela assigns each one an unique SERIE code and SUBSERIE code. This list gathers them all.',
+                    focus: 'ss', list: [
+                        { subtitle: 'CODE', text: 'The unique identifier of the SERIES or SUBSERIE.' },
+                        { subtitle: 'DESCRIPTION', text: 'The description of what the code identifies.' },
+
+                    ]
+                },
+                {
+                    title:'TYPOLOGIES', lefticon: <TagIcon />,
+                    content: 'In order to properly manage the processes of the team, Dovela needs to identify all incoming documents of each process, it does this by providing each document a TYPOLOGY code, this is the list of all codes.',
+                    focus: 't', list: [
+                        { subtitle: 'CODE', text: 'The unique identifier of the TYPOLOGY ciode.' },
+                        { subtitle: 'DESCRIPTION', text: 'The document of what the code refers to.' },
+
+                    ]
+                },
+            ],
+        },
+        es: {
+            title: 'DICCIONARIO DE DOVELA',
+            dicts: ['LICENCIAS', 'OTRAS ACTUACIONES', 'CONSECUTIVOS DE ENTRADA', 'CONSECUTIVOS DE SALIDA', 'CONSECUTIVOS DE RESOLUCIONES', 'CERTIFICACIONES', 'TITULARES', 'PROFESIONALES', 'PREVIOS', 'SERIES & SUBSERIES', 'TIPOLOGIA DOCUMENTAL'],
+            lic_th: ['Nr. RADICADO', 'ESTADO', 'TIPO'],
+            oa_th: ['Nr. RADICADO', 'ESTADO', 'TIPO'],
+            in_th: ['CONSECUTIVO RELACIONADO', 'DESCRIPCIÓN', 'FECHA'],
+            out_th: ['CONSECUTIVO RELACIONADO', 'PROCESO RELACIONADO'],
+            res_th: ['CONSECUTIVO RELACIONADO', 'ESTADO', 'TIPO'],
+            cert_th: ['CONSECUTIVO', 'TIPO', 'FECHA', 'CONSECUTIVO RELACIONADO'],
+            tit_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'REPRESENTANTE LEGAL', 'CONSECUTIVOS RELACIONADOS'],
+            prof_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'MATRÍCULA', 'DOCUMENTOS', 'CONSECUTIVOS RELACIONADOS'],
+            prev_th: ['ADDRESS', 'MATRÍCULA', 'NÚMERO PREDIAL', 'NUEVO PREDIAL', 'ESTRATO', 'BARRIO', 'CONSECUTIVOS RELACIONADOS'],
+            ss_th: ['CÓDIGO', 'DESCRIPCIÓN'],
+            t_th: ['CÓDIGO', 'DESCRIPCIÓN'],
+            btn_help_tile: 'DICCIONARIO DE DOVELA',
+            btn_help_body: 'El diccionario Dovela es una herramienta que recopila toda la información relevante sobre todos los procesos creados en la base de datos y los organiza en tablas por separado para facilitar su consulta. Además, algunas tablas pueden generar archivos CSV para cada una.',
+            HELP_PAGE: [
+                {
+                    title: 'DICCIONARIO DOVELA', lefticon: <PageIcon />,
+                    content: 'El diccionario Dovela es una herramienta que recopila toda la información relevante sobre todos los procesos creados en la base de datos y los organiza en tablas por separado para facilitar su consulta. Además, algunas tablas pueden generar archivos CSV para cada una.',
+                    focus: 'title',
+                },
+                {
+                    title: 'LICENCIAS', lefticon: <PageIcon />,
+                    content: 'Una lista de todos las actuaciones principales del equipo.',
+                    focus: 'lic', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'ESTADO', text: 'El estado actual del proceso.' },
+                        { subtitle: 'TIPO', text: 'Una clasificación para la modalidad del proceso.' },
+                    ]
+                },
+                {
+                    title: 'OTRAS ACTUACIONES', lefticon: <PageIcon />,
+                    content: 'Una lista de todos los demás actuacioned del equipo.',
+                    focus: 'oa', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'ESTADO', text: 'El estado actual del proceso.' },
+                        { subtitle: 'TIPO', text: 'Una clasificación para la modalidad del proceso.' },
+                    ]
+                },
+                {
+                    title:'CONSECUTIVOS DE ENTRADA',  lefticon: <TableIcon />,
+                    content: 'Todas las entradas generadas en la ventanilla única de radicación están marcadas con una identificación única, esta lista reúne todas esas entradas.',
+                    focus: 'in', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'El consecutivo del proceso que está asociado a esta entrada.' },
+                        { subtitle: 'DESCRIPCIÓN', text: 'A description of the process related to the entry. ' },
+                        { subtitle: 'FECHA', text: 'El momento en que se envió la entrada al sistema, formato ISO 8601 (AAAA-MM-DD HH:mm)' },
+                    ]
+                },
+                {
+                    title:'CONSECUTIVOS DE SALIDA', lefticon: <TableIcon />,
+                    content: 'En el curso de cualquier actuación, la acción de tal resulta en la creación de documentos de salida que deben ser guardados y controlados, con el uso de un consecutivo de salida que permite la identificación de cada documento por separado.',
+                    focus: 'out', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'El consecutivo del proceso que está asociado a esta entrada.' },
+                        { subtitle: 'PROCESO RELACIONADO', text: 'Una descripción del documento de salida que se asoció al consecutivo de salida.' },
+                    ]
+                },
+                {
+                    title:'CONSECUTIVOS DE RESOLUCIONES', lefticon: <TableIcon />,
+                    content: 'El producto final de cualquier actuación es una resolución, cada una necesita tener una identificación única que identifique a cada uno.',
+                    focus: 'res', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'ESTADO', text: 'El estado actual del proceso.' },
+                        { subtitle: 'TIPO', text: 'Una clasificación para la modalidad del proceso.' },
+                    ]
+                },
+                {
+                    title:'CERTIFICACIONES', lefticon: <DocPassIcon />,
+                    content: 'Dovela puede generar documentos especiales que certifican las actuaciones de determinadas personas o la vigencia de la información de determinadas actuaciones, cada uno de estos puede emitirse libremente en cualquier momento y se identifican mediante una identificación única.',
+                    focus: 'res', list: [
+                        { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
+                        { subtitle: 'TIPO', text: 'Una corta descripción de la certificación.' },
+                        { subtitle: 'FECHA', text: 'El momento en que se envió la entrada al sistema, formato ISO 8601 (AAAA-MM-DD HH:mm)' },
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'El consecutivo del proceso que está asociado a esta entrada. Este valor puede o no estar presente.' },
+                    ]
+                },
+                {
+                    title:'TITULARES', lefticon: <PeoplesIcon />,
+                    content: 'Cada actuación lo hacen los titulares, esta lista los reúne a todos en una lista individual.',
+                    focus: 'tit', list: [
+                        { subtitle: 'NOMBRE', text: 'El nombre del titular.' },
+                        { subtitle: 'NÚMERO DOCUMENTO', text: 'El número del documento legal de identificación del titular.' },
+                        { subtitle: 'CORREO EKECTRÓNICO', text: 'Dirección electrónica del titular.' },
+                        { subtitle: 'NÚMERO DE CONTACTO', text: 'Número de teléfono o móvil del titular.' },
+                        { subtitle: 'REPRESENTANTE LEGAL.', text: 'En caso de que el titular sea persona física jurídica, se marca el nombre de la persona que lo representa legalmente.' },
+                        { subtitle: 'CONSECUTIVOS RELACIONADOS', text: 'Los consecutivos del proceso que está asociado a esta entrada.' },
+                    ]
+                },
+                {
+                    title:'PROFESIONALES', lefticon: <PeoplesIcon />,
+                    content: 'En cada actuación intervienen profesionales, esta lista los reúne a todos en una lista individual.',
+                    focus: 'prof', list: [
+                        { subtitle: 'NOMBRE', text: 'El nombre del profesional.' },
+                        { subtitle: 'NÚMERO DOCUMENTO', text: 'El número del documento legal de identificación del profesional.' },
+                        { subtitle: 'CORREO EKECTRÓNICO', text: 'Dirección electrónica del profesional.' },
+                        { subtitle: 'NÚMERO DE CONTACTO', text: 'Número de teléfono o móvil del profesional.' },
+                        { subtitle: 'MATRÍCULA.', text: 'El identificador del la matrícula profesional del profesional.' },
+                        { subtitle: 'DOCUMENTOS.', text: 'En caso de que los documentos hayan sido subidos al sistema, este muestra un acceso rápido a los mismos.' },
+                        { subtitle: 'CONSECUTIVOS RELACIONADOS', text: 'Los consecutivos del proceso que está asociado a esta entrada.' },
+                    ]
+                },
+                {
+                    title:'PREVIOS', lefticon: <HomeIcon />,
+                    content: 'En cada actuación hay un inmueble intervenido, esta lista los reúne a todos en una lista individual.',
+                    focus: 'prev', list: [
+                        { subtitle: 'DIRECCIÓN', text: 'La dirección local del inmueble.' },
+                        { subtitle: 'MATRÍCULA', text: 'TEl identificador del número de inmueble.' },
+                        { subtitle: 'NÚMERO PREDIAL', text: 'El identificador del número predial.' },
+                        { subtitle: 'NUEVO PREDIAL', text: 'La nueva version del número predial.' },
+                        { subtitle: 'ESTRATO.', text: 'El estrato del inmueble.' },
+                        { subtitle: 'BARRIO.', text: 'El barrio donde se encuentra el inmueble.' },
+                        { subtitle: 'CONCECUTIVOS RELACIONADOS', text: 'Los consecutivos del proceso que está asociado a esta entrada.' },
+                    ]
+                },
+                {
+                    title:'SERIES & SUBSERIES', lefticon: <TagIcon />,
+                    content: 'Para identificar cada actuación, Dovela asigna a cada una un código único de SERIE y un código SUBSERIE. Esta lista los reúne a todos.',
+                    focus: 'ss', list: [
+                        { subtitle: 'CÓDIGO', text: 'El identificador único de la SERIE o SUBSERIE.' },
+                        { subtitle: 'DESCRIPCIÓN', text: 'La descripción de lo que identifica el código.' },
+
+                    ]
+                },
+                {
+                    title:'TIPOLOGIA DOCUMENTAL',  lefticon: <TagIcon />,
+                    content: 'Para administrar adecuadamente las actuaciones del equipo, Dovela necesita identificar todos los documentos entrantes de cada actuación, lo hace proporcionando a cada documento un código de TIPOLOGÍA, esta es la lista de todos los códigos.',
+                    focus: 't', list: [
+                        { subtitle: 'CÓDIGO', text: 'El identificador único del código de TIPOLOGÍA.' },
+                        { subtitle: 'DESCRIPCIÓN', text: 'El documento a que se refiere el código.' },
+
+                    ]
+                },
+            ],
+        }
+
+    }
 }

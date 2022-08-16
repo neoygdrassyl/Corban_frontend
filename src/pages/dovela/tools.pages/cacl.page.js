@@ -373,46 +373,48 @@ export default function CALCULATOR_DOVELA() {
         return <> <Grid fluid>
             <Row className='text-center fw-b'><h5 className='fw-bold'>{trn.bill_title}</h5></Row>
             <Row justify="center" className='fw-b'>
+                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
+                </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={18} sm={18} md={18} lg={18} xl={18} xxl={18} as={Col}>
                     {trn.bill_table[0]}
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} as={Col}>
                     {trn.bill_table[1]}
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
-                </FlexboxGrid.Item>
+
             </Row>
             <Row justify="center" ><hr className='border' /></Row>
             {bill.map((b, i) => <Row justify="center" className='py-1'>
+                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
+                    <IconButton icon={<MinusIcon />} circle size="xs" color="red" appearance='primary' onClick={() => REMOVE_TO_BILL(i)} />
+                </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={18} sm={18} md={18} lg={18} xl={18} xxl={18} as={Col}>
                     {b.name}
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} as={Col}>
                     {CONVERT_INT_TO_MONEY(b.value)}
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
-                    <IconButton icon={<MinusIcon />} circle size="xs" color="red" appearance='primary' onClick={() => REMOVE_TO_BILL(i)} />
-                </FlexboxGrid.Item>
             </Row>)}
             <Row justify="center" ><hr className='border' /></Row>
             <Row justify="center" className='py-1 fw-b'>
+                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
+                </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={18} sm={18} md={18} lg={18} xl={18} xxl={18} as={Col} className="txt-r">
                     <label >{trn.bill_table[2]}: </label>
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} as={Col}>
                     {CONVERT_INT_TO_MONEY(bill.reduce((total, curr) => Number(total) + Number(curr.value), 0))}
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} as={Col}>
-                </FlexboxGrid.Item>
+
             </Row>
             <Row justify="center" ><hr className='border' /></Row>
             <Row className='txt-r' >
                 <FlexboxGrid.Item xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} as={Col}>
                     <Row className='txt-l p-1' >
-                        <TUTORIAL text={trn.bill_link1} tutorial="csv_e" />
+                        <TUTORIAL text={btn.tut_1} tutorial="csv_e" />
                     </Row>
                     <Row className='txt-l p-1' >
-                        <TUTORIAL text={trn.bill_link2} tutorial="csv_lo"/>
+                        <TUTORIAL text={btn.tut_2} tutorial="csv_lo" />
                     </Row>
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} as={Col}>
