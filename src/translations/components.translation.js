@@ -215,6 +215,8 @@ export let translations = {
             template_body: "The parser could not build the template properly, check your template model model for more information.",
             no_templates_title: 'NO TEMPLATES FOUND',
             no_templates_body: "No templates found for this query, check your templates for more information.",
+            no_config_title: 'NO PROPER CONFIGURATION',
+            no_config_body: "The configuration for the variables of the team are not properly set. ",
         },
         es: {
             more_info: 'MAS INFORMAIÓN',
@@ -232,6 +234,8 @@ export let translations = {
             template_body: "El sistema no fue capas de compilar la plantilla, revise el modelo de plantilla para mas información.",
             no_templates_title: 'NO SE ENCONTRARON PLANTILLAS',
             no_templates_body: "Ninguna plantilla fue encontrada para esta solicitud, revise sus plantillas para mas informacion.",
+            no_config_title: 'CONFIGURACIÓN DE VARIABLES NO VÁLIDAS',
+            no_config_body: "La confguración de las variables de etorno no estan debidamente declaradas.",
         }
 
     },
@@ -470,6 +474,22 @@ export let translations = {
             csv_e_link: 'https://support.microsoft.com/es-es/office/importar-o-exportar-archivos-de-texto-txt-o-csv-5250ac4c-663c-47ce-937b-339e391393ba#ID0EBBN=Newer_versions',
             csv_e_link_b: 'FPara mayor información puede visitar la',
             csv_e_link_l: 'documentacion oficial de Microsot Office.',
+        }
+    },
+    dataListAPI:{
+        en:{
+            loading: 'Loading',
+            found: 'Found',
+            entry: 'entries',
+            label: 'TYPE IN THE SEARCH BAR TO FIND DATA AUTOMATICALLY',
+            error: 'Error while loading'
+        },
+        es:{
+            loading: 'Cargando',
+            found: 'Encontrados',
+            entry: 'elementos',
+            label: 'ESCRIBA EN LA BARRA DE BÚSQUEDA PARA ENCONTRAR DATOS AUTOMÁTICAMENTE',
+            error: 'Error al cargar'
         }
     },
     // ******************** PAGES ************************ // 
@@ -2024,6 +2044,7 @@ export let translations = {
             cert_th: ['ID', 'TYPE', 'DATE', 'RELATED ID'],
             tit_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'LEGAL REP.', 'RELATED IDS'],
             prof_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'REGISTRATION', 'DOCUMENTS', 'RELATED IDS'],
+            prof_docs: ['ID DOCUMENT', 'REGISTRATION DOCUMENT', 'VALIDITY DOCUMENT', 'CV & CERTIFICATIONS',],
             prev_th: ['ADDRESS', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'STRATA', 'LOCATION', 'RELATED IDS'],
             ss_th: ['CODE', 'DESCRIPTION'],
             t_th: ['CODE', 'DESCRIPTION'],
@@ -2160,6 +2181,7 @@ export let translations = {
             cert_th: ['CONSECUTIVO', 'TIPO', 'FECHA', 'CONSECUTIVO RELACIONADO'],
             tit_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'REPRESENTANTE LEGAL', 'CONSECUTIVOS RELACIONADOS'],
             prof_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'MATRÍCULA', 'DOCUMENTOS', 'CONSECUTIVOS RELACIONADOS'],
+            prof_docs: ['DOCUMENTO LEGAL DE IDENTIFICACIÓN', 'MATRICULAR', 'VIGENCIA', 'HOJA DE VIDA Y CERTIFICACIONES',],
             prev_th: ['ADDRESS', 'MATRÍCULA', 'NÚMERO PREDIAL', 'NUEVO PREDIAL', 'ESTRATO', 'BARRIO', 'CONSECUTIVOS RELACIONADOS'],
             ss_th: ['CÓDIGO', 'DESCRIPCIÓN'],
             t_th: ['CÓDIGO', 'DESCRIPCIÓN'],
@@ -2286,5 +2308,26 @@ export let translations = {
             ],
         }
 
-    }
+    },
+    dcerts: {
+        en:{
+            title: 'DOVELA CERTIFICACIONS',
+            tableHd: 'CERTIFICACTIONS LIST',
+            tableCl: ['ID', 'DESCRIPTION', 'DATE', 'RELATED ID', 'ACTION'],
+            certHd_1: ['NAME', 'DOCUMENT ID', 'REGISTRATION'],
+            certCl_1: ['RELATED ID', 'MODE', 'START DATE', 'END DATE', 'ROLE'],
+            cert_2: ['RELATED ID', 'MODE', 'PROCESS STATE', 'ADDRESS', 'CITY', 'STATE', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'RESPONSABLE', 'DOCUMENT ID', 'ROLE']
+
+        },
+        es:{
+            title: 'CERTIFICACIÓNES DE DOVELA',
+            tableHd: 'LISTADO DE CERTIFICACIONES',
+            tableCl: ['CONSECUTIVO', 'DESCRIPCCIÓN', 'FECHA', 'CONSECUTIVO RELACIONADO', 'ACCIÓN'],
+            certHd_1: ['NOMBRE', 'DOCUMENTO IDENTIFICADOR', 'MATRICULA PROFESIONAL'],
+            certCl_1: ['CONSECUTIVO RELACIONADO', 'MODALIDAD', 'FECHA RADICACIÓN', 'FECHA EXPEDICIÓN', 'EN CALIDAD DE:'],
+            cert_2: ['CONSECUTIVO RELACIONADO', 'MODAIDAD', 'ESTADO', 'DICERCCIÓN', 'CIUDAD', 'DEPARTAMENTO', 'MATRÍCULA', 'PREDIAL', 'NUEVO PREDIAL', 'RESPONSABLE', 'DOCUMENTO IDENTIFICADOR', 'ROL']
+
+        }
+    },
+
 }

@@ -12,6 +12,10 @@ class SERVICE_COMPANY {
     get_dic_tit() { return http.get(`/dict/tit`, header()); }
     get_dic_prof() { return http.get(`/dict/prof`, header()); }
     get_dic_prev() { return http.get(`/dict/prev`, header()); }
+
+    
+    get_logo() { return http.get(`/img/logo`, { ...header(), responseType: 'arraybuffer'}); }
+    get_sign() { return http.get(`/img/sign`, { ...header(), responseType: 'arraybuffer'}); }
 }
 
 export default new SERVICE_COMPANY();

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
 import SERVICE_COMPANY from '../../../services/apis/company.services';
+import SERVICE_FUN from '../../../services/apis/fun.service';
 
 // COMPONENTS
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
@@ -23,12 +24,10 @@ import FUN_SS_CODES from '../../../resources/jsons/funCodes.json'
 import FUN_T_CODES from '../../../resources/jsons/fun6DocsList.json'
 import GRID from '../../../resources/customs/components/grid.component';
 import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
+import VIEWER from '../../../resources/customs/components/viewer.component';
+import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 
 var moment = require('moment');
-
-
-// TODO DOCS VIEWER
-// NO CONFIG ALERT
 
 export default function DICTIONARY() {
     const auth = useContext(AuthContext);
@@ -120,6 +119,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataLic === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[0]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-success" />}
@@ -152,6 +152,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(loadOa === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[1]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-primary" />}
@@ -182,6 +183,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataIn === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <GRID
             title={trn.dicts[2]}
             cellText={'id_public'}
@@ -205,6 +207,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataOut === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <GRID
             title={trn.dicts[3]}
             cellText={'cub'}
@@ -233,6 +236,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataRes === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <GRID
             title={trn.dicts[4]}
             cellText={'id_public'}
@@ -269,6 +273,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataCert === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[5]}
             titleIcon={<DocPassIcon style={{ fontSize: '24px' }} className="text-warning" />}
@@ -277,7 +282,7 @@ export default function DICTIONARY() {
             load={loadCert == 0}
             search={[]}
             headerColor={'lightyellow'}
-            csv 
+            csv
         />
     }
     let COMPONENT_TIT = () => {
@@ -316,6 +321,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataTit === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[6]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-info" />}
@@ -359,16 +365,28 @@ export default function DICTIONARY() {
             {
                 name: trn.prof_th[5],
                 width: '10%',
-                cell: row => row.docs,
+                cell: row => {
+                    if (!row.docs) return ''
+                    let ids = row.docs.split(',');
+                    let intents = ['primary', 'success', 'warning', 'danger'];
+                    let docNames = trn.prof_docs
+                    return <>{ids.map((id, i) => {
+                        if (id > 0) return <VIEWER icon="id-number" api={loadFun6} apiID={id} intent={intents[i]} text={docNames[i]} filename={docNames[i]} />
+                        else return '';
+                    }
+
+                    )}</>
+                },
 
             },
             {
                 name: trn.prof_th[6],
                 selector: row => row.id_related,
-                cell: row =>row.id_related,
+                cell: row => row.id_related,
             },
         ]
 
+        if(dataProf === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[7]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-danger" />}
@@ -406,7 +424,7 @@ export default function DICTIONARY() {
             {
                 name: trn.prev_th[4],
                 width: '10%',
-                selector: row => trn.prev_th[4] +' '+ row.estrato,
+                selector: row => trn.prev_th[4] + ' ' + row.estrato,
                 cell: row => row.estrato,
             },
             {
@@ -421,6 +439,7 @@ export default function DICTIONARY() {
             },
         ]
 
+        if(dataPrev === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
         return <TABLE_COMPONENT
             title={trn.dicts[8]}
             titleIcon={<HomeIcon style={{ fontSize: '24px' }} className="text-paranoia" />}
@@ -491,81 +510,72 @@ export default function DICTIONARY() {
         SERVICE_COMPANY.get_dic_lic()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataLic(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataLic(-1)
+                else  setDataLic(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadLic(1));
     }
     function loadDataOa() {
         SERVICE_COMPANY.get_dic_oa()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataOa(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataOa(-1)
+                else setDataOa(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadOa(1));
     }
     function loadDataIn() {
         SERVICE_COMPANY.get_dic_in()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataIn(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataIn(-1)
+                else setDataIn(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadIn(1));
     }
     function loadDataOut() {
         SERVICE_COMPANY.get_dic_out()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataOut(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataOut(-1)
+                else setDataOut(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadOut(1));
     }
     function loadDataRes() {
         SERVICE_COMPANY.get_dic_res()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataRes(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataRes(-1)
+                else setDataRes(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadRes(1));
     }
     function loadDataCert() {
         SERVICE_COMPANY.get_dic_cert()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataCert(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataCert(-1)
+                else setDataCert(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadCert(1));
     }
     function loadDataTit() {
         SERVICE_COMPANY.get_dic_tit()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataTit(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataTit(-1)
+                else setDataTit(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadTit(1));
     }
     function loadDataProf() {
         SERVICE_COMPANY.get_dic_prof()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataProf(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataProf(-1)
+                else setDataProf(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadProf(1));
     }
     function loadDataPrev() {
         SERVICE_COMPANY.get_dic_prev()
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
-                else {
-                    setDataPrev(response.data)
-                }
+                else if (response.data == 'NO CONFIG') setDataPrev(-1)
+                else setDataPrev(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadPrev(1));
     }
     function coverCodes() {
@@ -589,8 +599,8 @@ export default function DICTIONARY() {
         setDataCodesT(codes_t);
     }
 
-    function loadFun6(id){
-
+    function loadFun6(id) {
+        return SERVICE_FUN.loadFun6(id)
     }
 
     return (

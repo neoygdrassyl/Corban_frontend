@@ -58,15 +58,39 @@ export default function DashboardTeam() {
         else auth.clearConn(() => { });
     }
 
-    // ADMIN : BILLING, DOCUMENTATIO API, TEMPLATES (ARC, RES, TAXES) - MASS UPLOAD
-    // MODULES:  SUBMIT - PUBLISH - FUN RAD - FUN MANAGE - PH -  ARHIVE
-    // MODULES OTHER: NOMENCLATURE - URBAN NORM - PQRS
-    // TOOLS: DICTIONARY - CALC - CERTIFICATIONS 
+    /*
+    // ADMIN : 
+        - BILLING 
+        - DOCUMENTATIO API
+        - TEMPLATES (ARC, RES, TAXES)
+        - MASS UPLOAD
+        - AUTO REVIEW
+    // MODULES:  
+        - SUBMIT 
+        - PUBLISH 
+        - FUN PRE ISSUES
+        - FUN RAD 
+        - FUN MANAGE 
+        - PH 
+        - ARHIVE
+    // MODULES OTHER: 
+        - NOMENCLATURE 
+        - URBAN NORM 
+        - PQRS
+    // TOOLS: 
+        - DICTIONARY -> DONE
+        - CALC  -> DONE
+        - CERTIFICATIONS -> DONE
+        - USER GUIDE
+        - ADMIN GUIDE 
+
     // PUBLIC PAGE:  HOME PAGE - DOVELA PAGE (SPECS, PRICING) - PUBLICATIONS - NEWS
     // USER: CREATE NEW PROJECT - SEE PROJECTS - PAY PROJECT - UPLOAD DOCUMENTOS TO PROJECT - DONWLOAD REPORTS 
     // USER PROFESIONAL: UPDATE PROFESIONAL PROFILE
     // USER CONFIG: 
     // HELP PAGE: 
+
+    */
     const DASHBOARD_INFO = [
         {
             header: trn.modules[0].title,
@@ -97,7 +121,7 @@ export default function DashboardTeam() {
             icon: <BsBookmarkCheck style={{ fontSize: '5em' }} />,
             text: trn.tools[2].desc,
             color: "red",
-            to: "/submit"
+            to: "/dcerts"
         },
     ]
 

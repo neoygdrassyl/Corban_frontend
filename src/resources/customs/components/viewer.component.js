@@ -12,7 +12,7 @@ import { ALERT_WAIT } from '../utils/notifications.vars';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function VIEWER(props) {
-    const { float, filename, path } = props;
+    const { float, filename, path, api, apiID, icon, intent, text } = props;
     const utilities = useContext(UtilContext);
     const auth = useContext(AuthContext);
     const conn = auth.conn ? auth.conn.conn : '';
@@ -31,10 +31,23 @@ export default function VIEWER(props) {
     const [pagesComponent, setPagesC] = useState([]);
 
     useEffect(() => {
-        if (load == 0 && modal) {
+        if (load == 0 && modal && !api) {
             let docExt = getDocExt(filename);
             if (docExt === 'pdf') getPdf();
             if (docExt === 'img') getImage();
+        } else if (load == 0 && modal && api && apiID) {
+            api(apiID)
+                .then(response => {
+                    let data = response.data;
+                    let type = { type: response.headers['content-type'] }
+                    let docType = getDocType(response.headers['content-type']);
+
+                    const blob = new Blob([data], type);
+                    const urlBlob = window.URL.createObjectURL(blob);
+
+                    if (docType == 'pdf') setFile(urlBlob)
+                    if (docType == 'img') setImage(urlBlob)
+                }).catch(e => { console.log(e); setFile(0) }).finally(() => setLoad(1));
         }
     }, [load, modal, scale]);
 
@@ -43,6 +56,11 @@ export default function VIEWER(props) {
         let docExt = _filename.substring(_filename.lastIndexOf('.'), _filename.length);
         if (docExt === '.pdf') return 'pdf'
         if (docExt === '.jpg' || docExt === '.png' || docExt === '.jpeg') return 'img'
+    }
+    function getDocType(_type) {
+        if (!_type) return false;
+        if (_type === 'application/pdf') return 'pdf'
+        if (_type === 'image/png' || _type === 'image/jpg' || _type === 'image/jpeg') return 'img'
     }
 
 
@@ -171,7 +189,7 @@ export default function VIEWER(props) {
 
     return (
         <>
-            <ButtonWhisper whisper={trn.view} icon={getDocExt(filename) === 'pdf' ? "document-open" : getDocExt(filename) === 'img' ? 'media' : 'search-template'} float={float} onClick={() => setModal(!modal)} />
+            <ButtonWhisper intent={intent || 'primary'} whisper={text || trn.view} icon={icon || (getDocExt(filename) === 'pdf' ? "document-open" : getDocExt(filename) === 'img' ? 'media' : 'search-template')} float={float} onClick={() => setModal(!modal)} />
 
             <MODAL
                 open={modal}
