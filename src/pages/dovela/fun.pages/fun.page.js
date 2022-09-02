@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
 import { UtilContext } from '../../../resources/customs/contextProviders/util.provider';
 import FunService from '../../../services/apis/fun.service'
-import { ALERT_NO_PERMIT } from '../../../resources/customs/utils/notifications.vars';
+import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
@@ -14,17 +14,17 @@ import { TiFolderOpen } from 'react-icons/ti'
 import DocPassIcon from '@rsuite/icons/DocPass';
 
 
-import { Nav, Progress, Row, Tag, TagGroup } from 'rsuite';
+import { Nav, Progress, Row, Tag, TagGroup, TagInput } from 'rsuite';
 import { Button, Icon } from '@blueprintjs/core';
 import { formsParser1, regexChecker_isOA, regexChecker_isOA_2, regexChecker_isOA_3, regexChecker_isPh } from '../../../resources/customs/utils/funParser.module';
 import { _GET_CLOCK_STATE } from '../../../resources/customs/utils/fun.loader';
 import { dateParser_finalDate, dateParser_timePassed } from '../../../resources/customs/utils/utilsParse.module';
-import { FIND_PERMIT, GET_FUN_STATE } from '../../../resources/customs/utils/lamdas.functions';
-import PROGRESION_ICONS from './fun.component/progresionIcons.component';
-import { Link } from 'react-router-dom';
-import PROGRESION_BAR from './fun.component/progressionBar.component';
+import { FIND_PERMIT, GET_FUN_STATE, GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../../resources/customs/utils/lamdas.functions';
+import PROGRESION_ICONS from '../../../resources/customs/components/fun.components/progresionIcons.component';
+import PROGRESION_BAR from '../../../resources/customs/components/fun.components/progressionBar.component';
 import MODAL from '../../../resources/customs/components/modal.component';
 import FORM from '../../../resources/customs/components/form.component';
+import FUN_GEN from '../../../resources/customs/components/fun.components/funGen.component';
 
 var moment = require('moment');
 
@@ -50,21 +50,24 @@ export default function FUN() {
     var [data, setData] = useState([]);
     var [active, setActive] = useState('inc');
     var [modal, setModal] = useState(false);
+    var [tags, setTags] = useState([]);
 
     useEffect(() => {
         if (load == 0 || load == 2) loadData();
     }, [load]);
+
     // model, date, type, desc, rules
     let FORM_INPUTS = [
         {
             inputs: [
                 {
-                    label: 'id', placeholder: 'id', leftIcon: 'selection', fname: 'id', min: 3,
+                    label: 'id', placeholder: 'id', leftIcon: 'selection', fname: 'id_public', min: 3,
                     id: 'fun_form_id', req: true, dv: dvSerial,
+                    rightBtn: { icon: 'numerical', intent: 'primary', label: 'gen id', onClick: () => GET_LAST_ID_PUBLIC('fun_form_id', lang), },
                 },
                 {
                     label: 'type', placeholder: 'type', leftIcon: 'saved', fname: 'type',
-                    id: 'fun_form_type', dv: 'iii', type: 'select', req: true,
+                    id: 'fun_form_type', df: 'iii', type: 'select', req: true,
                     selectOptions: [
                         { value: 'i', label: 'type I', },
                         { value: 'ii', label: 'type II', },
@@ -74,15 +77,15 @@ export default function FUN() {
                     ]
                 },
                 {
-                    label: 'model', placeholder: 'model', leftIcon: 'calendar', fname: 'type',
-                    id: 'fun_form_model', dv: moment().format('YYYY'), type: 'select', req: true,
+                    label: 'model', placeholder: 'model', leftIcon: 'calendar', fname: 'model',
+                    id: 'fun_form_model', df: moment().format('YYYY'), type: 'select', req: true,
                     selectOptions: [
                         { value: '2021', label: '2021', },
                         { value: '2022', label: '2022', },
                     ]
                 },
                 {
-                    label: 'date', placeholder: 'date', type: 'date', req: true,  id: 'fun_form_date',  fname: 'date',
+                    label: 'date', placeholder: 'date', type: 'date', req: true, id: 'fun_form_date', fname: 'date',
                     dv: moment().format('YYYY-MM-DD'), useTime: false, leftIcon: 'calendar',
                 },
 
@@ -91,10 +94,10 @@ export default function FUN() {
         {
             inputs: [
                 {
-                    label: 'desc', placeholder: 'desc', leftIcon: 'selection', fname: 'desc', min: 3,
+                    label: 'description', placeholder: 'description', leftIcon: 'selection', fname: 'description', min: 3,
                     id: 'fun_form_desc', req: true, type: 'textarea'
                 },
-               
+
             ],
         },
     ]
@@ -281,7 +284,9 @@ export default function FUN() {
         },
         {
             name: trn.th[4],
-            cell: row => '',
+            cell: row => <>
+                <FUN_GEN type="btn" id_public={row.id_public} />
+            </>,
         },
     ];
 
@@ -305,7 +310,24 @@ export default function FUN() {
     }
 
     function newFun(data) {
+        let formData = data.formData;
 
+        formData.append('tags', tags.join(','));
+        ALERT_WAIT(lang);
+
+        FunService.create(formData)
+            .then(response => {
+                if (response.data === 'OK') {
+                    ALERT_SUCCESS(lang);
+                    setLoad(0);
+                    setModal(false);
+                } else if (response.data === 'ERROR_DUPLICATE') ALERT_ERROR_DUPLICATE(lang);
+                else ALERT_ERROR(lang);
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang);
+            });
     }
 
     return (
@@ -329,7 +351,11 @@ export default function FUN() {
                     >
                         <FORM form={FORM_INPUTS} id="fun_form" onSubmit={(e) => newFun(e)}
                             btnAlignment="txt-l" submitBtn={<Button icon="add" intent="success" type="submit" text={btn.add} />}
-                        />
+                        >
+                            <div className='p-1'><label><Icon icon={'tag'} /> Tags</label></div>
+                            <TagInput block trigger={['Enter', 'Space', 'Comma']} placeholder="Tags..." className='border'
+                                onChange={setTags} />
+                        </FORM>
                     </MODAL>
 
                 </> : ''}

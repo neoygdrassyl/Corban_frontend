@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { parserReport, _GET_CLOCK_STATE } from '../../../../resources/customs/utils/fun.loader';
-import { regexChecker_isOA, regexChecker_isPh } from '../../../../resources/customs/utils/funParser.module';
-import { UtilContext } from '../../../../resources/customs/contextProviders/util.provider';
+import { parserReport, _GET_CLOCK_STATE } from '../../utils/fun.loader';
+import { regexChecker_isOA, regexChecker_isPh } from '../../utils/funParser.module';
+import { UtilContext } from '../../contextProviders/util.provider';
 import { useContext } from 'react';
 
 import { DocPass } from '@rsuite/icons/';
@@ -37,6 +37,7 @@ function PROGRESION_ICONS(row, show) {
     const payStatus = _GET_CLOCK_STATE(row, 3).date_start ? 'success' : 'start';
     const checkStatus = _GET_CLOCK_STATE(row, 5).date_start ? 'success' : 'start';
     const neightStatus = () => {
+        if(f3.length == 0) return 'start';
         let state = f3.every(n => n.status == 1);
         if (state) return 'success';
         state = f3.every(n => n.status == 1 || n.status == 2);
@@ -69,8 +70,6 @@ function PROGRESION_ICONS(row, show) {
     let reportArc = () => parserReport(row, 13)
     let reportEng = () => parserReport(row, 12)
     let reportPh = () => parserReport(row, 14)
-
-
 
     const lawStatus = () => {
         let lastRew = 0;

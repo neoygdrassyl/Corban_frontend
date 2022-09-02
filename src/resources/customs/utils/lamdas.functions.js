@@ -30,9 +30,9 @@ export function GET_LAST_VR(_htmlId, _lang) {
 
 export function GET_LAST_ID_PUBLIC(_htmlId, _lang) {
     let new_id = "";
-    let _user = GET_JSON_FULL(localStorage.getItem('corban_user'));
-    let _conn = GET_JSON_FULL(localStorage.getItem('corban_conn')).conn;
-    let nomens = _user.companies[_conn].technicalInfo.serials.process
+    let _conn = GET_JSON_FULL(localStorage.getItem('corban_conn'));
+   
+    let nomens = _conn ? _conn.technicalInfo.serials.process : false;
 
     SERVICE_FUN.getLastIdPublic()
         .then(response => {

@@ -6,6 +6,8 @@ class FunService {
 
   // GET
   getAll() { return http.get(`/${route}/`, header()); }
+  create(data) { return http.post(`/${route}/`, data, header()); }
+
   getAllInTime(dataStart, dateEnd) { return http.get(`/${route}/${dataStart}&${dateEnd}`, header()); }
   getGeneral(id) { return http.get(`/${route}/${id}`, header()); }
   get_fun_IdPublic(id_public) { return http.get(`/${route}/get/idpublic/${id_public}`, header()); }
