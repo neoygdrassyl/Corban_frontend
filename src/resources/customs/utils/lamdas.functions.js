@@ -108,18 +108,18 @@ export function GET_FUN_STATE(state, _lang, inString) {
     let lang = _lang || 'en';
     let trn = {
         en: {
-            desj: 'WITHDRAWAL (Execution)',
+            desj: 'DESISTED (Execution)',
             inc: 'INCOPLETE',
             ldf: 'LEGALLY SUBMITTED',
             exp: 'ISSUING',
             close: 'CLOSED',
             arch: 'ARCHIVED',
             close0: 'CLOSED (Withdrawal)',
-            close1: 'WITHDRAWAL (Incomplete)',
-            close2: 'WITHDRAWAL (Not present sign)',
-            close3: 'WITHDRAWAL (Not corrected act)',
-            close4: 'WITHDRAWAL (Not payed)',
-            close5: 'WITHDRAWAL (Voluntary)',
+            close1: 'DESISTED (Incomplete)',
+            close2: 'DESISTED (Not present sign)',
+            close3: 'DESISTED (Not corrected act)',
+            close4: 'DESISTED (Not payed)',
+            close5: 'DESISTED (Voluntary)',
         },
         es: {
             desj: 'DESISTIDO (Ejecución)',
@@ -151,4 +151,11 @@ export function GET_FUN_STATE(state, _lang, inString) {
     if (state == '204') return inString ? trn[lang].close4 : <label className='text-danger text-center'>{trn[lang].close4}</label>
     if (state == '205') return inString ? trn[lang].close5 : <label className='text-danger text-center'>{trn[lang].close5}</label>
     return ''
+}
+
+export function OPEN_FILE(name, response, alert) {
+    if (response.data.length == 0) return alert;
+    const file = new File([response.data], name, { type: response.headers['content-type'] });
+    const urlFile = window.URL.createObjectURL(file);
+    window.open(urlFile, '_blank');
 }

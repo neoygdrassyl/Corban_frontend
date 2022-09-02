@@ -11,7 +11,7 @@ import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.comp
 import FORM from '../../../resources/customs/components/form.component';
 import moment from 'moment';
 import { AuthContext } from '../../../resources/customs/contextProviders/auth.provider';
-import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
+import { FIND_PERMIT, OPEN_FILE } from '../../../resources/customs/utils/lamdas.functions';
 
 
 export default function SUBMIT_PDF(props) {
@@ -60,7 +60,7 @@ export default function SUBMIT_PDF(props) {
             },
         ]
 
-        return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => { e.preventDefault(); addDocument() }} upload
+        return <FORM form={FORM_INPUTS} id="submit_form_anex" onSubmit={(e) => {addDocument(e) }} upload
             submitBtn={<ButtonBP type="submit" className='mx-1' icon="floppy-disk" intent="success" text={btrn.save} />} btnAlignment='txt-r'
         />
     }
@@ -77,15 +77,11 @@ export default function SUBMIT_PDF(props) {
         var formData = new FormData();
 
         formData.set('id', currentItem.id);
+        formData.append('lang', lang)
 
         ALERT_WAIT(lang)
         SERVICE_SUBMIT.gen_doc_submit(formData)
-            .then(response => {
-                if (response.data === 'OK') {
-                    toaster.remove()
-                    window.open(process.env.REACT_APP_API_URL + "/pdf/submit/" + "Control Ingreso Documentos " + currentItem.id_public + ".pdf");
-                } else ALERT_ERROR(lang)
-            })
+            .then(response => OPEN_FILE('document.pdf', response, ALERT_ERROR(lang)))
             .catch(e => {
                 console.log(e);
                 ALERT_ERROR(lang)
@@ -95,7 +91,6 @@ export default function SUBMIT_PDF(props) {
 
     let addDocument = () => {
         var formData = new FormData();
-
         if (files.length) {
             let _homepath = 'submit'
             let _creationYear = moment(currentItem.createdAt).format('YY');
@@ -103,8 +98,6 @@ export default function SUBMIT_PDF(props) {
             let _name = files[0].name.replace(/\_/g, "");
             formData.append('file', files[0].blobFile, `${_homepath}_${_creationYear}_${_folder}_${_name}`)
         }
-
-
         let id_public = document.getElementById("submit_pdf_anex_1").value;
         formData.set('id_public', id_public);
         let pages = document.getElementById("submit_pdf_anex_2").value;

@@ -27,9 +27,7 @@ import SUBMIT from "./pages/dovela/submit.pages/submit.page";
 import ROLES from "./pages/dovela/roles.pages/roles.page";
 import WORKERS from "./pages/dovela/workers.pages/workers.page";
 
-import Fun from './pages/fun.pages/fun.page' // TODO MOVE
-import FUN_GEN_VIEW from './pages/fun.pages/lists.pages/funGen.view'; // TODO MOVE
-import FUN_MACRO_VIEW from './pages/fun.pages/lists.pages/funMacro.view'; // TODO MOVE
+import Fun from './pages/dovela/fun.pages/fun.page' // TODO MOVE
 // -------- PUBLIC 
 import Home from './pages/public/home.page/home.page'
 import BEDROCK from "./pages/public/bedrock.page/bedrcok.page";
@@ -76,11 +74,8 @@ function App() {
                   <Route exact path="/dashboard" element={<Dashboard />} />
                   
                   <Route exact path="/dashteam/:team" element={<DashboardTeam />} />
-                  <Route exact path="/fun" element={<Fun />} />
-                  <Route exact path="/fun/macro" element={<FUN_MACRO_VIEW />} />
-                  <Route exact path="/fun/macro/:date_start&:date_end" element={<FUN_MACRO_VIEW />} />
-                  <Route exact path="/fun/gen/:id" element={<FUN_GEN_VIEW />} />
 
+                  <Route exact path="/fun" element={<Fun />} />
                   <Route exact path="/submit" element={<SUBMIT />} />
 
                   <Route exact path="/roles" element={<ROLES />} />

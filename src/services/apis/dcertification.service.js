@@ -11,7 +11,10 @@ class SERVICE_DCERTIFICATIONS {
     findOne(id) { return http.get(`/${route}/id/${id}`, header()); }
     findOneOc(oc) { return http.get(`/${route}/oc/${oc}`, header()); }
     findAllRelated(idr) { return http.get(`/${route}/idr/${idr}`, header()); }
-    findProfS(search) { return http.get(`/${route}/profs/${search}`, header()); }
+
+    findProfS(search) { return http.get(`/${route}/data/profs/${search}`, header()); }
+    findProf(search) { return http.get(`/${route}/data/prof/${search}`, header()); }
+    findFun(search) { return http.get(`/${route}/data/fun/${search}`, header()); }
 
     genPDF(data) { return http.post(`/${route}/pdf`, data, {...header(), responseType: 'arraybuffer'}); }
 

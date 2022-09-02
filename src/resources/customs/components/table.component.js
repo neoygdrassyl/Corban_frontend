@@ -24,15 +24,16 @@ export default function TABLE_COMPONENT(props) {
         },
         headCells: {
             style: {
-                backgroundColor: props.headerColor || 'gainsboro',
+                backgroundColor: props.headerColor || (theme == 'dark' ? 'Gray' : 'Gainsboro'),
+                color: theme == 'dark' ? 'MintCream' : 'black',
                 border: '0.2px solid',
-                borderColor: 'gainsboro',
+                borderColor: theme == 'dark' ? 'DimGrey' : 'lightgrey',
             },
         },
         cells: {
             style: {
                 border: '0.2px solid',
-                borderColor: 'gainsboro',
+                borderColor: theme == 'dark' ? 'DimGrey' : 'lightgrey',
             },
         },
     };
@@ -122,7 +123,7 @@ export default function TABLE_COMPONENT(props) {
             columns={columns.map(column => {
                 return {
                     ...column,
-                    name: <label className="text-center fw-bold text-dark">{column.name}</label>,
+                    name: <label className="text-center fw-bold">{column.name}</label>,
                     sortable: column.selector ? true : false,
                     filterable: column.selector ? true : false,
                     center: column.center ?? true,

@@ -32,7 +32,7 @@ class SERVICE_SUBMIT {
         return http.post(`/${route}/create_list`, data, header());
     }
     create_anex(data) {
-        return http.post(`/${route}/anex/`, data, header());
+        return http.post(`/${route}/anex/`, data, header({app: 'dovela'}));
     }
 
 
@@ -43,7 +43,7 @@ class SERVICE_SUBMIT {
         return http.put(`/${route}/update_list/${id}`, data, header());
     }
     update_anex(id, data) {
-        return http.put(`/${route}/anex/${id}`, data, header());
+        return http.put(`/${route}/anex/${id}`, data, header({app: 'dovela'}));
     }
 
 
@@ -62,7 +62,7 @@ class SERVICE_SUBMIT {
     }
 
     gen_doc_submit(data) {
-        return http.post(`/${route}/gendoc/submit`, data, header());
+        return http.post(`/${route}/gendoc/submit`, data, {...header(), responseType: 'arraybuffer'});
     }
 
 }

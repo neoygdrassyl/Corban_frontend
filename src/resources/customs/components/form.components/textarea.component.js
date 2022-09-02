@@ -5,7 +5,7 @@ export default function TEXTAREA(props) {
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('textareaComponent');
 
-    var [strLength, setLength] = useState(props.length)
+    var [strLength, setLength] = useState(props.length || 2000)
     var [strUsed, setUsed] = useState(props.dv ? props.dv.length : 0)
 
     return (

@@ -5,7 +5,8 @@ const route = "fun"
 class FunService {
 
   // GET
-  getAll(dataStart, dateEnd) { return http.get(`/${route}/${dataStart}&${dateEnd}`, header()); }
+  getAll() { return http.get(`/${route}/`, header()); }
+  getAllInTime(dataStart, dateEnd) { return http.get(`/${route}/${dataStart}&${dateEnd}`, header()); }
   getGeneral(id) { return http.get(`/${route}/${id}`, header()); }
   get_fun_IdPublic(id_public) { return http.get(`/${route}/get/idpublic/${id_public}`, header()); }
   getLastIdPublic() {return http.get(`/${route}/getlast/id`, header());}

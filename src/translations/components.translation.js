@@ -15,7 +15,43 @@ import TagIcon from '@rsuite/icons/Tag';
 import HomeIcon from '@rsuite/icons/legacy/Home';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { IoIosSwitch } from 'react-icons/io';
+import MemberIcon from '@rsuite/icons/Member';
 
+let _searchBar = (lang, title, items) => {
+    let obj = {
+        en: {
+            title: 'SEARCH BAR',
+            content: <>This button allows filtering the <strong>{title}</strong> in order to find one specific entry. To use the search bar, input into the text bar next to the button the value to look for and press the button or press the key Enter.<br />The search patterns can be <strong>{items.join(', ')}</strong>.</>,
+            component: <div class="bp4-input-group .modifier">
+                <span class="bp4-icon bp4-icon-search"></span>
+                <input type="text" class="bp4-input" placeholder={'Search...'} />
+                <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+            </div>,
+            focus: 'search',
+        },
+        es: {
+            title: 'BARRA DE BUSQUEDA',
+            content: <>Este botón permite filtrar las <strong>{title}</strong> para encontrar una entrada específica. Para usar la barra de búsqueda, ingrese en la barra de busqueda el texto a buscar y presione el botón de buscar o presione la tecla Enter.<br />Los patrones de búsqueda pueden ser <strong>{items.join(', ')}</strong>.</>,
+            component: <div class="bp4-input-group .modifier">
+                <span class="bp4-icon bp4-icon-search"></span>
+                <input type="text" class="bp4-input" placeholder={'Buscar...'} />
+                <button class="bp4-button bp4-minimal bp4-intent-primary bp4-icon-arrow-right"></button>
+            </div>,
+            focus: 'search',
+        }
+    }
+    return obj[lang]
+}
+
+let _new = (lang, text) => {
+    let newText = { en: 'NEW', es: 'NUEVO' }
+    return {
+        title: newText[lang],
+        content: text,
+        btn: newText[lang], btnColor: 'success', btnIcon: 'add',
+        focus: 'new',
+    }
+}
 
 export let translations = {
     // ******************** LAYOUT ************************ // 
@@ -151,6 +187,8 @@ export let translations = {
             download: 'DOWLOAD',
             tut_1: 'How to open a CSV file in Excel',
             tut_2: 'How to open a CSV file in LibreOffice',
+            load: 'LOADING...',
+            realod: 'RELOAD',
         },
         es: {
             save: 'GUARDAR',
@@ -172,6 +210,8 @@ export let translations = {
             download: 'DESCARGAR',
             tut_1: 'Como abrir un archivo CSV en Excel',
             tut_2: 'Como abrir un archivo CSV en LibreOffice',
+            load: 'CARGANDO...',
+            realod: 'RECARGAR',
         }
 
     },
@@ -217,6 +257,8 @@ export let translations = {
             no_templates_body: "No templates found for this query, check your templates for more information.",
             no_config_title: 'NO PROPER CONFIGURATION',
             no_config_body: "The configuration for the variables of the team are not properly set. ",
+            find_title: 'NO ITEM SELECTED',
+            find_body: "Search the item to display information about it.",
         },
         es: {
             more_info: 'MAS INFORMAIÓN',
@@ -236,6 +278,8 @@ export let translations = {
             no_templates_body: "Ninguna plantilla fue encontrada para esta solicitud, revise sus plantillas para mas informacion.",
             no_config_title: 'CONFIGURACIÓN DE VARIABLES NO VÁLIDAS',
             no_config_body: "La confguración de las variables de etorno no estan debidamente declaradas.",
+            find_title: 'NO HAY ITEM SELECCIONADO',
+            find_body: "Busque informacion acerca del item para mostrar información de este.",
         }
 
     },
@@ -266,6 +310,168 @@ export let translations = {
                 res: 'Citacion Notificación Resolución'
             },
         }
+    },
+    progress_icons: {
+        en: {
+            pay: {
+                start: 'Fixed expenses not filled',
+                warning: 'Missing data for fixed expenses',
+                success: 'Fixed expenses filled',
+                fail: 'Fixed expenses not filled',
+            },
+            check: {
+                start: 'Incomplete',
+                warning: 'Incomplete',
+                success: 'Legally submitted',
+                fail: 'Incomplete',
+            },
+            neigh: {
+                start: 'No neighbor informed',
+                warning: 'Missing neighbors for informing',
+                success: 'All neighbors informed',
+                fail: 'No neighbor informed',
+            },
+            sign: {
+                start: 'Sign not filled',
+                warning: 'Sign not filled',
+                success: 'Sign filled',
+                fail: 'Sign not filled',
+            },
+            report: {
+                start: 'Report not sent',
+                warning: 'Report sent but no response',
+                success: 'Report sent and answered',
+                fail: 'Report not sent',
+            },
+            law: {
+                start: 'Not assigned and not reviewed',
+                warning: 'Assigned and not reviewed',
+                success: 'Assigned and reviewed',
+                fail: 'Reviewed as not viable',
+            },
+            arc: {
+                start: 'Not assigned and not reviewed',
+                warning: 'Assigned and not reviewed',
+                success: 'Assigned and reviewed',
+                fail: 'Reviewed as not viable',
+            },
+            eng: {
+                start: 'Not assigned and not reviewed',
+                warning: 'Assigned and not reviewed',
+                success: 'Assigned and reviewed',
+                fail: 'Reviewed as not viable',
+            },
+            ph: {
+                start: 'Not assigned and not reviewed',
+                warning: 'Assigned and not reviewed',
+                success: 'Assigned and reviewed',
+                fail: 'Reviewed as not viable',
+            },
+            acta: {
+                start: 'Not reviewed',
+                warning: 'First review not viable, waiting for second review',
+                success: 'Reviewed as viable',
+                fail: 'Both reviews not viable',
+            },
+            via: {
+                start: 'Not declared as viable',
+                warning: 'Not declared as viable',
+                success: 'Declared as viable',
+                fail: 'Not declared as viable',
+            },
+            pay2: {
+                start: 'Variable expenses not filled',
+                warning: 'Missing data for fixed expenses',
+                success: 'Variable expenses filled',
+                fail: 'Variable expenses not filled',
+            },
+            lic: {
+                start: 'License not issued',
+                warning: 'License not issued',
+                success: 'License issued',
+                fail: 'License not issued',
+            },
+        },
+        es: {
+            pay: {
+                start: 'Pago fijo no radicado',
+                warning: 'Falta información sobre el pago fijo',
+                success: 'Pago fijo radicado',
+                fail: 'Pago fijo no radicado',
+            },
+            check: {
+                start: 'Incompleto',
+                warning: 'Incompleto',
+                success: 'Legal y debida forma',
+                fail: 'Incompleto',
+            },
+            neigh: {
+                start: 'Sin notificar vecinos',
+                warning: 'Faltan vecinos por notificar',
+                success: 'Todos los vecinos notificados',
+                fail: 'Sin notificar vecinos',
+            },
+            sign: {
+                start: 'Valla sin radicar',
+                warning: 'Valla sin radicar',
+                success: 'Valla radicada',
+                fail: 'Valla sin radicar',
+            },
+            report: {
+                start: 'Reporte sin enviar',
+                warning: 'Reporte enviado y sin respuesta de la entidad',
+                success: 'Reporte enviado y con respuesta de la entidad',
+                fail: 'Reporte sin enviar',
+            },
+            law: {
+                start: 'Sin asignar y sin revisar',
+                warning: 'Asignado y sin revisar',
+                success: 'Asignado y revisado viable',
+                fail: 'Revisado como no viable',
+            },
+            arc: {
+                start: 'Sin asignar y sin revisar',
+                warning: 'Asignado y sin revisar',
+                success: 'Asignado y revisado viable',
+                fail: 'Revisado como no viable',
+            },
+            eng: {
+                start: 'Sin asignar y sin revisar',
+                warning: 'Asignado y sin revisar',
+                success: 'Asignado y revisado viable',
+                fail: 'Revisado como no viable',
+            },
+            ph: {
+                start: 'Sin asignar y sin revisar',
+                warning: 'Asignado y sin revisar',
+                success: 'Asignado y revisado viable',
+                fail: 'Revisado como no viable',
+            },
+            acta: {
+                start: 'Sin revisar',
+                warning: 'Primera revision como no viable, esperando segunda revision',
+                success: 'Revisado como viable',
+                fail: 'Las dos revisiones no son viables',
+            },
+            via: {
+                start: 'Declarado como no viable',
+                warning: 'Declarado como no viable',
+                success: 'Declarado como viable',
+                fail: 'Declarado como no viable',
+            },
+            pay2: {
+                start: 'Pago variable no radicado',
+                warning: 'Falta información sobre el pago variable',
+                success: 'Pago variable radicado',
+                fail: 'Pago variable no radicado',
+            },
+            lic: {
+                start: 'Licencia sin expedir',
+                warning: 'Licencia sin expedir',
+                success: 'Licencia expedida',
+                fail: 'Licencia sin expedir',
+            },
+        },
     },
     // ******************** COMPONENTS ************************ // 
     tableComponent: {
@@ -476,20 +682,24 @@ export let translations = {
             csv_e_link_l: 'documentacion oficial de Microsot Office.',
         }
     },
-    dataListAPI:{
-        en:{
+    dataListAPI: {
+        en: {
             loading: 'Loading',
             found: 'Found',
             entry: 'entries',
             label: 'TYPE IN THE SEARCH BAR TO FIND DATA AUTOMATICALLY',
-            error: 'Error while loading'
+            error: 'Error while loading',
+            nodata: 'No data found',
+            search: 'Search',
         },
-        es:{
+        es: {
             loading: 'Cargando',
             found: 'Encontrados',
             entry: 'elementos',
             label: 'ESCRIBA EN LA BARRA DE BÚSQUEDA PARA ENCONTRAR DATOS AUTOMÁTICAMENTE',
-            error: 'Error al cargar'
+            error: 'Error al cargar',
+            nodata: 'No se econtraron datos',
+            search: 'Buscar',
         }
     },
     // ******************** PAGES ************************ // 
@@ -2054,10 +2264,10 @@ export let translations = {
                 {
                     title: 'DOVELA DICTIONARY',
                     content: 'Dovela dictionary is a tool that gathers all relevant information about all the processes created in the database and organized them in tables separately for an easy way to consult them. Additionally, some tables can generate CSV files for each one',
-                    focus: 'title', 
+                    focus: 'title',
                 },
                 {
-                    title: 'LICENSES',  lefticon: <PageIcon />,
+                    title: 'LICENSES', lefticon: <PageIcon />,
                     content: 'A lists of all the main processes of the team.',
                     focus: 'lic', list: [
                         { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
@@ -2066,7 +2276,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title: 'OTHER PROCESSES',  lefticon: <PageIcon />,
+                    title: 'OTHER PROCESSES', lefticon: <PageIcon />,
                     content: 'A lists of all other processes of the team.',
                     focus: 'oa', list: [
                         { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
@@ -2075,7 +2285,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'IN IDS', lefticon: <TableIcon />,
+                    title: 'IN IDS', lefticon: <TableIcon />,
                     content: 'All entries generated in the Filling both are marked with an unique ID this list gathers all those entries.',
                     focus: 'in', list: [
                         { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
@@ -2085,7 +2295,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'OUT IDS', lefticon: <TableIcon />,
+                    title: 'OUT IDS', lefticon: <TableIcon />,
                     content: 'In the course of any process, the action of such result in the creation of exit documents that have to be saved and controlled, with the use of an exit ID that allows the identification of each document separately',
                     focus: 'out', list: [
                         { subtitle: 'ID', text: 'The number that identifies the process, this is unique for each one.' },
@@ -2094,7 +2304,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'RESOLUTION IDS', lefticon: <TableIcon />,
+                    title: 'RESOLUTION IDS', lefticon: <TableIcon />,
                     content: 'The final product of any process is a resolution, each one needs to have an unique ID that identifies each one.',
                     focus: 'res', list: [
                         { subtitle: 'ID', text: 'The number that identifies the resolution, this is unique for each one.' },
@@ -2103,7 +2313,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'CERTIFICATIONS', lefticon: <DocPassIcon />,
+                    title: 'CERTIFICATIONS', lefticon: <DocPassIcon />,
                     content: 'Dovela can generate special documents that certify the actions of certain individuals or the validity of the information of certain processes, each one of this can be issued freely at any moment and are identified by a unique ID.',
                     focus: 'res', list: [
                         { subtitle: 'ID', text: 'The number that identifies the resolution, this is unique for each one.' },
@@ -2113,7 +2323,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'TITULARS',  lefticon: <PeoplesIcon />,
+                    title: 'TITULARS', lefticon: <PeoplesIcon />,
                     content: 'Each process is done by titulars, this lists gathers them all in an individual list',
                     focus: 'tit', list: [
                         { subtitle: 'NAME', text: 'The name of the titular.' },
@@ -2125,7 +2335,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'PROFESSIONALS', lefticon: <PeoplesIcon />,
+                    title: 'PROFESSIONALS', lefticon: <PeoplesIcon />,
                     content: 'On each process there are professionals involve, this lists gathers them all in an individual list',
                     focus: 'prof', list: [
                         { subtitle: 'NAME', text: 'The name of the professional.' },
@@ -2138,7 +2348,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'BUILDINGS', lefticon: <HomeIcon />,
+                    title: 'BUILDINGS', lefticon: <HomeIcon />,
                     content: 'On each process there is a building intervened, this lists gathers them all in an individual list',
                     focus: 'prev', list: [
                         { subtitle: 'ADDRESS', text: 'The local address of the building.' },
@@ -2151,7 +2361,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'SERIES & SUBSERIES', lefticon: <TagIcon />,
+                    title: 'SERIES & SUBSERIES', lefticon: <TagIcon />,
                     content: 'In order to identified each process, Dovela assigns each one an unique SERIE code and SUBSERIE code. This list gathers them all.',
                     focus: 'ss', list: [
                         { subtitle: 'CODE', text: 'The unique identifier of the SERIES or SUBSERIE.' },
@@ -2160,7 +2370,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'TYPOLOGIES', lefticon: <TagIcon />,
+                    title: 'TYPOLOGIES', lefticon: <TagIcon />,
                     content: 'In order to properly manage the processes of the team, Dovela needs to identify all incoming documents of each process, it does this by providing each document a TYPOLOGY code, this is the list of all codes.',
                     focus: 't', list: [
                         { subtitle: 'CODE', text: 'The unique identifier of the TYPOLOGY ciode.' },
@@ -2212,7 +2422,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'CONSECUTIVOS DE ENTRADA',  lefticon: <TableIcon />,
+                    title: 'CONSECUTIVOS DE ENTRADA', lefticon: <TableIcon />,
                     content: 'Todas las entradas generadas en la ventanilla única de radicación están marcadas con una identificación única, esta lista reúne todas esas entradas.',
                     focus: 'in', list: [
                         { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
@@ -2222,7 +2432,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'CONSECUTIVOS DE SALIDA', lefticon: <TableIcon />,
+                    title: 'CONSECUTIVOS DE SALIDA', lefticon: <TableIcon />,
                     content: 'En el curso de cualquier actuación, la acción de tal resulta en la creación de documentos de salida que deben ser guardados y controlados, con el uso de un consecutivo de salida que permite la identificación de cada documento por separado.',
                     focus: 'out', list: [
                         { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
@@ -2231,7 +2441,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'CONSECUTIVOS DE RESOLUCIONES', lefticon: <TableIcon />,
+                    title: 'CONSECUTIVOS DE RESOLUCIONES', lefticon: <TableIcon />,
                     content: 'El producto final de cualquier actuación es una resolución, cada una necesita tener una identificación única que identifique a cada uno.',
                     focus: 'res', list: [
                         { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
@@ -2240,7 +2450,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'CERTIFICACIONES', lefticon: <DocPassIcon />,
+                    title: 'CERTIFICACIONES', lefticon: <DocPassIcon />,
                     content: 'Dovela puede generar documentos especiales que certifican las actuaciones de determinadas personas o la vigencia de la información de determinadas actuaciones, cada uno de estos puede emitirse libremente en cualquier momento y se identifican mediante una identificación única.',
                     focus: 'res', list: [
                         { subtitle: 'Nr. RADICADO', text: 'El número que identifica el proceso, este es único para cada uno.' },
@@ -2250,7 +2460,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'TITULARES', lefticon: <PeoplesIcon />,
+                    title: 'TITULARES', lefticon: <PeoplesIcon />,
                     content: 'Cada actuación lo hacen los titulares, esta lista los reúne a todos en una lista individual.',
                     focus: 'tit', list: [
                         { subtitle: 'NOMBRE', text: 'El nombre del titular.' },
@@ -2262,7 +2472,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'PROFESIONALES', lefticon: <PeoplesIcon />,
+                    title: 'PROFESIONALES', lefticon: <PeoplesIcon />,
                     content: 'En cada actuación intervienen profesionales, esta lista los reúne a todos en una lista individual.',
                     focus: 'prof', list: [
                         { subtitle: 'NOMBRE', text: 'El nombre del profesional.' },
@@ -2275,7 +2485,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'PREVIOS', lefticon: <HomeIcon />,
+                    title: 'PREVIOS', lefticon: <HomeIcon />,
                     content: 'En cada actuación hay un inmueble intervenido, esta lista los reúne a todos en una lista individual.',
                     focus: 'prev', list: [
                         { subtitle: 'DIRECCIÓN', text: 'La dirección local del inmueble.' },
@@ -2288,7 +2498,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'SERIES & SUBSERIES', lefticon: <TagIcon />,
+                    title: 'SERIES & SUBSERIES', lefticon: <TagIcon />,
                     content: 'Para identificar cada actuación, Dovela asigna a cada una un código único de SERIE y un código SUBSERIE. Esta lista los reúne a todos.',
                     focus: 'ss', list: [
                         { subtitle: 'CÓDIGO', text: 'El identificador único de la SERIE o SUBSERIE.' },
@@ -2297,7 +2507,7 @@ export let translations = {
                     ]
                 },
                 {
-                    title:'TIPOLOGIA DOCUMENTAL',  lefticon: <TagIcon />,
+                    title: 'TIPOLOGIA DOCUMENTAL', lefticon: <TagIcon />,
                     content: 'Para administrar adecuadamente las actuaciones del equipo, Dovela necesita identificar todos los documentos entrantes de cada actuación, lo hace proporcionando a cada documento un código de TIPOLOGÍA, esta es la lista de todos los códigos.',
                     focus: 't', list: [
                         { subtitle: 'CÓDIGO', text: 'El identificador único del código de TIPOLOGÍA.' },
@@ -2310,24 +2520,152 @@ export let translations = {
 
     },
     dcerts: {
-        en:{
+        en: {
             title: 'DOVELA CERTIFICACIONS',
             tableHd: 'CERTIFICACTIONS LIST',
             tableCl: ['ID', 'DESCRIPTION', 'DATE', 'RELATED ID', 'ACTION'],
             certHd_1: ['NAME', 'DOCUMENT ID', 'REGISTRATION'],
             certCl_1: ['RELATED ID', 'MODE', 'START DATE', 'END DATE', 'ROLE'],
-            cert_2: ['RELATED ID', 'MODE', 'PROCESS STATE', 'ADDRESS', 'CITY', 'STATE', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'RESPONSABLE', 'DOCUMENT ID', 'ROLE']
-
+            cert_2: ['RELATED ID', 'MODE', 'PROCESS STATE', 'ADDRESS', 'CITY', 'STATE', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'ANSERABLE', 'DOCUMENT ID', 'ROLE'],
+            newCert: 'NEW CERTIFICATION',
+            newCertTh: ['PROFFESIOANL CERTIFICATION', 'URBAN PROCESS CERTIFICATION'],
+            profInfo: 'To generate a new proffesional certification input the name of the proffesional or their identification number in order to find all information about their works in the team.',
+            funInfo: 'To generate an new urban process certification input the full ID of the urban process to find information abot it.',
+            btn_help_tile: 'DOVELA CERTIFICACIONS',
+            btn_help_body: 'Dovela can generate special documents that certify the actions of certain individuals or the validity of the information of certain processes, each one of this can be issued freely at any moment and are identified by a unique ID. Dovela can generate Professional Certifications, for professionals that have worked in any urban process and Urban Process Certifications for each process.',
+            HELP_PAGE: [
+                {
+                    title: 'CERTIFICACTIONS LIST',
+                    content: 'This list tracks all the certifications generated in the system.',
+                    focus: 'title', list: [
+                        { subtitle: 'ID', text: 'Unique identifier of each certificaction.' },
+                        { subtitle: 'DESCRIPTION', text: 'A short description of the certification.' },
+                        { subtitle: 'DATE', text: 'Time and moment it was issued, ISO 8601 format (YYYY-MM-DD HH:mm)' },
+                        { subtitle: 'RELATED ID', text: 'In case this is a certification of an urban process, this identified the unique ID of the process.' },
+                        { subtitle: 'ACTION', text: 'Allows to generate a PDF copy of the certification.' },
+                    ]
+                },
+                _new('en', 'This button opens a new subwindow with a filling form which allows creation of a new certification.'),
+                _searchBar('en', 'CERTIFICACTIONS LIST', ['ID', 'DESCRIPTION', 'DATE', 'RELATED ID']),
+                {
+                    title: 'PROFESSIONAL CERTIFICATION', lefticon: <MemberIcon />,
+                    content: 'This is a certification for a professional  that has worked in any urban process. It lists the following:',
+                    focus: 'title', list: [
+                        { subtitle: 'NAME', text: 'Name of the professional.' },
+                        { subtitle: 'DOCUMENT ID', text: 'Number of the identification document.' },
+                        { subtitle: 'REGISTRATION', text: 'Number of the professional  registration.' },
+                        { subtitle: 'RELATED ID', text: 'A lists of various processes IDS in which the professional  was part of.' },
+                        { subtitle: 'MODE', text: 'The type of process.' },
+                        { subtitle: 'START DATE', text: 'The moment the process started.' },
+                        { subtitle: 'END DATE', text: 'The moment the process finished, if no present may indicate the process is still ongoing.' },
+                        { subtitle: 'ROLE', text: 'The role in which the professional acted.' },
+                    ]
+                },
+                {
+                    title: 'URBAN PROCESS CERTIFICATION', lefticon: <TagIcon />,
+                    content: 'This is a certification for each individual process of the team, it brings basic information about the process and the current state, it lists the following:',
+                    focus: 'title', list: [
+                        { subtitle: 'RELATED ID', text: 'The identifier ID of the process.' },
+                        { subtitle: 'MODE', text: 'The type of process.' },
+                        { subtitle: 'PROCESS STATE', text: 'The state in which the process was AT THE MOMENT of issuing the certification.' },
+                        { subtitle: 'ADDRESS', text: 'The address of the buildings the process is taking in.' },
+                        { subtitle: 'CITY', text: 'The city in which the building is located.' },
+                        { subtitle: 'STATE', text: 'The state or county in which the building is located.' },
+                        { subtitle: 'REGISTRATION', text: "Number of the building's registration." },
+                        { subtitle: 'PREDIAL', text: "Number of the building's predial." },
+                        { subtitle: 'NEW PREDIAL', text: 'The new predial number for the building.' },
+                        { subtitle: 'ANSERABLE', text: 'The person that is taking responsibility for the process.' },
+                        { subtitle: 'DOCUMENT ID', text: 'The number of the identifier document of the  answerable.' },
+                        { subtitle: 'ROLE', text: 'The role the  answerable is acting on the process.' },
+                    ]
+                },
+            ],
         },
-        es:{
+        es: {
             title: 'CERTIFICACIÓNES DE DOVELA',
             tableHd: 'LISTADO DE CERTIFICACIONES',
             tableCl: ['CONSECUTIVO', 'DESCRIPCCIÓN', 'FECHA', 'CONSECUTIVO RELACIONADO', 'ACCIÓN'],
-            certHd_1: ['NOMBRE', 'DOCUMENTO IDENTIFICADOR', 'MATRICULA PROFESIONAL'],
+            certHd_1: ['NOMBRE', 'DOCUMENTO IDENTIFICADOR', 'MATRÍCULA PROFESIONAL'],
             certCl_1: ['CONSECUTIVO RELACIONADO', 'MODALIDAD', 'FECHA RADICACIÓN', 'FECHA EXPEDICIÓN', 'EN CALIDAD DE:'],
-            cert_2: ['CONSECUTIVO RELACIONADO', 'MODAIDAD', 'ESTADO', 'DICERCCIÓN', 'CIUDAD', 'DEPARTAMENTO', 'MATRÍCULA', 'PREDIAL', 'NUEVO PREDIAL', 'RESPONSABLE', 'DOCUMENTO IDENTIFICADOR', 'ROL']
-
+            cert_2: ['CONSECUTIVO RELACIONADO', 'MODALIDAD', 'ESTADO', 'DICERCCIÓN', 'CIUDAD', 'DEPARTAMENTO', 'MATRÍCULA', 'PREDIAL', 'NUEVO PREDIAL', 'RESPONSABLE', 'DOCUMENTO IDENTIFICADOR', 'ROL'],
+            newCert: 'NUEVA CERTIFICACIÓN',
+            newCertTh: ['CERTIFICACIÓN PROFESIONAL', 'CERTIFICACIÓN ACTUACIÓN URBANÍSTICA'],
+            profInfo: 'Para generar una nueva certificación profesional ingrese el nombre o el número de documento de identificación del profesional para encontrar información sobre sus actuaciones en la organización.',
+            funInfo: 'Para generar ua nueva certificación de actuación urbanística ingrese el número completo de radicado de la actuación urbanística para encontrar información sobre esta.',
+            btn_help_tile: 'CERTIFICACIÓNES DE DOVELA',
+            btn_help_body: 'Dovela puede generar documentos especiales que certifican las acciones de ciertos individuos o la vigencia de la información de ciertos procesos, cada uno de estos puede ser emitido libremente en cualquier momento y son identificados por una identificación única. Dovela puede generar Certificaciones Profesionales, para profesionales que hayan trabajado en algún proceso urbanístico y Certificaciones de Proceso Urbano para cada proceso.',
+            HELP_PAGE: [
+                {
+                    title: 'LISTADO DE CERTIFICACIONES',
+                    content: 'Esta lista rastrea todas las certificaciones generadas en el sistema.',
+                    focus: 'title', list: [
+                        { subtitle: 'CONSECUTIVO', text: 'Identificador único de la certificación.' },
+                        { subtitle: 'DESCRIPCCIÓN', text: 'Descripción corte de la certificación.' },
+                        { subtitle: 'FECHA', text: 'Hora y momento en que se emitió, formato ISO 8601  (AAAA-MM-DD HH:mm)' },
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'En caso de que se trate de una certificación de la actuación urbanístico, este identificará el ID único de la actuación.' },
+                        { subtitle: 'ACCIÓN', text: 'Crea una copia en PDF de la certificación.' },
+                    ]
+                },
+                _new('es', 'Este botón abre una nueva subventana con un formulario de llenado que permite la creación de una nueva certificación.'),
+                _searchBar('es', 'LISTADO DE CERTIFICACIONES', ['CONSECUTIVO', 'DESCRIPCCIÓN', 'FECHA', 'CONSECUTIVO RELACIONADO']),
+                {
+                    title: 'CERTIFICACIÓN PROFESIONAL', lefticon: <MemberIcon />,
+                    content: 'This is a certification for a professional  that has worked in any urban process. It lists the following:',
+                    focus: 'title', list: [
+                        { subtitle: 'NOMBRE', text: 'Nombre del profesional.' },
+                        { subtitle: 'DOCUMENTO IDENTIFICADOR', text: 'Número del documento de identificación.' },
+                        { subtitle: 'MATRÍCULA PROFESIONAL', text: 'Número de la matrícula profesional.' },
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'Una lista de varios radicados de actuaciaciónes urbanisticas en los que el profesional formó parte.' },
+                        { subtitle: 'MODALIDAD', text: 'El tipo de la actuación.' },
+                        { subtitle: 'FECHA RADICACIÓN', text: 'El momento en que comenzó el proceso.' },
+                        { subtitle: 'FECHA EXPEDICIÓN', text: 'El momento en que finalizó el proceso, si no está presente, puede indicar que el proceso aún está en curso.' },
+                        { subtitle: 'EN CALIDAD DE', text: 'El rol en el que actuó el profesional.' },
+                    ]
+                },
+                {
+                    title: 'CERTIFICACIÓN ACTUACIÓN URBANÍSTICA', lefticon: <TagIcon />,
+                    content: 'This is a certification for each individual process of the team, it brings basic information about the process and the current state, it lists the following:',
+                    focus: 'title', list: [
+                        { subtitle: 'CONSECUTIVO RELACIONADO', text: 'El número de radicado de la actuación.' },
+                        { subtitle: 'MODALIDAD', text: 'El tipo de actuación.' },
+                        { subtitle: 'ESTADO', text: 'El estado en que se encontraba la actuación AL MOMENTO de emitir la certificación.' },
+                        { subtitle: 'DICERCCIÓN', text: 'La dirección de inmueble.' },
+                        { subtitle: 'CIUDAD', text: 'La cidad donde se encuentra localizado el inmueble.' },
+                        { subtitle: 'DEPARTAMENTO', text: 'El departamento donde se encuentra localizado el inmueble.' },
+                        { subtitle: 'MATRÍCULA', text: "Número de matriula del inmueble." },
+                        { subtitle: 'PREDIAL', text: "Número predial del inmueble." },
+                        { subtitle: 'NUEVO PREDIAL', text: 'El nuevo número de predial del inmueble.' },
+                        { subtitle: 'RESPONSABLE', text: 'El responsable de la actuación.' },
+                        { subtitle: 'DOCUMENTO IDENTIFICADOR', text: 'El documento identificador del responsable' },
+                        { subtitle: 'ROL', text: 'El rol que actual el responsable en la actuaión.' },
+                    ]
+                },
+            ],
         }
     },
-
+    fun: {
+        en: {
+            title: 'FILL LIENCESE',
+            tabs: ['Incomplete', 'Reviewing', 'Issuing', 'Other processes', 'Desisting', 'Archived'],
+            th: ['ID', 'TAGS', 'MODE', 'PROGRESS %', 'ACTION'],
+            th_inc: ['FILL DATE', 'LIMITE DATE', 'TIME', 'PROGRESS'],
+            th_ldf: ['SUBMIT DATE', 'PROGRESS'],
+            th_exp: ['VIABLE DATE', 'PROGRESS'],
+            th_oa: ['FILL DATE', 'SUBMIT DATE', 'TIME', 'PROGRESS'],
+            th_neg: [],
+            th_lic: ['STATE', 'PROGRESS'],
+        },
+        es: {
+            title: 'RADICACIÓN DE LICENCIAS',
+            tabs: ['Incompleto', 'Evaluación', 'Expedición', 'Otras actuaciónes', 'Desistiendo', 'Archivado'],
+            th: ['CONSECUTIVO', 'TAGS', 'MODALIDAD', 'PROGRECIÓN %', 'ACCIÓN'],
+            th_inc: ['FECHA RADICACIÓN', 'FECHA LIMITE LDF', 'TIEMPO', 'PROGRECIÓN'],
+            th_ldf: ['FECHA RADICACIÓN', 'PROGRECIÓN'],
+            th_exp: ['FECHA VIABILIDAD', 'PROGRECIÓN'],
+            th_oa: ['FECHA RADICACIÓN', 'FECHA LDF', 'TIEMPO', 'PROGRECIÓN'],
+            th_neg: [],
+            th_lic: ['ESTADO', 'PROGRECIÓN'],
+        },
+    },
 }
+

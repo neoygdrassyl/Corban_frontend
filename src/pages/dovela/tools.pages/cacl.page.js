@@ -9,7 +9,7 @@ import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.comp
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import { ALERT_ERROR, ALERT_NO_PERMIT, ALERT_WAIT } from '../../../resources/customs/utils/notifications.vars';
 import { Col, FlexboxGrid, Grid, IconButton, Panel, Row, toaster } from 'rsuite';
-import { CONVERT_INT_TO_MONEY } from '../../../resources/customs/utils/lamdas.functions';
+import { CONVERT_INT_TO_MONEY, OPEN_FILE } from '../../../resources/customs/utils/lamdas.functions';
 import { Button, FormGroup, NonIdealState, NumericInput } from '@blueprintjs/core';
 import SELECT from '../../../resources/customs/components/form.components/select.compontnt';
 import TEMPLATES_BODY from '../temaplates.pages/body.template';
@@ -531,12 +531,7 @@ export default function CALCULATOR_DOVELA() {
 
         ALERT_WAIT(lang)
         SERVICE_TEMPLATES.genPDF_TaxCalculation(formData)
-            .then(response => {
-                if (response.data === 'OK') {
-                    toaster.remove()
-                    window.open(process.env.REACT_APP_API_URL + "/pdf/taxc/" + "Liquidacion previa.pdf");
-                } else ALERT_ERROR(lang)
-            })
+            .then(response =>  OPEN_FILE('TAX.pdf', response, ALERT_ERROR(lang)))
             .catch(e => {
                 console.log(e);
                 ALERT_ERROR(lang)

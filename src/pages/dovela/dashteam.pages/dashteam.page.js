@@ -8,6 +8,7 @@ import { IoDocumentAttachOutline } from 'react-icons/io5'
 import { BiLinkExternal } from 'react-icons/bi'
 import { RiBook2Line } from 'react-icons/ri'
 import { BiCalculator } from 'react-icons/bi'
+import { TiFolderOpen } from 'react-icons/ti'
 import PeoplesIcon from '@rsuite/icons/Peoples';
 import UserInfoIcon from '@rsuite/icons/UserInfo';
 import InfoRoundIcon from '@rsuite/icons/InfoRound';
@@ -15,6 +16,7 @@ import SearchPeopleIcon from '@rsuite/icons/SearchPeople';
 import ToolsIcon from '@rsuite/icons/Tools';
 import MessageIcon from '@rsuite/icons/Message';
 import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
+
 
 //
 
@@ -64,7 +66,7 @@ export default function DashboardTeam() {
         - DOCUMENTATIO API
         - TEMPLATES (ARC, RES, TAXES)
         - MASS UPLOAD
-        - AUTO REVIEW
+        - AUTO REVIEWS
     // MODULES:  
         - SUBMIT 
         - PUBLISH 
@@ -84,11 +86,25 @@ export default function DashboardTeam() {
         - USER GUIDE
         - ADMIN GUIDE 
 
-    // PUBLIC PAGE:  HOME PAGE - DOVELA PAGE (SPECS, PRICING) - PUBLICATIONS - NEWS
-    // USER: CREATE NEW PROJECT - SEE PROJECTS - PAY PROJECT - UPLOAD DOCUMENTOS TO PROJECT - DONWLOAD REPORTS 
-    // USER PROFESIONAL: UPDATE PROFESIONAL PROFILE
-    // USER CONFIG: 
-    // HELP PAGE: 
+    // PUBLIC PAGE:  
+        - HOME PAGE 
+        - DOVELA PAGE (SPECS, PRICING) 
+        - PUBLICATIONS 
+        - NEWS
+        - HELP PAGE
+    // USER: 
+        - CREATE NEW PROJECT 
+        - SEE PROJECTS 
+        - PAY PROJECT 
+        - UPLOAD DOCUMENTOS TO PROJECT 
+        - DONWLOAD REPORTS 
+        - CONFIG PROFILES (cit, prof, ent)
+
+    // USER CONFIGS => USER, cit, prof, ent, 
+    
+        USER PREFERENCES (theme, lang, date format, font size, link colors) -> SAVE IN BD
+
+    //  HELP PAGE (user)
 
     */
     const DASHBOARD_INFO = [
@@ -99,6 +115,13 @@ export default function DashboardTeam() {
             color: "violet",
             to: "/submit"
         },
+        {
+            header: trn.modules[2].title,
+            icon: <TiFolderOpen style={{ fontSize: '5em' }} />,
+            text: trn.modules[2].desc,
+            color: "blue",
+            to: "/fun"
+        },
     ]
 
     const TOOL_INFO = [
@@ -106,21 +129,21 @@ export default function DashboardTeam() {
             header: trn.tools[0].title,
             icon: <BiCalculator style={{ fontSize: '5em' }} />,
             text: trn.tools[0].desc,
-            color: "blue",
+            color: "violet",
             to: "/dcalc"
         },
         {
             header: trn.tools[1].title,
             icon: <RiBook2Line style={{ fontSize: '5em' }} />,
             text: trn.tools[1].desc,
-            color: "green",
+            color: "blue",
             to: "/dictionary"
         },
         {
             header: trn.tools[2].title,
             icon: <BsBookmarkCheck style={{ fontSize: '5em' }} />,
             text: trn.tools[2].desc,
-            color: "red",
+            color: "green",
             to: "/dcerts"
         },
     ]
@@ -144,6 +167,14 @@ export default function DashboardTeam() {
             </Row>
         </Panel>
     );
+    const CardColor = props => {
+        return <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+            <Message onClick={props.onClick} className="pointer my-1" style={{ backgroundColor: props.color, height: '130px' }}
+                header={<label className='text-light fw-b pointer'>{props.icon} {props.title}</label>} >
+                <label className='text-light pointer'>{props.desc}</label>
+            </Message>
+        </Col>
+    }
     // ******************** COMPONENT JSX ************************ // 
     let _COMPONENT_INFOBOX = () => {
         return <>
@@ -279,50 +310,46 @@ export default function DashboardTeam() {
                 <Grid fluid>
                     <Row style={{ width: '100%' }} >
                         {canInviteWorker ?
-                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                <Message onClick={() => setInvite(!openInvite)} className="pointer my-1"
-                                    header={<label className='text-light fw-b pointer'>{<SearchPeopleIcon style={{ fontSize: '24px' }} />} {trn.admin[0].title}</label>} style={{ backgroundColor: 'dodgerblue' }}>
-                                    <label className='text-light pointer'>{trn.admin[0].desc}</label>
-                                </Message>
-                            </Col>
+                            <CardColor
+                                onClick={() => setInvite(!openInvite)}
+                                title={trn.admin[0].title} desc={trn.admin[0].desc} color={'dodgerblue'}
+                                icon={<SearchPeopleIcon style={{ fontSize: '24px' }} />}
+                            />
                             : ''}
                         {canViewRoles ?
-                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                <Message className="pointer my-1" onClick={() => nagivate('/roles')}
-                                    header={<label className='text-dark fw-b'>{<UserInfoIcon style={{ fontSize: '24px' }} />} {trn.admin[1].title}</label>} style={{ backgroundColor: 'gold' }}>
-                                    <label className='text-dark'>{trn.admin[1].desc}</label>
-                                </Message>
-                            </Col>
+                            <CardColor
+                                onClick={() => nagivate('/roles')}
+                                title={trn.admin[1].title} desc={trn.admin[1].desc} color={'DarkOrange'}
+                                icon={<UserInfoIcon style={{ fontSize: '24px' }} />}
+                            />
                             : ''}
                         {canVieweWorker ?
-                            <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                <Message className="pointer my-1" onClick={() => nagivate('/workers')}
-                                    header={<label className='text-light fw-b'>{<PeoplesIcon style={{ fontSize: '24px' }} />} {trn.admin[2].title}</label>} style={{ backgroundColor: 'forestGreen' }}>
-                                    <label className='text-light'>{trn.admin[2].desc}</label>
-                                </Message>
-                            </Col>
+                            <CardColor
+                                onClick={() => nagivate('/workers')}
+                                title={trn.admin[2].title} desc={trn.admin[2].desc} color={'forestGreen'}
+                                icon={<PeoplesIcon style={{ fontSize: '24px' }} />}
+                            />
                             : ''}
-                        {canViewTemplates ? <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                            <Message className="pointer my-1" onClick={() => nagivate('/dtemplates')}
-                                header={<label className='text-light fw-b'>{<ViewsAuthorizeIcon style={{ fontSize: '24px' }} />} {trn.admin[7].title}</label>} style={{ backgroundColor: 'DarkOrchid' }}>
-                                <label className='text-light'>{trn.admin[7].desc}</label>
-                            </Message>
-                        </Col> : ''}
+                        {canViewTemplates ?
+                            <CardColor
+                                onClick={() => nagivate('/dtemplates')}
+                                title={trn.admin[7].title} desc={trn.admin[7].desc} color={'DarkOrchid'}
+                                icon={<ViewsAuthorizeIcon style={{ fontSize: '24px' }} />}
+                            />
+                            : ''}
 
                         {isSuperAdmin ?
                             <>
-                                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                    <Message className="pointer my-1" onClick={() => nagivate('/dconfig')}
-                                        header={<label className='text-light fw-b'>{<ToolsIcon style={{ fontSize: '24px' }} />} {trn.admin[3].title}</label>} style={{ backgroundColor: 'crimson' }}>
-                                        <label className='text-light'>{trn.admin[3].desc}</label>
-                                    </Message>
-                                </Col>
-                                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                                    <Message className="pointer my-1" onClick={() => nagivate('/daudit')}
-                                        header={<label className='text-light fw-b'>{<MessageIcon style={{ fontSize: '24px' }} />} {trn.admin[4].title}</label>} style={{ backgroundColor: 'LightSeaGreen' }}>
-                                        <label className='text-light'>{trn.admin[4].desc}</label>
-                                    </Message>
-                                </Col>
+                                <CardColor
+                                    onClick={() => nagivate('/dconfig')}
+                                    title={trn.admin[3].title} desc={trn.admin[3].desc} color={'crimson'}
+                                    icon={<ToolsIcon style={{ fontSize: '24px' }} />}
+                                />
+                                <CardColor
+                                    onClick={() => nagivate('/daudit')}
+                                    title={trn.admin[4].title} desc={trn.admin[4].desc} color={'LightSeaGreen'}
+                                    icon={<MessageIcon style={{ fontSize: '24px' }} />}
+                                />
                             </>
 
                             : ''}

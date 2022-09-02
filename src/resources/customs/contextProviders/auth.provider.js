@@ -67,22 +67,23 @@ export function AuthProvider({ children }) {
     let logOn = sessionStorage.getItem('corban_logOn');
 
 
+   
     if (_jwt && _user) {
       if (!logOn) {
         AtuhService.verifyLogin(_jwt).then(response => {
-          if (response.data === 'OK') {
+          if (response.data.message === 'OK') {
             sessionStorage.setItem('corban_logOn', true);
             if (!user && !token) {
               setToken(_jwt);
               setUser(JSON.parse(_user));
             }
             if (_conn && !conn) setCon(JSON.parse(_conn));
-            return callback(true)
+            return callback(true);
           }
           else return callback(false);
         })
           .catch(e => {
-            return callback(false);;
+            return callback(false);
           });
       } else {
         if (!user && !token) {

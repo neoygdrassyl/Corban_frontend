@@ -4,11 +4,12 @@ import { UtilContext } from '../../contextProviders/util.provider';
 // COMPONENTS
 import { AutoComplete, InputGroup, Loader } from 'rsuite';
 import WarningRoundIcon from '@rsuite/icons/WarningRound';
+import RemindRoundIcon from '@rsuite/icons/RemindRound';
 // ICONS
 import { ALERT_NO_PERMIT } from '../../utils/notifications.vars';
 
 export default function DATALIST_API(props) {
-    const { api, onSelect, filterBy, model, icon, text, ph,dv, value, disabled } = props;
+    const { api, onSelect, filterBy, model, icon, text, ph, dv, value, disabled } = props;
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('dataListAPI');
     const btn = utilities.getTranslation('btns');
@@ -32,9 +33,11 @@ export default function DATALIST_API(props) {
         }
         api(value.trim())
             .then(response => {
-                if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
+                if (response.data == 'NO PERMIT') return ALERT_NO_PERMIT(lang)
                 else {
-                    let searchData = response.data.map((data, i) => {
+                    if(response.data == 'NO DATA') return setLoad(4)
+                    let searchData;
+                    if (Array.isArray(response.data)) searchData = response.data.map((data, i) => {
                         return {
                             value: model.value(data),
                             label: model.label(data),
@@ -43,12 +46,20 @@ export default function DATALIST_API(props) {
                             data: data,
                         }
                     })
-                    setData(searchData);
-                    if(searchData.length < entries || entries == 0 ) setEntries(searchData.length);
-                }
-            }).catch(e => { setLoad(3); console.log(e)}).finally(() => setLoad(1));
-    }
+                    else searchData = [{
+                        value: model.value(response.data),
+                        label: model.label(response.data),
+                        id: model.id(response.data),
+                        i: 0,
+                        data: response.data,
+                    }]
 
+                    setData(searchData);
+                    setEntries(searchData.length);
+                    setLoad(1)
+                }
+            }).catch(e => { setLoad(3); console.log(e) })
+    }
 
     return (
         <>
@@ -56,31 +67,25 @@ export default function DATALIST_API(props) {
             <InputGroup inside>
                 {icon ?
                     <InputGroup.Addon>
-                       {icon}
+                        {icon}
                     </InputGroup.Addon> : ''}
 
                 <AutoComplete data={data} onChange={loadData} onSelect={(value, list, e) => {
-                    let filterItem = {};
-                    if (data.length > 1) {
-                        filterItem = data[list.i];
-                        setData([filterItem]);
-                        setEntries(data.length);
-                    }else{
-                        filterItem = data[0];
-                        setEntries(1);
-                    }
-                    
+                    let filterItem = data.find(it => it.id == list.id);
+                    setData([filterItem]);
+                    setEntries(1);
                     onSelect(filterItem);
                 }}
                     filterBy={filterBy}
-                    placeholder={ph}
+                    placeholder={ph || trn.search + "..."}
                     defaultValue={dv}
                     value={value}
                     disabled={disabled}
-                    />
+                />
                 <InputGroup.Addon>
+                    {load == 4 ? <div className='text-warning'><RemindRoundIcon /> {trn.nodata}</div> : ''}
                     {load == 3 ? <div className='text-danger'><WarningRoundIcon /> {trn.error}</div> : ''}
-                    {load == 2 ? <Loader content={trn.loading +"..."} /> : ''}
+                    {load == 2 ? <Loader content={trn.loading + "..."} /> : ''}
                     {load == 1 ? `${trn.found}: ${entries} ${trn.entry}` : ''}
                 </InputGroup.Addon>
             </InputGroup>

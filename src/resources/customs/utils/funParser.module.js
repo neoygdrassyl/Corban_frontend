@@ -945,24 +945,28 @@ export function formsParser1_exlucde2(object, lang) {
 
 // REGEX GROUP
 export function regexChecker_isPh(input, parser) {
+    if (!input) return false;
     if (parser) return REGEX_MATCH_1100_40_02(formsParser1(input))
     return REGEX_MATCH_1100_40_02(input)
 }
 export function regexChecker_isOA(input) {
+    if (!input) return false;
     let modalidad = input.tramite;
     let tipo = input.tipo;
     if (!modalidad) return false;
+    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
     if (!tipo) tipo = "";
-    if (modalidad == 'B' || modalidad == 'D' || tipo.includes('G')) return true;
+    if (modalidad == 'B' || modalidad == 'D' || tipo.includes('G') || isPro) return true;
     return false;
 }
 export function regexChecker_isOA_2(input) {
     if (!input) return false;
     let modalidad = input.tramite;
-    let tipo = input.tipo;
     if (!modalidad) return false;
+    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
+    let tipo = input.tipo;
     if (!tipo) tipo = "";
-    if (modalidad == 'B') return true;
+    if (modalidad == 'B' || isPro) return true;
     return false;
 }
 export function regexChecker_isOA_3(input) {
@@ -970,8 +974,9 @@ export function regexChecker_isOA_3(input) {
     let modalidad = input.tramite;
     let tipo = input.tipo;
     if (!modalidad) return false;
+    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
     if (!tipo) tipo = "";
-    if (modalidad == 'B' || modalidad == 'D') return true;
+    if (modalidad == 'B' || modalidad == 'D' || isPro) return true;
     return false;
 }
 export function regexChecker_movTierra(input) {

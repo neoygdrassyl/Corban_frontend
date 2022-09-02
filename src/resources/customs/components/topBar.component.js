@@ -16,6 +16,7 @@ import { AuthContext } from '../contextProviders/auth.provider'
 import { UtilContext } from '../contextProviders/util.provider';
 import AtuhService from '../../../services/apis/auth.service'
 import InfoRoundIcon from '@rsuite/icons/InfoRound';
+import packageInfo from '../../../../package.json'
 
 // FLAGS FOR LANGAUGE SELECT
 import FLAG_ES from '../../images/flags/ES.png'
@@ -94,10 +95,16 @@ function TopBarComponent() {
         let reporter = user.id + ' @ ' + user.name;
         let browser = navigator.userAgent;
         let url = window.location.href;
+        let product = document.getElementById('error_form_product').value;
+        if(product == 'dovela') {
+            formData.delete('product')
+            formData.append('product', product +' : '+ packageInfo.dovela_v)
+        } 
 
         formData.append('reporter', reporter)
         formData.append('browser', browser)
         formData.append('url', url)
+       
 
         ALERT_WAIT(lang);
         AtuhService.reportBug(formData)

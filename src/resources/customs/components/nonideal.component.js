@@ -25,7 +25,7 @@ export default function NON_IDEAL_STATE(props) {
     // *************************** DATA TABLE  **************************** //
 
     // ******************************** APIS ****************************** //
-    let types = ['datatable', 'permit', 'noload', 'error', 'nots', 'template', 'no_templates', 'no_config', ]
+    let types = ['datatable', 'permit', 'noload', 'error', 'nots', 'template', 'no_templates', 'no_config', 'find']
     if (!types.includes(type)) type = 'error'
 
     let icon = 'cross'
@@ -37,6 +37,7 @@ export default function NON_IDEAL_STATE(props) {
     if(type == 'template') icon = 'exclude-row'
     if(type == 'no_templates') icon = 'exclude-row'
     if(type == 'no_config') icon = 'error'
+    if(type == 'find') icon = 'search-template'
     
     return (
         <>

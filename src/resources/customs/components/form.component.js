@@ -30,7 +30,7 @@ export default function FORM(props) {
                 return <div class="bp4-input-group">
                     <span class={"bp4-icon bp4-icon-" + input.leftIcon}></span>
                     <input type="date" id={input.id} name={input.name} disabled={input.disabled} value={input.value} defaultValue={input.dv} readOnly={input.readOnly} required={input.req}
-                        min="1900-01-01" max="2100-01-01" className="bp4-input" style={{ width: '60%' }} />
+                        min="1900-01-01" max="2100-01-01" className="bp4-input" style={{ width: input.useTime ? '60%': '100%' }} />
                     {input.useTime
                         ? <input type="time" id={input.idTime} name={input.nameTime} disabled={input.disabled} value={input.valueTime} defaultValue={input.dvTime} readOnly={input.readOnly} required={input.req}
                             className="bp4-input" style={{ width: '40%', paddingLeft: '4px' }} />

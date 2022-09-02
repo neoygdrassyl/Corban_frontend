@@ -8,7 +8,7 @@ import SERVICE_FUN from '../../../services/apis/fun.service';
 import TABLE_COMPONENT from '../../../resources/customs/components/table.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 import { ALERT_NO_PERMIT } from '../../../resources/customs/utils/notifications.vars';
-import { Badge, Col, Nav, Row } from 'rsuite';
+import { Badge, Col, Nav, Row, Tag, TagGroup } from 'rsuite';
 import { GET_FUN_STATE } from '../../../resources/customs/utils/lamdas.functions';
 
 // ICONS
@@ -33,6 +33,8 @@ export default function DICTIONARY() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const serial = conn.technicalInfo.serials ? conn.technicalInfo.serials.process : false;
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('dictioary');
@@ -119,7 +121,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(dataLic === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataLic === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[0]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-success" />}
@@ -152,7 +154,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(loadOa === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (loadOa === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[1]}
             titleIcon={<PageIcon style={{ fontSize: '24px' }} className="text-primary" />}
@@ -183,7 +185,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(dataIn === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataIn === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <GRID
             title={trn.dicts[2]}
             cellText={'id_public'}
@@ -207,7 +209,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(dataOut === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataOut === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <GRID
             title={trn.dicts[3]}
             cellText={'cub'}
@@ -236,7 +238,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(dataRes === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataRes === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <GRID
             title={trn.dicts[4]}
             cellText={'id_public'}
@@ -273,7 +275,7 @@ export default function DICTIONARY() {
             },
         ]
 
-        if(dataCert === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataCert === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[5]}
             titleIcon={<DocPassIcon style={{ fontSize: '24px' }} className="text-warning" />}
@@ -317,11 +319,21 @@ export default function DICTIONARY() {
             {
                 name: trn.tit_th[5],
                 selector: row => row.id_related,
-                cell: row => row.id_related,
+                cell: row => {
+                    if (!row.id_related) return ''
+                    let array = row.id_related.split(', ')
+                    return <TagGroup className='fw-b'>
+                        {array.map(a => {
+                            let text = a;
+                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
+                            return <Tag color="violet" size="sm">{text}</Tag>
+                        })}
+                    </TagGroup>
+                },
             },
         ]
 
-        if(dataTit === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataTit === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[6]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-info" />}
@@ -382,11 +394,21 @@ export default function DICTIONARY() {
             {
                 name: trn.prof_th[6],
                 selector: row => row.id_related,
-                cell: row => row.id_related,
+                cell: row => {
+                    if (!row.id_related) return ''
+                    let array = row.id_related.split(', ')
+                    return <TagGroup className='fw-b'>
+                        {array.map(a => {
+                            let text = a;
+                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
+                            return <Tag color="violet" size="sm">{text}</Tag>
+                        })}
+                    </TagGroup>
+                },
             },
         ]
 
-        if(dataProf === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataProf === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[7]}
             titleIcon={<PeoplesIcon style={{ fontSize: '24px' }} className="text-danger" />}
@@ -435,11 +457,21 @@ export default function DICTIONARY() {
             {
                 name: trn.prev_th[6],
                 selector: row => row.id_related,
-                cell: row => row.id_related,
+                cell: row => {
+                    if (!row.id_related) return ''
+                    let array = row.id_related.split(', ')
+                    return <TagGroup className='fw-b'>
+                        {array.map(a => {
+                            let text = a;
+                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
+                            return <Tag color="violet" size="sm">{text}</Tag>
+                        })}
+                    </TagGroup>
+                },
             },
         ]
 
-        if(dataPrev === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig"/>
+        if (dataPrev === -1) return <NON_IDEAL_STATE type="no_config" link="/dconfig" />
         return <TABLE_COMPONENT
             title={trn.dicts[8]}
             titleIcon={<HomeIcon style={{ fontSize: '24px' }} className="text-paranoia" />}
@@ -511,7 +543,7 @@ export default function DICTIONARY() {
             .then(response => {
                 if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
                 else if (response.data == 'NO CONFIG') setDataLic(-1)
-                else  setDataLic(response.data)
+                else setDataLic(response.data)
             }).catch(e => console.log(e)).finally(() => setLoadLic(1));
     }
     function loadDataOa() {

@@ -26,7 +26,7 @@ class SERVICE_TEMPLATES {
     }
 
     genPDF_TaxCalculation(data) {
-        return http.post(`/calc/tc`, data, header());
+        return http.post(`/calc/tc`, data,  {...header(), responseType: 'arraybuffer'});
     }
 
 }

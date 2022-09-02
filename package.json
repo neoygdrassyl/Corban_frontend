@@ -1,6 +1,7 @@
 {
   "name": "corban_client",
   "version": "0.5.0",
+  "dovela_v": "0.5.0",
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^4.3.2",

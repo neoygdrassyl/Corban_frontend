@@ -66,15 +66,73 @@ export default function ROLES() {
             ]
         },
         {
+            id: 'templates', name: 'PLANTILLAS', permits: [
+                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, }
+            ]
+        },
+
+        {
             id: 'submit', name: 'VENTANILLA ÚNICA DE RADICACIÓN', permits: [
                 { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, }, { name: 'SUBIR ARCHIVOS', value: 5 }, { name: 'GENERAR ARCHIVOS', value: 6 },
             ]
         },
+
         {
-            id: 'templates', name: 'PLANTILLAS', permits: [
-                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'EDITAR', value: 3 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, }
+            id: 'fun', name: 'LICENCIAS URBANISTICAS', permits: [
+                { name: 'VER', value: 1 }, { name: 'CREAR', value: 2 }, { name: 'ELIMINAR', value: 4, intent: 'danger', danger: true, },
             ]
-        }
+        },
+        {
+            id: 'fun_doc', name: 'LICENCIAS URBANISTICAS - DOCUMENTOS', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, { name: 'SUBIR ARCHIVOS', value: 5 }, { name: 'GENERAR ARCHIVOS', value: 6 },
+            ]
+        },
+        {
+            id: 'fun_check', name: 'LICENCIAS URBANISTICAS - CHECKEO', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, 
+            ]
+        },
+        {
+            id: 'fun_neg', name: 'LICENCIAS URBANISTICAS - DESESTIMIENTOS', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 },
+            ]
+        },
+        {
+            id: 'fun_sign', name: 'LICENCIAS URBANISTICAS - PUBLICIDAD', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 },
+            ]
+        },
+        {
+            id: 'fun_law', name: 'LICENCIAS URBANISTICAS - INFORME JURIDICO', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, { name: 'DAR VIAVILIDAD', value: 7 },
+            ]
+        },
+        {
+            id: 'fun_arc', name: 'LICENCIAS URBANISTICAS - INFORME ARQUITECTONICO', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, { name: 'DAR VIAVILIDAD', value: 7 },
+            ]
+        },
+        {
+            id: 'fun_eng', name: 'LICENCIAS URBANISTICAS - INFORME ESTRUCTURAL', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, { name: 'DAR VIAVILIDAD', value: 7 },
+            ]
+        },
+        {
+            id: 'fun_acta', name: 'LICENCIAS URBANISTICAS - ACTA OBSERVACIONES Y CORRECIONES', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 }, { name: 'DAR VIAVILIDAD', value: 7 },
+            ]
+        },
+        {
+            id: 'fun_pay', name: 'LICENCIAS URBANISTICAS - LIQUIDACIONES', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 },
+            ]
+        },
+        {
+            id: 'fun_res', name: 'LICENCIAS URBANISTICAS - RESOLUCION', permits: [
+                { name: 'VER', value: 1 }, { name: 'EDITAR', value: 3 },
+            ]
+        },
+
     ]
 
     let FORM_INPUTS = (edit) => [
