@@ -36,7 +36,7 @@ export default function FUN() {
     const dvSerial = conn.technicalInfo.serials ? conn.technicalInfo.serials.process : false;
 
     const utilities = useContext(UtilContext);
-    const trn = utilities.getTranslation('fun');
+    const trn = utilities.getTranslation('dfun');
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
 
@@ -250,7 +250,7 @@ export default function FUN() {
         },
         {
             name: trn.th_oa[1],
-            cell: row => PROGRESION_ICONS(row, { pay: true, check: true, neigh: true, sign: true, report: true, ph: true, law: true, arch: true, eng: true, acta: true, pay2: true, via: true, lic: true }),
+            cell: row => PROGRESION_ICONS(row, { pay: true, check: true, neigh: true, sign: true, report: true, ph: true, law: true, arc: true, eng: true, acta: true, pay2: true, via: true, lic: true }),
         },
     ]
 
@@ -285,7 +285,7 @@ export default function FUN() {
         {
             name: trn.th[4],
             cell: row => <>
-                <FUN_GEN type="btn" id_public={row.id_public} />
+                <FUN_GEN type="icon" id_public={row.id_public} />
             </>,
         },
     ];

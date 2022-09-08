@@ -16,6 +16,7 @@ import AdminIcon from '@rsuite/icons/Admin';
 import PageIcon from '@rsuite/icons/Page';
 import GearIcon from '@rsuite/icons/Gear';
 import { Icon } from '@blueprintjs/core';
+import { Tooltip, Whisper } from 'rsuite';
 
 function PROGRESION_ICONS(row, show) {
 
@@ -37,10 +38,11 @@ function PROGRESION_ICONS(row, show) {
     const payStatus = _GET_CLOCK_STATE(row, 3).date_start ? 'success' : 'start';
     const checkStatus = _GET_CLOCK_STATE(row, 5).date_start ? 'success' : 'start';
     const neightStatus = () => {
-        if(f3.length == 0) return 'start';
-        let state = f3.every(n => n.status == 1);
+        if (f3.length == 0) return 'start';
+        let state = f3.every(n => n.state == 1);
         if (state) return 'success';
-        state = f3.every(n => n.status == 1 || n.status == 2);
+        state = f3.every(n => n.state == 1 || n.state == 2);
+        if (state) return 'success';
         if (!state) return 'warning';
         return 'fail'
     };
@@ -60,6 +62,7 @@ function PROGRESION_ICONS(row, show) {
         let con2 = rew2.desc ? rew2.desc.includes('CUMPLE') && !rew2.desc.includes('NO CUMPLE') : false;
 
         let date2 = rew2.date_start;
+        if (rew1 == false && rew2 == false) return 'start';
         if (con1 || con2) return 'success';
         if (!con1 && !con2 && date2) return 'fail';
         if (!con1 && !con2) return 'warning';
@@ -117,7 +120,7 @@ function PROGRESION_ICONS(row, show) {
         })
 
 
-        if (asign && lastRew[0] == 0) return 'start';
+        if (asign == false && lastRew[0] == 0) return 'start';
         if (asign && reportEng().review.every(r => !r)) return 'warning';
         if (lastRew[0] == 1) return 'success';
         if (lastRew[0] == 0 && lastRew[1] == 1) return 'success';
@@ -147,24 +150,48 @@ function PROGRESION_ICONS(row, show) {
 
 
     const conditionColors = { start: 'DimGrey', fail: 'FireBrick', warning: 'Orange', success: 'LimeGreen' };
-    
-    return (<div>
-        {show.pay ? <Tooltip2 content={trn.pay[payStatus]} placement="top" ><Icon icon="dollar" style={{ color: conditionColors[payStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.check ? <Tooltip2 content={trn.check[checkStatus]} placement="top"><CheckOutlineIcon style={{ color: conditionColors[checkStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.neigh && useNeight && !usePH ? <Tooltip2 content={trn.neigh[neightStatus()]} placement="top"><AdminIcon style={{ color: conditionColors[neightStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.sign && useSign && !usePH ? <Tooltip2 content={trn.sign[signStatus]} placement="top"><FaSign style={{ color: conditionColors[signStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.report && useReport ? <Tooltip2 content={trn.report[reportStatus()]} placement="top"><TextImageIcon style={{ color: conditionColors[reportStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
 
-        {show.law && !usePH ? <Tooltip2 content={trn.law[lawStatus()]} placement="top"><VscLaw style={{ color: conditionColors[lawStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.arc && !usePH ? <Tooltip2 content={trn.arc[arcStatus()]} placement="top"><BsBuilding style={{ color: conditionColors[arcStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.eng && useEng && !usePH ? <Tooltip2 content={trn.eng[engStatus()]} placement="top"><GearIcon style={{ color: conditionColors[engStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.ph && usePH ? <Tooltip2 content={trn.ph[phStatus()]} placement="top"><PageIcon style={{ color: conditionColors[phStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+    let iconsBP = () => {
+        return <div>
+            {show.pay ? <Tooltip2 content={trn.pay[payStatus]} placement="top" ><Icon icon="dollar" style={{ color: conditionColors[payStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.check ? <Tooltip2 content={trn.check[checkStatus]} placement="top"><CheckOutlineIcon style={{ color: conditionColors[checkStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.neigh && useNeight && !usePH ? <Tooltip2 content={trn.neigh[neightStatus()]} placement="top"><AdminIcon style={{ color: conditionColors[neightStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.sign && useSign && !usePH ? <Tooltip2 content={trn.sign[signStatus]} placement="top"><FaSign style={{ color: conditionColors[signStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.report && useReport ? <Tooltip2 content={trn.report[reportStatus()]} placement="top"><TextImageIcon style={{ color: conditionColors[reportStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
 
-        {show.acta && !usePH ? <Tooltip2 content={trn.acta[actaStatus()]} placement="top"><DocPass style={{ color: conditionColors[actaStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.via && !usePH ? <Tooltip2 content={trn.via[viaStatus]} placement="top"><DocPass style={{ color: conditionColors[viaStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.pay2 && !usePH ? <Tooltip2 content={trn.pay2[pay2Status]} placement="top"><Icon icon="dollar" style={{ color: conditionColors[pay2Status], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-        {show.lic && !usePH ? <Tooltip2 content={trn.lic[licStatus]} placement="top"><DocPass style={{ color: conditionColors[licStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
-    </div>);
+            {show.law && !usePH ? <Tooltip2 content={trn.law[lawStatus()]} placement="top"><VscLaw style={{ color: conditionColors[lawStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.arc && !usePH ? <Tooltip2 content={trn.arc[arcStatus()]} placement="top"><BsBuilding style={{ color: conditionColors[arcStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.eng && useEng && !usePH ? <Tooltip2 content={trn.eng[engStatus()]} placement="top"><GearIcon style={{ color: conditionColors[engStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.ph && usePH ? <Tooltip2 content={trn.ph[phStatus()]} placement="top"><PageIcon style={{ color: conditionColors[phStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+
+            {show.acta && !usePH ? <Tooltip2 content={trn.acta[actaStatus()]} placement="top"><DocPass style={{ color: conditionColors[actaStatus()], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.via && !usePH ? <Tooltip2 content={trn.via[viaStatus]} placement="top"><DocPass style={{ color: conditionColors[viaStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.pay2 && !usePH ? <Tooltip2 content={trn.pay2[pay2Status]} placement="top"><Icon icon="dollar" style={{ color: conditionColors[pay2Status], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+            {show.lic && !usePH ? <Tooltip2 content={trn.lic[licStatus]} placement="top"><DocPass style={{ color: conditionColors[licStatus], fontSize: iconSize, marginLeft: '1px' }} /> </Tooltip2> : ''}
+        </div>
+    }
+
+    let iconsRS = () => {
+        return <div>
+            {show.pay ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.pay[payStatus]}</Tooltip>}><Icon icon="dollar" style={{ color: conditionColors[payStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.check ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.check[checkStatus]}</Tooltip>}><CheckOutlineIcon style={{ color: conditionColors[checkStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.neigh && useNeight && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.neigh[neightStatus()]}</Tooltip>}><AdminIcon style={{ color: conditionColors[neightStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.sign && useSign && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.sign[signStatus]}</Tooltip>}><Icon  style={{ color: conditionColors[signStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.report && useReport ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.report[reportStatus()]}</Tooltip>}><TextImageIcon style={{ color: conditionColors[reportStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            
+            {show.law && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.law[lawStatus()]}</Tooltip>}><Icon icon="book" style={{ color: conditionColors[lawStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.arc && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.arc[arcStatus()]}</Tooltip>}><Icon icon="home" style={{ color: conditionColors[arcStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.eng && useEng && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.eng[engStatus()]}</Tooltip>}><GearIcon style={{ color: conditionColors[engStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.ph && usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.ph[phStatus()]}</Tooltip>}><PageIcon style={{ color: conditionColors[phStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            
+            {show.acta && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.acta[actaStatus()]}</Tooltip>}><DocPass style={{ color: conditionColors[actaStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.via && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.via[viaStatus]}</Tooltip>}><DocPass style={{ color: conditionColors[viaStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.pay2 && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.pay2[pay2Status]}</Tooltip>}><Icon icon="dollar" style={{ color: conditionColors[pay2Status], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.lic && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.lic[licStatus]}</Tooltip>}><DocPass style={{ color: conditionColors[licStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+        </div>
+    }
+
+    return iconsRS();
 }
 
 export default PROGRESION_ICONS;

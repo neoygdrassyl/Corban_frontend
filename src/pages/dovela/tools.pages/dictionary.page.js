@@ -26,6 +26,7 @@ import GRID from '../../../resources/customs/components/grid.component';
 import { formsParser1 } from '../../../resources/customs/utils/funParser.module';
 import VIEWER from '../../../resources/customs/components/viewer.component';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
+import FUN_GEN from '../../../resources/customs/components/fun.components/funGen.component';
 
 var moment = require('moment');
 
@@ -103,7 +104,7 @@ export default function DICTIONARY() {
                 minWidth: '30%',
                 width: '15%',
                 selector: row => row.id_public,
-                cell: row => row.id_public,
+                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagText={row.id_public.substr(-7)}/>,
             },
             {
                 name: trn.lic_th[1],
@@ -138,7 +139,7 @@ export default function DICTIONARY() {
             {
                 name: trn.oa_th[0],
                 selector: row => row.id_public,
-                cell: row => row.id_public,
+                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagColor="violet" tagText={row.id_public}/>,
             },
             {
                 name: trn.oa_th[1],
@@ -325,8 +326,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
-                            return <Tag color="violet" size="sm">{text}</Tag>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
+                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
                         })}
                     </TagGroup>
                 },
@@ -380,7 +381,7 @@ export default function DICTIONARY() {
                 cell: row => {
                     if (!row.docs) return ''
                     let ids = row.docs.split(',');
-                    let intents = ['primary', 'success', 'warning', 'danger'];
+                    let intents = ['primary', 'success', 'warning', 'danger', 'primary'];
                     let docNames = trn.prof_docs
                     return <>{ids.map((id, i) => {
                         if (id > 0) return <VIEWER icon="id-number" api={loadFun6} apiID={id} intent={intents[i]} text={docNames[i]} filename={docNames[i]} />
@@ -400,8 +401,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
-                            return <Tag color="violet" size="sm">{text}</Tag>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
+                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
                         })}
                     </TagGroup>
                 },
@@ -463,8 +464,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <Tag color="blue" size="sm">{text.substr(-7)}</Tag>
-                            return <Tag color="violet" size="sm">{text}</Tag>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
+                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
                         })}
                     </TagGroup>
                 },

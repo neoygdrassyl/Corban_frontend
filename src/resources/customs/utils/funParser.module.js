@@ -3,6 +3,8 @@
 //------------------------ SERIES & SUBSERIES ------------------------//
 //--------------------------------------------------------------------//
 
+import { GET_JSON_FULL } from './lamdas.functions';
+
 export const SERIES_DOCS = {
     'GENERIC': {
         'DOCUMENTOS GENERALES': [700, 803, 511, 512, 514, 513, 516, 517, 900,
@@ -308,6 +310,9 @@ const _FUN_1_101_HELPER = ['A', 'B', 'C'];
 const _FUN_1_102_HELPER = ['A', 'B', 'C', 'D'];
 const _FUN_2_4_HELPER = ['A', 'B', 'C'];
 const _FUN_2_5_HELPER = ['A', 'B'];
+const _FUN_A_1_HELPER = ['A', 'B', 'C', 'D', 'E', 'F', '%'];
+const _FUN_A_2_HELPER = ['A', 'B', 'C', 'D', 'E', '%'];
+const _FUN_A_2a_HELPER = ['A', 'B', 'C', 'D', 'E', 'F', '%'];
 
 const _FUN_1_1 = (useLeter, lang) => {
     let letters = _FUN_1_1_HELPER
@@ -551,7 +556,6 @@ const _FUN_2_4 = (useLeter, lang) => {
     else return trn[lang || 'en']
 };
 
-
 const _FUN_2_5 = (useLeter, lang) => {
     let letters = _FUN_2_5_HELPER
     let trn = {
@@ -559,6 +563,202 @@ const _FUN_2_5 = (useLeter, lang) => {
             'TOPOGRAPHIC MAP'],
         es: ['LANO DE LOTEO',
             'PLANO TOPOGRAFICO']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_1 = (useLeter, lang) => {
+    let letters = _FUN_A_1_HELPER
+    let trn = {
+        en: ['RESIDENCE',
+            'TRADING AND/OR SERVICES',
+            'INSTITUTIONAL',
+            'INDUSTRY',
+            'EDUCATION',
+            'HEALTH',
+            '%'],
+        es: ['VIVIENDA',
+            'COMERCIO Y/O SERVICIO',
+            'INSTITUCIONAL',
+            'INDUSTRIAL',
+            'EDUCACIÓN',
+            'SALUD',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_211 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['GREEN COVER',
+            'SUN PROTECTION ELEMENTS',
+            'SUN PROTECTION GLASS',
+            'SUN PROTECTION COVER',
+            'SUN PROTECTION WALL',
+            '%'],
+        es: ['CUBIERTA VERDE',
+            'ELEMENTOS DE PROTECCIÓN SOLAR',
+            'VIDRIOS DE PROTECCIÓN SOLAR',
+            'CUBIERTA DE PROTECCIÓN SOLAR',
+            'PARED DE PROTECCIÓN SOLAR',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_212 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['EFFICIENT LIGHTING',
+            'EFFICIENT AIR CONDITIONING EQUIPMENT',
+            'SOLAR HOT WATER',
+            'LIGHTING CONTROLS',
+            'SPEED VARIETIES FOR PUMPS',
+            '%'],
+        es: ['ILUMINACIÓN EFICIENTE',
+            'EQUIPOS DE AIRE ACONDICIONADOS EFICIENTES',
+            'AGUA CALIENTE SOLAR',
+            'CONTROLES DE ILUMINACIÓN',
+            'VARIEDADES DE VELOCIDAD PARA BOMBAS',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_22 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['BEARING BRICK',
+            'COMMON BRICK',
+            'CONCRETE WALL POURED ON SITE',
+            'WALL OF SUPERBOAR',
+            'ALUMINUM CURTAIN WALL',
+            '%'],
+        es: ['LADRILLO PORTANTE',
+            'LADRILLO COMÚN',
+            'MURO DE CONCRETO VACIADO EN OBRA',
+            'MURO DE SUPERBOAR',
+            'MURO CORTINA EN ALUMINIO',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_23 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['BRICK NUMBER 4 OR SIMILAR',
+            'DRYWALL',
+            'COMMON BRICK',
+            'CONCRETE WALL POURED ON SITE',
+            'CONCRETE BLOCK MASONRY',
+            '%'],
+        es: ['LADRILLO NÚMERO 4 O SIMILAR',
+            'DRYWALL',
+            'LADRILLO COMÚN',
+            'MURO DE CONCRETO VACIADO EN OBRA',
+            'MAMPOSTERÍA DE BLOQUE DE CONCRETO',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_24 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['CONCRETE ROOF POURED ON SITE',
+            'ALUMINUM SANDWICH PANEL',
+            'CLAY TILES',
+            'METAL',
+            'FIBRE CEMENT',
+            '%'],
+        es: ['CUBIERTA DE CONCRETO VACIADO EN OBRA',
+            'PANEL TIPO SÁNDWICH DE ALUMINIO',
+            'TEJAS DE ARCILLA',
+            'METÁLICA',
+            'FIBROCEMENTEO',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_26 = (useLeter, lang) => {
+    let letters = _FUN_A_2_HELPER
+    let trn = {
+        en: ['LOW CONSUMPTION SANITARY',
+            'LOW CONSUMPTION WASHBASINS',
+            'LOW CONSUMPTION SHOWERS',
+            'LOW CONSUMPTION URINALS',
+            'RAINWATER COLLECTION',
+            '%'],
+        es: ['SANITARIOS DE BAJO CONSUMO',
+            'LAVAMANOS DE BAJO CONSUMO',
+            'DUCHAS DE BAJO CONSUMO',
+            'ORINALES DE BAJO CONSUMO',
+            'RECOLECCIÓN DE AGUA LLUVIA',
+            '%']
+    }
+    if (useLeter) {
+        let array = trn[lang || 'en'];
+        array = array.map((a, i) => `${letters[i]}. ${a}`)
+        return array;
+    }
+    else return trn[lang || 'en']
+};
+
+const _FUN_A_27 = (useLeter, lang) => {
+    let letters = _FUN_A_2a_HELPER
+    let trn = {
+        en: ['COLD',
+            'TEMPERED',
+            'WARM DRY',
+            'WARM WET',
+            'YES',
+            'NO',
+            '%'],
+        es: ['FRIO',
+            'TEMPLADO',
+            'CÁLIDO SECO',
+            'CÁLIDO HÚMEDO',
+            'SI',
+            'NO',
+            '%']
     }
     if (useLeter) {
         let array = trn[lang || 'en'];
@@ -780,6 +980,29 @@ export const _FUN_25_PARSER = (_ARRAY, useLetter, lang) => {
     return _finalStr;
 }
 
+// A 1 FIXED ARRAYS OF 0 OR LETTERS, LAST ELEMENT IS CUSTOM STRING
+export const _FUN_A_PARSER = (_ARRAY, useLetter, lang, anex) => {
+    if (!_ARRAY || _ARRAY == 'null' || _ARRAY.length == 0) return "";
+    let _i = _ARRAY.length - 1;
+    let _finalStr = []
+    let ANEX_DATA = [];
+    if (anex == 'a1') ANEX_DATA = _FUN_A_1(useLetter, lang);
+    if (anex == 'a211') ANEX_DATA = _FUN_A_211(useLetter, lang);
+    if (anex == 'a212') ANEX_DATA = _FUN_A_212(useLetter, lang);
+    if (anex == 'a22') ANEX_DATA = _FUN_A_22(useLetter, lang);
+    if (anex == 'a23') ANEX_DATA = _FUN_A_23(useLetter, lang);
+    if (anex == 'a24') ANEX_DATA = _FUN_A_24(useLetter, lang);
+    if (anex == 'a26') ANEX_DATA = _FUN_A_26(useLetter, lang);
+    if (anex == 'a27') ANEX_DATA = _FUN_A_27(useLetter, lang);
+
+    _ARRAY.map((a, i) => {
+        if (i == _i && a) _finalStr.push(a);
+        if (a != 0) _finalStr.push(ANEX_DATA[i]);
+    }) 
+
+    return _finalStr.join(', ');
+}
+
 //--------------------------------------------------------------------//
 //--------------------------------------------------------------------//
 //--------------------------------------------------------------------//
@@ -954,7 +1177,7 @@ export function regexChecker_isOA(input) {
     let modalidad = input.tramite;
     let tipo = input.tipo;
     if (!modalidad) return false;
-    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
+    let isPro = modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
     if (!tipo) tipo = "";
     if (modalidad == 'B' || modalidad == 'D' || tipo.includes('G') || isPro) return true;
     return false;
@@ -963,7 +1186,7 @@ export function regexChecker_isOA_2(input) {
     if (!input) return false;
     let modalidad = input.tramite;
     if (!modalidad) return false;
-    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
+    let isPro = modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
     let tipo = input.tipo;
     if (!tipo) tipo = "";
     if (modalidad == 'B' || isPro) return true;
@@ -974,7 +1197,7 @@ export function regexChecker_isOA_3(input) {
     let modalidad = input.tramite;
     let tipo = input.tipo;
     if (!modalidad) return false;
-    let isPro =  modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
+    let isPro = modalidad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == 'prorroga';
     if (!tipo) tipo = "";
     if (modalidad == 'B' || modalidad == 'D' || isPro) return true;
     return false;

@@ -296,6 +296,17 @@ export let translations = {
                 dut: 'Urban duties',
                 res: 'Citation Notification Resolution'
             },
+            types: {
+                'i': 'Type I',
+                'ii': 'Type II',
+                'iii': 'Type III',
+                'iv': 'Type IV',
+                'oa': 'Other Process',
+            },
+            rules: {
+                sign: ['Publicity used', 'Publicity NOT use'],
+                eng: ['Estructural report used', 'Estructural repor NOT use'],
+            },
         },
         es: {
             cubs: {
@@ -309,7 +320,116 @@ export let translations = {
                 dut: 'Deberes Urbanisticos',
                 res: 'Citacion Notificación Resolución'
             },
+            types: {
+                'i': 'Categoria I',
+                'ii': 'Categoria II',
+                'iii': 'Categoria III',
+                'iv': 'Categoria IV',
+                'oa': 'Otra Actuación',
+            },
+            rules: {
+                sign: ['Publicidad usada', 'Publicidad NO usada'],
+                eng: ['Reporte estructural usado', 'Reporte estructural NO usado'],
+            },
         }
+    },
+    fun3: {
+        en: {
+            tableTitle: 'Adjacent Neighbors',
+            tableHd: ['PROPERTY ADDRESS', 'CORRESPONDENCE ADDRESS', 'DATA ORIGIN', 'WAS PARTY DECLARED?', 'CITATION STATUS', 'OUT CONSECUTIVE', 'CONFIRMATION GUIDE', 'DATE RECEIVED', 'METHODS OF PUBLICATION', 'PUBLICATION SUPPORTS', 'DOCUMENT', 'ACTION'],
+            dataOrigin: ['Filled out by the team', 'Filled out by the applicant'],
+            citationSattus: ['PENDING', 'POSITIVE CITATION', 'NEGATIVE CITATION'],
+            alertMethod: ['Newspaper at', 'Radio at', 'Web page at', 'Physical at'],
+            supportMethod: ['Periodic support', 'Radio support', 'Web page support', 'Physical support'],
+            support: 'Support document',
+        },
+        es: {
+            tableTitle: 'Vecinos Colindantes',
+            tableHd: ['DIRECCION DEL PREDIO', 'DIRECCION DE CORRESPONDENCIA', 'ORIGEN DATO', '¿SE DECLARÓ PARTE?', 'ESTADO CITACIÓN', 'CONSECUTIVO DE SALIDA', 'GUIA DE CONFIRMACION', 'FECHA RECIBIDO', 'METODOS DE PUBLICACION', 'SOPORTES DE PUBLICACION', 'DOCUMENTO', 'ACCIÓN',],
+            dataOrigin: ['Diligenciado por el equipo', 'Diligenciado por el solicitante'],
+            citationSattus: ['PENDIENTE', 'CITACIÓN POSITIVA', 'CITACIÓN NEGATIVA'],
+            alertMethod: ['Periódico el', 'Radio el', 'Pagina web el', 'Físico el'],
+            supportMethod: ['Soporte periódico', 'Soporte radio', 'Soporte pagina web', 'Soporte físico'],
+            support: 'Documento de soporte',
+        },
+    },
+    fun4: {
+        en: {
+            tableTitle: 'Boundaries, Dimensions and Areas',
+            tableHd: ['BOUNDARIES', 'LENGTH (in m)', 'BORDERS WITH'],
+            coord: {
+                'NORTE': 'NORTH',
+                'SUR': 'SOUTH',
+                'ORIENTE': 'EAST',
+                'OCCIDENTE': 'WEST',
+            }
+        },
+        es: {
+            tableTitle: 'Linderos, Dimensiones y Áreas',
+            tableHd: ['LINDEROS', 'LONGITUD (en m)', 'COLINDA CON: '],
+            coord: {
+                'NORTE': 'NORTE',
+                'SUR': 'SUR',
+                'ORIENTE': 'ORIENTE',
+                'OCCIDENTE': 'OCCIDENTE',
+            }
+        },
+    },
+    fun51: {
+        en: {
+            tableTitle: 'License Holders',
+            tableHd: ['PERSON TYPE', 'NAME', 'ID', 'LEGAL REP. ', 'REP ID', 'CONTACT NUMBER', 'MAIL', 'PERSON ROLE', 'DOCUMENTS'],
+            docs: ['ID',  'Certificate of Existence and Legal Representation']
+        },
+        es: {
+            tableTitle: 'Titular(es) de la Licencia',
+            tableHd: ['TIPO PERSONA', 'NOMBRE', 'DOCUMENTO IDENTIFICACIÓN', 'NOMBRE REP. LEGAL', 'DOCUMENTO IDENTIFICACIÓN REP.', 'NÚMERO DE CONTACTO', 'CORREO', 'TIPO TITULAR', 'DOCUMENTOS'],
+            docs: ['Documento Identificador', 'Certificado de Existencia y Representación Legal']
+        },
+    },
+    fun52: {
+        en: {
+            tableTitle: 'Responsible Professionals',
+            tableHd: ['NAME', 'ID', 'CONTACT NUMBER', 'EMAIL', 'ROLE', 'REGISTRATION', 'REGISTRATION DATE', 'EXPERIENCE', 'SANCTIONED?', 'SUPERVISION', 'DOCUMENTS'],
+            sanction: ['NO', 'YES'],
+            year: ' Year(s)',
+            docs: ['ID',  'Registration', 'Registration validity', 'CV & certifications', 'Postgraduate studies'],
+            docsColor: ['primary',  'success', 'warning', 'danger', 'info'],
+            supervition: { 'NO': 'NO', 'SI': 'YES', 'N/A': 'N/A'},
+            role: {
+                'URBANIZADOR/PARCELADOR' : 'DEVELOPER/PARCELLER',
+                'URBANIZADOR O CONSTRUCTOR RESPONSABLE':'RESPONSIBLE DEVELOPER OR BUILDER',
+                'DIRECTOR DE LA CONSTRUCCION':'CONSTRUCTION MANAGER',
+                'ARQUITECTO PROYECTISTA':'DESIGNER ARCHITECT',
+                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL':'CIVIL ENGINEER STRUCTURAL DESIGNER',
+                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES':'DESIGNER OF NON-STRUCTURAL ELEMENTS',
+                'INGENIERO CIVIL GEOTECNISTA':'GEOTECHNICAL CIVIL ENGINEER',
+                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO':'TOPOGRAPHER AND/OR TOPOGRAPHER ENGINEER',
+                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES':'INDEPENDENT REVIEWER OF STRUCTURAL DESIGNS',
+                'OTROS PROFESIONALES ESPECIALISTAS':'OTHER SPECIALIST PROFESSIONALS',
+            },
+        },
+        es: {
+            tableTitle: 'Profesionales Responsables',
+            tableHd: ['NOMBRE', 'DOCUMENTO IDENTIFICACIÓN', 'NÚMERO DE CONTACTO', 'CORREO', 'ROL', 'MATRÍCULA', 'EXP. MATRÍCULA', 'EXPERIENCIA', '¿SANCIONADO?', 'SUPERVISIÓN', 'DOCUMENTOS'],
+            sanction: ['NO', 'SI'],
+            year: ' Año(s)',
+            docs: ['Documnto identificación',  'Matrícula', 'Vigencia matricular', 'Hoja de vida y certificados', 'Estudios postgrados'],
+            docsColor: ['primary',  'success', 'warning', 'danger', 'info'],
+            supervition: { 'NO': 'NO', 'SI': 'SI', 'N/A': 'N/A'},
+            role: {
+                'URBANIZADOR/PARCELADOR' : 'URBANIZADOR/PARCELADOR',
+                'URBANIZADOR O CONSTRUCTOR RESPONSABLE':'URBANIZADOR O CONSTRUCTOR RESPONSABLE',
+                'DIRECTOR DE LA CONSTRUCCION':'DIRECTOR DE LA CONSTRUCCION',
+                'ARQUITECTO PROYECTISTA':'ARQUITECTO PROYECTISTA',
+                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL':'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL',
+                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES':'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES',
+                'INGENIERO CIVIL GEOTECNISTA':'INGENIERO CIVIL GEOTECNISTA',
+                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO':'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO',
+                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES':'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES',
+                'OTROS PROFESIONALES ESPECIALISTAS':'OTROS PROFESIONALES ESPECIALISTAS',
+            },
+        },
     },
     progress_icons: {
         en: {
@@ -2254,7 +2374,7 @@ export let translations = {
             cert_th: ['ID', 'TYPE', 'DATE', 'RELATED ID'],
             tit_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'LEGAL REP.', 'RELATED IDS'],
             prof_th: ['NAME', 'ID NUMBER', 'EMAIL', 'CONTACT NUMBER', 'REGISTRATION', 'DOCUMENTS', 'RELATED IDS'],
-            prof_docs: ['ID DOCUMENT', 'REGISTRATION DOCUMENT', 'VALIDITY DOCUMENT', 'CV & CERTIFICATIONS',],
+            prof_docs: ['ID DOCUMENT', 'REGISTRATION DOCUMENT', 'VALIDITY DOCUMENT', 'CV & CERTIFICATIONS', 'POSTGRADUATE STUDIES'],
             prev_th: ['ADDRESS', 'REGISTRATION', 'PREDIAL', 'NEW PREDIAL', 'STRATA', 'LOCATION', 'RELATED IDS'],
             ss_th: ['CODE', 'DESCRIPTION'],
             t_th: ['CODE', 'DESCRIPTION'],
@@ -2391,7 +2511,7 @@ export let translations = {
             cert_th: ['CONSECUTIVO', 'TIPO', 'FECHA', 'CONSECUTIVO RELACIONADO'],
             tit_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'REPRESENTANTE LEGAL', 'CONSECUTIVOS RELACIONADOS'],
             prof_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'MATRÍCULA', 'DOCUMENTOS', 'CONSECUTIVOS RELACIONADOS'],
-            prof_docs: ['DOCUMENTO LEGAL DE IDENTIFICACIÓN', 'MATRICULAR', 'VIGENCIA', 'HOJA DE VIDA Y CERTIFICACIONES',],
+            prof_docs: ['DOCUMENTO LEGAL DE IDENTIFICACIÓN', 'MATRICULAR', 'VIGENCIA', 'HOJA DE VIDA Y CERTIFICACIONES','ESTUDIOS DE POSTGRADO'],
             prev_th: ['ADDRESS', 'MATRÍCULA', 'NÚMERO PREDIAL', 'NUEVO PREDIAL', 'ESTRATO', 'BARRIO', 'CONSECUTIVOS RELACIONADOS'],
             ss_th: ['CÓDIGO', 'DESCRIPCIÓN'],
             t_th: ['CÓDIGO', 'DESCRIPCIÓN'],
@@ -2643,7 +2763,7 @@ export let translations = {
             ],
         }
     },
-    fun: {
+    dfun: {
         en: {
             title: 'FILL LIENCESE',
             tabs: ['Incomplete', 'Reviewing', 'Issuing', 'Other processes', 'Desisting', 'Archived'],

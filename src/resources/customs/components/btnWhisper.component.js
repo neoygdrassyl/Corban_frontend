@@ -12,7 +12,10 @@ export default function ButtonWhisper(props) {
         <p className='text-left'>{whisper}</p>
     </Popover>
 
-
+    let color = ''
+    if(intent == 'info') color = 'LightSeaGreen' 
+    if(intent == 'paranoia') color = 'Purple' 
+    
     return <>
         <Whisper  placement={placement ?? "top"} trigger={hover ?? "hover"} controlId={controlId ?? "control-id-hover"} speaker={speaker}>
             {subtle ?
@@ -20,7 +23,7 @@ export default function ButtonWhisper(props) {
                     {props.children}
                 </Button>
                 :
-                <ButtonPB icon={icon} intent={intent ?? 'primary'} onClick={onClick} className={props.className} style={{float: float}}>
+                <ButtonPB icon={icon} intent={intent ?? 'primary'} onClick={onClick} className={props.className} style={{float: float, backgroundColor: color}}>
                     {props.children}
                 </ButtonPB>
             }

@@ -20,6 +20,9 @@ function SideBarComponent(props) {
 
     let auth = useContext(AuthContext);
     let user = auth.user ? auth.user : false;
+    let conn = auth.conn ? auth.conn : false;
+
+    let connId = conn.id ?? false;
     
     let workList = user.workList ? user.workList : [];
 
@@ -57,8 +60,8 @@ function SideBarComponent(props) {
                             placement="rightStart"
                         >
                             {workList.map((wl, i) => <Nav.Item eventKey={"3-" + i} onClick={() => navigate("/dashteam/" + wl.id)} 
-                             icon={<PageEndIcon color="blue" />}>
-                                {wl.name}
+                             icon={<PageEndIcon color={wl.id == connId ? "blue" : 'gray'} />}>
+                                <label className={wl.id == connId ? "fw-b" : ''}>{wl.name}</label>
                             </Nav.Item>
                             )}
 

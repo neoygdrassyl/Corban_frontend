@@ -1,3 +1,4 @@
+import { GET_JSON_FULL } from "./lamdas.functions";
 
 function _GET_CHILD_CLOCK(fun) {
     var _CHILD = fun.fun_clocks;
@@ -23,6 +24,136 @@ export function _GET_CLOCK_STATE(_fun, _state) {
         if (_CLOCK[i].state == _state) return _CLOCK[i];
     }
     return false;
+}
+
+export function _GET_FUN_0(_data) {
+    // fun_0, + fun_law
+    var _CHILD = _data ? _data.fun_law ?? {} : {};
+    var _CHILD_VARS = {
+        id: _data.id ?? false,
+        id_pqrs: _data.id_pqrs ?? false,
+        id_payment: _data.id_payment ?? false,
+        date_payment: _data.date ?? false,
+        id6payment: _CHILD.id6payment ?? false,
+        state: _data.state ?? false,
+        type: _data.type ?? false,
+        model: _data.model ?? false,
+        tags: _data.tags ?? '',
+        rules: _data.rules ? _data.rules.split(';') : [0, 0],
+        sign: _CHILD.sign ? _CHILD.sign.split(',') : [],
+        report_data: _CHILD.report_data ? _CHILD.report_data.split(',') : [],
+        report_data_pdf: GET_JSON_FULL(_CHILD.report_data_pdf),
+        report_cub: _CHILD.report_cub ?? false,
+        cub_inc: _CHILD.cub_inc ?? false,
+        cub_ldf: _CHILD.cub_ldf ?? false,
+        cub_act: _CHILD.cub_act ?? false,
+        cub_inc_json: GET_JSON_FULL(_CHILD.cub_inc_json),
+        cub_ldf_json: GET_JSON_FULL(_CHILD.cub_ldf_json),
+        cub_act_json: GET_JSON_FULL(_CHILD.cub_act_json),
+    }
+    return _CHILD_VARS;
+}
+export function _GET_FUN_1(_data, asArray) {
+    var _CHILD = _data ? _data.fun_1s ? _data.fun_1s[0] : {} : {};
+    var _CHILD_VARS = {
+        id: _CHILD ? _CHILD.id ?? false : false,
+        tipo: asArray ? (_CHILD.tipo ? _CHILD.tipo.split(',') : []) : _CHILD ? _CHILD.tipo ?? '' : '',
+        tramite: asArray ? (_CHILD.tramite ? _CHILD.tramite.split(',') : []) : _CHILD ? _CHILD.tramite ?? '' : '',
+        m_urb: asArray ? (_CHILD.m_urb ? _CHILD.m_urb.split(',') : []) : _CHILD ? _CHILD.m_urb ?? '' : '',
+        m_sub: asArray ? (_CHILD.m_sub ? _CHILD.m_sub.split(',') : []) : _CHILD ? _CHILD.m_sub ?? '' : '',
+        m_lic: asArray ? (_CHILD.m_lic ? _CHILD.m_lic.split(',') : []) : _CHILD ? _CHILD.m_lic ?? '' : '',
+        usos: asArray ? (_CHILD.usos ? _CHILD.usos.split(',') : []) : _CHILD ? _CHILD.usos ?? '' : '',
+        area: asArray ? (_CHILD.area ? _CHILD.area.split(',') : []) : _CHILD ? _CHILD.area ?? '' : '',
+        vivienda: asArray ? (_CHILD.vivienda ? _CHILD.vivienda.split(',') : []) : _CHILD ? _CHILD.vivienda ?? '' : '',
+        cultural: asArray ? (_CHILD.cultural ? _CHILD.cultural.split(',') : []) : _CHILD ? _CHILD.cultural ?? '' : '',
+        regla_1: asArray ? (_CHILD.regla_1 ? _CHILD.regla_1.split(',') : []) : _CHILD ? _CHILD.regla_1 ?? '' : '',
+        regla_2: asArray ? (_CHILD.regla_2 ? _CHILD.regla_2.split(',') : []) : _CHILD ? _CHILD.regla_2 ?? '' : '',
+        anex_1:  asArray ? (_CHILD.anex1 ? _CHILD.anex1.split(';') : []) : _CHILD ? _CHILD.anex1 ?? '' : '',
+        anex_2: GET_JSON_FULL(_CHILD.anex2),
+        anex_3: asArray ? (_CHILD.anex3 ? _CHILD.anex3.split(';') : []) : _CHILD ? _CHILD.anex3 ?? '' : '',
+        description: _CHILD ? _CHILD.description ?? '' : '',
+    }
+
+    return _CHILD_VARS;
+}
+export function _GET_FUN_2(_data) {
+    var _CHILD = _data ? _data.fun_2 ?? {} : {};
+    var _CHILD_VARS = {
+        direccion: _CHILD.direccion ?? '',
+        direccion_ant: _CHILD.direccion_ant ?? '',
+        matricula: _CHILD.matricula ?? '',
+        catastral: _CHILD.catastral ?? '',
+        catastral_2: _CHILD.catastral_2 ?? '',
+        suelo: [_CHILD.suelo] ?? [''],
+        lote_pla: [_CHILD.lote_pla] ?? [''],
+        barrio: _CHILD.barrio ?? '',
+        vereda: _CHILD.vereda ?? '',
+        comuna: _CHILD.comuna ?? '',
+        sector: _CHILD.sector ?? '',
+        estrato: _CHILD.estrato ?? '',
+        corregimiento: _CHILD.corregimiento ?? '',
+        manzana: _CHILD.manzana ?? '',
+        lote: _CHILD.lote ?? '',
+    }
+    return _CHILD_VARS;
+}
+export function _GET_FUN_3(_data) {
+    var _CHILDREN = _data ? _data.fun_3s ?? [] : [];
+    var _VAR = _CHILDREN.map(item => {
+        return { ...item }
+    })
+
+    return _VAR;
+}
+
+export function _GET_FUN_4(_data) {
+    var _CHILDREN = _data ? _data.fun_4s ?? [] : [];
+    var _VAR = _CHILDREN.map(item => {
+        return { ...item }
+    })
+
+    return _VAR;
+}
+
+export function _GET_FUN_51(_data) {
+    var _CHILDREN = _data ? _data.fun_51s ?? [] : [];
+    var _VAR = _CHILDREN.map(item => {
+        return {
+            ...item,
+            docs: item.docs ? item.docs.split(',') : [],
+        }
+    })
+
+    return _VAR;
+}
+
+export function _GET_FUN_52(_data) {
+    var _CHILDREN = _data ? _data.fun_52s ?? [] : [];
+    var _VAR = _CHILDREN.map(item => {
+        return {
+            ...item,
+            docs: item.docs ? item.docs.split(',') : [],
+        }
+    })
+
+    return _VAR;
+}
+
+export function _GET_FUN_53(_data) {
+    var _CHILD = _data ? _data.fun_53s ? _data.fun_53s[0] : {} : {};
+    var _CHILD_VARS = {
+        id: _CHILD.id ?? false,
+        name: _CHILD.name ?? '',
+        surname: _CHILD.surname ?? '',
+        id_number: _CHILD.id_number ?? '',
+        role: _CHILD.role ?? '',
+        number: _CHILD.number ?? '',
+        email: _CHILD.email ?? '',
+        address: _CHILD.address ?? '',
+        docs: _CHILD.docs ? _CHILD.docs.split(',') : [],
+    }
+
+    return _CHILD_VARS;
 }
 
 
