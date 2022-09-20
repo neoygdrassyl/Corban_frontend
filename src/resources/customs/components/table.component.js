@@ -34,6 +34,7 @@ export default function TABLE_COMPONENT(props) {
             style: {
                 border: '0.2px solid',
                 borderColor: theme == 'dark' ? 'DimGrey' : 'lightgrey',
+                backgroundColor:  theme == 'dark' ? '#2d2d2d' : '',
             },
         },
     };
@@ -59,8 +60,8 @@ export default function TABLE_COMPONENT(props) {
         })
         let find2 = columns.some(c => {
             if (!c.selector) return false;
-            if (c.selector(d) == null) return false;
-            let curatedText = c.selector(d).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            if (c.selector(d) == null || c.selector(d) == undefined) return false;
+            let curatedText = String(c.selector(d)).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             return curatedText.includes(filter);
         })
         return find1 || find2
@@ -143,7 +144,7 @@ export default function TABLE_COMPONENT(props) {
             striped={theme == 'light' ? true : false}
             highlightOnHover
 
-            defaultSortFieldId={1}
+            defaultSortFieldId={props.sort ?? 1}
             defaultSortAsc={props.desc || false}
 
             paginationComponentOptions={{ rowsPerPageText: trn.publish, rangeSeparatorText: trn.of }}

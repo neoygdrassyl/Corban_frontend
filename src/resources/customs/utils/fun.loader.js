@@ -40,8 +40,16 @@ export function _GET_FUN_0(_data) {
         model: _data.model ?? false,
         tags: _data.tags ?? '',
         rules: _data.rules ? _data.rules.split(';') : [0, 0],
-        sign: _CHILD.sign ? _CHILD.sign.split(',') : [],
-        report_data: _CHILD.report_data ? _CHILD.report_data.split(',') : [],
+        sign_id: _CHILD.sign ? _CHILD.sign.split(',')[0] : 0,
+        sign_date: _CHILD.sign ? _CHILD.sign.split(',')[1] : '',
+        report_data: {
+            inform: _CHILD.report_data ? _CHILD.report_data.split(',')[0] : 0,
+            id_cub: _CHILD.report_cub ?? false,
+            date: _CHILD.report_data ? _CHILD.report_data.split(',')[2] : '',
+            reply: _CHILD.report_data ? _CHILD.report_data.split(',')[3] : '',
+            id_reply: _CHILD.report_data ? _CHILD.report_data.split(',')[5] : '',
+            id6: _CHILD.report_data ? _CHILD.report_data.split(',')[6] : 0,
+        },
         report_data_pdf: GET_JSON_FULL(_CHILD.report_data_pdf),
         report_cub: _CHILD.report_cub ?? false,
         cub_inc: _CHILD.cub_inc ?? false,
@@ -54,7 +62,7 @@ export function _GET_FUN_0(_data) {
     return _CHILD_VARS;
 }
 export function _GET_FUN_1(_data, asArray) {
-    var _CHILD = _data ? _data.fun_1s ? _data.fun_1s[0] : {} : {};
+    var _CHILD = _data ? _data.fun_1s ? _data.fun_1s[0] ?? {} : {} : {};
     var _CHILD_VARS = {
         id: _CHILD ? _CHILD.id ?? false : false,
         tipo: asArray ? (_CHILD.tipo ? _CHILD.tipo.split(',') : []) : _CHILD ? _CHILD.tipo ?? '' : '',
@@ -68,8 +76,8 @@ export function _GET_FUN_1(_data, asArray) {
         cultural: asArray ? (_CHILD.cultural ? _CHILD.cultural.split(',') : []) : _CHILD ? _CHILD.cultural ?? '' : '',
         regla_1: asArray ? (_CHILD.regla_1 ? _CHILD.regla_1.split(',') : []) : _CHILD ? _CHILD.regla_1 ?? '' : '',
         regla_2: asArray ? (_CHILD.regla_2 ? _CHILD.regla_2.split(',') : []) : _CHILD ? _CHILD.regla_2 ?? '' : '',
-        anex_1:  asArray ? (_CHILD.anex1 ? _CHILD.anex1.split(';') : []) : _CHILD ? _CHILD.anex1 ?? '' : '',
-        anex_2: GET_JSON_FULL(_CHILD.anex2),
+        anex_1: asArray ? (_CHILD.anex1 ? _CHILD.anex1.split(';') : []) : _CHILD ? _CHILD.anex1 ?? '' : '',
+        anex_2: GET_JSON_FULL(_CHILD ? _CHILD.anex2 : false),
         anex_3: asArray ? (_CHILD.anex3 ? _CHILD.anex3.split(';') : []) : _CHILD ? _CHILD.anex3 ?? '' : '',
         description: _CHILD ? _CHILD.description ?? '' : '',
     }
@@ -105,7 +113,6 @@ export function _GET_FUN_3(_data) {
 
     return _VAR;
 }
-
 export function _GET_FUN_4(_data) {
     var _CHILDREN = _data ? _data.fun_4s ?? [] : [];
     var _VAR = _CHILDREN.map(item => {
@@ -114,7 +121,6 @@ export function _GET_FUN_4(_data) {
 
     return _VAR;
 }
-
 export function _GET_FUN_51(_data) {
     var _CHILDREN = _data ? _data.fun_51s ?? [] : [];
     var _VAR = _CHILDREN.map(item => {
@@ -126,7 +132,6 @@ export function _GET_FUN_51(_data) {
 
     return _VAR;
 }
-
 export function _GET_FUN_52(_data) {
     var _CHILDREN = _data ? _data.fun_52s ?? [] : [];
     var _VAR = _CHILDREN.map(item => {
@@ -138,9 +143,8 @@ export function _GET_FUN_52(_data) {
 
     return _VAR;
 }
-
 export function _GET_FUN_53(_data) {
-    var _CHILD = _data ? _data.fun_53s ? _data.fun_53s[0] : {} : {};
+    var _CHILD = _data ? _data.fun_53s ? _data.fun_53s[0] ?? {} : {} : {};
     var _CHILD_VARS = {
         id: _CHILD.id ?? false,
         name: _CHILD.name ?? '',
@@ -155,9 +159,55 @@ export function _GET_FUN_53(_data) {
 
     return _CHILD_VARS;
 }
+export function _GET_FUN_6(_data) {
+    var _CHILDREN = _data ? _data.fun_6s ?? [] : [];
+    var _VAR = _CHILDREN.map(item => {
+        return {
+            ...item,
+        }
+    })
 
+    return _VAR;
+}
+export function _GET_FUN_C(_data) {
+    var _CHILD = _data ? _data.fun_cs ? _data.fun_cs[0] ?? {} : {} : {};
+    var _CHILD_VARS = {
+        id: _CHILD.id ?? false,
+        worker: _CHILD.worker ?? '',
+        date: _CHILD.date ?? '',
+        condition: _CHILD.condition ?? null,
+        details: _CHILD.details ?? '',
+        reciever_name: _CHILD.reciever_name ?? '',
+        reciever_date: _CHILD.reciever_date ?? '',
+        reciever_id: _CHILD.reciever_id ?? '',
+        reciever_actor: _CHILD.reciever_actor ?? '',
+        legal_date: _CHILD.legal_date ?? '',
+    }
+    return _CHILD_VARS;
+}
+export function _GET_FUN_REVIEW(_data) {
+    var _CHILD = _data ? _data.fun_rs ? _data.fun_rs[0] ?? {} : {} : {};
+    var _CHILD_VARS = {
+        ..._CHILD,
+        code: _CHILD.code ? _CHILD.code.split(',') : [],
+        checked: _CHILD.checked ? _CHILD.checked.split(',') : [],
+        review: _CHILD.review ? _CHILD.review.split(',') : [],
+        id6: _CHILD.id6 ? _CHILD.id6.split(',') : [],
+    }
 
-export function parserReport(_fun, _state) {
+    return _CHILD_VARS;
+}
+
+export function _GET_RECORD_REVIEW(_data){
+    var _CHILD = _data ? _data.record_review ?? {} : {};
+    var _CHILD_VARS = {
+        ..._CHILD,
+    }
+
+    return _CHILD_VARS;
+}
+
+export function parserReport(_fun, _state, _asArray) {
     let clock_1 = _GET_CLOCK_STATE_VERSION(_fun, _state, 1); // FIRST REVIEW
     let clock_100 = _GET_CLOCK_STATE_VERSION(_fun, _state, 100); // ASIGN
     let clock_200 = _GET_CLOCK_STATE_VERSION(_fun, _state, 200); // REVIEWS
@@ -166,6 +216,12 @@ export function parserReport(_fun, _state) {
     let rew_date;
     let asign;
     let not;
+    let type = '';
+
+    if(_state == 11) type = 'law'
+    if(_state == 12) type = 'eng'
+    if(_state == 13) type = 'arc'
+    if(_state == 14) type = 'ph'
 
     if (!clock_100.date_start) asign = [];
     else asign = clock_100.date_start.split(';')
@@ -195,9 +251,20 @@ export function parserReport(_fun, _state) {
         asign: asign,
         review: rew,
         rew_date: rew_date,
-        not: not
+        not: not,
+        type: type,
     }
-
+    if(_asArray){
+        let reportArray = [];
+        rew.map((a, i) => reportArray.push({
+            asign: asign[i],
+            review: rew[i],
+            rew_date: rew_date[i],
+            not: not[i],
+            type: type,
+        }))
+        return reportArray;
+    }
     return report
 
 }

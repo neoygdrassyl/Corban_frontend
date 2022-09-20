@@ -16,6 +16,8 @@ import HomeIcon from '@rsuite/icons/legacy/Home';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { IoIosSwitch } from 'react-icons/io';
 import MemberIcon from '@rsuite/icons/Member';
+import GearIcon from '@rsuite/icons/Gear';
+import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
 
 let _searchBar = (lang, title, items) => {
     let obj = {
@@ -189,6 +191,7 @@ export let translations = {
             tut_2: 'How to open a CSV file in LibreOffice',
             load: 'LOADING...',
             realod: 'RELOAD',
+            document: 'Document',
         },
         es: {
             save: 'GUARDAR',
@@ -212,6 +215,7 @@ export let translations = {
             tut_2: 'Como abrir un archivo CSV en LibreOffice',
             load: 'CARGANDO...',
             realod: 'RECARGAR',
+            document: 'Documento',
         }
 
     },
@@ -379,7 +383,7 @@ export let translations = {
         en: {
             tableTitle: 'License Holders',
             tableHd: ['PERSON TYPE', 'NAME', 'ID', 'LEGAL REP. ', 'REP ID', 'CONTACT NUMBER', 'MAIL', 'PERSON ROLE', 'DOCUMENTS'],
-            docs: ['ID',  'Certificate of Existence and Legal Representation']
+            docs: ['ID', 'Certificate of Existence and Legal Representation']
         },
         es: {
             tableTitle: 'Titular(es) de la Licencia',
@@ -393,20 +397,20 @@ export let translations = {
             tableHd: ['NAME', 'ID', 'CONTACT NUMBER', 'EMAIL', 'ROLE', 'REGISTRATION', 'REGISTRATION DATE', 'EXPERIENCE', 'SANCTIONED?', 'SUPERVISION', 'DOCUMENTS'],
             sanction: ['NO', 'YES'],
             year: ' Year(s)',
-            docs: ['ID',  'Registration', 'Registration validity', 'CV & certifications', 'Postgraduate studies'],
-            docsColor: ['primary',  'success', 'warning', 'danger', 'info'],
-            supervition: { 'NO': 'NO', 'SI': 'YES', 'N/A': 'N/A'},
+            docs: ['ID', 'Registration', 'Registration validity', 'CV & certifications', 'Postgraduate studies'],
+            docsColor: ['primary', 'success', 'warning', 'danger', 'info'],
+            supervition: { 'NO': 'NO', 'SI': 'YES', 'N/A': 'N/A' },
             role: {
-                'URBANIZADOR/PARCELADOR' : 'DEVELOPER/PARCELLER',
-                'URBANIZADOR O CONSTRUCTOR RESPONSABLE':'RESPONSIBLE DEVELOPER OR BUILDER',
-                'DIRECTOR DE LA CONSTRUCCION':'CONSTRUCTION MANAGER',
-                'ARQUITECTO PROYECTISTA':'DESIGNER ARCHITECT',
-                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL':'CIVIL ENGINEER STRUCTURAL DESIGNER',
-                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES':'DESIGNER OF NON-STRUCTURAL ELEMENTS',
-                'INGENIERO CIVIL GEOTECNISTA':'GEOTECHNICAL CIVIL ENGINEER',
-                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO':'TOPOGRAPHER AND/OR TOPOGRAPHER ENGINEER',
-                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES':'INDEPENDENT REVIEWER OF STRUCTURAL DESIGNS',
-                'OTROS PROFESIONALES ESPECIALISTAS':'OTHER SPECIALIST PROFESSIONALS',
+                'URBANIZADOR/PARCELADOR': 'DEVELOPER/PARCELLER',
+                'URBANIZADOR O CONSTRUCTOR RESPONSABLE': 'RESPONSIBLE DEVELOPER OR BUILDER',
+                'DIRECTOR DE LA CONSTRUCCION': 'CONSTRUCTION MANAGER',
+                'ARQUITECTO PROYECTISTA': 'DESIGNER ARCHITECT',
+                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL': 'CIVIL ENGINEER STRUCTURAL DESIGNER',
+                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES': 'DESIGNER OF NON-STRUCTURAL ELEMENTS',
+                'INGENIERO CIVIL GEOTECNISTA': 'GEOTECHNICAL CIVIL ENGINEER',
+                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO': 'TOPOGRAPHER AND/OR TOPOGRAPHER ENGINEER',
+                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES': 'INDEPENDENT REVIEWER OF STRUCTURAL DESIGNS',
+                'OTROS PROFESIONALES ESPECIALISTAS': 'OTHER SPECIALIST PROFESSIONALS',
             },
         },
         es: {
@@ -414,21 +418,45 @@ export let translations = {
             tableHd: ['NOMBRE', 'DOCUMENTO IDENTIFICACIÓN', 'NÚMERO DE CONTACTO', 'CORREO', 'ROL', 'MATRÍCULA', 'EXP. MATRÍCULA', 'EXPERIENCIA', '¿SANCIONADO?', 'SUPERVISIÓN', 'DOCUMENTOS'],
             sanction: ['NO', 'SI'],
             year: ' Año(s)',
-            docs: ['Documnto identificación',  'Matrícula', 'Vigencia matricular', 'Hoja de vida y certificados', 'Estudios postgrados'],
-            docsColor: ['primary',  'success', 'warning', 'danger', 'info'],
-            supervition: { 'NO': 'NO', 'SI': 'SI', 'N/A': 'N/A'},
+            docs: ['Documnto identificación', 'Matrícula', 'Vigencia matricular', 'Hoja de vida y certificados', 'Estudios postgrados'],
+            docsColor: ['primary', 'success', 'warning', 'danger', 'info'],
+            supervition: { 'NO': 'NO', 'SI': 'SI', 'N/A': 'N/A' },
             role: {
-                'URBANIZADOR/PARCELADOR' : 'URBANIZADOR/PARCELADOR',
-                'URBANIZADOR O CONSTRUCTOR RESPONSABLE':'URBANIZADOR O CONSTRUCTOR RESPONSABLE',
-                'DIRECTOR DE LA CONSTRUCCION':'DIRECTOR DE LA CONSTRUCCION',
-                'ARQUITECTO PROYECTISTA':'ARQUITECTO PROYECTISTA',
-                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL':'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL',
-                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES':'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES',
-                'INGENIERO CIVIL GEOTECNISTA':'INGENIERO CIVIL GEOTECNISTA',
-                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO':'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO',
-                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES':'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES',
-                'OTROS PROFESIONALES ESPECIALISTAS':'OTROS PROFESIONALES ESPECIALISTAS',
+                'URBANIZADOR/PARCELADOR': 'URBANIZADOR/PARCELADOR',
+                'URBANIZADOR O CONSTRUCTOR RESPONSABLE': 'URBANIZADOR O CONSTRUCTOR RESPONSABLE',
+                'DIRECTOR DE LA CONSTRUCCION': 'DIRECTOR DE LA CONSTRUCCION',
+                'ARQUITECTO PROYECTISTA': 'ARQUITECTO PROYECTISTA',
+                'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL': 'INGENIERO CIVIL DISEÑADOR ESTRUCTURAL',
+                'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES': 'DISEÑADOR DE ELEMENTOS NO ESTRUCTURALES',
+                'INGENIERO CIVIL GEOTECNISTA': 'INGENIERO CIVIL GEOTECNISTA',
+                'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO': 'INGENIERO TOPOGRAFO Y/O TOPÓGRAFO',
+                'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES': 'REVISOR INDEPENDIENTE DE LOS DISEÑOS ESTRUCTURALES',
+                'OTROS PROFESIONALES ESPECIALISTAS': 'OTROS PROFESIONALES ESPECIALISTAS',
             },
+        },
+    },
+    fun6: {
+        en: {
+            tableTitle: 'Digitalized documents',
+            tableHd: ['DESCRIPTION', 'CODE', 'SHEETS', 'DATE', 'DOCUMENT',],
+
+        },
+        es: {
+            tableTitle: 'Documentos digitalizados',
+            tableHd: ['DESCRIPCIÓN', 'CÓDIGO', 'FOLIOS', 'FECHA', 'DOCUMENTO',],
+
+        },
+    },
+    funSubmit: {
+        en: {
+            tableTitle: 'Filling both documents',
+            tableHd: ['DOCUMENT', 'CODE', 'SHEETS', 'ID', 'DATE', 'TIME',],
+
+        },
+        es: {
+            tableTitle: 'Documentos de ventanilla única',
+            tableHd: ['DOCUMENTO', 'CÓDIGO', 'FOLIOS', 'COSECUTIVO', 'FECHA', 'HORA',],
+
         },
     },
     progress_icons: {
@@ -591,6 +619,74 @@ export let translations = {
                 success: 'Licencia expedida',
                 fail: 'Licencia sin expedir',
             },
+        },
+    },
+    clocks: {
+        en: {
+            0: {name: 'Note', desc: false},
+            30: {name: 'Remarks Record', desc: 'First review of the process'},
+            31: {name: 'Summons (Observations)', desc: 'Summons to notify the record of Observations'},
+            32: {name: 'Notification (Observations)', desc: 'Notification to the applicant, personal, electronic or by certified mail'},
+            33: {name: 'Notification by notice (Observations)', desc: 'Failure to submit for notification of the record of Observations, notification by other means'},
+            34: {name: 'Submission Of Extension', desc: 'Submission of extension to extend the deadline for submitting corrections'},
+            35: {name: 'Presentation Of Corrections', desc: 'Formal presentation of the corrections for the record of Observations'},
+            49: {name: 'Correction Act', desc: 'Second review of the process'},
+            61: {name: 'License Processing Act (Viability)', desc: 'License viability processing'},
+            55: {name: 'Summons (Viability)', desc: 'Summons to notify the feasibility process of the license'},
+            56: {name: 'Notification (Viability)', desc: 'Notification to the applicant of the license viability process'},
+            57: {name: 'Notification by notice (Viability)', desc: 'Failure to submit for the license viability process, notification by other means'},
+            62: {name: 'Variable Expenses', desc: 'Variable Expense Payment'},
+            // ... OTHER CLOCKS OF PAYMENTS
+            69: {name: 'Filing Payments', desc: 'Filing all required payments'},
+            70: {name: 'Administrative Act / Resolution', desc: 'Issue of administrative act / Resolution'},
+            71: {name: 'Summons (Resolution)', desc: 'Summons to notify the administrative act / Resolution'},
+            72: {name: 'Notification (Resolution)', desc: 'Notification to the applicant of the administrative act / Resolution'},
+            73: {name: 'Notification by notice (Resolution)', desc: 'Failure to file for notification of the administrative act / Resolution, notification by other means'},
+            731: {name: 'Notification (interested entity)', desc: 'Notification to entity interested in recognition'},
+            730: {name: 'Terms waiver', desc: 'Terms waiver'},
+            74: {name: 'Resource', desc: 'Resource Presentation'},
+            75: {name: 'Resolve Appeal', desc: 'Resolution / Conclusion of appeal'},
+            751: {name: 'Summons (Appeal)', desc: 'Summons to notify the appeal'},
+            752: {name: 'Notification (Resource)', desc: 'Notification to resource requester'},
+            753: {name: 'Notification by notice (Recourse)', desc: 'Failure to file for notice of recourse, notice by other means'},
+            76: {name: 'Resolves Appeal (interested entity)', desc: 'Resolution / Conclusion of the appeal by the interested entity'},
+            761: {name: 'Reception of Notification (interested entity)', desc: 'Reception of the resource from the interested entity'},
+            85: {name: 'License publication', desc: 'License publication in media'},
+            99: {name: 'License Execution', desc: 'License Issuance'},
+            98: {name: 'License Delivery', desc: 'License Delivery'},
+        },
+        es:{
+            0: {name: 'Nota', desc: false},
+            30: {name: 'Acta de Observaciones', desc: 'Primera revisión del proceso'},
+            31: {name: 'Citación (Observaciones)', desc: 'Citación para notificar el acta de Observaciones'},
+            32: {name: 'Notificación (Observaciones)', desc: 'Notificación al solicitante, personal, electrónico o por correo certificado'},
+            33: {name: 'Notificación por aviso (Observaciones)', desc: 'Falta de presentación para la notificación de acta de Observaciones, notificación por otros medios'},
+            34: {name: 'Presentación De Prórroga', desc: 'Presentación de prórroga para extender el plazo para entregar correcciones'},
+            35: {name: 'Presentación De Correcciones', desc: 'Presentación formal de las correcciones para el acta de Observaciones'},
+            49: {name: 'Acta de Correcciones', desc: 'Segunda revisión del proceso'},
+            61: {name: 'Acto de Tramite de Licencia (Viabilidad)', desc: 'Tramitación de viabilidad de la licencia'},
+            55: {name: 'Citación (Viabilidad)', desc: 'Citación para notificar el tramite de viabilidad de la licencia'},
+            56: {name: 'Notificación (Viabilidad)', desc: 'Notificación al solicitante del tramite de viabilidad de licencia'},
+            57: {name: 'Notificación por aviso (Viabilidad)', desc: 'Falta de presentación para el tramite de viabilidad de licencia, notificación por otros medios'},
+            62: {name: 'Expensas Variables', desc: 'Pago de expensas variables'},
+            // ... OTHER CLOCKS OF PAYMENTS
+            69: {name: 'Radicación Pagos', desc: 'Radicación de todos los pagos requeridos'},
+            70: {name: 'Acto Administrativo / Resolución', desc: 'Expedición de acto administrativo / Resolución'},
+            71: {name: 'Citación (Resolución)', desc: 'Citación para notificar el acto administrativo / Resolución'},
+            72: {name: 'Notificación (Resolución)', desc: 'Notificación al solicitante del acto administrativo / Resolució'},
+            73: {name: 'Notificación por aviso (Resolución)', desc: 'Falta de presentación para la notificación del acto administrativo / Resolusión, notificación por otros medios'},
+            731: {name: 'Notificación (entidad interesada)', desc: 'Notificación a entidad interesada en reconocimiento'},
+            730: {name: 'Renuncia de terminos', desc: 'Renunciación de terminos'},
+            74: {name: 'Recurso', desc: 'Presentación de recurso'},
+            75: {name: 'Resuelve Recurso', desc: 'Resolusión / Conclusión del recurso'},
+            751: {name: 'Citación (Recurso)', desc: 'Citación para notificar el recurso'},
+            752: {name: 'Notificación (Recurso)', desc: 'Notificación al solicitante del recurso'},
+            753: {name: 'Notificación por aviso (Recurso)', desc: 'Falta de presentación para la notificación del recurso, notificación por otros medios'},
+            76: {name: 'Resuelve Recurso (entidad interesada)', desc: 'Resolusión / Conclusión del recurso por la entidad interesada'},
+            761: {name: 'Recepción Notificación (entidad interesada)', desc: 'Recibimiento del recurso de la entidad interesada'},
+            85: {name: 'Publicación de la licencia', desc: 'Publicación de la licencia en un medio de comunicación'},
+            99: {name: 'Ejecutoria de la Licencia', desc: 'Expedición de la licencia'},
+            98: {name: 'Entrega de la Licencia', desc: 'Entrega de la licencia'},
         },
     },
     // ******************** COMPONENTS ************************ // 
@@ -821,6 +917,14 @@ export let translations = {
             nodata: 'No se econtraron datos',
             search: 'Buscar',
         }
+    },
+    navigation: {
+        en: {
+            dash: 'Dasboard',
+        },
+        es: {
+            dash: 'Panel general',
+        },
     },
     // ******************** PAGES ************************ // 
     login: {
@@ -1840,6 +1944,7 @@ export let translations = {
     dashteam: {
         en: {
             title: 'WORK TEAM',
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, active: true}]},
             role_title: 'ROLES INFORMATION',
             team_data: ['LEADER', 'LOCATION', 'NUMBERS', 'EMAILS', 'ADDRESS', 'WEB PAGE'],
             role_data: ['ROLE', 'NO ROLES ASIGNED TO THIS USER', 'COMUNICATE WITH YOUR TEAM LEADER IN ORDER TO BE SET A NEW ROLE', 'DEACTIVATED USER', 'This user has been deactivated and cannot perfom any action, comunicate to your team leader for more information.'],
@@ -1878,6 +1983,7 @@ export let translations = {
         },
         es: {
             title: 'EQUIPO DE TRABAJO',
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, active: true}]},
             role_title: 'NFORMACIÓN DE FUNCIONES',
             team_data: ['LÍDER', 'UBICACIÓN', 'TELEFONOS', 'CORREOS', 'DIRECCIÓN', 'PÁGINA WEB'],
             role_data: ['ROL', 'NO HAY NINGÚN ROL ASIGNADO A ESTE USUARIO', 'COMUNÍQUESE CON EL LÍDER DEL EQUIPO PARA RECIBIR UN NUEVO ROL.', 'TRABAJADOR DESHABILITADO', 'Este trabajador ha sido desactivado por el administrador y no puede realizar ninguna acción, comuníquese con el director del equipo para mos información.'],
@@ -2511,7 +2617,7 @@ export let translations = {
             cert_th: ['CONSECUTIVO', 'TIPO', 'FECHA', 'CONSECUTIVO RELACIONADO'],
             tit_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'REPRESENTANTE LEGAL', 'CONSECUTIVOS RELACIONADOS'],
             prof_th: ['NOMBRE', 'NÚMERO DOCUMENTO', 'CORREO EKECTRÓNICO', 'NÚMERO DE CONTACTO', 'MATRÍCULA', 'DOCUMENTOS', 'CONSECUTIVOS RELACIONADOS'],
-            prof_docs: ['DOCUMENTO LEGAL DE IDENTIFICACIÓN', 'MATRICULAR', 'VIGENCIA', 'HOJA DE VIDA Y CERTIFICACIONES','ESTUDIOS DE POSTGRADO'],
+            prof_docs: ['DOCUMENTO LEGAL DE IDENTIFICACIÓN', 'MATRICULAR', 'VIGENCIA', 'HOJA DE VIDA Y CERTIFICACIONES', 'ESTUDIOS DE POSTGRADO'],
             prev_th: ['ADDRESS', 'MATRÍCULA', 'NÚMERO PREDIAL', 'NUEVO PREDIAL', 'ESTRATO', 'BARRIO', 'CONSECUTIVOS RELACIONADOS'],
             ss_th: ['CÓDIGO', 'DESCRIPCIÓN'],
             t_th: ['CÓDIGO', 'DESCRIPCIÓN'],
@@ -2766,6 +2872,7 @@ export let translations = {
     dfun: {
         en: {
             title: 'FILL LIENCESE',
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, }, { label: 'Fill license', href: '/fun', active: true }]},
             tabs: ['Incomplete', 'Reviewing', 'Issuing', 'Other processes', 'Desisting', 'Archived'],
             th: ['ID', 'TAGS', 'MODE', 'PROGRESS %', 'ACTION'],
             th_inc: ['FILL DATE', 'LIMITE DATE', 'TIME', 'PROGRESS'],
@@ -2777,6 +2884,7 @@ export let translations = {
         },
         es: {
             title: 'RADICACIÓN DE LICENCIAS',
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, }, { label: 'Fill license', href: '/fun', active: true }]},
             tabs: ['Incompleto', 'Evaluación', 'Expedición', 'Otras actuaciónes', 'Desistiendo', 'Archivado'],
             th: ['CONSECUTIVO', 'TAGS', 'MODALIDAD', 'PROGRECIÓN %', 'ACCIÓN'],
             th_inc: ['FECHA RADICACIÓN', 'FECHA LIMITE LDF', 'TIEMPO', 'PROGRECIÓN'],
@@ -2785,6 +2893,55 @@ export let translations = {
             th_oa: ['FECHA RADICACIÓN', 'FECHA LDF', 'TIEMPO', 'PROGRECIÓN'],
             th_neg: [],
             th_lic: ['ESTADO', 'PROGRECIÓN'],
+        },
+    },
+    options: {
+        en: {
+            title: 'SETTINGS',
+            nav: [{ label: 'Settings', href: '/options', active: true, icon: <GearIcon /> }],
+            text: 'Select local application settings at your convenience. These settings are tied to the local system, so if you use another computer, the settings will not be transferred, instead you will have to reconfigure your preferences again.',
+            confs: ['LANGUAGE SELECTION', 'APPLICATION THEME', 'DATE FORMAT'],
+            theme: ['Light theme', 'Dark theme'],
+            df: ['Example', 'ISO 8601', 'Letter', 'Letter short', 'Legal', 'American',],
+            fontScale: ['FONT SCALE', 'font-scale'],
+            fontFamily: 'FONT FAMILY',
+            pangram: 'This Pangram contains four a’s, one b, two c’s, one d, thirty e’s, six f’s, five g’s, seven h’s, eleven i’s, one j, one k, two l’s, two m’s, eighteen n’s, fifteen o’s, two p’s, one q, five r’s, twenty-seven s’s, eighteen t’s, two u’s, seven v’s, eight w’s, two x’s, three y’s, & one z. - Lee Sallows',
+        },
+        es: {
+            title: 'OPCIONES',
+            nav: [{ label: 'Opciones', href: '/options', active: true, icon: <GearIcon /> }],
+            text: 'Seleccione la configuración local de la aplicación a su comodidad. Esta configuración está ligada al sistema local, por lo tanto, si utiliza otro computador, la configuración no será transferida, en su lugar tendrá que reconfigurar sus preferencias nuevamente.',
+            confs: ['SELECCIÓN DE IDIOMA', 'TEMA DE LA APLICACIÓN', 'FORMATO DE FECHA'],
+            theme: ['Tema claro', 'Tema oscuro'],
+            df: ['Ejemplo', 'ISO 8601', 'Carta', 'Carta corta', 'Legal', 'Americano',],
+            fontScale: ['TAMAÑO DE LETRA', 'tamaño-letra'],
+            fontFamily: 'TIPO DE LETRA',
+            pangram: 'El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja',
+        },
+    },
+    help: {
+        en: {
+            title: 'HELP & INFORMATION',
+            nav: [{ label: 'Help & information', href: '/help', active: true, icon: <HelpOutlineIcon /> }],
+            bug_btn: 'FILL BUG REPORT',
+            bug_title: 'REPORT A BUG',
+            bug_body: 'In order to ensure maximum quality for our products and services, it is important to follow a constant process of updates that correct all errors that arise. Use this form to report a bug.',
+            FORM: [
+                { label: 'Product', ph: 'Product', options: ['Dovela', 'Other'], values: ['dovela', 'other'] },
+                { label: 'Information about the bug', ph: `Description of the error:\n\nWhat were you doing?\n\nWhat result did you expect?\n\nWhat actually happened?\n\nCan you reproduce the error? how?\n` }
+            ],
+        },
+        es:{
+            title: 'AYUDA E INFORMACIÓN',
+            nav: [{ label: 'Ayuda e información', href: '/help', active: true, icon: <HelpOutlineIcon /> }],
+            bug_btn: 'REPORTAR UN ERROR',
+            bug_title: 'REPORTAR UN ERROR',
+            bug_body: 'Para poder asegurar un máximo de calidad para nuestros productos y servicios, es impórtate seguir un proceso constante de actualizaciones que corrijan todos los errores que se presenten. Utilice este formulario para reportar un error.',
+            FORM: [
+                { label: 'Producto', ph: 'Producto', options: ['Dovela', 'Otro'], values: ['dovela', 'other'] },
+                { label: 'Información acerca del error', ph: `Descripción del error:\n\n¿Que estaba haciendo?\n\n¿Que resultado esperaba?\n\n¿Que paso en realidad?\n\n¿Puede reproducir el error? ¿como?\n` }
+            ],
+
         },
     },
 }

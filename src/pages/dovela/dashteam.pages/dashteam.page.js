@@ -29,6 +29,7 @@ import { Alert } from '@blueprintjs/core';
 import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
 import PATCH_NOTES from '../../../resources/customs/components/patchnotes.component';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 
 export default function DashboardTeam() {
@@ -48,6 +49,8 @@ export default function DashboardTeam() {
     var [openInvite, setInvite] = useState(false);
     let connection = auth.conn ?? {};
 
+    const connID = connection.id ?? '';
+    const connName = connection.name ?? '';
     const isSuperAdmin = connection.roles ? connection.roles.some(role => role.priority >= 10) : false;
     const permits = conn.roles ?? [];
     const canInviteWorker = FIND_PERMIT(permits, 'worker', 1);
@@ -169,9 +172,9 @@ export default function DashboardTeam() {
     );
     const CardColor = props => {
         return <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-            <Message onClick={props.onClick} className="pointer my-1" style={{ backgroundColor: props.color, height: '130px' }}
-                header={<label className='text-light fw-b pointer'>{props.icon} {props.title}</label>} >
-                <label className='text-light pointer'>{props.desc}</label>
+            <Message onClick={props.onClick} className="pointer my-1" style={{ backgroundColor: props.color, height: '130px', }}
+                header={<label className='text-light fw-b pointer' style={{ color: 'whitesmoke' }}>{props.icon} {props.title}</label>} >
+                <label className='text-light pointer' style={{ color: 'whitesmoke' }}>{props.desc}</label>
             </Message>
         </Col>
     }
@@ -293,7 +296,7 @@ export default function DashboardTeam() {
     let _COMPONENT_TOOLS_SELECTOR = () => {
         return <>
             <Divider>{trn.tools_title}</Divider>
-            <Row className="my-6" style={{ width: '100%' }}>
+            <Row className="my-6" style={{ width: '100%', }}>
                 {TOOL_INFO.map(it => <Col lg={4} md={6} sm={12} xs={24}>
                     <Card
                         {...it}
@@ -399,8 +402,9 @@ export default function DashboardTeam() {
             }).finally(() => { setLoading(false); setInvite(false) });
     }
 
-    return (
-        <div className="my-6 px-0">
+    return (<>
+        <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+        <div className="my-2 px-0">
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title}</h3>
             </Row>
@@ -417,5 +421,7 @@ export default function DashboardTeam() {
                     </>
                     : <NON_IDEAL_STATE type="permit" />}
         </div>
+    </>
+
     );
 }

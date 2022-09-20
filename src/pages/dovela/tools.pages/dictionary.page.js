@@ -622,9 +622,9 @@ export default function DICTIONARY() {
             }
         }
 
-        for (const key in FUN_T_CODES) {
-            if (Object.hasOwnProperty.call(FUN_T_CODES, key)) {
-                const element = FUN_T_CODES[key];
+        for (const key in FUN_T_CODES[lang]) {
+            if (Object.hasOwnProperty.call(FUN_T_CODES[lang], key)) {
+                const element = FUN_T_CODES[lang][key];
                 codes_t.push({ code: key, name: element })
             }
         }

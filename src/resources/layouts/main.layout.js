@@ -10,11 +10,7 @@ const MainLayout = ({ children, ...rest }) => {
 
     return (
         <div className={utilities ? utilities.theme : 'light'}>
-            <Container>
-                <Header><TopBarComponent /></Header>
-                <Content><Outlet /></Content>
-                <Footer><FooterComponent /></Footer>
-            </Container>
+            <Outlet />
         </div>
     );
 };

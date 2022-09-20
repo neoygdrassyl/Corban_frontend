@@ -1,10 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Container, Content } from 'rsuite';
+import { Container, Content, Footer, Header } from 'rsuite';
+import FooterComponent from '../customs/components/footer.component';
+import TopBarComponent from '../customs/components/topBar.component';
 
 const PublicLayout = () => (
   <Container>
-    <Content><Outlet/></Content>
+    <Header><TopBarComponent /></Header>
+    <Content><Outlet /></Content>
+    <Footer><FooterComponent /></Footer>
   </Container>
 );
 

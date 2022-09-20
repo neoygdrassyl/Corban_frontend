@@ -56,8 +56,8 @@ function TopBarComponent() {
                     label: trn.FORM[0].label, placeholder: trn.FORM[0].ph, req: true,
                     type: 'select', leftIcon: 'property', id: 'error_form_product', fname: 'product',
                     selectOptions: [
-                        { value: trn.FORM[0].values[0], label:  trn.FORM[0].options[0], },
-                        { value:  trn.FORM[0].values[1], label: trn.FORM[0].options[1], },
+                        { value: trn.FORM[0].values[0], label: trn.FORM[0].options[0], },
+                        { value: trn.FORM[0].values[1], label: trn.FORM[0].options[1], },
                     ]
                 },
             ],
@@ -96,29 +96,29 @@ function TopBarComponent() {
         let browser = navigator.userAgent;
         let url = window.location.href;
         let product = document.getElementById('error_form_product').value;
-        if(product == 'dovela') {
+        if (product == 'dovela') {
             formData.delete('product')
-            formData.append('product', product +' : '+ packageInfo.dovela_v)
-        } 
+            formData.append('product', product + ' : ' + packageInfo.dovela_v)
+        }
 
         formData.append('reporter', reporter)
         formData.append('browser', browser)
         formData.append('url', url)
-       
+
 
         ALERT_WAIT(lang);
         AtuhService.reportBug(formData)
-        .then(response => {
-            if (response.data === 'OK') {
-                ALERT_SUCCESS(lang);
-                setModal(false);
-            }
-            else ALERT_ERROR(lang);
-        })
-        .catch(e => {
-            console.log(e);
-            ALERT_ERROR(lang);
-        });
+            .then(response => {
+                if (response.data === 'OK') {
+                    ALERT_SUCCESS(lang);
+                    setModal(false);
+                }
+                else ALERT_ERROR(lang);
+            })
+            .catch(e => {
+                console.log(e);
+                ALERT_ERROR(lang);
+            });
 
     }
 
@@ -136,13 +136,16 @@ function TopBarComponent() {
                         icon={nots.length > 0 ? <Badge color="blue"> <FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} /></Badge> : <FaRegUser className="text-icon" style={{ fontSize: '1.5em' }} />}
                         title={<label className="pointer text-uppercase">{user.name}</label>} >
                         <Nav.Item icon={<GridIcon color="dark" />} onClick={() => navigate("/dashboard")}> {trn.dash}</Nav.Item>
+                        {/***
+                        
                         <Nav.Item icon={<NoticeIcon color="orange" />} onClick={() => navigate("/dashboard")}> {trn.menu[0]} {nots.length > 0 ? <Badge color="blue" content={nots.length} /> : ''}</Nav.Item>
                         <Nav.Item icon={<DetailIcon color="red" />} onClick={() => navigate("/dashboard")}> {trn.menu[1]}</Nav.Item>
                         <Nav.Item icon={<PeoplesIcon color="blue" />} onClick={() => navigate("/dashboard")}> {trn.menu[2]}</Nav.Item>
                         <Nav.Item icon={<GearIcon color="green" />} onClick={() => navigate("/dashboard")}> {trn.menu[3]}</Nav.Item>
                         <Nav.Item icon={<HelpOutlineIcon color="violet" />} onClick={() => navigate("/dashboard")}> {trn.menu[4]}</Nav.Item>
                         <Nav.Item icon={<InfoRoundIcon color="red" />} onClick={() => setModal(!modal)}> <strong className='text-danger'>{trn.menu[5]}</strong></Nav.Item>
-                        {<hr />}
+
+                         */}
                         <Nav.Item icon={<FaSignOutAlt style={{ fontSize: '1.2em' }} />} onClick={() => auth.signout(() => navigate("/"))}> {trn.lout}</Nav.Item>
                     </Nav.Menu>
 

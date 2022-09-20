@@ -45,6 +45,8 @@ import CALCULATOR_DOVELA from "./pages/dovela/tools.pages/cacl.page";
 import TEMPLATES from "./pages/dovela/temaplates.pages/templates.page";
 import DICTIONARY from "./pages/dovela/tools.pages/dictionary.page";
 import CERTIFICATIONS from "./pages/dovela/tools.pages/certifications.page";
+import OPTIONS from "./pages/user/options.page";
+import HELP from "./pages/user/help.page";
 
 
 
@@ -84,12 +86,16 @@ function App() {
                   <Route exact path="/daudit" element={<AUDITS_DOVELA />} />
                   <Route exact path="/dtemplates" element={<TEMPLATES />} />
 
-                  {
-                  /* -------------------------- TOLLS ----------------- */
-                  } 
+                  {/* -------------------------- TOLLS ----------------- */} 
+
                   <Route exact path="/dcalc" element={<CALCULATOR_DOVELA />} />
                   <Route exact path="/dictionary" element={<DICTIONARY />} />
                   <Route exact path="/dcerts" element={<CERTIFICATIONS />} />
+
+                    {/* -------------------------- OTHERS ----------------- */} 
+
+                    <Route exact path="/options" element={<OPTIONS />} />
+                    <Route exact path="/help" element={<HELP />} />
                 </Route>
               </Route>
 

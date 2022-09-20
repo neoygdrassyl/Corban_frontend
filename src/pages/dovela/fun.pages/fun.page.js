@@ -14,7 +14,7 @@ import { TiFolderOpen } from 'react-icons/ti'
 import DocPassIcon from '@rsuite/icons/DocPass';
 
 
-import { Nav, Progress, Row, Tag, TagGroup, TagInput } from 'rsuite';
+import { Breadcrumb, Nav, Progress, Row, Tag, TagGroup, TagInput } from 'rsuite';
 import { Button, Icon } from '@blueprintjs/core';
 import { formsParser1, regexChecker_isOA, regexChecker_isOA_2, regexChecker_isOA_3, regexChecker_isPh } from '../../../resources/customs/utils/funParser.module';
 import { _GET_CLOCK_STATE } from '../../../resources/customs/utils/fun.loader';
@@ -25,8 +25,13 @@ import PROGRESION_BAR from '../../../resources/customs/components/fun.components
 import MODAL from '../../../resources/customs/components/modal.component';
 import FORM from '../../../resources/customs/components/form.component';
 import FUN_GEN from '../../../resources/customs/components/fun.components/funGen.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
-var moment = require('moment');
+const BREADCRUMBS = [
+    { href: "/dashboard", icon: "folder-close", text: "Users" },
+    { href: "/fun", icon: "folder-close", text: "Janet" },
+    { icon: "document", text: "image.jpg" },
+];
 
 export default function FUN() {
     const auth = useContext(AuthContext);
@@ -34,11 +39,14 @@ export default function FUN() {
     const conn = auth.conn ?? {};
 
     const dvSerial = conn.technicalInfo.serials ? conn.technicalInfo.serials.process : false;
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('dfun');
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
+    const moment = utilities.moment;
 
     const permits = conn.roles ?? [];
     const canView = FIND_PERMIT(permits, 'fun', 1);
@@ -51,6 +59,8 @@ export default function FUN() {
     var [active, setActive] = useState('inc');
     var [modal, setModal] = useState(false);
     var [tags, setTags] = useState([]);
+
+
 
     useEffect(() => {
         if (load == 0 || load == 2) loadData();
@@ -78,7 +88,7 @@ export default function FUN() {
                 },
                 {
                     label: 'model', placeholder: 'model', leftIcon: 'calendar', fname: 'model',
-                    id: 'fun_form_model', df: moment().format('YYYY'), type: 'select', req: true,
+                    id: 'fun_form_model', df: moment.format('YYYY'), type: 'select', req: true,
                     selectOptions: [
                         { value: '2021', label: '2021', },
                         { value: '2022', label: '2022', },
@@ -86,7 +96,7 @@ export default function FUN() {
                 },
                 {
                     label: 'date', placeholder: 'date', type: 'date', req: true, id: 'fun_form_date', fname: 'date',
-                    dv: moment().format('YYYY-MM-DD'), useTime: false, leftIcon: 'calendar',
+                    dv: moment.format('YYYY-MM-DD'), useTime: false, leftIcon: 'calendar',
                 },
 
             ],
@@ -156,19 +166,19 @@ export default function FUN() {
         {
             name: trn.th_inc[0],
             selector: row => _GET_CLOCK_STATE(row, 3).date_start,
-            cell: row => _GET_CLOCK_STATE(row, 3).date_start,
+            cell: row => utilities.parseDate(_GET_CLOCK_STATE(row, 3).date_start),
         },
         {
             name: trn.th_inc[1],
             selector: row => {
                 let date = _GET_CLOCK_STATE(row, 3).date_start;
                 let limit = dateParser_finalDate(date, 30);
-                return limit;
+                return  limit;
             },
             cell: row => {
                 let date = _GET_CLOCK_STATE(row, 3).date_start;
                 let limit = dateParser_finalDate(date, 30);
-                return limit;
+                return utilities.parseDate(limit);
             },
         },
         {
@@ -189,7 +199,7 @@ export default function FUN() {
         {
             name: trn.th_ldf[0],
             selector: row => _GET_CLOCK_STATE(row, 5).date_start,
-            cell: row => _GET_CLOCK_STATE(row, 5).date_start,
+            cell: row => utilities.parseDate(_GET_CLOCK_STATE(row, 5).date_start),
         },
         {
             name: trn.th_ldf[1],
@@ -201,7 +211,7 @@ export default function FUN() {
         {
             name: trn.th_exp[0],
             selector: row => _GET_CLOCK_STATE(row, 61).date_start,
-            cell: row => _GET_CLOCK_STATE(row, 61).date_start,
+            cell: row => utilities.parseDate(_GET_CLOCK_STATE(row, 61).date_start),
         },
         {
             name: trn.th_exp[1],
@@ -213,7 +223,7 @@ export default function FUN() {
         {
             name: trn.th_oa[0],
             selector: row => _GET_CLOCK_STATE(row, 3).date_start,
-            cell: row => _GET_CLOCK_STATE(row, 3).date_start,
+            cell: row => utilities.parseDate(_GET_CLOCK_STATE(row, 3).date_start),
         },
         {
             name: trn.th_oa[1],
@@ -225,7 +235,7 @@ export default function FUN() {
             cell: row => {
                 let date = _GET_CLOCK_STATE(row, 3).date_start;
                 let limit = dateParser_finalDate(date, 30);
-                return limit;
+                return utilities.parseDate(limit);
             },
         },
         {
@@ -332,7 +342,11 @@ export default function FUN() {
 
     return (
         <>
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
             <div className='my-3'>
+
+
                 <Row className="text-center" style={{ width: '100%' }}>
                     <h3>{trn.title} <BTN_HELP title={'lic'} text={'lic'} page={[]} /></h3>
                 </Row>

@@ -69,72 +69,70 @@ function PROGRESION_ICONS(row, show) {
         return 'start';
     };
 
-    let reportLaw = () => parserReport(row, 11)
-    let reportArc = () => parserReport(row, 13)
-    let reportEng = () => parserReport(row, 12)
-    let reportPh = () => parserReport(row, 14)
+    let reportLaw = parserReport(row, 11)
+    let reportArc = parserReport(row, 13)
+    let reportEng = parserReport(row, 12)
+    let reportPh =  parserReport(row, 14)
 
     const lawStatus = () => {
         let lastRew = 0;
         let asign = false;
 
-        reportLaw().review.map(r => {
-            if (r !== '' || r !== undefined) lastRew = r
+        reportLaw.review.map(r => {
+            lastRew = r
         })
-
-        reportLaw().asign.map(r => {
-            if (r !== '' || r !== undefined) asign = r
+        reportLaw.asign.map(r => {
+            asign = r
         })
-        if (asign == false && lastRew == 0) return 'start';
-        if (asign && reportLaw().review.every(r => r !== 0 && r !== 1)) return 'warning';
-        if (lastRew == 1) return 'success';
-        if (asign && lastRew == 0) return 'fail';
+        //if (asign === false && lastRew === false) return 'start';
+        if (asign && !lastRew && lastRew !== false) return 'warning';
+        if (asign && (lastRew === 0 || lastRew === '0')) return 'fail';
+        if ((lastRew === '1' || lastRew === 1)) return 'success';
         return 'start'
     };
     const arcStatus = () => {
-        let lastRew = 0;
+        let lastRew = false;
         let asign = false;
-        reportArc().review.map(r => {
-            if (r !== '' || r !== undefined) lastRew = r
+        reportArc.review.map(r => {
+            lastRew = r
         })
-        reportArc().asign.map(r => {
-            if (r !== '' || r !== undefined) asign = r
+        reportArc.asign.map(r => {
+            asign = r
         })
-        if (asign == false && lastRew == 0) return 'start';
-        if (asign && reportLaw().review.every(r => r !== 0 && r !== 1)) return 'warning';
-        if (lastRew == 1) return 'success';
-        if (asign && lastRew == 0) return 'fail';
-        return 'start'
+        //if (asign === false && lastRew === false) return 'start';
+        if (asign && !lastRew && lastRew !== false) return 'warning';
+        if (asign && (lastRew === 0 || lastRew === '0')) return 'fail';
+        if ((lastRew === '1' || lastRew === 1)) return 'success';
+        return 'start';
     };
     const engStatus = () => {
         let lastRew = [0, 0]
         let asign = false;
 
-        reportEng().review.map(r => {
+        reportEng.review.map(r => {
             if (!r) return;
             let rews = r.split(',');
             if (rews[0] !== '' && rews[0] !== undefined && rews[1] !== '' && rews[1] !== undefined) lastRew = rews
         })
-        reportEng().asign.map(r => {
+        reportEng.asign.map(r => {
             if (r !== '' || r !== undefined) asign = r
         })
 
 
         if (asign == false && lastRew[0] == 0) return 'start';
-        if (asign && reportEng().review.every(r => !r)) return 'warning';
+        if (asign && reportEng.review.every(r => !r)) return 'warning';
         if (lastRew[0] == 1) return 'success';
         if (lastRew[0] == 0 && lastRew[1] == 1) return 'success';
         if (lastRew[0] == 0 && lastRew[0] == 0) return 'fail';
-        console.log(lastRew)
         return 'start'
     };
     const phStatus = () => {
         let lastRew = 0;
         let asign = false;
-        reportPh().review.map(r => {
+        reportPh.review.map(r => {
             if (r !== '' || r !== undefined) lastRew = r
         })
-        reportPh().asign.map(r => {
+        reportPh.asign.map(r => {
             if (r !== '' || r !== undefined) asign = r
         })
         if (asign == false && lastRew == 0) return 'start';
@@ -176,14 +174,14 @@ function PROGRESION_ICONS(row, show) {
             {show.pay ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.pay[payStatus]}</Tooltip>}><Icon icon="dollar" style={{ color: conditionColors[payStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.check ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.check[checkStatus]}</Tooltip>}><CheckOutlineIcon style={{ color: conditionColors[checkStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.neigh && useNeight && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.neigh[neightStatus()]}</Tooltip>}><AdminIcon style={{ color: conditionColors[neightStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
-            {show.sign && useSign && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.sign[signStatus]}</Tooltip>}><Icon  style={{ color: conditionColors[signStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
+            {show.sign && useSign && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.sign[signStatus]}</Tooltip>}><Icon icon="media" style={{ color: conditionColors[signStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.report && useReport ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.report[reportStatus()]}</Tooltip>}><TextImageIcon style={{ color: conditionColors[reportStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
-            
+
             {show.law && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.law[lawStatus()]}</Tooltip>}><Icon icon="book" style={{ color: conditionColors[lawStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.arc && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.arc[arcStatus()]}</Tooltip>}><Icon icon="home" style={{ color: conditionColors[arcStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.eng && useEng && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.eng[engStatus()]}</Tooltip>}><GearIcon style={{ color: conditionColors[engStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.ph && usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.ph[phStatus()]}</Tooltip>}><PageIcon style={{ color: conditionColors[phStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
-            
+
             {show.acta && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.acta[actaStatus()]}</Tooltip>}><DocPass style={{ color: conditionColors[actaStatus()], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.via && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.via[viaStatus]}</Tooltip>}><DocPass style={{ color: conditionColors[viaStatus], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
             {show.pay2 && !usePH ? <Whisper followCursor placement="auto" speaker={<Tooltip>{trn.pay2[pay2Status]}</Tooltip>}><Icon icon="dollar" style={{ color: conditionColors[pay2Status], fontSize: iconSize, marginLeft: '1px' }} /></Whisper> : ''}
