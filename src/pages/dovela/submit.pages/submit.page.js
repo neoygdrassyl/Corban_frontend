@@ -21,12 +21,16 @@ import SUBMIT_LISTS from './submit_lists.component';
 import ButtonWhisper from '../../../resources/customs/components/btnWhisper.component';
 import SUBMIT_PDF from './submit_pdf.component';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 
 export default function SUBMIT() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('submit');
@@ -376,6 +380,8 @@ export default function SUBMIT() {
 
     return (
         <>
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title}  <BTN_HELP
                     title={trn.btn_help_texts[0]}

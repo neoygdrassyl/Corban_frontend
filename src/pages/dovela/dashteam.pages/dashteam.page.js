@@ -105,7 +105,7 @@ export default function DashboardTeam() {
 
     // USER CONFIGS => USER, cit, prof, ent, 
     
-        USER PREFERENCES (theme, lang, date format, font size, link colors) -> SAVE IN BD
+        USER PREFERENCES (theme, lang, date format, font size, font type,  link colors) -> SAVE IN BD
 
     //  HELP PAGE (user)
 

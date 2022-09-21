@@ -25,6 +25,7 @@ export default function FUN_6(props) {
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
     const theme = utilities.theme;
+    const parseDate = utilities.parseDate;
 
     const permits = conn.roles ?? [];
     const canView = FIND_PERMIT(permits, 'fun', 1);
@@ -54,7 +55,7 @@ export default function FUN_6(props) {
         {
             name: trn.tableHd[3],
             selector:row => row.date,
-            cell: row => row.date,
+            cell: row => parseDate(row.date),
         },
         {
             name: trn.tableHd[4],

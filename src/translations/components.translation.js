@@ -18,6 +18,14 @@ import { IoIosSwitch } from 'react-icons/io';
 import MemberIcon from '@rsuite/icons/Member';
 import GearIcon from '@rsuite/icons/Gear';
 import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
+import DashboardIcon from '@rsuite/icons/Dashboard';
+import GridIcon from '@rsuite/icons/Grid';
+import AttachmentIcon from '@rsuite/icons/Attachment';
+import ListIcon from '@rsuite/icons/List';
+import AdminIcon from '@rsuite/icons/Admin';
+import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
+import MessageIcon from '@rsuite/icons/Message';
+import ToolsIcon from '@rsuite/icons/Tools';
 
 let _searchBar = (lang, title, items) => {
     let obj = {
@@ -192,6 +200,7 @@ export let translations = {
             load: 'LOADING...',
             realod: 'RELOAD',
             document: 'Document',
+            view_gen: 'View general information'
         },
         es: {
             save: 'GUARDAR',
@@ -216,8 +225,17 @@ export let translations = {
             load: 'CARGANDO...',
             realod: 'RECARGAR',
             document: 'Documento',
+            view_gen: 'Ver información general'
         }
 
+    },
+    process: {
+        en: {
+            review: ['NOT VIABLE', 'VIABLE', 'NO APPLY'],
+        },
+        es: {
+            review: ['NO VIABLE', 'VIABLE', 'NO APLICA'],
+        },
     },
     viewer: {
         en: {
@@ -311,6 +329,8 @@ export let translations = {
                 sign: ['Publicity used', 'Publicity NOT use'],
                 eng: ['Estructural report used', 'Estructural repor NOT use'],
             },
+            name: 'Process',
+            documents: 'Documents',
         },
         es: {
             cubs: {
@@ -335,10 +355,109 @@ export let translations = {
                 sign: ['Publicidad usada', 'Publicidad NO usada'],
                 eng: ['Reporte estructural usado', 'Reporte estructural NO usado'],
             },
+            name: 'Actuación',
+            documents: 'Documentos',
         }
+    },
+    fun0: {
+        en: {
+            title: 'Process metadata',
+            type: 'Type of process',
+            desc: 'Description',
+            state: 'State',
+            cat: 'Category',
+            model: 'Model',
+            pay_id: 'Payment ID',
+            pay_date: 'Paymeny date',
+            pay_id6: 'Payment document',
+            rules: 'Special rules',
+            arch: 'Archive',
+        },
+        es: {
+            title: 'Meta datos de la Actuación',
+            type: 'Tipo de Actuacion',
+            desc: 'Descripción',
+            state: 'Estado',
+            cat: 'Categoria',
+            model: 'Modelo',
+            pay_id: 'Consecutivo de pago',
+            pay_date: 'Fecha de pago',
+            pay_id6: 'Documento de pago',
+            rules: 'Reglas especiales',
+            arch: 'Archivo',
+        },
+    },
+    fun1: {
+        en: {
+            title: 'Process identification',
+            type: 'Type of request',
+            obj: 'Procedure goal',
+            urb: 'Urbanization License Mode',
+            sub: 'Subdivision License Mode',
+            con: 'Construction License Mode',
+            use: 'Uses',
+            area: 'Built-up area',
+            house: 'Type of housing',
+            bic: 'Location of cultural interest',
+            sustain: 'Declaration on sustainable construction measures',
+            weather: 'Climate Zoning',
+        },
+        es: {
+            title: 'Identificación de la Actuación',
+            type: 'Tipo de solicitud',
+            obj: 'Objeto de trámite',
+            urb: 'Modalidad Licencia de Urbanización',
+            sub: 'Modalidad Licencia de Subdivisión',
+            con: 'Modalidad Licencia de Construcción',
+            use: 'Usos',
+            area: 'Área construida',
+            house: 'Tipo de vivienda',
+            bic: 'Bien de interés cultural',
+            sustain: 'Declaración sobre medidas de construcción sostenible',
+            weather: 'Zonificación Climática',
+        },
+    },
+    fun2: {
+        en:{
+            title: 'Building Information',
+            address: 'Current address',
+            address2: 'Previous addresses',
+            mat: 'Real estate registration ID',
+            cat: 'Catastral identificacion (Old)',
+            cat2: 'Catastral identificacion (New, 30 digits)',
+            soil: 'Soil clasification',
+            plan: 'Lot Planimetry',
+            barrio: 'Neighbour',
+            vereda: 'Village',
+            comuna: 'Commune',
+            sector: 'Sector',
+            estrato: 'Strata',
+            corre: 'Settlement',
+            manzana: 'Square No.',
+            lote: 'Lot No.',
+        },
+        es: {
+            title: 'Información del predio',
+            address: 'Dirección o Nomenclatura actual',
+            address2: 'Dirección(es) Anterior(es)',
+            mat: 'No. Matrícula Inmobiliaria',
+            cat: 'Identificación Catastral (Viejo)',
+            cat2: 'Identificación Catastral (Nuevo, 30 dígitos)',
+            soil: 'Clasificación del Suelo',
+            plan: 'Planimetría del Lote',
+            barrio: 'Barrio',
+            vereda: 'Vereda',
+            comuna: 'Comuna',
+            sector: 'Sector',
+            estrato: 'Estrato',
+            corre: 'Corregimiento',
+            manzana: 'Manzana No.',
+            lote: 'Lote No.',
+        },
     },
     fun3: {
         en: {
+            title: 'Adjacent Neighbors Information',
             tableTitle: 'Adjacent Neighbors',
             tableHd: ['PROPERTY ADDRESS', 'CORRESPONDENCE ADDRESS', 'DATA ORIGIN', 'WAS PARTY DECLARED?', 'CITATION STATUS', 'OUT CONSECUTIVE', 'CONFIRMATION GUIDE', 'DATE RECEIVED', 'METHODS OF PUBLICATION', 'PUBLICATION SUPPORTS', 'DOCUMENT', 'ACTION'],
             dataOrigin: ['Filled out by the team', 'Filled out by the applicant'],
@@ -348,6 +467,7 @@ export let translations = {
             support: 'Support document',
         },
         es: {
+            title: 'Información de Vecinos Colindantes',
             tableTitle: 'Vecinos Colindantes',
             tableHd: ['DIRECCION DEL PREDIO', 'DIRECCION DE CORRESPONDENCIA', 'ORIGEN DATO', '¿SE DECLARÓ PARTE?', 'ESTADO CITACIÓN', 'CONSECUTIVO DE SALIDA', 'GUIA DE CONFIRMACION', 'FECHA RECIBIDO', 'METODOS DE PUBLICACION', 'SOPORTES DE PUBLICACION', 'DOCUMENTO', 'ACCIÓN',],
             dataOrigin: ['Diligenciado por el equipo', 'Diligenciado por el solicitante'],
@@ -359,6 +479,7 @@ export let translations = {
     },
     fun4: {
         en: {
+            title: 'Boundaries, Dimensions and Areas',
             tableTitle: 'Boundaries, Dimensions and Areas',
             tableHd: ['BOUNDARIES', 'LENGTH (in m)', 'BORDERS WITH'],
             coord: {
@@ -369,6 +490,7 @@ export let translations = {
             }
         },
         es: {
+            title: 'Linderos, Dimensiones y Áreas',
             tableTitle: 'Linderos, Dimensiones y Áreas',
             tableHd: ['LINDEROS', 'LONGITUD (en m)', 'COLINDA CON: '],
             coord: {
@@ -379,13 +501,23 @@ export let translations = {
             }
         },
     },
+    fun5:{
+        en: {
+            title: 'License holders and responsible professionals',
+        },
+        es:{
+            title: 'Titulares y profesionales responsables',
+        },
+    },
     fun51: {
         en: {
+            title: 'License Holders',
             tableTitle: 'License Holders',
             tableHd: ['PERSON TYPE', 'NAME', 'ID', 'LEGAL REP. ', 'REP ID', 'CONTACT NUMBER', 'MAIL', 'PERSON ROLE', 'DOCUMENTS'],
             docs: ['ID', 'Certificate of Existence and Legal Representation']
         },
         es: {
+            title: 'Titular(es) de la Licencia',
             tableTitle: 'Titular(es) de la Licencia',
             tableHd: ['TIPO PERSONA', 'NOMBRE', 'DOCUMENTO IDENTIFICACIÓN', 'NOMBRE REP. LEGAL', 'DOCUMENTO IDENTIFICACIÓN REP.', 'NÚMERO DE CONTACTO', 'CORREO', 'TIPO TITULAR', 'DOCUMENTOS'],
             docs: ['Documento Identificador', 'Certificado de Existencia y Representación Legal']
@@ -393,6 +525,7 @@ export let translations = {
     },
     fun52: {
         en: {
+            title: 'Responsible Professionals',
             tableTitle: 'Responsible Professionals',
             tableHd: ['NAME', 'ID', 'CONTACT NUMBER', 'EMAIL', 'ROLE', 'REGISTRATION', 'REGISTRATION DATE', 'EXPERIENCE', 'SANCTIONED?', 'SUPERVISION', 'DOCUMENTS'],
             sanction: ['NO', 'YES'],
@@ -414,6 +547,7 @@ export let translations = {
             },
         },
         es: {
+            title: 'Profesionales Responsables',
             tableTitle: 'Profesionales Responsables',
             tableHd: ['NOMBRE', 'DOCUMENTO IDENTIFICACIÓN', 'NÚMERO DE CONTACTO', 'CORREO', 'ROL', 'MATRÍCULA', 'EXP. MATRÍCULA', 'EXPERIENCIA', '¿SANCIONADO?', 'SUPERVISIÓN', 'DOCUMENTOS'],
             sanction: ['NO', 'SI'],
@@ -435,28 +569,210 @@ export let translations = {
             },
         },
     },
+    fun53: {
+        en: {
+            title: 'Responsible license holder',
+            name: 'Name',
+            surname: 'Surname',
+            id_number: 'Document ID',
+            role: 'Role',
+            number: 'Contact number',
+            emmail: 'Contact email',
+            address: 'Mailing address',
+            documents: 'Documents',
+            doc_names: ['Document ID', 'Power, mandate or authorization duly granted'],
+        },
+        es: {
+            title: 'Responsable de la Solicitud',
+            name: 'Nombre',
+            surname: 'Apellido',
+            id_number: 'Documento identificador',
+            role: 'En calidad de',
+            number: 'Número de contacto',
+            emmail: 'Correo de contacto',
+            address: 'Dirección de correspondencia',
+            documents: 'Documentos',
+            doc_names: ['Documento identificación', 'Poder, mandato o autorización debidamente otorgado'],
+        },
+    },
     fun6: {
         en: {
+            title: 'Digitalized documents',
             tableTitle: 'Digitalized documents',
             tableHd: ['DESCRIPTION', 'CODE', 'SHEETS', 'DATE', 'DOCUMENT',],
 
         },
         es: {
+            title: 'Documentos digitalizados',
             tableTitle: 'Documentos digitalizados',
             tableHd: ['DESCRIPCIÓN', 'CÓDIGO', 'FOLIOS', 'FECHA', 'DOCUMENTO',],
 
         },
     },
+    funA: {
+        en: {
+            title: 'Sustainable Construction Annex',
+             type: 'Type of use',
+             rule: 'Sustainable Construction Regulation',
+             pass: 'Passive measures',
+             act: 'Active measures',
+             wall_out: 'External wall materiality',
+             wall_in: 'Internal wall materiality',
+             top: 'cover material',
+             relation: 'Relationship wall window and floor to ceiling height',
+             range: ['Range( 0% - 100%)', 'North', 'South', 'East', 'West'],
+             water: 'Declaration on water saving measures',
+             weather: 'Climate Zoning',
+             water2: 'Expected water savings',
+             energy: 'Expected energy savings',
+             area: 'Project area',
+             area1: 'Net urban and landscaping area (if applicable)',
+             area2: 'Net area of common areas (if applicable)',
+             area3: 'Net parking area (if applicable)',
+        },
+        es: {
+            title: 'Anexo de construcción sostenible',
+            type: 'Tipo de uso',
+            rule: 'Reglamento de construcción sostenible',
+            pass: 'Medidas pasivas',
+            act: 'Medidas activas',
+            wall_out: 'Materialidad muro externos',
+            wall_in: 'Materialidad muro interno',
+            top: 'aterialidad de cubierta',
+            relation: 'Relación muro ventana y altura piso a techo',
+            range: ['Rango( 0% - 100%)', 'Norte', 'Sur', 'Oriente', 'Occidente'],
+            water: 'Declaración sobre medidas de ahorro en agua',
+            weather: 'Zonificación Climática',
+            water2: 'Ahorro de esperado de agua',
+            energy: 'Ahorro esperado en energía',
+            area: 'Área del proyecto',
+            area1: 'Área neta de urbanismo y paisajismo (si aplica)',
+            area2: 'Área neta de zonas comunes (si aplica)',
+            area3: 'Área neta de parqueaderos (si aplica)',
+        },
+    },
+    funC: {
+        en:{
+            title: 'Check',
+            worker: 'Review manager name',
+            date: 'Revision Date',
+            result: 'Filing condition',
+            state: ['Incomplete', 'Legally submmited'],
+            role: 'Actuator role',
+            name: 'Actuator name',
+            id_number: 'Actuator identification document',
+            date_inc: 'Incomplete date',
+            date_ldf: 'Legally submmited date',
+            details: 'Details',
+            tableHd: ['CODE', 'DOCUMENT NAME', 'CONTRIBUTED'],
+            rr:  ['NO', 'YES', 'NA'],
+            ra:  {'A': 'APPLICANT', 'B': 'POWER HOLDER', 'C': 'MANDATARY',}
+        },
+        es: {
+            title: 'Checkeo',
+            worker: 'Nombre encarrgado revisión',
+            date: 'Fecha revision',
+            result: 'Condicion de la radicación',
+            state: ['Incompleto', 'LyDF'],
+            role: 'Calidad de actuador',
+            name: 'Nombre actuador',
+            id_number: 'Documnto identificador actuador',
+            date_inc: 'Fecha incompleto',
+            date_ldf: 'Fecha LyDF',
+            details: 'Detalles',
+            tableHd: ['CODIGO', 'NOMBRE DOCUMENTO', 'APORTÓ'],
+            rr:  ['NO', 'SI', 'NA'],
+            ra:  {'A': 'SOLICITANTE', 'B': 'APODERADO', 'C': 'MANDATARIO',}
+        },
+    },
     funSubmit: {
         en: {
+            title: 'Filling both',
             tableTitle: 'Filling both documents',
             tableHd: ['DOCUMENT', 'CODE', 'SHEETS', 'ID', 'DATE', 'TIME',],
 
         },
         es: {
+            title: 'Ventanilla única',
             tableTitle: 'Documentos de ventanilla única',
             tableHd: ['DOCUMENTO', 'CÓDIGO', 'FOLIOS', 'COSECUTIVO', 'FECHA', 'HORA',],
 
+        },
+    },
+    funLaw: {
+        en:{
+            title: 'Advertising and others',
+            sign_date: 'Fence installation date',
+            sign_id6: 'Photo fence',
+            report_title: 'Recognition letter',
+            report_state : 'Notification of recognition to the interested entity',
+            report_id : 'Out ID',
+            report_date: 'Filing Date to the interested entity',
+            report_reply :'Response interested entity filing:',
+            report_limit : 'Limit Date (Filing date plus 10 business days)',
+            report_id2: 'Out ID of the interested entity',
+            report_id6: 'Related Document',
+            report_doc : 'Entity response',
+            inform : ['NOT INFORMED', 'INFORMED', 'NOT APPLY'],
+        },
+        es: {
+            title: 'Publicidad y otros',
+            sign_date: 'Fecha de instalación de valla',
+            sign_id6: 'Fotografia valla',
+            report_title: 'Oficio de reconocimiento',
+            report_state : 'Notificación de reconocimiento a la entidad interesada',
+            report_id : 'Consecutivo del oficio',
+            report_date: 'Fecha de Radicación ante la entidad interesada',
+            report_reply :'Respuesta entidad interesada radicación:',
+            report_limit : 'Fecha Limite (Fecha radicación mas 10 días hábiles)',
+            report_id2: 'Oficio de la entidad interesada',
+            report_id6: 'Documento relacionado',
+            report_doc : 'Respuesta entidad',
+            inform : ['NO INFORMADO', 'INFORMADO', 'NO APLICA'],
+        },
+    },
+    records: {
+        en: {
+            records: 'Reports',
+            law: 'Juridical',
+            arc: 'Architectural',
+            eng: 'Structural',
+            ph: 'P.H.',
+            recordTh: ['STUDY', 'ASSIGNMENT', 'RESULT', 'RES. DATE', 'NOTIFICATION'],
+            review: 'Act of observations and corrections',
+            review1: 'Act of observations',
+            review2: 'Act of corrections',
+            review1_date: 'Act of observations date',
+            review1_res: 'Act of observations result',
+            review2_date: 'Act of corrections date',
+            review2_res: 'Act of corrections result',
+            reviewTh: ['EVENT', 'EVENT DATE', 'DEADLINE', 'FORM', 'DOCUMENT'],
+            terms: 'END PROCESS OF CORRECTIONS',
+            clocks: ['Applicant terms resumption', 'Team terms resumption'],
+            via: 'Feasibility act',
+            expTh: ['EVENT', 'EVENT DATE', 'DEADLINE', 'FORM', 'DOCUMENT'],
+            breakpoits : ['FEABILITY ACT', 'PAYMENTS', 'RESOLUTION', 'RESOURCE', 'LICENSE']
+        },
+        es: {
+            records: 'Informes',
+            law: 'Juridico',
+            arc: 'Arquitectonico',
+            eng: 'Estructural',
+            ph: 'P.H.',
+            recordTh: ['ESTUDIO', 'ASIGNACIÓN', 'RESULTADO', 'FECHA RES.', 'NOTIFICACIÓN'],
+            review: 'Acta de observaciones y correciones',
+            review1: 'Acta de observaciones',
+            review2: 'Acta de correciones',
+            review1_date: 'Acta de observaciones fecha',
+            review1_res: 'Acta de observaciones resultado',
+            review2_date: 'Acta de correciones fecha',
+            review2_res: 'Acta de correciones resultado',
+            reviewTh: ['EVENTO', 'FECHA EVENTO', 'FECHA LIMITE', 'FORMA', 'DOCUMENTO'],
+            terms: 'TERMINA PROCESO DE CORRECIONES',
+            clocks: ['Reanudación de términos solicitante', 'Reanudación de términos Curaduria'],
+            via: 'Acta de viabilidad',
+            expTh: ['EVENTO', 'FECHA EVENTO', 'FECHA LIMITE', 'FORMA', 'DOCUMENTO'],
+            breakpoits : ['ACTA DE VIABILIDAD', 'PAGOS', 'RESOLUCIÓN', 'RECURSO', 'LICENCIA']
         },
     },
     progress_icons: {
@@ -687,6 +1003,32 @@ export let translations = {
             85: {name: 'Publicación de la licencia', desc: 'Publicación de la licencia en un medio de comunicación'},
             99: {name: 'Ejecutoria de la Licencia', desc: 'Expedición de la licencia'},
             98: {name: 'Entrega de la Licencia', desc: 'Entrega de la licencia'},
+        },
+    },
+    doc_list_titles: {
+        en: {
+            list_61: 'DOCUMENTS COMMON TO ALL REQUEST',
+            list_62: 'URBANIZATION LICENSE DOCUMENTS',
+            list_63: 'PARCELATION LICENSE DOCUMENTS',
+            list_64: 'ADDITIONAL SUBDIVISION LICENSE DOCUMENTS',
+            list_65: 'ADDITIONAL BUILDING RECOGNITION DOCUMENTS',
+            list_66: 'ADDITIONAL CONSTRUCTION LICENSE DOCUMENTS',
+            list_67: 'PUBLIC SPACE INTERVENTION AND OCCUPATION DOCUMENTS',
+            list_68: 'ADDITIONAL DOCUMENTS OTHER ACTIONS',
+            list_Z: 'EXPENSE / TAX DOCUMENTS',
+            new: 'NEW LIST',
+        },
+        es: {
+            list_61: 'DOCUMENTOS COMUNES A TODA SOLICITUD',
+            list_62: 'DOCUMENTOS LICENCIA DE URBANIZACIÓN',
+            list_63: 'DOCUMENTOS LICENCIA DE PARCELACIÓN',
+            list_64: 'DOCUMENTOS ADICIONALES LICENCIA DE SUBDIVICION',
+            list_65: 'DOCUMENTOS ADICIONALES DE RECONOCIMIENTO DE EDIFICACIONES',
+            list_66: 'DOCUMENTOS ADICIONALES LICENCIA DE CONSTRUCCION',
+            list_67: 'DOCUMENTOS INTERVENCIÓN Y OCUPACIÓN ESPACIO PÚBLICO',
+            list_68: 'DOCUMENTOS ADICIONALES OTRAS ACTUACIONES',
+            list_Z: 'DOCUMENTOS EXPENSAS / IMPUESTOS',
+            new: 'NUEVA LISTA',
         },
     },
     // ******************** COMPONENTS ************************ // 
@@ -1051,6 +1393,7 @@ export let translations = {
     },
     submit: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Filing Booth', href: '/submit', active: true, icon: <AttachmentIcon/> }]},
             HELP_PAGE: [
                 {
                     title: 'FILING BOOTH',
@@ -1352,6 +1695,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Ventanilla única de radicación', href: '/submit', active: true, icon: <AttachmentIcon/> }]},
             HELP_PAGE: [
                 {
                     title: 'VENTANILLA ÚNICA DE RADICACIÓN',
@@ -1655,6 +1999,7 @@ export let translations = {
     },
     roles: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Work team roles', href: '/roles', active: true, icon: <AdminIcon/> }]},
             title: 'WORK TEAM ROLES',
             tableHd: 'ROLES LIST',
             tableCl: ['NAME', 'DESCRIPTION', 'ACTION'],
@@ -1713,7 +2058,8 @@ export let translations = {
             ],
         },
         es: {
-            title: 'ROLES DE EQUIPO DE TRABAJO',
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Roles del equipo de trabajo', href: '/roles', active: true, icon: <AdminIcon/> }]},
+            title: 'ROLES DEL EQUIPO DE TRABAJO',
             tableHd: 'LISTA DE ROLES',
             tableCl: ['NOMBRE', 'DESCRIPCIÓN', 'ACCIÓN'],
             newtitle: 'CREAR NUEVO ROL',
@@ -1724,11 +2070,11 @@ export let translations = {
             ],
             confirm: "¿Está seguro de que desea eliminar esto rol de forma permanente? la información no será recuperable.",
             adminRole: 'Este es un rol administrador. Este rol sobrepasa los sets de reglas de los Trbajadores y Roles y NO puede ser eliminado.',
-            btn_help_tile: 'ROLES DE EQUIPO DE TRABAJO',
+            btn_help_tile: 'ROLES DEL EQUIPO DE TRABAJO',
             btn_help_body: 'Lista de roles que pueden ser asignados a los usurios que sean parte del equipo de trabajo.',
             HELP_PAGE: [
                 {
-                    title: 'ROLES DE EQUIPO DE TRABAJO',
+                    title: 'ROLES DEL EQUIPO DE TRABAJO',
                     content: 'Este módulo gestiona los diferentes roles del equipo, cada rol se puede crear y personalizar según las necesidades de la organización. Cada miembro del equipo puede tener varios roles, por lo que se recomienda crear un conjunto de varios roles simples en lugar de crear un rol específico para cada miembro del equipo.',
                     focus: 'title',
                 },
@@ -1773,6 +2119,7 @@ export let translations = {
     },
     workers: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Role assignment', href: '/workers', active: true, icon: <PeoplesIcon/> }]},
             title: 'ROLE ASSIGNMENT OF WORKERS',
             tableHd: 'WORKERS LIST',
             tableCl: ['WORKER NAME', 'ROLES OF WORKER', 'ASIGN ROLES', 'ACTIVATE / DEACTIVATE'],
@@ -1815,6 +2162,7 @@ export let translations = {
 
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Asignación de roles', href: '/workers', active: true, icon: <PeoplesIcon/> }]},
             title: 'GESTIÓN DE TRABAJADORES',
             tableHd: 'LISTA DE TRABAJADORES',
             tableCl: ['NOMBRE DEL TRABAJADOR', 'FUNCIONES DEL TRABAJADOR', 'ESTABLECER FUNCIONES', 'HABILITAR / DESHABILITAR'],
@@ -1858,6 +2206,7 @@ export let translations = {
     },
     audits: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Audits', href: '/daudit', active: true, icon: <MessageIcon/> }]},
             title: 'TEAM AUDIT',
             tableHdTeam: 'MAIN EVENT AUDIT',
             tableHdApp: 'SPECIAL EVENT AUDIT',
@@ -1900,6 +2249,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Auditorias', href: '/daudit', active: true, icon: <MessageIcon/> }]},
             title: 'AUDITORIA DEL EQUIPO',
             tableHdTeam: 'EVENTOS PRINCIPALES',
             tableHdApp: 'EVENTOS ESPECIALES',
@@ -1944,7 +2294,7 @@ export let translations = {
     dashteam: {
         en: {
             title: 'WORK TEAM',
-            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, active: true}]},
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, active: true, icon: <DashboardIcon />}]},
             role_title: 'ROLES INFORMATION',
             team_data: ['LEADER', 'LOCATION', 'NUMBERS', 'EMAILS', 'ADDRESS', 'WEB PAGE'],
             role_data: ['ROLE', 'NO ROLES ASIGNED TO THIS USER', 'COMUNICATE WITH YOUR TEAM LEADER IN ORDER TO BE SET A NEW ROLE', 'DEACTIVATED USER', 'This user has been deactivated and cannot perfom any action, comunicate to your team leader for more information.'],
@@ -2023,6 +2373,7 @@ export let translations = {
     },
     templates: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Templates', href: '/dtemplates', active: true, icon: <ViewsAuthorizeIcon/> }]},
             title: 'Templates',
             tableHd: 'TEMPLATE LIST',
             tableCl: ['TEMPLATE NAME', 'TEMPLATE TYPE', 'ACTION'],
@@ -2121,6 +2472,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Planillas', href: '/dtemplates', active: true, icon: <ViewsAuthorizeIcon/> }]},
             title: 'Plantillas',
             tableHd: 'LISTA DE PLANTILLAS',
             tableCl: ['NOMBRE DE PLANTILLA', 'TIPO DE PLANTILLA', 'ACCIÓN'],
@@ -2222,6 +2574,7 @@ export let translations = {
     },
     dcalc: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Dovela calculator', href: '/dcalc', active: true, icon: <TableIcon /> }]},
             title: 'DOVELA CALCULATOR',
             infoFixed: ['Calculator model', 'Units', 'Value', 'cvi', 'cfi', 'CV', 'CF', 'AVT'],
             infoVaried: ['TRIBUTARY UNIT VALUE', 'TUV', 'MINIMUM MONTHLY LEGAL WAGE', 'MMLW'],
@@ -2345,6 +2698,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Calculadora Dovela', href: '/dcalc', active: true, icon: <TableIcon /> }]},
             title: 'CALCULADORA DOVELA',
             infoFixed: ['Modelo de Calculadora', 'Unidades', 'Valor', 'cvi', 'cfi', 'CV', 'CF', 'IVA'],
             infoVaried: ['UNIDAD DE VALOR TRIBUTARIO', 'UVT', 'SALARIO MINIMO MENSUAL VIGENTE', 'SMLV'],
@@ -2470,6 +2824,7 @@ export let translations = {
     },
     dictioary: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> },{ label: 'Dovela dictionary', href: '/dictionary', active: true, icon: <ListIcon /> }]},
             title: 'DOVELA DICTIONARY',
             dicts: ['LICENSES', 'OTHER PROCESSES', 'IN IDS', 'OUT IDS', 'RESOLUTION IDS', 'CERTIFICATIONS', 'TITULARS', 'PROFESIONALS', 'BUILDINGS', 'SERIES & SUBSERIES', 'TYPOLOGIES'],
             lic_th: ['ID', 'STATE', 'TYPE'],
@@ -2607,6 +2962,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Diccionario de dovela', href: '/dictionary', active: true, icon: <ListIcon /> }]},
             title: 'DICCIONARIO DE DOVELA',
             dicts: ['LICENCIAS', 'OTRAS ACTUACIONES', 'CONSECUTIVOS DE ENTRADA', 'CONSECUTIVOS DE SALIDA', 'CONSECUTIVOS DE RESOLUCIONES', 'CERTIFICACIONES', 'TITULARES', 'PROFESIONALES', 'PREVIOS', 'SERIES & SUBSERIES', 'TIPOLOGIA DOCUMENTAL'],
             lic_th: ['Nr. RADICADO', 'ESTADO', 'TIPO'],
@@ -2747,6 +3103,7 @@ export let translations = {
     },
     dcerts: {
         en: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Dovela certifications', href: '/dcerts', active: true, icon: <DocPassIcon /> }]},
             title: 'DOVELA CERTIFICACIONS',
             tableHd: 'CERTIFICACTIONS LIST',
             tableCl: ['ID', 'DESCRIPTION', 'DATE', 'RELATED ID', 'ACTION'],
@@ -2808,6 +3165,7 @@ export let translations = {
             ],
         },
         es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Certificaciónes de Dovela', href: '/dcerts', active: true, icon: <DocPassIcon /> }]},
             title: 'CERTIFICACIÓNES DE DOVELA',
             tableHd: 'LISTADO DE CERTIFICACIONES',
             tableCl: ['CONSECUTIVO', 'DESCRIPCCIÓN', 'FECHA', 'CONSECUTIVO RELACIONADO', 'ACCIÓN'],
@@ -2872,7 +3230,7 @@ export let translations = {
     dfun: {
         en: {
             title: 'FILL LIENCESE',
-            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id, }, { label: 'Fill license', href: '/fun', active: true }]},
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Fill license', href: '/fun', active: true, icon: <GridIcon/> }]},
             tabs: ['Incomplete', 'Reviewing', 'Issuing', 'Other processes', 'Desisting', 'Archived'],
             th: ['ID', 'TAGS', 'MODE', 'PROGRESS %', 'ACTION'],
             th_inc: ['FILL DATE', 'LIMITE DATE', 'TIME', 'PROGRESS'],
@@ -2944,5 +3302,14 @@ export let translations = {
 
         },
     },
+    dconfig: {
+        en:{
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Variable configuration', href: '/dconfig', active: true, icon: <ToolsIcon/> }]},
+            
+        },
+        es: {
+            nav: data =>{ return [{ label: data.name, href: '/dashteam/' + data.id,  icon: <DashboardIcon /> }, { label: 'Configuración de variables', href: '/dconfig', active: true, icon: <ToolsIcon/> }]},
+        },
+    }
 }
 

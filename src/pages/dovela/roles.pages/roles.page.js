@@ -24,11 +24,15 @@ import { Col, Grid, Row } from 'rsuite';
 import { Button, Button as ButtonBP, Icon, NonIdealState, Switch } from '@blueprintjs/core';
 import { Tooltip2 } from "@blueprintjs/popover2";
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 export default function ROLES() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('roles');
@@ -348,6 +352,8 @@ export default function ROLES() {
 
     return (
         <>
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP
                     title={trn.btn_help_tile}

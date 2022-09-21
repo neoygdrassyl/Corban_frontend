@@ -24,11 +24,15 @@ import { Button, Button as ButtonBP, FormGroup, Icon, NonIdealState, Switch } fr
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import TEXTAREA from '../../../resources/customs/components/form.components/textarea.component';
 import TEMPLATES_BODY from './body.template';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 export default function TEMPLATES() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('templates');
@@ -252,6 +256,10 @@ export default function TEMPLATES() {
 
     return (
         <>
+
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP
                     title={trn.btn_help_tile}

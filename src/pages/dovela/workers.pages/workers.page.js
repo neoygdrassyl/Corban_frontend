@@ -18,15 +18,19 @@ import PeoplesIcon from '@rsuite/icons/Peoples';
 
 
 import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
-import { Row } from 'rsuite';
+import { Row, Tag } from 'rsuite';
 import { Button as ButtonBP, Switch } from '@blueprintjs/core';
 import { Tooltip2 } from "@blueprintjs/popover2";
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 export default function WORKERS() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('workers');
@@ -60,7 +64,7 @@ export default function WORKERS() {
         let user_roles = edit.roles_workers
         return <>
             <DIALOG title={trn.edit_rw}
-                icon={<MdWork size={'20px'} className="mx-1 text-primary"/>}
+                icon={<MdWork size={'20px'} className="mx-1 text-primary" />}
                 hideClose forceClose={load == 0}
                 btn={false}
                 btnWhisper={{ icon: <FaEdit className='text-primary' />, text: btn.edit }} >
@@ -104,7 +108,8 @@ export default function WORKERS() {
             },
             cell: row => {
                 let roles = row.roles_workers ?? [];
-                return roles.map(r => {return r.role.priority >= 10 ? <>| {r.role.name}{adminToolTip} | </> :<>| {r.role.name} | </>}) }
+                return roles.map(r => { return r.role.priority >= 10 ? <><Tag className='my-1' color="violet"> {adminToolTip} {r.role.name}</Tag></> : <><Tag className='my-1' color="blue">{r.role.name}</Tag></> })
+            }
         },
         {
             name: trn.tableCl[2],
@@ -138,7 +143,7 @@ export default function WORKERS() {
     function loadData() {
         SERVICE_WORKERS.getAll(conn.id)
             .then(response => {
-                if(response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
+                if (response.data == 'NO PERMIT') ALERT_NO_PERMIT(lang)
                 else setData(response.data)
             })
             .catch(e => {
@@ -148,7 +153,7 @@ export default function WORKERS() {
     function loadRoles() {
         SERVICE_ROLES.getAllCompany(conn.id)
             .then(response => {
-                if(response.data == 'NO PERMIT'){}
+                if (response.data == 'NO PERMIT') { }
                 else setRoles(response.data)
             })
             .catch(e => {
@@ -212,6 +217,9 @@ export default function WORKERS() {
 
     return (
         <>
+
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP
                     title={trn.btn_help_tile}

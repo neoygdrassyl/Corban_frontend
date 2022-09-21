@@ -25,6 +25,7 @@ export default function FUN_SUBMIT(props) {
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
     const theme = utilities.theme;
+    const parseDate = utilities.parseDate;
 
     const permits = conn.roles ?? [];
     const canView = FIND_PERMIT(permits, 'fun', 1);
@@ -67,7 +68,7 @@ export default function FUN_SUBMIT(props) {
         {
             name: trn.tableHd[4],
             selector: row => row.date,
-            cell: row => row.date,
+            cell: row => parseDate(row.date),
         },
         {
             name: trn.tableHd[5],

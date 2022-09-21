@@ -16,6 +16,7 @@ import { AiTwotoneStar } from 'react-icons/ai'
 import MessageIcon from '@rsuite/icons/Message';
 
 import { GET_JSON_FULL } from '../../../resources/customs/utils/lamdas.functions';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 
 
@@ -25,6 +26,9 @@ export default function AUDITS_DOVELA() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('audits');
@@ -59,17 +63,18 @@ export default function AUDITS_DOVELA() {
         },
         {
             name: trn.tableCl[1],
-            cell: row =>{ 
+            cell: row => {
                 let obj = GET_JSON_FULL(row.auditInfo)
                 let text = '';
                 for (const key in obj) {
                     if (Object.hasOwnProperty.call(obj, key)) {
                         const value = obj[key];
                         text += `${key} : ${value} | `
-                        
+
                     }
                 }
-                return text}
+                return text
+            }
         },
         {
             name: trn.tableCl[2],
@@ -132,6 +137,9 @@ export default function AUDITS_DOVELA() {
 
     return (
         <>
+
+            <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP
                     title={trn.btn_help_tile}
@@ -140,7 +148,7 @@ export default function AUDITS_DOVELA() {
             </Row>
 
             {isAdmin ? _COMPONENT_TEAM_DATATABLE() : <NON_IDEAL_STATE type="permit" />}
-            <hr/>
+            <hr />
             {isAdmin ? _COMPONENT_APP_DATATABLE() : <NON_IDEAL_STATE type="permit" />}
         </>
     );

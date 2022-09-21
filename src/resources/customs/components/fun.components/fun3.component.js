@@ -24,6 +24,7 @@ export default function FUN_3(props) {
     const btn = utilities.getTranslation('btns');
     const lang = utilities.lang;
     const theme = utilities.theme;
+    const parseDate =  utilities.parseDate;
 
     const permits = conn.roles ?? [];
     const canView = FIND_PERMIT(permits, 'fun', 1);
@@ -42,13 +43,13 @@ export default function FUN_3(props) {
         let _ALERT = [];
         for (var i = 0; i < _alerts_array.length; i++) {
             if (_alerts_array[i].includes("ALERT_1"))
-                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[0]} {_alerts_array[i].split('&')[1]}</label><br /></>);
+                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[0]} {parseDate(_alerts_array[i].split('&')[1])}</label><br /></>);
             if (_alerts_array[i].includes("ALERT_2"))
-                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[1]} {_alerts_array[i].split('&')[1]}</label><br /></>);
+                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[1]} {parseDate(_alerts_array[i].split('&')[1])}</label><br /></>);
             if (_alerts_array[i].includes("ALERT_3"))
-                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[2]} {_alerts_array[i].split('&')[1]}</label><br /></>);
+                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[2]} {parseDate(_alerts_array[i].split('&')[1])}</label><br /></>);
             if (_alerts_array[i].includes("ALERT_4"))
-                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[3]} {_alerts_array[i].split('&')[1]}</label><br /></>);
+                if (_alerts_array[i].split('&')[1]) _ALERT.push(<><label>{trn.alertMethod[3]} {parseDate(_alerts_array[i].split('&')[1])}</label><br /></>);
         }
         return <>{_ALERT}</>
     }
@@ -122,7 +123,7 @@ export default function FUN_3(props) {
         {
             name: trn.tableHd[7],
             selector: row => row.state == 1 ? row.alerted : "",
-            cell: row => <label>{row.state == 1 ? row.alerted : ""}</label>
+            cell: row => <label>{row.state == 1 ? parseDate(row.alerted) : ""}</label>
         },
         {
             name: trn.tableHd[8],

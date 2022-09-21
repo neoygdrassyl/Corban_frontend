@@ -3,26 +3,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contextProviders/auth.provider';
 import { UtilContext } from '../../contextProviders/util.provider';
 import FunService from '../../../../services/apis/fun.service'
-import { ALERT_ERROR, ALERT_ERROR_DUPLICATE, ALERT_NO_PERMIT, ALERT_SUCCESS, ALERT_WAIT } from '../../utils/notifications.vars';
+import { ALERT_NO_PERMIT } from '../../utils/notifications.vars';
 import NON_IDEAL_STATE from '../nonideal.component';
-import TABLE_COMPONENT from '../table.component';
-import BTN_HELP from '../btnHelp.component';
 
 import PageIcon from '@rsuite/icons/Page';
 import GearIcon from '@rsuite/icons/Gear';
 
-
-import { Col, Divider, Drawer, FlexboxGrid, Grid, Loader, Nav, Panel, PanelGroup, Placeholder, Progress, Row, Tag, TagGroup, TagInput, Tooltip, Whisper } from 'rsuite';
+import { Col, Divider, Drawer, FlexboxGrid, Grid, Loader,  Panel, PanelGroup, Row, Tag, Tooltip, Whisper } from 'rsuite';
 import { Button, Icon } from '@blueprintjs/core';
-import { formsParser1, regexChecker_isOA, regexChecker_isOA_2, regexChecker_isOA_3, regexChecker_isPh, _FUN_101_PARSER, _FUN_102_PARSER, _FUN_1_PARSER, _FUN_24_PARSER, _FUN_25_PARSER, _FUN_2_PARSER, _FUN_3_PARSER, _FUN_4_PARSER, _FUN_5_PARSER, _FUN_6_PARSER, _FUN_7_PARSER, _FUN_8_PARSER, _FUN_9_PARSER, _FUN_A_PARSER } from '../../utils/funParser.module';
+import { formsParser1, regexChecker_isPh, _FUN_101_PARSER, _FUN_102_PARSER, _FUN_1_PARSER, _FUN_24_PARSER, _FUN_25_PARSER, _FUN_2_PARSER, _FUN_3_PARSER, _FUN_4_PARSER, _FUN_5_PARSER, _FUN_6_PARSER, _FUN_7_PARSER, _FUN_8_PARSER, _FUN_9_PARSER, _FUN_A_PARSER } from '../../utils/funParser.module';
 import { parserReport, _GET_CLOCK_STATE, _GET_FUN_0, _GET_FUN_1, _GET_FUN_2, _GET_FUN_3, _GET_FUN_4, _GET_FUN_51, _GET_FUN_52, _GET_FUN_53, _GET_FUN_6, _GET_FUN_C, _GET_FUN_REVIEW, _GET_RECORD_REVIEW } from '../../utils/fun.loader';
-import { dateParser_finalDate, dateParser_timePassed } from '../../utils/utilsParse.module';
-import { FIND_PERMIT, GET_FUN_STATE, GET_JSON_FULL, GET_LAST_ID_PUBLIC, GET_LAST_VR } from '../../utils/lamdas.functions';
+import { dateParser_finalDate } from '../../utils/utilsParse.module';
+import { FIND_PERMIT, GET_FUN_STATE, } from '../../utils/lamdas.functions';
+
 import PROGRESION_ICONS from './progresionIcons.component';
-import { Link } from 'react-router-dom';
 import PROGRESION_BAR from './progressionBar.component';
-import MODAL from '../modal.component';
-import FORM from '../form.component';
 import { Tooltip2 } from '@blueprintjs/popover2';
 import VIEWER from '../viewer.component';
 import FUN_3 from './fun3.component';
@@ -43,9 +38,27 @@ export default function FUN_GEN(props) {
     const conn = auth.conn ?? {};
 
     const utilities = useContext(UtilContext);
+    // ------- TRANSLATIONS ------------
     const trn = utilities.getTranslation('fun');
+    const trn_fun0 = utilities.getTranslation('fun0');
+    const trn_fun1 = utilities.getTranslation('fun1');
+    const trn_fun2 = utilities.getTranslation('fun2');
+    const trn_fun3 = utilities.getTranslation('fun3');
+    const trn_fun4 = utilities.getTranslation('fun4');
+    const trn_fun5 = utilities.getTranslation('fun5');
+    const trn_fun51 = utilities.getTranslation('fun51');
+    const trn_fun52 = utilities.getTranslation('fun52');
+    const trn_fun53 = utilities.getTranslation('fun53');
+    const trn_anex = utilities.getTranslation('funA');
+    const trn_func = utilities.getTranslation('funC');
+    const trn_fun6 = utilities.getTranslation('fun6');
+    const trn_Submit = utilities.getTranslation('funSubmit');
+    const trn_flaw = utilities.getTranslation('funLaw');
+    const records = utilities.getTranslation('records');
     const btn = utilities.getTranslation('btns');
+    const process = utilities.getTranslation('process');
     const tcl = utilities.getTranslation('clocks');
+
     const lang = utilities.lang;
     const theme = utilities.theme;
     const parseDate = utilities.parseDate;
@@ -96,61 +109,67 @@ export default function FUN_GEN(props) {
         let f6 = _GET_FUN_6(data);
         return <>
             <PanelGroup accordion bordered defaultActiveKey={1} className='border'>
-                <Panel header={<label className='fw-b txt-up'>0. Meta datos de la Actuación - <Icon intent='primary' icon="label" /></label>} defaultExpanded eventKey={1}>
+                <Panel header={<label className='fw-b txt-up'>0. {trn_fun0.title} - <Icon intent='primary' icon="label" /></label>} defaultExpanded eventKey={1}>
                     {FUN_0()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>1. Identificación de la Actuación - <Icon intent='primary' icon="form" /></label>} eventKey={2}>
+                <Panel header={<label className='fw-b txt-up'>1. {trn_fun1.title} - <Icon intent='primary' icon="form" /></label>} eventKey={2}>
                     {FUN_1()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>2. Informacion del Predio - <Icon intent='primary' icon="home" /></label>} eventKey={3}>
+                <Panel header={<label className='fw-b txt-up'>2. {trn_fun2.title} - <Icon intent='primary' icon="home" /></label>} eventKey={3}>
                     {FUN_2()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'> 3. Información de Vecinos Colindantes - <Icon intent='primary' icon="people" /></label>} eventKey={4}>
+                <Panel header={<label className='fw-b txt-up'> 3. {trn_fun3.title} - <Icon intent='primary' icon="people" /></label>} eventKey={4}>
                     <FUN_3 data={f3} load={load} />
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>4. Linderos, Dimensiones y Áreas - <Icon intent='primary' icon="inheritance" /></label>} eventKey={5}>
+                <Panel header={<label className='fw-b txt-up'>4. {trn_fun4.title} - <Icon intent='primary' icon="inheritance" /></label>} eventKey={5}>
                     <FUN_4 data={f4} load={load} />
                 </Panel>
 
-                <Divider className='txt-up'>5. Titulares y profesionales responsables</Divider>
+                <Divider className='txt-up'>5. {trn_fun5.title}</Divider>
 
-                <Panel header={<label className='fw-b txt-up'>5.1 Titular(es) de la Licencia - <Icon intent='primary' icon="people" /></label>} eventKey={6}>
+                <Panel header={<label className='fw-b txt-up'>5.1 {trn_fun51.title} - <Icon intent='primary' icon="people" /></label>} eventKey={6}>
                     <FUN_51 data={f51} load={load} />
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>5.2 Profesionales Responsables - <Icon intent='primary' icon="people" /></label>} eventKey={7}>
+                <Panel header={<label className='fw-b txt-up'>5.2 {trn_fun52.title} - <Icon intent='primary' icon="people" /></label>} eventKey={7}>
                     <FUN_52 data={f52} load={load} />
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>5.3 Responsable de la Solicitud - <Icon intent='primary' icon="people" /></label>} eventKey={8}>
+                <Panel header={<label className='fw-b txt-up'>5.3 {trn_fun53.title} - <Icon intent='primary' icon="people" /></label>} eventKey={8}>
                     {FUN_53()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>6. ANEXO DE CONSTRUCCIÓN SOSTENIBLE - <Icon intent='primary' icon="form" /></label>} eventKey={9}>
+
+                <Divider />
+
+                <Panel header={<label className='fw-b txt-up'>6. {trn_anex.title} - <Icon intent='primary' icon="form" /></label>} eventKey={9}>
                     {FUN_ANEX()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>7. Checkeo - <Icon intent='primary' icon="endorsed" /></label>} eventKey={10}>
+                <Panel header={<label className='fw-b txt-up'>7. {trn_func.title} - <Icon intent='primary' icon="endorsed" /></label>} eventKey={10}>
                     {FUN_C()}
                 </Panel>
 
-                <Divider lassName='txt-up' >8. DOCUMENTOS</Divider>
+                <Divider lassName='txt-up' >8. {trn.documents}</Divider>
 
                 <Panel header={<label className='fw-b txt-up'>8.1 Estudio de documentos - <Icon intent='success' icon="saved" /></label>} eventKey={11}>
-                    Content
+                    TODO...
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>8.2 Documentos digitalizados - <Icon intent='success' icon="cloud-upload" /></label>} eventKey={12}>
+                <Panel header={<label className='fw-b txt-up'>8.2 {trn_fun6.title} - <Icon intent='success' icon="cloud-upload" /></label>} eventKey={12}>
                     <FUN_6 data={f6} load={load} />
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>8.3 Documentos de ventanilla unica - <Icon intent='success' icon="paperclip" /></label>} eventKey={13}>
+                <Panel header={<label className='fw-b txt-up'>8.3 {trn_Submit.title} - <Icon intent='success' icon="paperclip" /></label>} eventKey={13}>
                     <FUN_SUBMIT id={data.id_public ?? false} />
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>9. Publicidad y otros - <Icon intent='warning' icon="media" /></label>} eventKey={14}>
+
+                <Divider />
+
+                <Panel header={<label className='fw-b txt-up'>9. {trn_flaw.title} - <Icon intent='warning' icon="media" /></label>} eventKey={14}>
                     {FUN_SIGN()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>10. Informes - <Icon intent='danger' icon="panel-table" /></label>} eventKey={16}>
+                <Panel header={<label className='fw-b txt-up'>10. {records.records} - <Icon intent='danger' icon="panel-table" /></label>} eventKey={16}>
                     {REPORTS()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>11. Acta Observaciones y Correciones - <Icon intent='danger' icon="bookmark" /></label>} eventKey={17}>
+                <Panel header={<label className='fw-b txt-up'>11. {records.review} - <Icon intent='danger' icon="bookmark" /></label>} eventKey={17}>
                     {REVIEW()}
                 </Panel>
-                <Panel header={<label className='fw-b txt-up'>12. Acta de Viabilidad - <Icon intent='danger' icon="bookmark" /></label>} eventKey={18}>
+                <Panel header={<label className='fw-b txt-up'>12. {records.via} - <Icon intent='danger' icon="bookmark" /></label>} eventKey={18}>
                     {EXPEDTION()}
                 </Panel>
             </PanelGroup>
@@ -163,38 +182,38 @@ export default function FUN_GEN(props) {
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">0.1 Tipo de Actuacion: </Col>
+                    <Col xs={6} className="txt-r">0.1 {trn_fun0.type}: </Col>
                     <Col xs={18} className="fw-b">{formsParser1(f1)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">0.2 Descripción: </Col>
+                    <Col xs={6} className="txt-r">0.2 {trn_fun0.desc}: </Col>
                     <Col xs={18} className="">{f1.description}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={4} className="txt-r">0.3 Estado: </Col>
+                    <Col xs={4} className="txt-r">0.3 {trn_fun0.state}: </Col>
                     <Col xs={4} className="fw-b">{GET_FUN_STATE(f0.state, lang)}</Col>
-                    <Col xs={4} className="txt-r">0.4 Categoria: </Col>
+                    <Col xs={4} className="txt-r">0.4 {trn_fun0.cat}: </Col>
                     <Col xs={4} className="fw-b">{f0.type ? trn.types[f0.type] : ''}</Col>
-                    <Col xs={4} className="txt-r">0.5 Modelo: </Col>
+                    <Col xs={4} className="txt-r">0.5 {trn_fun0.model}: </Col>
                     <Col xs={4} className="fw-b">{f0.model}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={4} className="txt-r">0.6 Consecutivo de Pago: </Col>
+                    <Col xs={4} className="txt-r">0.6 {trn_fun0.pay_id}: </Col>
                     <Col xs={4} className="fw-b">{f0.id_payment}</Col>
-                    <Col xs={4} className="txt-r">0.7 Fecha Pago: </Col>
-                    <Col xs={4} className="fw-b">{f0.date_payment}</Col>
-                    <Col xs={4} className="txt-r">0.8 Documento de pago: </Col>
+                    <Col xs={4} className="txt-r">0.7 {trn_fun0.pay_date}: </Col>
+                    <Col xs={4} className="fw-b">{parseDate(f0.date_payment)}</Col>
+                    <Col xs={4} className="txt-r">0.8 {trn_fun0.pay_id6}: </Col>
                     <Col xs={4} className="fw-b">{
                         f0.id6payment > 0 ?
                             <VIEWER icon="id-number" api={loadFun6} apiID={f0.id6payment} intent={'primary'} text={'documento de pago'} filename={'document de pago'} />
                             : ''}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">0.9 Reglas especiales: </Col>
+                    <Col xs={6} className="txt-r">0.9 {trn_fun0.rules}: </Col>
                     <Col xs={18} className="fw-b">{trn.rules.sign[f0.rules[0]]}, {trn.rules.eng[f0.rules[1]]}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">0.10 Archivo: </Col>
+                    <Col xs={6} className="txt-r">0.10 {trn_fun0.arch}: </Col>
                     <Col xs={18} className="fw-b">TODO... </Col>
                 </Row>
             </Grid>
@@ -206,35 +225,35 @@ export default function FUN_GEN(props) {
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">1.1 Tipo de Solicitud: </Col>
+                    <Col xs={6} className="txt-r">1.1 {trn_fun1.type}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_1_PARSER(f1.tipo, false, lang)}</Col>
-                    <Col xs={6} className="txt-r">1.2 Objeto del Tramite: </Col>
+                    <Col xs={6} className="txt-r">1.2 {trn_fun1.obj}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_2_PARSER(f1.tramite, false, lang)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">1.3 Modalidad Licencia de Urbanización: </Col>
+                    <Col xs={6} className="txt-r">1.3 {trn_fun1.urb}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_3_PARSER(f1.m_urb, false, lang)}</Col>
-                    <Col xs={6} className="txt-r">1.4 Modalidad Licencia de Subdivisión: </Col>
+                    <Col xs={6} className="txt-r">1.4 {trn_fun1.sub}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_4_PARSER(f1.m_sub, false, lang)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">1.5 Modalidad Licencia de Construcción: </Col>
+                    <Col xs={6} className="txt-r">1.5 {trn_fun1.con}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_5_PARSER(f1.m_lic, false, lang)}</Col>
-                    <Col xs={6} className="txt-r">1.6 Usos: </Col>
+                    <Col xs={6} className="txt-r">1.6 {trn_fun1.uses}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_6_PARSER(f1.usos, false, lang)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">1.7 Área Construida: </Col>
+                    <Col xs={6} className="txt-r">1.7 {trn_fun1.area}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_7_PARSER(f1.area, false, lang)}</Col>
-                    <Col xs={6} className="txt-r">1.8 Tipo de Vivienda: </Col>
+                    <Col xs={6} className="txt-r">1.8 {trn_fun1.house}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_8_PARSER(f1.vivienda, false, lang)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">1.9 Bien de Interés Cultural: </Col>
+                    <Col xs={6} className="txt-r">1.9 {trn_fun1.bic}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_9_PARSER(f1.cultural, false, lang)}</Col>
                     {model == '2021' ?
                         <>
-                            <Col xs={6} className="txt-r">1.10.1 Declaración sobre medidas de construcción sostenible: </Col>
+                            <Col xs={6} className="txt-r">1.10.1 {trn_fun1.sustain}: </Col>
                             <Col xs={6} className="fw-b">{_FUN_101_PARSER(f1.regla_1, false, lang)}</Col>
                         </>
                         : ''}
@@ -242,7 +261,7 @@ export default function FUN_GEN(props) {
                 <Row className='py-1'>
                     {model == '2021' ?
                         <>
-                            <Col xs={6} className="txt-r">1.10.2 Zónificacion Climática: </Col>
+                            <Col xs={6} className="txt-r">1.10.2 {trn_fun1.weather}: </Col>
                             <Col xs={6} className="fw-b">{_FUN_102_PARSER(f1.regla_2, false, lang)}</Col>
                         </>
                         : ''}
@@ -255,47 +274,47 @@ export default function FUN_GEN(props) {
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">2.1 Dirección o Nomenclatura actual: </Col>
+                    <Col xs={6} className="txt-r">2.1 {trn_fun2.address}: </Col>
                     <Col xs={6} className="fw-b">{f2.direccion}</Col>
-                    <Col xs={6} className="txt-r">2.1 Dirección(es) Anterior(es): </Col>
+                    <Col xs={6} className="txt-r">2.1 {trn_fun2.address2}: </Col>
                     <Col xs={6} className="fw-b">{f2.direccion_ant}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">2.2 No. Matrícula Inmobiliaria: </Col>
+                    <Col xs={6} className="txt-r">2.2 {trn_fun2.mat}: </Col>
                     <Col xs={18} className="fw-b">{f2.matricula}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">2.3.1 Identificación Catastral (Viejo): </Col>
+                    <Col xs={6} className="txt-r">2.3.1 {trn_fun2.cat}: </Col>
                     <Col xs={6} className="fw-b">{f2.catastral}</Col>
-                    <Col xs={6} className="txt-r">2.3.2 Identificación Catastral (Nuevo, 30 dígitos): </Col>
+                    <Col xs={6} className="txt-r">2.3.2 {trn_fun2.cat2}: </Col>
                     <Col xs={6} className="fw-b">{f2.catastral_2}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">2.4 Clasificación del Suelo: </Col>
+                    <Col xs={6} className="txt-r">2.4 {trn_fun2.soil}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_24_PARSER(f2.suelo, false, lang)}</Col>
-                    <Col xs={6} className="txt-r">2.5 Planimetría del Lote: </Col>
+                    <Col xs={6} className="txt-r">2.5 {trn_fun2.plan}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_25_PARSER(f2.lote_pla, false, lang)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={4} className="txt-r">2.6.1 Barrio o Urbanzación: </Col>
+                    <Col xs={4} className="txt-r">2.6.1 {trn_fun2.barrio}: </Col>
                     <Col xs={4} className="fw-b">{f2.barrio}</Col>
-                    <Col xs={4} className="txt-r">2.6.2 Vereda: </Col>
+                    <Col xs={4} className="txt-r">2.6.2 {trn_fun2.vereda}: </Col>
                     <Col xs={4} className="fw-b">{f2.vereda}</Col>
-                    <Col xs={4} className="txt-r">2.6.3 Comuna: </Col>
+                    <Col xs={4} className="txt-r">2.6.3 {trn_fun2.comuna}: </Col>
                     <Col xs={4} className="fw-b">{f2.comuna}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={4} className="txt-r">2.6.4 Sector: </Col>
+                    <Col xs={4} className="txt-r">2.6.4 {trn_fun2.sector}: </Col>
                     <Col xs={4} className="fw-b">{f2.sector}</Col>
-                    <Col xs={4} className="txt-r">2.6.5 Estrato: </Col>
+                    <Col xs={4} className="txt-r">2.6.5 {trn_fun2.estrato}: </Col>
                     <Col xs={3} className="fw-b">{f2.estrato}</Col>
-                    <Col xs={5} className="txt-r">2.6.6 Corregimiento: </Col>
+                    <Col xs={5} className="txt-r">2.6.6 {trn_fun2.corre}: </Col>
                     <Col xs={4} className="fw-b">{f2.corregimiento}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={4} className="txt-r">2.6.4 Manzana No.: </Col>
+                    <Col xs={4} className="txt-r">2.6.4 {trn_fun2.manzana}: </Col>
                     <Col xs={4} className="fw-b">{f2.manzana}</Col>
-                    <Col xs={4} className="txt-r">2.6.5 Lote No.: </Col>
+                    <Col xs={4} className="txt-r">2.6.5 {trn_fun2.lote}: </Col>
                     <Col xs={4} className="fw-b">{f2.lote}</Col>
                 </Row>
             </Grid>
@@ -306,29 +325,29 @@ export default function FUN_GEN(props) {
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">5.3.1 Nombre: </Col>
+                    <Col xs={6} className="txt-r">5.3.1 {trn_fun53.name}: </Col>
                     <Col xs={6} className="fw-b">{f53.name + ' ' + f53.surname}</Col>
-                    <Col xs={6} className="txt-r">5.3.2 Documento Identificador: </Col>
+                    <Col xs={6} className="txt-r">5.3.2 {trn_fun53.id_number}: </Col>
                     <Col xs={6} className="fw-b">{f53.id_number}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">5.3.3 En calidad de: </Col>
+                    <Col xs={6} className="txt-r">5.3.3 {trn_fun53.role}: </Col>
                     <Col xs={6} className="fw-b">{f53.role}</Col>
-                    <Col xs={6} className="txt-r">5.3.4 Número de contacto: </Col>
+                    <Col xs={6} className="txt-r">5.3.4 {trn_fun53.number}: </Col>
                     <Col xs={6} className="fw-b">{f53.number}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">5.3.5 Correo de contacto: </Col>
+                    <Col xs={6} className="txt-r">5.3.5 {trn_fun53.email}: </Col>
                     <Col xs={6} className="fw-b">{f53.email}</Col>
-                    <Col xs={6} className="txt-r">5.3.6 Dirección de correspondencia: </Col>
+                    <Col xs={6} className="txt-r">5.3.6 {trn_fun53.address}: </Col>
                     <Col xs={6} className="fw-b">{f53.address}</Col>
                 </Row>
                 <Row className='py-1'>
 
-                    <Col xs={6} className="txt-r">5.3.7 Documentos: </Col>
+                    <Col xs={6} className="txt-r">5.3.7 {trn_fun53.documents}: </Col>
                     <Col xs={18} className="fw-b">{
-                        f53.docs.map(doc => doc > 0 ?
-                            <VIEWER icon="id-number" api={loadFun6} apiID={doc} intent={'primary'} text={'documento de pago'} filename={'document de pago'} />
+                        f53.docs.map((doc, i) => doc > 0 ?
+                            <VIEWER icon="id-number" api={loadFun6} apiID={doc} intent={'primary'} text={trn_fun53.doc_names[i] || 'Document'} filename={trn_fun53.doc_names[i] || 'Document'} />
                             : '')
                     }</Col>
                 </Row>
@@ -357,61 +376,61 @@ export default function FUN_GEN(props) {
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.1 Tipo de uso: </Col>
+                    <Col xs={6} className="txt-r">6.1 {trn_anex.type}: </Col>
                     <Col xs={18} className="fw-b">{_FUN_A_PARSER(a1, false, lang, 'a1')}</Col>
                 </Row>
 
-                <Divider lassName='txt-up' >6.2 Reglamento de construcción sostenible</Divider>
+                <Divider lassName='txt-up' >6.2 {trn_anex.rule}</Divider>
 
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.2.1.1 Medidas Pasivas: </Col>
+                    <Col xs={6} className="txt-r">6.2.1.1 {trn_anex.pass}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a211, false, lang, 'a211')}</Col>
-                    <Col xs={6} className="txt-r">6.2.1.2  Medidas Activa: </Col>
+                    <Col xs={6} className="txt-r">6.2.1.2 {trn_anex.act}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a212, false, lang, 'a212')}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.2.2 Materialidad muro interno: </Col>
+                    <Col xs={6} className="txt-r">6.2.2 {trn_anex.wall_out}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a22, false, lang, 'a22')}</Col>
-                    <Col xs={6} className="txt-r">6.2.3  Medidas Activa: </Col>
+                    <Col xs={6} className="txt-r">6.2.3 {trn_anex.wall_in}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a23, false, lang, 'a23')}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.2.4 Materialidad de cubierta: </Col>
+                    <Col xs={6} className="txt-r">6.2.4 {trn_anex.top}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a24, false, lang, 'a24')}</Col>
-                    <Col xs={6} className="txt-r">6.2.4  Relación muro ventana y altura piso a techo: </Col>
+                    <Col xs={6} className="txt-r">6.2.4 {trn_anex.relation}: </Col>
                     <Col xs={6} className="fw-b">
-                        <Row>Rango( 0% - 100%)</Row>
-                        <Row>Norte: {a25[0]}</Row>
-                        <Row>Sur: {a25[1]}</Row>
-                        <Row>Oriente: {a25[2]}</Row>
-                        <Row>Occidente: {a25[3]}</Row>
+                        <Row>{trn_anex.range[0]}</Row>
+                        <Row>{trn_anex.range[1]}: {a25[0]}</Row>
+                        <Row>{trn_anex.range[2]}: {a25[1]}</Row>
+                        <Row>{trn_anex.range[3]}: {a25[2]}</Row>
+                        <Row>{trn_anex.range[4]}: {a25[3]}</Row>
                     </Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.2.6 Declaración sobre medidas de ahorro en agua: </Col>
+                    <Col xs={6} className="txt-r">6.2.6 {trn_anex.water}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a26, false, lang, 'a26')}</Col>
-                    <Col xs={6} className="txt-r">6.2.7 Zonificación Climática: </Col>
+                    <Col xs={6} className="txt-r">6.2.7 {trn_anex.weather}: </Col>
                     <Col xs={6} className="fw-b">{_FUN_A_PARSER(a27, false, lang, 'a27')}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">6.2.8 Ahorro de esperado de agua: </Col>
+                    <Col xs={6} className="txt-r">6.2.8 {trn_anex.water2}: </Col>
                     <Col xs={6} className="fw-b">{a28}</Col>
-                    <Col xs={6} className="txt-r">6.2.9 Ahorro esperado en energía: </Col>
+                    <Col xs={6} className="txt-r">6.2.9 {trn_anex.energy}: </Col>
                     <Col xs={6} className="fw-b">{a29}</Col>
                 </Row>
 
-                <Divider lassName='txt-up' >6.3  Área del proyecto</Divider>
+                <Divider lassName='txt-up' >6.3  {trn_anex.area}</Divider>
 
                 <Row className='py-1'>
-                    <Col xs={12} className="txt">6.3.1 Área neta de urbanismo y paisajismo (si aplica): </Col>
+                    <Col xs={12} className="txt">6.3.1 {trn_anex.area1}: </Col>
                     <Col xs={12} className="fw-b">{a3[0]}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={12} className="txt">6.3.2 Área neta de zonas comunes (si aplica): </Col>
+                    <Col xs={12} className="txt">6.3.2 {trn_anex.area2}: </Col>
                     <Col xs={12} className="fw-b">{a3[0]}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={12} className="txt">6.3.3 Área neta de parqueaderos (si aplica): </Col>
+                    <Col xs={12} className="txt">6.3.3 {trn_anex.area3}: </Col>
                     <Col xs={12} className="fw-b">{a3[0]}</Col>
                 </Row>
 
@@ -421,46 +440,42 @@ export default function FUN_GEN(props) {
     let FUN_C = () => {
         let fc = _GET_FUN_C(data);
         let fr = _GET_FUN_REVIEW(data);
-        let ra = {
-            'A': 'SOLICITANTE',
-            'B': 'APODERADO',
-            'C': 'MANDATARIO',
-        }
-        let rr = ['NO', 'SI', 'NA']
+        let ra = trn_func.ra;
+        let rr = trn_func.rr;
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">7.1 Nombre encarrgado revision: </Col>
+                    <Col xs={6} className="txt-r">7.1 {trn_func.worker}: </Col>
                     <Col xs={6} className="fw-b">{fc.worker}</Col>
-                    <Col xs={6} className="txt-r">7.2 Fecha revision: </Col>
-                    <Col xs={6} className="fw-b">{fc.date}</Col>
+                    <Col xs={6} className="txt-r">7.2 {trn_func.date}: </Col>
+                    <Col xs={6} className="fw-b">{parseDate(fc.date)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">7.3 Condicion de la radicacion: </Col>
-                    <Col xs={6} className="fw-b">{fc.condition == 1 ? 'LyDF' : fc.condition == 0 ? 'Incompleto' : ''}</Col>
-                    <Col xs={6} className="txt-r">7.4 Calidad de Actuador: </Col>
+                    <Col xs={6} className="txt-r">7.3 {trn_func.result}: </Col>
+                    <Col xs={6} className="fw-b txt-up">{fc.condition == 1 ? trn_func.state[1] : fc.condition == 0 ? trn_func.state[0] : ''}</Col>
+                    <Col xs={6} className="txt-r">7.4 {trn_func.role}: </Col>
                     <Col xs={6} className="fw-b">{ra[fc.reciever_actor] || ''}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">7.5 Nombre actuador: </Col>
+                    <Col xs={6} className="txt-r">7.5 {trn_func.name}: </Col>
                     <Col xs={6} className="fw-b">{fc.reciever_name}</Col>
-                    <Col xs={6} className="txt-r">7.6 Cedula Actuador: </Col>
+                    <Col xs={6} className="txt-r">7.6 {trn_func.id_number}: </Col>
                     <Col xs={6} className="fw-b">{fc.reciever_id}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">7.7 Fecha incompleto: </Col>
-                    <Col xs={6} className="fw-b">{fc.reciever_date}</Col>
-                    <Col xs={6} className="txt-r">7.8 Fecha LyDF: </Col>
-                    <Col xs={6} className="fw-b text-success">{fc.legal_date}</Col>
+                    <Col xs={6} className="txt-r">7.7 {trn_func.date_inc}: </Col>
+                    <Col xs={6} className="fw-b">{parseDate(fc.reciever_date)}</Col>
+                    <Col xs={6} className="txt-r">7.8 {trn_func.date_ldf}: </Col>
+                    <Col xs={6} className="fw-b text-success">{parseDate(fc.legal_date)}</Col>
                 </Row>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">7.9 Detalles: </Col>
+                    <Col xs={6} className="txt-r">7.9 {trn_func.details}: </Col>
                     <Col xs={18}><p className='txt-j'>{fc.details}</p></Col>
                 </Row>
                 <Row className='border bg-cold py-1'>
-                    <Col xs={3} className="fw-b txt-c">CODIGO</Col>
-                    <Col xs={18} className="fw-b txt-c">LISTA DE CHECKEO</Col>
-                    <Col xs={3} className="fw-b txt-c">APORTO</Col>
+                    <Col xs={3} className="fw-b txt-c">{trn_func.tableHd[0]}</Col>
+                    <Col xs={18} className="fw-b txt-c">{trn_func.tableHd[1]}</Col>
+                    <Col xs={3} className="fw-b txt-c">{trn_func.tableHd[2]}</Col>
                 </Row>
                 {fr.code.map((c, i) => {
                     if (fr.checked[i] == 2) return ''
@@ -473,19 +488,18 @@ export default function FUN_GEN(props) {
             </Grid>
         </>
     }
-
     let FUN_SIGN = () => {
         let f0 = _GET_FUN_0(data);
         let f1 = _GET_FUN_1(data, true);
         let useReport = f1 ? f1.tipo ? f1.tipo.includes('F') : false : false;
         let reportData = f0.report_data;
-        let inform = ['NO INFORMADO', 'INFORMADO', 'NO APLICA']
+        let inform = trn_flaw.inform;
 
         return <Grid fluid>
             <Row className='py-1'>
-                <Col xs={6} className="txt-r">9.1 Fecha de instalación de valla: </Col>
-                <Col xs={6} className="fw-b">{f0.sign_date}</Col>
-                <Col xs={6} className="txt-r">9.2 Fotografia valla: </Col>
+                <Col xs={6} className="txt-r">9.1 {trn_flaw.sign_date}: </Col>
+                <Col xs={6} className="fw-b">{parseDate(f0.sign_date)}</Col>
+                <Col xs={6} className="txt-r">9.2 {trn_flaw.sign_id6}: </Col>
                 <Col xs={6} className="fw-b">{
                     f0.sign_id > 0 ?
                         <VIEWER icon="media" api={loadFun6} apiID={f0.sign_id} intent={'primary'} text={'Fotografia valla'} filename={'Fotografia valla'} />
@@ -493,38 +507,37 @@ export default function FUN_GEN(props) {
             </Row>
             {useReport ?
                 <>
-                    <Divider lassName='txt-up' >9.3 Oficio de reconocimiento</Divider>
+                    <Divider lassName='txt-up' >9.3 {trn_flaw.report_title}</Divider>
 
                     <Row className='py-1'>
-                        <Col xs={8} className="txt-r">9.3.1 Notificación de reconocimiento a la entidad interesada: </Col>
+                        <Col xs={8} className="txt-r">9.3.1 {trn_flaw.report_state}: </Col>
                         <Col xs={4} className="fw-b">{inform[reportData.inform]}</Col>
-                        <Col xs={8} className="txt-r">9.3.2 Consecutivo del oficio: </Col>
+                        <Col xs={8} className="txt-r">9.3.2 {trn_flaw.report_id2}: </Col>
                         <Col xs={4} className="fw-b">{reportData.id_cub}</Col>
                     </Row>
                     <Row className='py-1'>
-                        <Col xs={8} className="txt-r">9.3.3 Fecha de Radicación ante la entidad interesada: </Col>
-                        <Col xs={4} className="fw-b">{reportData.date}</Col>
-                        <Col xs={8} className="txt-r">9.3.4 Respuesta entidad interesada radicación: </Col>
+                        <Col xs={8} className="txt-r">9.3.3 {trn_flaw.report_date}: </Col>
+                        <Col xs={4} className="fw-b">{parseDate(reportData.date)}</Col>
+                        <Col xs={8} className="txt-r">9.3.4 {trn_flaw.report_reply}: </Col>
                         <Col xs={4} className="fw-b">{reportData.reply}</Col>
                     </Row>
                     <Row className='py-1'>
-                        <Col xs={8} className="txt-r">9.3.5 Fecha Limite (Fecha radicación mas 10 días hábiles): </Col>
-                        <Col xs={4} className="fw-b">{dateParser_finalDate(reportData.date, 10)}</Col>
-                        <Col xs={8} className="txt-r">9.3.6 Oficio de la entidad interesada: </Col>
+                        <Col xs={8} className="txt-r">9.3.5 {trn_flaw.report_limit}: </Col>
+                        <Col xs={4} className="fw-b">{parseDate(dateParser_finalDate(reportData.date, 10))}</Col>
+                        <Col xs={8} className="txt-r">9.3.6 {trn_flaw.report_id2}: </Col>
                         <Col xs={4} className="fw-b">{reportData.id_reply}</Col>
                     </Row>
                     <Row className='py-1'>
-                        <Col xs={8} className="txt-r">9.3.7 Documento relacionado: </Col>
+                        <Col xs={8} className="txt-r">9.3.7 {trn_flaw.report_id6}: </Col>
                         <Col xs={4} className="fw-b">{
                             reportData.id6 > 0 ?
-                                <VIEWER icon="media" api={loadFun6} apiID={reportData.id6} intent={'primary'} text={'Respuesta entidad'} filename={'Respuesta entidad'} />
+                                <VIEWER icon="media" api={loadFun6} apiID={reportData.id6} intent={'primary'} text={trn_flaw.report_doc} filename={trn_flaw.report_doc} />
                                 : ''}</Col>
                     </Row>
                 </> : ''}
         </Grid>
 
     }
-
     let REPORTS = () => {
         let reportLaw = parserReport(data, 11, true)
         let reportArc = parserReport(data, 13, true)
@@ -533,17 +546,19 @@ export default function FUN_GEN(props) {
         let f1 = _GET_FUN_1(data, true);
         let isPh = regexChecker_isPh(f1, true);
 
+        let reportsExist = isPh ? reportLaw.length + reportPh.length : reportLaw.length + reportArc.length + reportEng.length;
+
         let iconType = {
-            law: <Whisper followCursor placement="auto" speaker={<Tooltip>{'law'}</Tooltip>}><Icon icon="book" style={{ fontSize: '16px' }} /></Whisper>,
-            arc: <Whisper followCursor placement="auto" speaker={<Tooltip>{'arc'}</Tooltip>}><Icon icon="home" style={{ fontSize: '16px' }} /></Whisper>,
-            eng: <Whisper followCursor placement="auto" speaker={<Tooltip>{'eng'}</Tooltip>}><GearIcon style={{ fontSize: '16px' }} /></Whisper>,
-            ph: <Whisper followCursor placement="auto" speaker={<Tooltip>{'ph'}</Tooltip>}><PageIcon style={{ fontSize: '16px' }} /></Whisper>,
+            law: <Whisper followCursor placement="auto" speaker={<Tooltip>{records.law}</Tooltip>}><Icon icon="book" style={{ fontSize: '16px' }} /></Whisper>,
+            arc: <Whisper followCursor placement="auto" speaker={<Tooltip>{records.arc}</Tooltip>}><Icon icon="home" style={{ fontSize: '16px' }} /></Whisper>,
+            eng: <Whisper followCursor placement="auto" speaker={<Tooltip>{records.eng}</Tooltip>}><GearIcon style={{ fontSize: '16px' }} /></Whisper>,
+            ph: <Whisper followCursor placement="auto" speaker={<Tooltip>{records.ph}</Tooltip>}><PageIcon style={{ fontSize: '16px' }} /></Whisper>,
         };
 
         let reviewIcons = {
-            0: <Whisper followCursor placement="auto" speaker={<Tooltip>{'No viable'}</Tooltip>}><Icon icon="delete" className='text-danger py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
-            1: <Whisper followCursor placement="auto" speaker={<Tooltip>{'Viable'}</Tooltip>}><Icon icon="tick-circle" className='text-success py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
-            2: <Whisper followCursor placement="auto" speaker={<Tooltip>{'No Apply'}</Tooltip>}><Icon icon="selection" className='text-warning py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            0: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[0]}</Tooltip>}><Icon icon="delete" className='text-danger py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            1: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[1]}</Tooltip>}><Icon icon="tick-circle" className='text-success py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            2: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[2]}</Tooltip>}><Icon icon="selection" className='text-warning py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
         }
 
         let _ROW = (data) => {
@@ -552,70 +567,73 @@ export default function FUN_GEN(props) {
             let reviews = data.review ? String(data.review).split(',') : [];
             return <Row className='py-1 border'>
                 <Col xs={4} className="txt-c">{iconType[data.type]}</Col>
-                <Col xs={5} className="txt-c">{data.asign}</Col>
+                <Col xs={5} className="txt-c">{parseDate(data.asign)}</Col>
                 <Col xs={5} className="txt-c">{reviews.map(r => reviewIcons[r] || '')}</Col>
-                <Col xs={5} className="txt-c">{data.rew_date}</Col>
-                <Col xs={5} className="txt-c">{data.not}</Col>
+                <Col xs={5} className="txt-c">{parseDate(data.rew_date)}</Col>
+                <Col xs={5} className="txt-c">{parseDate(data.not)}</Col>
             </Row>
         }
         return <>
-            <Grid fluid>
-                <Row className='py-1 bg-cold fw-b'>
-                    <Col xs={4} className="txt-c">ESTUDIO</Col>
-                    <Col xs={5} className="txt-c">ASIGNACION</Col>
-                    <Col xs={5} className="txt-c">REVIEW</Col>
-                    <Col xs={5} className="txt-c">REVIEW DATE </Col>
-                    <Col xs={5} className="txt-c">NOTIFICATION</Col>
-                </Row>
-                {isPh
-                    ? <>
-                        {reportLaw.map(report => _ROW(report))}
-                        {reportPh.map(report => _ROW(report))}
-                    </>
-                    : <>
-                        {reportLaw.map(report => _ROW(report))}
-                        {reportArc.map(report => _ROW(report))}
-                        {reportEng.map(report => _ROW(report))}
-                    </>}
+            {reportsExist > 0 ?
+                <Grid fluid>
+                    <Row className='py-1 bg-cold fw-b'>
+                        <Col xs={4} className="txt-c">{records.recordTh[0]}</Col>
+                        <Col xs={5} className="txt-c">{records.recordTh[1]}</Col>
+                        <Col xs={5} className="txt-c">{records.recordTh[2]}</Col>
+                        <Col xs={5} className="txt-c">{records.recordTh[3]}</Col>
+                        <Col xs={5} className="txt-c">{records.recordTh[4]}</Col>
+                    </Row>
+                    {isPh
+                        ? <>
+                            {reportLaw.map(report => _ROW(report))}
+                            {reportPh.map(report => _ROW(report))}
+                        </>
+                        : <>
+                            {reportLaw.map(report => _ROW(report))}
+                            {reportArc.map(report => _ROW(report))}
+                            {reportEng.map(report => _ROW(report))}
+                        </>}
 
-            </Grid>
+                </Grid> : <>
+                    <NON_IDEAL_STATE type="datatable" />
+                </>
+            }
 
         </>
     }
-
     let REVIEW = () => {
         let review = _GET_RECORD_REVIEW(data);
         let clockPro = _GET_CLOCK_STATE(data, 34).date_start
         let reviewIcons = {
-            0: <Whisper followCursor placement="auto" speaker={<Tooltip>{'No viable'}</Tooltip>}><Icon icon="delete" className='text-danger py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
-            1: <Whisper followCursor placement="auto" speaker={<Tooltip>{'Viable'}</Tooltip>}><Icon icon="tick-circle" className='text-success py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
-            2: <Whisper followCursor placement="auto" speaker={<Tooltip>{'No Apply'}</Tooltip>}><Icon icon="selection" className='text-warning py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            0: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[0]}</Tooltip>}><Icon icon="delete" className='text-danger py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            1: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[1]}</Tooltip>}><Icon icon="tick-circle" className='text-success py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
+            2: <Whisper followCursor placement="auto" speaker={<Tooltip>{process.review[2]}</Tooltip>}><Icon icon="selection" className='text-warning py-1' style={{ fontSize: '16px', marginLeft: '3px' }} /></Whisper>,
         }
 
         return <>
             <Grid fluid>
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">Acta Observaciones Fecha: </Col>
+                    <Col xs={6} className="txt-r">{records.review1_date}: </Col>
                     <Col xs={6} className="fw-b">{parseDate(review.date)}</Col>
-                    <Col xs={6} className="txt-r">Acta Observaciones Resultado: </Col>
+                    <Col xs={6} className="txt-r">{records.review1_res}: </Col>
                     <Col xs={6} className="fw-b">{reviewIcons[review.check] || ''}</Col>
                 </Row>
 
                 <Row className='py-1'>
-                    <Col xs={6} className="txt-r">Acta Correciones Fecha: </Col>
+                    <Col xs={6} className="txt-r">{records.review2_date}: </Col>
                     <Col xs={6} className="fw-b">{parseDate(review.date_2)}</Col>
-                    <Col xs={6} className="txt-r">Acta Correciones Resultado: </Col>
+                    <Col xs={6} className="txt-r">{records.review2_res}: </Col>
                     <Col xs={6} className="fw-b">{reviewIcons[review.check_2] || ''}</Col>
                 </Row>
 
                 <br />
 
                 <Row className='py-1 fw-b bg-cold txt-c'>
-                    <Col xs={5}>EVENTO</Col>
-                    <Col xs={5}>FECHA EVENTO</Col>
-                    <Col xs={5}>FECHA LIMITE</Col>
-                    <Col xs={5}>FORMA</Col>
-                    <Col xs={4}>DOCUMENTO</Col>
+                    <Col xs={5}>{records.reviewTh[0]}</Col>
+                    <Col xs={5}>{records.reviewTh[1]}</Col>
+                    <Col xs={5}>{records.reviewTh[2]}</Col>
+                    <Col xs={5}>{records.reviewTh[3]}</Col>
+                    <Col xs={4}>{records.reviewTh[4]}</Col>
                 </Row>
                 {ROW_CLOCK(tcl[30].name, 30, false)}
                 {ROW_CLOCK(tcl[31].name, 31, 5, [30])}
@@ -623,45 +641,44 @@ export default function FUN_GEN(props) {
                 {ROW_CLOCK(tcl[33].name, 33, 10, [31])}
                 {review.check == 0 ? <>
                     <Row className='py-1 fw-b txt-c border-danger'>
-                        <Col xs={24}><label>ACTA DE CORRECCIONES</label></Col>
+                        <Col xs={24}><label>{records.review1}</label></Col>
                     </Row>
-                    {ROW_CLOCK('Reanudación De Términos Solicitante', false, 1, [32, 33])}
+                    {ROW_CLOCK(records.clocks[0], false, 1, [32, 33])}
                     {ROW_CLOCK(tcl[34].name, 34, 30, [32, 33])}
                     {ROW_CLOCK(tcl[35].name, 35, clockPro ? 45 : 30, [32, 33])}
                     <Row className='py-1 fw-b txt-c border-danger'>
-                        <Col xs={24}><label>TERMINA PROCESO DE CORRECCIONES</label></Col>
+                        <Col xs={24}><label>{records.terms}</label></Col>
                     </Row>
                 </> : ''}
-                {ROW_CLOCK('Reanudación De Términos Curaduria', false, clockPro ? 46 : 31, [32, 33])}
+                {ROW_CLOCK(records.clocks[1], false, clockPro ? 46 : 31, [32, 33])}
             </Grid>
         </>
     }
-
     let EXPEDTION = () => {
         let resClock = _GET_CLOCK_STATE(data, 74).date_start
         return <>
             <Grid fluid>
                 <Row className='py-1 fw-b bg-cold txt-c'>
-                    <Col xs={5}>EVENTO</Col>
-                    <Col xs={5}>FECHA EVENTO</Col>
-                    <Col xs={5}>FECHA LIMITE</Col>
-                    <Col xs={5}>FORMA</Col>
-                    <Col xs={4}>DOCUMENTO</Col>
+                    <Col xs={5}>{records.expTh[0]}</Col>
+                    <Col xs={5}>{records.expTh[1]}</Col>
+                    <Col xs={5}>{records.expTh[2]}</Col>
+                    <Col xs={5}>{records.expTh[3]}</Col>
+                    <Col xs={4}>{records.expTh[4]}</Col>
                 </Row>
                 <Row className='py-1 fw-b border-primary txt-c'>
-                    <Col xs={24}><lalbel>ACTA DE VIABILIDAD</lalbel></Col>
+                    <Col xs={24}><lalbel>{records.breakpoits[0]}</lalbel></Col>
                 </Row>
                 {ROW_CLOCK(tcl[61].name, 61, 5, [49, 30])}
                 {ROW_CLOCK(tcl[55].name, 55, 5, [61])}
                 {ROW_CLOCK(tcl[56].name, 56, 5, [55])}
                 {ROW_CLOCK(tcl[57].name, 57, 10, [55])}
                 <Row className='py-1 fw-b border-primary txt-c'>
-                    <Col xs={24}><lalbel>PAGOS</lalbel></Col>
+                    <Col xs={24}><lalbel>{records.breakpoits[1]}</lalbel></Col>
                 </Row>
                 {ROW_CLOCK(tcl[62].name, 62, 30, [49])}
                 {ROW_CLOCK(tcl[69].name, 69, 30, [56, 57])}
                 <Row className='py-1 fw-b border-primary txt-c'>
-                    <Col xs={24}><lalbel>RESOLUCIÓN</lalbel></Col>
+                    <Col xs={24}><lalbel>{records.breakpoits[2]}</lalbel></Col>
                 </Row>
                 {ROW_CLOCK(tcl[70].name, 70, 5, [69])}
                 {ROW_CLOCK(tcl[71].name, 71, 5, [69])}
@@ -670,7 +687,7 @@ export default function FUN_GEN(props) {
                 {ROW_CLOCK(tcl[731].name, 731, 5, [71])}
                 {ROW_CLOCK(tcl[730].name, 730, false)}
                 <Row className='py-1 fw-b border-primary txt-c'>
-                    <Col xs={24}><lalbel>RECURSO</lalbel></Col>
+                    <Col xs={24}><lalbel>{records.breakpoits[3]}</lalbel></Col>
                 </Row>
                 {ROW_CLOCK(tcl[74].name, 74, 15, [71])}
                 {resClock ? ROW_CLOCK(tcl[75].name, 75, 30, [74]) : ''}
@@ -680,7 +697,7 @@ export default function FUN_GEN(props) {
                 {resClock ? ROW_CLOCK(tcl[76].name, 76, 30, [74]) : ''}
                 {resClock ? ROW_CLOCK(tcl[761].name, 761, 10, [751]) : ''}
                 <Row className='py-1 fw-b border-primary txt-c'>
-                    <Col xs={24}><lalbel>LICENCIA</lalbel></Col>
+                    <Col xs={24}><lalbel>{records.breakpoits[4]}</lalbel></Col>
                 </Row>
                 {ROW_CLOCK(tcl[85].name, 85, false)}
                 {ROW_CLOCK(tcl[99].name, 99, 10, [72, 73])}
@@ -703,13 +720,12 @@ export default function FUN_GEN(props) {
         return FunService.loadFun6(id)
     }
 
-
     return (
         <>
             {canView ? <>
-                {type == 'btn' ? <Tooltip2 content={'gen data'} placement="top"><Button intent='primary' icon="label" onClick={() => setDrawer(true)}></Button></Tooltip2> : ''}
-                {type == 'tag' ? <Tooltip2 content={'gen data'} placement="top"><Tag className='pointer fw-b' style={{ marginRight: '1px', marginBottom: '1px', color: 'whitesmoke' }} color={tagColor ?? "blue"} size="sm" ton onClick={() => setDrawer(true)}>{tagText ?? id_public}</Tag></Tooltip2> : ''}
-                {type == 'icon' ? <Tooltip2 content={'gen data'} placement="top"><Icon className='pointer' intent='primary' icon="label" onClick={() => setDrawer(true)}></Icon></Tooltip2> : ''}
+                {type == 'btn' ? <Tooltip2 content={btn.view_gen} placement="top"><Button intent='primary' icon="label" onClick={() => setDrawer(true)}></Button></Tooltip2> : ''}
+                {type == 'tag' ? <Tooltip2 content={btn.view_gen} placement="top"><Tag className='pointer fw-b' style={{ marginRight: '1px', marginBottom: '1px', color: 'whitesmoke' }} color={tagColor ?? "blue"} size="sm" ton onClick={() => setDrawer(true)}>{tagText ?? id_public}</Tag></Tooltip2> : ''}
+                {type == 'icon' ? <Tooltip2 content={btn.view_gen} placement="top"><Icon className='pointer' intent='primary' icon="label" onClick={() => setDrawer(true)}></Icon></Tooltip2> : ''}
 
                 <Drawer size={'lg'} open={drawer} onClose={() => setDrawer(false)}>
                     {load == 0 ?
@@ -720,7 +736,7 @@ export default function FUN_GEN(props) {
                             <Drawer.Header className={utilities ? utilities.theme : 'light'}>
                                 <Drawer.Title>
                                     <FlexboxGrid justify="center">
-                                        <FlexboxGrid.Item colspan={6}><label className='fw-b'>Actuacion: {id_public}</label></FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={6}><label className='fw-b'>{trn.name}: {id_public}</label></FlexboxGrid.Item>
                                         <FlexboxGrid.Item colspan={6}><label className='fw-b'> - {data ? GET_FUN_STATE(data.state, lang) : ''}</label></FlexboxGrid.Item>
                                         <FlexboxGrid.Item colspan={6}>{PROGRESION_ICONS(data ?? {}, { pay: true, check: true, neigh: true, sign: true, report: true, ph: true, law: true, arc: true, eng: true, acta: true, pay2: true, via: true, lic: true })}</FlexboxGrid.Item>
                                         <FlexboxGrid.Item colspan={6}><PROGRESION_BAR row={data ?? {}} /></FlexboxGrid.Item>

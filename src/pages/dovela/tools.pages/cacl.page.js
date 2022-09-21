@@ -18,6 +18,7 @@ import BTN_DOWNLOAD from '../../../resources/customs/components/btnDownload.comp
 // ICONS
 import MinusIcon from '@rsuite/icons/Minus';
 import TUTORIAL from '../../../resources/customs/components/tutorial.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 var moment = require('moment');
 
@@ -25,6 +26,9 @@ export default function CALCULATOR_DOVELA() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('dcalc');
@@ -531,14 +535,17 @@ export default function CALCULATOR_DOVELA() {
 
         ALERT_WAIT(lang)
         SERVICE_TEMPLATES.genPDF_TaxCalculation(formData)
-            .then(response =>  OPEN_FILE('TAX.pdf', response, ALERT_ERROR(lang)))
+            .then(response => OPEN_FILE('TAX.pdf', response, ALERT_ERROR(lang)))
             .catch(e => {
                 console.log(e);
                 ALERT_ERROR(lang)
             });
     }
-    return (
-        <div className='my-3'>
+    return (<>
+
+        <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
+        <div className='my-2'>
 
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP title={trn.btn_help_tile} text={trn.btn_help_body} page={trn.HELP_PAGE} /></h3>
@@ -622,5 +629,7 @@ export default function CALCULATOR_DOVELA() {
             </Grid>
 
         </div>
+
+    </>
     );
 }

@@ -12,37 +12,6 @@ import BTN_LIST_DOCS from '../../../resources/customs/components/btnListDocs.com
 import ButtonWhisper from '../../../resources/customs/components/btnWhisper.component';
 import BTN_HELP from '../../../resources/customs/components/btnHelp.component';
 
-const LISTS = [
-    {
-        id: 'list_61', name: "DOCUMENTOS COMUNES A TODA SOLICITUD", list: [511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534]
-    },
-    {
-        id: 'list_62', name: "DOCUMENTOS LICENCIA DE URBANIZACION", list: [601, 602, 621, 622, 623, 624, 625, 626, 627]
-    },
-    {
-        id: 'list_63', name: "DOCUMENTOS LICENCIA DE PARCELACION", list: [602, 630, 631, 632, 633, 634, 635, 636]
-    },
-    {
-        id: 'list_64', name: "DOCUMENTOS ADICIONALES LICENCIA DE SUBDIVICION", list: [641, 642, 643]
-    },
-    {
-        id: 'list_65', name: "DOCUMENTOS ADICIONALES DE RECONOCIMIENTO DE EDIFICACIONES", list: [651, 652, 653]
-    },
-    {
-        id: 'list_66', name: "DOCUMENTOS ADICIONALES LICENCIA DE CONSTRUCCION", list: [6601, 6602, 6603, 6604, 6605, 6607, 6608, 6609, 6610, 6611, 6612, 6613, 6614, 6615, 6616, 6617, 6618, 6619, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915]
-    },
-    {
-        id: 'list_67', name: "DOCUMENTOS INERVENCION Y OCUPACION ESPACIO PUBLICO", list: [671, 672]
-    },
-    {
-        id: 'list_68', name: "DOCUMENTOS ADICIONALES OTRAS ACTUACIONES", list: [680, 681, 683, 684, 685, 686, 687, 688, 689]
-    },
-    {
-        id: 'list_Z', name: "DOCUMENTOS EXPENSAS / IMPUESTOS", list: [701, 702, 703, 705, 706, 707]
-    },
-]
-
-
 export default function SUBMIT_LISTS(props) {
     const { currentItem } = props;
     const auth = useContext(AuthContext);
@@ -50,6 +19,7 @@ export default function SUBMIT_LISTS(props) {
 
     const utilities = useContext(UtilContext);
     const trn = utilities.getTranslation('submit');
+    const trn_dlt = utilities.getTranslation('doc_list_titles');
     const lang = utilities.lang;
 
     var [load, setLoad] = useState(0);
@@ -60,7 +30,35 @@ export default function SUBMIT_LISTS(props) {
     var [editList, setEditList] = useState(false);
     var [editListArray, setEditListA] = useState([]);
 
-
+    const LISTS = [
+        {
+            id: 'list_61', name: trn_dlt.list_61, list: [511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534]
+        },
+        {
+            id: 'list_62', name: trn_dlt.list_62, list: [601, 602, 621, 622, 623, 624, 625, 626, 627]
+        },
+        {
+            id: 'list_63', name: trn_dlt.list_63, list: [602, 630, 631, 632, 633, 634, 635, 636]
+        },
+        {
+            id: 'list_64', name: trn_dlt.list_64, list: [641, 642, 643]
+        },
+        {
+            id: 'list_65', name: trn_dlt.list_65, list: [651, 652, 653]
+        },
+        {
+            id: 'list_66', name: trn_dlt.list_66, list: [6601, 6602, 6603, 6604, 6605, 6607, 6608, 6609, 6610, 6611, 6612, 6613, 6614, 6615, 6616, 6617, 6618, 6619, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915]
+        },
+        {
+            id: 'list_67', name: trn_dlt.list_67, list: [671, 672]
+        },
+        {
+            id: 'list_68', name: trn_dlt.list_68, list: [680, 681, 683, 684, 685, 686, 687, 688, 689]
+        },
+        {
+            id: 'list_Z', name: trn_dlt.list_Z, list: [701, 702, 703, 705, 706, 707]
+        },
+    ]
 
     useEffect(() => {
         if (load == 0) loadData()
@@ -218,7 +216,7 @@ export default function SUBMIT_LISTS(props) {
                 return <>
                     <Grid className='border txt-c' fluid>
                         <Row style={{ width: '100%' }}>
-                            <Col xl={15} lg={15} md={12} sm={12} xs={24} className="txt-l"><label name={"submit_form_newListName"}>{DOC_LIST[doc]}</label></Col>
+                            <Col xl={15} lg={15} md={12} sm={12} xs={24} className="txt-l"><label name={"submit_form_newListName"}>{DOC_LIST[lang][doc]}</label></Col>
                             <Col xl={3} lg={3} md={4} sm={4} xs={8}><label name={"submit_form_newListCode"}>{doc}</label></Col>
                             <Col xl={3} lg={3} md={4} sm={4} xs={8}>
                                 <div class="bp4-input-group">
@@ -285,7 +283,7 @@ export default function SUBMIT_LISTS(props) {
                             className={'bp4-input'}
                         >
                             {LISTS.map(option => <option value={option.id}>{option.name}</option>)}
-                            <option value={0}>{'NUEVA LISTA'}</option>
+                            <option value={0}>{trn_dlt.new}</option>
                         </select>
                         <span class={"bp4-icon bp4-icon-chevron-down"}></span>
                     </div>

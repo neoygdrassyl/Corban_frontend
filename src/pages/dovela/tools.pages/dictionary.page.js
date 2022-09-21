@@ -19,7 +19,6 @@ import PeoplesIcon from '@rsuite/icons/Peoples';
 import TagIcon from '@rsuite/icons/Tag';
 import HomeIcon from '@rsuite/icons/legacy/Home';
 
-
 import FUN_SS_CODES from '../../../resources/jsons/funCodes.json'
 import FUN_T_CODES from '../../../resources/jsons/fun6DocsList.json'
 import GRID from '../../../resources/customs/components/grid.component';
@@ -27,6 +26,7 @@ import { formsParser1 } from '../../../resources/customs/utils/funParser.module'
 import VIEWER from '../../../resources/customs/components/viewer.component';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import FUN_GEN from '../../../resources/customs/components/fun.components/funGen.component';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 var moment = require('moment');
 
@@ -34,6 +34,9 @@ export default function DICTIONARY() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const serial = conn.technicalInfo.serials ? conn.technicalInfo.serials.process : false;
 
@@ -104,7 +107,7 @@ export default function DICTIONARY() {
                 minWidth: '30%',
                 width: '15%',
                 selector: row => row.id_public,
-                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagText={row.id_public.substr(-7)}/>,
+                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagText={row.id_public.substr(-7)} />,
             },
             {
                 name: trn.lic_th[1],
@@ -139,7 +142,7 @@ export default function DICTIONARY() {
             {
                 name: trn.oa_th[0],
                 selector: row => row.id_public,
-                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagColor="violet" tagText={row.id_public}/>,
+                cell: row => <FUN_GEN id_public={row.id_public} type='tag' tagColor="violet" tagText={row.id_public} />,
             },
             {
                 name: trn.oa_th[1],
@@ -326,8 +329,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
-                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)} />
+                            return <FUN_GEN id_public={text} type='tag' tagText={text} tagColor="violet" />
                         })}
                     </TagGroup>
                 },
@@ -401,8 +404,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
-                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)} />
+                            return <FUN_GEN id_public={text} type='tag' tagText={text} tagColor="violet" />
                         })}
                     </TagGroup>
                 },
@@ -464,8 +467,8 @@ export default function DICTIONARY() {
                     return <TagGroup className='fw-b'>
                         {array.map(a => {
                             let text = a;
-                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)}/>
-                            return  <FUN_GEN  id_public={text} type='tag' tagText={text} tagColor="violet"/>
+                            if (serial && a.includes(serial)) return <FUN_GEN id_public={text} type='tag' tagText={text.substr(-7)} />
+                            return <FUN_GEN id_public={text} type='tag' tagText={text} tagColor="violet" />
                         })}
                     </TagGroup>
                 },
@@ -636,8 +639,11 @@ export default function DICTIONARY() {
         return SERVICE_FUN.loadFun6(id)
     }
 
-    return (
-        <div className='my-3'>
+    return (<>
+
+        <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
+        <div className='my-2'>
 
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP title={trn.btn_help_tile} text={trn.btn_help_body} page={trn.HELP_PAGE} /></h3>
@@ -676,5 +682,6 @@ export default function DICTIONARY() {
             </Row>
 
         </div>
+    </>
     );
 }

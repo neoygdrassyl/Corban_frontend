@@ -20,6 +20,7 @@ import DATALIST_API from '../../../resources/customs/components/form.components/
 import DocPassIcon from '@rsuite/icons/DocPass';
 import TagIcon from '@rsuite/icons/Tag';
 import MemberIcon from '@rsuite/icons/Member';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 var moment = require('moment');
 
@@ -27,6 +28,9 @@ export default function CERTIFICATIONS() {
     const auth = useContext(AuthContext);
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
 
     const dvSerial = conn.technicalInfo.serials ? conn.technicalInfo.serials.process : false;
 
@@ -318,8 +322,11 @@ export default function CERTIFICATIONS() {
             }).catch(e => console.log(e));
     }
 
-    return (
-        <div className='my-3'>
+    return (<>
+
+        <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
+        <div className='my-2'>
             <Row className="text-center" style={{ width: '100%' }}>
                 <h3>{trn.title} <BTN_HELP title={trn.btn_help_tile} text={trn.btn_help_body} page={trn.HELP_PAGE} /></h3>
             </Row>
@@ -337,5 +344,6 @@ export default function CERTIFICATIONS() {
 
             {COMPONENT_CERT}
         </div>
+    </>
     );
 }

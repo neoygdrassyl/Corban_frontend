@@ -26,6 +26,7 @@ import { FIND_PERMIT } from '../../../resources/customs/utils/lamdas.functions';
 import NON_IDEAL_STATE from '../../../resources/customs/components/nonideal.component';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { header } from '../../../services/auth/auth';
+import NAVIGATON from '../../../resources/customs/components/navigation.component';
 
 
 export default function DOVELA_CONFIG() {
@@ -41,6 +42,9 @@ export default function DOVELA_CONFIG() {
 
     const user = auth.user ?? {};
     const conn = auth.conn ?? {};
+
+    const connID = conn.id ?? '';
+    const connName = conn.name ?? '';
     let connection = auth.conn ?? {};
 
     var [load, setLoad] = useState(0);
@@ -217,7 +221,7 @@ export default function DOVELA_CONFIG() {
             title: 'FIRMAS AUTOMATICAS', help: 'Configura el software para generar de forma automatcica la firma digital del curador para los documentos deseados',
             list: [
                 {
-                    id: 'imgs.sign', type: 'img', dl: sign.url ? [sign] : [], accept: 'image/* ', api: '/img/sign', app: 'sign', 
+                    id: 'imgs.sign', type: 'img', dl: sign.url ? [sign] : [], accept: 'image/* ', api: '/img/sign', app: 'sign',
                     name: 'Firma digital',
                     help: 'Imagen con la firma del curador, recomedada de 120x80px y fondo transparente.'
                 },
@@ -238,7 +242,7 @@ export default function DOVELA_CONFIG() {
         if (cvar.type == 'cb') return <Checkbox id={cvar.id} defaultChecked={cvar.dv} />
         if (cvar.type == 'img') return <Uploader listType="picture-text" defaultFileList={[]} fileList={cvar.dl}
             multiple={false} accept={cvar.accept}
-            action={process.env.REACT_APP_API_URL + cvar.api} headers={{...header().headers, app: cvar.app}}
+            action={process.env.REACT_APP_API_URL + cvar.api} headers={{ ...header().headers, app: cvar.app }}
             shouldQueueUpdate={(next, prev) => next.length == 1}
         >
             <ButtonBP icon="cloud-upload" intent="danger" small >SUBIR ARCHIVO</ButtonBP>
@@ -324,7 +328,7 @@ export default function DOVELA_CONFIG() {
         technicalInfo.email.bcc = document.getElementById('email.bcc').value;
         technicalInfo.email.bounce = document.getElementById('email.bounce').value;
 
-         technicalInfo.concent.certs = document.getElementById('concent.certs').checked ? 1 : 0;
+        technicalInfo.concent.certs = document.getElementById('concent.certs').checked ? 1 : 0;
 
         formData.append('technicalInfo', JSON.stringify(technicalInfo));
 
@@ -376,11 +380,14 @@ export default function DOVELA_CONFIG() {
         console.log(e)
     }
 
-    return (
-        <div className="my-6 px-0">
+    return (<>
+
+        <NAVIGATON nav={trn.nav({ name: connName, id: connID })} />
+
+        <div className="my-2 px-0">
             {isSuperAdmin ?
                 <>
-                    <form id="dovela_vars_config_form"  onSubmit={(e) => { e.preventDefault(); onSubmit() }}>
+                    <form id="dovela_vars_config_form" onSubmit={(e) => { e.preventDefault(); onSubmit() }}>
                         <FlexboxGrid justify="center">
                             <FlexboxGrid.Item className='border py-1 bg-dark' as={Col} xs={24} sm={22} md={18} lg={16} xl={14} xxl={12}>
                                 <Grid fluid>
@@ -423,5 +430,6 @@ export default function DOVELA_CONFIG() {
 
                 </> : <NON_IDEAL_STATE type="permit" />}
         </div>
+    </>
     );
 }
