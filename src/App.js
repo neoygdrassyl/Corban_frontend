@@ -47,6 +47,7 @@ import DICTIONARY from "./pages/dovela/tools.pages/dictionary.page";
 import CERTIFICATIONS from "./pages/dovela/tools.pages/certifications.page";
 import OPTIONS from "./pages/user/options.page";
 import HELP from "./pages/user/help.page";
+import USER from "./pages/user/user/user.page";
 
 
 
@@ -96,6 +97,7 @@ function App() {
 
                     <Route exact path="/options" element={<OPTIONS />} />
                     <Route exact path="/help" element={<HELP />} />
+                    <Route exact path="/user" element={<USER />} />
                 </Route>
               </Route>
 

@@ -94,7 +94,9 @@ export function AuthProvider({ children }) {
         
         return callback(true)
       }
-    } else  {return callback(false);}
+    } else  {
+      updateToken(_jwt, () => {})
+      return callback(false);}
   }
 
   function loadNots(email){

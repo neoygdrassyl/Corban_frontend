@@ -18,7 +18,7 @@ export default function BTN_HELP(props) {
     });
 
     const speaker = <Popover title={title} className={utilities ? utilities.theme : 'light'} style={{ width: '400px' }}>
-        <p className='text-left'>{text}</p>
+        <p className='text-left'><label>{text}</label></p>
         {page ? <p className='text-right fw-b'>{trn.click}</p> : ''}
     </Popover>
 

@@ -57,7 +57,7 @@ function SideBarComponent(props) {
     let workList = user.workList ? user.workList : [];
 
     let SIDE_BAR_ITEMS = (<>
-        <Nav.Item eventKey="2" icon={<UserInfoIcon style={{ color: 'forestgreen' }} />}>{String(user.name || 'USER').toUpperCase()}</Nav.Item>
+        <Nav.Item eventKey="2" onClick={() => navigate("/user")} icon={<UserInfoIcon style={{ color: 'forestgreen' }} />}>{String(user.name || 'USER').toUpperCase()}</Nav.Item>
         <Nav.Menu title="POYECTOS" icon={<SingleSourceIcon style={{ color: 'crimson' }} />}>
             <Nav.Item>Proyecto A</Nav.Item>
         </Nav.Menu>

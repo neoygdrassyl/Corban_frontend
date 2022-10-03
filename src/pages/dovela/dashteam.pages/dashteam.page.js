@@ -95,17 +95,25 @@ export default function DashboardTeam() {
         - PUBLICATIONS 
         - NEWS
         - HELP PAGE
-    // USER: 
+
+    // DASH BOARD
+        - NEWS FROM DOVELA
         - CREATE NEW PROJECT 
+        - RECENT ACTIVITIES IN MY PROJECT
+        - NOTIFICATIONS -> DONE
+        
+
+    // USER
+        - CONFIG PROFILES (cit, prof, ent)
+        - USER CONFIGS => USER, cit, prof, ent, 
+
+    // MY PROJECTS 
         - SEE PROJECTS 
         - PAY PROJECT 
         - UPLOAD DOCUMENTOS TO PROJECT 
         - DONWLOAD REPORTS 
-        - CONFIG PROFILES (cit, prof, ent)
-
-    // USER CONFIGS => USER, cit, prof, ent, 
-    
-        USER PREFERENCES (theme, lang, date format, font size, font type,  link colors) -> SAVE IN BD
+        
+    // OPTIONS => USER PREFERENCES (theme, lang, date format, font size, font type,  link colors) -> SAVE IN BD
 
     //  HELP PAGE (user)
 
