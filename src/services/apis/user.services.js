@@ -5,19 +5,19 @@ import { header, Logheader } from "../auth/auth";
 class SERVICE_USERS {
 
     getAll_profesionals(id_public) {
-        return http.get(`/profesionals/update`, Logheader());
+        return http.get(`/profesionals/`, Logheader());
     }
 
     create(data) {
-        return http.post(`/profesionals/update`, data, Logheader());
+        return http.post(`/profesionals/`, data, Logheader());
     }
 
     update(id, data) {
-        return http.put(`/profesionals/update`, data, Logheader());
+        return http.put(`/profesionals/`, data, Logheader());
     }
 
     delete(id) {
-        return http.delete(`/profesionals/update`, Logheader());
+        return http.delete(`/profesionals/`, Logheader());
     }
 
 }
