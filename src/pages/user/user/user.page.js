@@ -21,7 +21,7 @@ export default function USER() {
     let user = auth.user;
 
     useEffect(() => {
-        SERVICE_USERS.getAll_profesionals().then(data => console.log(data))
+        SERVICE_USERS.create().then(data => console.log(data))
     });
 
 
